@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="member/profile" extends="baseLayout">
+		<put-attribute name="title" value="프로필" />
+		<put-attribute name="body" value="/WEB-INF/views/member/profile.jsp" />
+	</definition>
+	
+	<definition name="member/confirmPwd" extends="baseLayout">
+		<put-attribute name="title" value="비밀번호 확인" />
+		<put-attribute name="body" value="/WEB-INF/views/member/confirmPwd.jsp" />
+	</definition>
+	
+	<definition name="member/updateProfile" extends="baseLayout">
+		<put-attribute name="title" value="프로필 수정" />
+		<put-attribute name="body" value="/WEB-INF/views/member/updateProfile.jsp" />
+	</definition>
+
+</tiles-definitions>

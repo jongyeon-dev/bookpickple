@@ -1,8 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"
-    isELIgnored="false"
-    %>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 
@@ -39,21 +35,40 @@
             </div>
             <div class="header-right">
                 <ul class="clearfix">
-                	<li class="icons">	
-                        <p class="member-name"><span class="text-primary">홍길동</span> 님</p>
-                    </li>
-                    <li class="icons">	
-                        <button type="button" class="btn mb-1 btn-primary btn-flat btn-sm"
-                        onclick="location.href='${pageContext.request.contextPath}/member/memberLogin.do'">로그인</button>
-                    </li>
-                    <li class="icons">    
-                        <button type="button" class="btn mb-1 btn-outline-primary btn-flat btn-sm"
-                        onclick="location.href='${pageContext.request.contextPath}/member/memberJoin.do'">회원가입</button>
-                    </li>
-                    <li class="icons">    
-                        <button type="button" class="btn mb-1 btn-outline-primary btn-flat btn-sm"
-                        onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button>
-                    </li>
+                	<c:choose>
+                		<c:when test="${isLogin == true and not empty member and member.type == 'MEMBER'}">
+                			<li class="icons">	
+	                        	<p class="member-name"><span class="text-primary">${ member.userName }</span> 님</p>
+	                    	</li>
+		                    <li class="icons">    
+		                        <button type="button" class="btn mb-1 btn-primary btn-flat btn-sm"
+		                        onclick="location.href='${contextPath}/member/memberLogout.do'">로그아웃</button>
+		                    </li>
+                		</c:when>
+                		<c:when test="${isLogin == true and not empty member and member.type == 'MANAGER'}">
+	                		<li class="icons">	
+	                        	<p class="member-name"><span class="text-primary">${ member.userName }</span> 님</p>
+	                    	</li>
+	                    	<li class="icons">    
+		                        <button type="button" class="btn mb-1 btn-secondary btn-flat btn-sm"
+		                        onclick="location.href='${contextPath}/manager/managerMain.do'">관리자 페이지</button>
+		                    </li>
+		                    <li class="icons">    
+		                        <button type="button" class="btn mb-1 btn-outline-primary btn-flat btn-sm"
+		                        onclick="location.href='${contextPath}/member/memberLogout.do'">로그아웃</button>
+		                    </li>
+                		</c:when>
+                		<c:otherwise>
+	                		<li class="icons">	
+		                        <button type="button" class="btn mb-1 btn-primary btn-flat btn-sm"
+		                        onclick="location.href='${contextPath}/member/memberLoginView.do'">로그인</button>
+		                    </li>
+		                    <li class="icons">    
+		                        <button type="button" class="btn mb-1 btn-outline-secondary btn-flat btn-sm"
+		                        onclick="location.href='${contextPath}/member/memberJoinView.do'">회원가입</button>
+		                    </li>
+                		</c:otherwise>
+                	</c:choose>
                 </ul>
             </div>
         </div>
@@ -82,7 +97,7 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="#">주문내역</a></li>
-                        <li><a href="#">프로필</a></li>
+                        <li><a href="${contextPath}/member/memberProfileView.do?userNo=${member.userNo}">프로필</a></li>
                         <li><a href="#">1:1 문의 내역</a></li>
                     </ul>
                 </li>

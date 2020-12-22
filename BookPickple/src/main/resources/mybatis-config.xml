@@ -8,21 +8,11 @@
 	</settings>
 
 	<typeAliases>
-	<!--
-    <typeAlias type="com.test.book.goods.vo.GoodsVO" alias="goodsVO" />
-  	<typeAlias type="com.test.book.goods.vo.ImageFileVO" alias="imageFileVO" />
-    <typeAlias type="com.test.book.member.vo.MemberVO" alias="memberVO" />
-    <typeAlias type="com.test.book.cart.vo.CartVO" alias="cartVO" />
-    <typeAlias type="com.test.book.order.vo.OrderVO" alias="orderVO" />
-    <typeAlias type="com.test.book.mypage.vo.MyPageVO" alias="mypageVO" />
-   -->
+
+    	<typeAlias type="com.kh.bookpickple.member.model.vo.Member" alias="Member" />
     
-  </typeAliases>
+  	</typeAliases>
   
-	<!-- 	<typeHandlers>
-		<package name="com.kh.spring.common.typeHandler"/>
-	</typeHandlers>
-	-->
 </configuration>
 
 
