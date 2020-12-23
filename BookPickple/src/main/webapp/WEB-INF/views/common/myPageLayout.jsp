@@ -1,43 +1,60 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 
 <link href="${contextPath}/resources/plugins/highlightjs/styles/darkula.css" rel="stylesheet" type="text/css">
 <link href="${contextPath}/resources/css/style.css" rel="stylesheet" type="text/css">
-<link href="${contextPath}/resources/css/carousel/owl.carousel.min.css" rel="stylesheet" type="text/css">
-<link href="${contextPath}/resources/css/carousel/owl.theme.default.min.css" rel="stylesheet" type="text/css">
 <link href="${contextPath}/resources/css/common/custom.css" rel="stylesheet" type="text/css">
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
-	<title><tiles:insertAttribute name="title" ignore="true"/></title>
-	
+<title><tiles:insertAttribute name="title" ignore="true"/></title>
 </head>
 <body>
+
 	<div id="main-wrapper">
 		<div class="main">
 			<header>
 			   <tiles:insertAttribute name="header" ignore="true" />
 			</header>
 			
-	        <section class="content-body" style="margin-top: 50px;">
-			 	<tiles:insertAttribute name="body" ignore="true" />
+			<section class="content-body" style="margin-top: 50px; background: #F3F3F9;">
+			 	<div class="container-fluid">
+					<div class="row" style="padding: 0 30px;">
+						 <div class="col-lg-4 col-xl-3">
+			                <div class="card">
+			                    <div class="card-body">
+			                    	<ul>
+			                    		<li class="nav-label"><a href="${contextPath}/order/orderView.do?userNo=${member.userNo}">주문내역</a></li>
+			                    		<li class="nav-label"><a href="${contextPath}/member/memberProfileView.do?userNo=${member.userNo}" class="text-primary font-weight-bold">프로필</a></li>
+			                    		<li class="nav-label"><a href="${contextPath}/inquiry/inquiryListView.do?userNo=${member.userNo}">1:1 문의</a></li>
+			                    	</ul>
+			           			</div>
+			                </div>  
+			            </div>
+			            
+			            <tiles:insertAttribute name="body" ignore="true" />	 	
+			            
+					</div>
+				</div>
 		 	</section>
 		 	
-			<footer>
+		 	<footer>
 	      		<tiles:insertAttribute name="footer" ignore="true" />
 	      	</footer>
-	    </div>
-	    <tiles:insertAttribute name="quickMenu" ignore="true" />
-    </div>
- 
-
-    
-  	<script src="${contextPath}/resources/js/common/common.min.js"></script>
+	      	
+		</div>
+	</div>
+	
+	<script src="${contextPath}/resources/js/common/common.min.js"></script>
   	<script src="${contextPath}/resources/js/common/custom.min.js"></script>
   	<script src="${contextPath}/resources/js/common/settings.js"></script>
   	<script src="${contextPath}/resources/js/common/styleSwitcher.js"></script>
@@ -62,31 +79,7 @@
 	        });
 		});
    	</script>
-   	
-   	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
- 	<script src="${contextPath}/resources/js/carousel/owl.carousel.min.js"></script>
-	<script src="${contextPath}/resources/js/carousel/bxslider.min.js"></script>
-	<script src="${contextPath}/resources/js/carousel/script.slider.js"></script>
-   	<script>
-		$(function () {
-			$('.owl-carousel').owlCarousel({
-			    loop:true,
-			    margin:10,
-			    nav:true,
-			    responsive:{
-			        0:{
-			            items:1
-			        },
-			        600:{
-			            items:3
-			        },
-			        1000:{
-			            items:5
-			        }
-			    }
-			});
-		});
-   	</script>
-</body>      
-        
-        
+
+
+</body>
+</html>

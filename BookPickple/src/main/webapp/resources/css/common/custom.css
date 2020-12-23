@@ -569,3 +569,16 @@ footer {
 .wrap-profile .form-group {
 	align-items: center;
 }
+
+
+/*-------------------------
+[ breadcrumb ]
+---------------------------*/
+.page-titles {
+	background: transparent;
+}
+
+.page-titles .breadcrumb {
+	float: left;
+	font-size: 0.775rem;
+}

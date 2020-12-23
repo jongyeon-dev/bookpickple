@@ -30,7 +30,7 @@ public class MemberController {
 
 	@RequestMapping("/member/memberJoinView.do")
 	public String memberJoinView() {
-		return "member/join";
+		return "common/join";
 	}
 	
 	@RequestMapping("/member/checkIdDuplicate.do")
@@ -56,7 +56,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/memberJoinEnd.do")
-	public String memberJoinEnd(Member member, Model model) {
+	public String memberJoin(Member member, Model model) {
 		System.out.println("member : " + member);
 		
 		String plainPassword = member.getPassword();
@@ -84,7 +84,7 @@ public class MemberController {
 	
 	@RequestMapping("/member/memberLoginView.do")
 	public String memberLoginView() {
-		return "member/login";
+		return "common/login";
 	}
 	
 	@RequestMapping("/member/memberLoginEnd.do")
@@ -101,15 +101,20 @@ public class MemberController {
 			loc = "/member/memberLoginView.do";
 			msg = "존재하지 않는 아이디입니다.";
 		} else {
-			if( bcryptPasswordEncoder.matches(password, m.getPassword()) ) {
-				loc = "/";
-				msg = "로그인에 성공하였습니다";
-				// 회원가입 시 자동으로 MEMBER가 세션에 들어가서 isLogin으로 세션 유무 구분
-				mv.addObject("isLogin", true);
-				mv.addObject("member", m);
-			} else {
+			if( m.getStatus().equals("N")) {
 				loc = "/member/memberLoginView.do";
-				msg = "비밀번호가 일치하지 않습니다.";
+				msg = "탈퇴한 회원입니다. 다시 회원가입을 진행해주세요.";
+			} else {
+				if( bcryptPasswordEncoder.matches(password, m.getPassword()) ) {
+					loc = "/";
+					msg = "로그인에 성공하였습니다";
+					// 회원가입 시 자동으로 MEMBER가 세션에 들어가서 isLogin으로 세션 유무 구분
+					mv.addObject("isLogin", true);
+					mv.addObject("member", m);
+				} else {
+					loc = "/member/memberLoginView.do";
+					msg = "비밀번호가 일치하지 않습니다.";
+				}
 			}
 		}
 		
@@ -127,12 +132,12 @@ public class MemberController {
 		Member m = memberService.selectOneMember(userNo);
 		model.addAttribute("member", m);
 		
-		return "member/profile";
+		return "mypage/member/profile";
 	}
 	
 	@RequestMapping("/member/confirmPwdView.do") 
 	public String memberConfirmPwdView() {
-		return "member/confirmPwd";
+		return "mypage/member/confirmPwd";
 	}
 
 	@RequestMapping("/member/confirmPwd.do")
@@ -168,7 +173,7 @@ public class MemberController {
 		Member m = memberService.selectOneMember(userNo);
 		model.addAttribute("member", m);
 		
-		return "member/updateProfile";
+		return "mypage/member/updateProfile";
 	}
 	
 	@RequestMapping("/member/memberUpdateEnd.do") 

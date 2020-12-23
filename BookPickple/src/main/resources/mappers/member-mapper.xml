@@ -41,7 +41,8 @@
 	
 	<update id="deleteMember" parameterType="_int">
 		UPDATE MEMBER SET
-			STATUS = 'N'
+			STATUS = 'N',
+			DELDATE = SYSDATE
 		WHERE USERNo = #{userNo}
 	</update>
 	

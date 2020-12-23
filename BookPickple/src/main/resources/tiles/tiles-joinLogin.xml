@@ -9,13 +9,13 @@
 		<put-attribute name="body" value="" />
 	</definition>
 
-	<definition name="member/login" extends="joinLogin">
+	<definition name="common/login" extends="joinLogin">
 		<put-attribute name="title" value="로그인" />
-		<put-attribute name="body" value="/WEB-INF/views/member/login.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/common/login.jsp" />
 	</definition>
 	
-	<definition name="member/join" extends="joinLogin">
+	<definition name="common/join" extends="joinLogin">
 		<put-attribute name="title" value="회원가입" />
-		<put-attribute name="body" value="/WEB-INF/views/member/join.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/common/join.jsp" />
 	</definition>    
 </tiles-definitions>

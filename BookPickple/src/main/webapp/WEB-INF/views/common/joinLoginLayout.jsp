@@ -11,8 +11,8 @@
 <link href="${contextPath}/resources/css/style.css" rel="stylesheet" type="text/css">
 <link href="${contextPath}/resources/css/common/custom.css" rel="stylesheet" type="text/css">
 
-	<title><tiles:insertAttribute name="title" ignore="true"/></title>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<title><tiles:insertAttribute name="title" ignore="true"/></title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 </head>
 <body class="h-100" style="background: #F3F3F9;">
 	<div class="login-form-bg h-100">

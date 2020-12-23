@@ -53,6 +53,19 @@
 	    <beans:property name="order" value="1" />
 	</beans:bean>
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/memberProfileView.do"/>
+			<mapping path="/member/confirmPwdView.do"/>
+			<mapping path="/member/confirmPwd.do"/>
+			<mapping path="/member/memberUpdateView.do"/>
+			<mapping path="/member/memberUpdateEnd.do"/>
+			<mapping path="/member/memberDelete.do"/>
+			<mapping path="/member/memberLogout.do"/>
+			<beans:bean id="loginInterceptor" class="com.kh.bookpickple.common.interceptor.LoginInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 	<!--  Multipart Resolver -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="10485760"/>

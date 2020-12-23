@@ -6,36 +6,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </head>
 <body>
 
-	<div class="row page-titles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">홈</a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)">프로필</a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)">프로필 조회</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">프로필 수정</a></li>
-            </ol>
-        </div>
-    </div>
+	
     
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-4 col-xl-3">
-                <div class="card">
-                    <div class="card-body">
-                    	<ul>
-                    		<li class="nav-label"><a href="${contextPath}/order/orderView.do?userNo=${member.userNo}">주문내역</a></li>
-                    		<li class="nav-label active"><a href="${contextPath}/member/memberProfileView.do?userNo=${member.userNo}" class="text-primary font-weight-bold">프로필</a></li>
-                    		<li class="nav-label"><a href="${contextPath}/inquiry/inquiryListView.do?userNo=${member.userNo}">1:1 문의</a></li>
-                    	</ul>
-           			</div>
-                </div>  
-            </div>
-            <div class="col-lg-7 col-xl-8">
+            <div class="col-lg-8 col-xl-9">
+            	<div class="row page-titles">
+			        <div class="col">
+			            <ol class="breadcrumb">
+			                <li class="breadcrumb-item"><a href="javascript:void(0)">홈</a></li>
+			                <li class="breadcrumb-item"><a href="javascript:void(0)">프로필</a></li>
+			                <li class="breadcrumb-item"><a href="javascript:void(0)">프로필 조회</a></li>
+			                <li class="breadcrumb-item"><a href="javascript:void(0)" class="text-primary">프로필 수정</a></li>
+			            </ol>
+			        </div>
+			    </div>
                 <div class="card">
                     <div class="card-body">
                         <form id="updateMemberForm" class="mt-3 mb-3" method="post" name="updateMemberForm"
@@ -136,15 +123,13 @@
                              </div>
                              <div class="mt-5 text-center">
                              	<button type="button" class="btn btn-primary" onclick="checkForm()">수정 하기</button>
-                             	<button type="button" class="btn btn-outline-primary" onclick="location.href='${contextPath}/member/memberProfileView.do?userNo=${member.userNo}'">프로필로 돌아가기</button>
+                             	<button type="button" class="btn btn-outline-secondary"
+                             			onclick="location.href='${contextPath}/member/memberProfileView.do?userNo=${member.userNo}'">프로필로 돌아가기</button>
                          	</div>
                          </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
     <script>
     	$(function() {
 			var dbAddr = $("#dbAddress").val();
@@ -184,9 +169,9 @@
  		// submit 할 때 error 문구 있는지 확인용
 	   	var errorPwd = true;
 	   	var errorPwd2 = true;
-	   	var errorTel = true;
-	   	var errorEmail = true;
-	   	var errorAddr = true;
+	   	var errorTel = false; // 이미 값이 있음
+	   	var errorEmail = false; // 이미 값이 있음
+	   	var errorAddr = false ; // 이미 값이 있음
 	   	
      	function checkForm() {
          	// 모든 항목에 에러가 없으면 form 전송
@@ -273,60 +258,59 @@
 			});
 
 			/* 연락처 */
-			
-				var tel = $("#tel").val();
-				var telReg = /^\d{2,3}-\d{3,4}-\d{4}$/;
+			var tel = $("#tel").val();
+			var telReg = /^\d{2,3}-\d{3,4}-\d{4}$/;
 
-				if(tel.length == 0 || tel == "") {
-					// 연락처를 입력하지 않았으면 req 메세지 보여주기
-					$("#validateTel").css("display", "none");
-					$("#reqTel").css("display", "block");
+			if(tel.length == 0 || tel == "") {
+				// 연락처를 입력하지 않았으면 req 메세지 보여주기
+				$("#validateTel").css("display", "none");
+				$("#reqTel").css("display", "block");
+				errorTel = true;
+			} else {
+				// 연락처를 입력했으나
+				if(!chk(telReg, tel)){ 
+					// 연락처 유효성 검사를 통과하지 못하면 validate 메세지 보여주기
+					$("#validateTel").css("display", "block");
+					$("#reqTel").css("display", "none");
+					errorTel = true;
 				} else {
-					// 연락처를 입력했으나
-					if(!chk(telReg, tel)){ 
-						// 연락처 유효성 검사를 통과하지 못하면 validate 메세지 보여주기
-						$("#validateTel").css("display", "block");
-						$("#reqTel").css("display", "none");
-					} else {
-                	 	// 유효성 검사 통과하면 error 메세지 지우기
-						$("#validateTel").css("display", "none");
-						$("#reqTel").css("display", "none");
-						errorTel = false;
-                    }
-				}
+               	 	// 유효성 검사 통과하면 error 메세지 지우기
+					$("#validateTel").css("display", "none");
+					$("#reqTel").css("display", "none");
+					errorTel = false;
+                   }
+			}
 			
 			/* 이메일 */
-			var email = $("#email").val();
-			var emailReg = /^[a-z][a-z0-9_-]{3,20}@([a-z\d\.-]+)\.([a-z\.]{2,6})$/
+			var originEmail = $("#email").val();
+			var emailReg = /^[a-z][a-z0-9_-]{3,20}@([a-z\d\.-]+)\.([a-z\.]{2,6})$/;
 
-			$("#email").change(function() {
-			
+			$("#email").change(function(){
 				var changeEmail = $(this).val();
 
-				console.log(email);
-				console.log(changeEmail);
-				if(email != changeEmail) {
-				if(email.length == 0 || email == "") {
-					// 이메일을 입력하지 않았으면
-					$("#infoEmail").css("display", "none");
-					$("#okEmail").css("display", "none");
-					$("#duplicateEmail").css("display", "none");
-					$("#validateEmail").css("display", "none");
-					$("#reqEmail").css("display", "block");
-				} else {
-					// 이메일을 입력했으나
-					if(!chk(emailReg, email)){ 
+				if(originEmail != changeEmail) {
+					if(changeEmail.length == 0 || changeEmail == "") {
+						// 이메일을 입력하지 않았으면
+						$("#infoEmail").css("display", "none");
+						$("#okEmail").css("display", "none");
+						$("#duplicateEmail").css("display", "none");
+						$("#validateEmail").css("display", "none");
+						$("#reqEmail").css("display", "block");
+						errorEmail = true;
+					} 
+					if(!chk(emailReg, changeEmail)){ 
 						// 이메일 유효성 검사를 통과하지 못하면 validate 메세지 보여주기
 						$("#infoEmail").css("display", "none");
 						$("#okEmail").css("display", "none");
 						$("#duplicateEmail").css("display", "none");
 						$("#validateEmail").css("display", "block");
 						$("#reqEmail").css("display", "none");
+						errorEmail = true;
 					} else {
 						// ajax로 중복 여부 체크
 						$.ajax({
 							url: "${contextPath}/member/checkEmailDuplicate.do",
-							data : {email: email},
+							data : {email: changeEmail},
 							dataType: "json",
 							success: function(data) {
 								if(data.isUsable) {
@@ -346,6 +330,7 @@
 									$("#validateEmail").css("display", "none");
 									$("#reqEmail").css("display", "none");
 									$("#duplicateEmailCheck").val(0);
+									errorEmail = true;
 								}
 							},
 							error: function(jqxhr, textStatus, errorThrown){
@@ -356,24 +341,29 @@
 				                console.log(errorThrown);
 				            }
 						});
-                    }
-				}
+					}
 				} else {
+					// 기존 이메일 주소와 바뀐 이메일 주소가 같다면
+					$("#infoEmail").css("display", "block");
+					$("#okEmail").css("display", "none");
+					$("#duplicateEmail").css("display", "none");
+					$("#validateEmail").css("display", "none");
+					$("#reqEmail").css("display", "none");
 					errorEmail = false;
 					return;
 				}
-			}); // 이메일 전체 체크 종료
+			});
 
 			/* 주소 */
-		
-				if($("#zipCode").val().length == 0 && $("#zipCode").val() == "" &&
-					$("#address1").val().length == 0 && $("#address1").val() == "" &&
-					$("#address2").val().length == 0 && $("#address2").val() == "" ) {
-					$("#reqAddr").css("display", "block");
-				} else {
-					$("#reqAddr").css("display", "none");
-					errorAddr = false;
-				}
+			if($("#zipCode").val().length == 0 && $("#zipCode").val() == "" &&
+				$("#address1").val().length == 0 && $("#address1").val() == "" &&
+				$("#address2").val().length == 0 && $("#address2").val() == "" ) {
+				$("#reqAddr").css("display", "block");
+				errorAddr = true;
+			} else {
+				$("#reqAddr").css("display", "none");
+				errorAddr = false;
+			}
 			
         });
 
