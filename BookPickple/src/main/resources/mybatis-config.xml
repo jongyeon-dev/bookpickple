@@ -10,7 +10,9 @@
 	<typeAliases>
 
     	<typeAlias type="com.kh.bookpickple.member.model.vo.Member" alias="Member" />
-    
+    	<typeAlias type="com.kh.bookpickple.manager.book.model.vo.Book" alias="Book" />
+    	<typeAlias type="com.kh.bookpickple.manager.book.model.vo.BookImages" alias="BookImages" />
+    	
   	</typeAliases>
   
 </configuration>

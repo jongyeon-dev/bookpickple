@@ -76,7 +76,8 @@
     <div class="nk-sidebar">           
         <div class="nk-nav-scroll">
             <ul class="metismenu" id="menu">
-                <li>
+            	<c:if test="${ isLogin != true or empty member or member.type == 'MEMBER'}">
+            		<li>
                     <a href="${contextPath}/">
                         <i class="icon-home menu-icon"></i><span class="nav-text">Home</span>
                     </a>
@@ -101,6 +102,34 @@
                         <li><a href="#">1:1 문의 내역</a></li>
                     </ul>
                 </li>
+            	</c:if>
+               <c:if test="${isLogin == true and not empty member and member.type == 'MANAGER'}">
+                	<li class="mega-menu mega-menu-sm">
+	                    <a href="${contextPath}/manager/memberListView.do">
+	                        <i class="icon-people menu-icon"></i><span class="nav-text">회원 관리</span>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="${contextPath}/manager/bookListView.do">
+	                         <i class="icon-book-open menu-icon"></i><span class="nav-text">도서 관리</span>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a class="has-arrow" href="#" aria-expanded="false">
+	                        <i class="icon-drawer menu-icon"></i><span class="nav-text">배송 관리</span>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a class="has-arrow" href="#" aria-expanded="false">
+	                        <i class="icon-note menu-icon"></i><span class="nav-text">1:1 문의 관리</span>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a class="has-arrow" href="#" aria-expanded="false">
+	                        <i class="icon-envelope-letter menu-icon"></i><span class="nav-text">EDM 전송</span>
+	                    </a>
+	                </li>
+                </c:if>
             </ul>
         </div>
       </div>
