@@ -126,6 +126,29 @@ public class MemberController {
 		return mv;
 	}
 	
+	@RequestMapping("/member/memberLogout.do")
+	public ModelAndView memberLogout(SessionStatus sessionStatus) {
+		
+		ModelAndView mv = new ModelAndView();
+
+		String loc = "";
+		String msg = "";
+		
+		if(!sessionStatus.isComplete()) {
+			loc = "/";
+			msg = "로그아웃 되었습니다.";
+			mv.addObject("isLogin", false);
+			sessionStatus.setComplete();
+			
+		}
+		mv.addObject("msg", msg);
+		mv.addObject("loc", loc);
+		
+		mv.setViewName("common/msg");
+		
+		return mv;
+	}
+	
 	@RequestMapping("/member/memberProfileView.do")
 	public String memberProfileView(@RequestParam int userNo, Model model) {
 		
@@ -226,13 +249,5 @@ public class MemberController {
 		model.addAttribute("msg", msg);
 		
 		return "common/msg";
-	}
-	
-	@RequestMapping("/member/memberLogout.do")
-	public String memberLogout(SessionStatus sessionStatus) {
-		if(!sessionStatus.isComplete()) {
-			sessionStatus.setComplete();
-		}
-		return "redirect:/";
 	}
 }
