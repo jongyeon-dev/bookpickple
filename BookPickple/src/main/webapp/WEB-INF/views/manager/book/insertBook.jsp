@@ -64,6 +64,12 @@
 	                             </div>
                              </div>
                              <div class="form-group row">
+                             	<label class="col-sm-3 col-form-label" for="publishedDate">출판일</label>
+	                             <div class="col-sm-5">
+	                                  <input type="text" class="form-control" name="publishedDate" id="publishedDate" placeholder="ex)20200101">
+	                             </div>
+                             </div>
+                             <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="price">정가</label>
 	                             <div class="col-sm-5">
 	                                  <input type="text" class="form-control" name="price" id="price">
@@ -78,13 +84,7 @@
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="point">포인트</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="point" id="point">
-	                             </div>
-                             </div>
-                             <div class="form-group row">
-                             	<label class="col-sm-3 col-form-label" for="publishedDate">출판일</label>
-	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="publishedDate" id="publishedDate" placeholder="ex)20200101">
+	                                  <input type="text" class="form-control" name="point" id="point" placeholder="정가에서 5% 적립">
 	                             </div>
                              </div>
                              <div class="form-group row">
@@ -96,7 +96,7 @@
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="deliveryPrice">배송비</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="deliveryPrice" id="deliveryPrice">
+	                                  <input type="text" class="form-control" name="deliveryPrice" id="deliveryPrice" placeholder="기본 2500원 / 1만원 이상 무료배송">
 	                             </div>
                              </div>
 
@@ -115,19 +115,23 @@
 
 							<div class="form-group row">
                             	<label class="col-sm-3 col-form-label" for="titleImg">대표 이미지</label>
-	                             <div class="col-sm-5 input-group mb-3">
+	                             <div class="col-sm-7 input-group mb-3">
                                      <div class="custom-file">
-                                         <input type="file" class="custom-file-input" name="uploadFile" id="titleImg" accept="image/*">
-                                         <label class="custom-file-label">첨부 파일 등록</label>
+                                     	<input class="upload-title-name form-control" value="파일선택" disabled="disabled" />
+                                         <input type="file" style="display:none;" class="custom-file-input title-file"
+                                         name="uploadFile" id="titleImg" accept="image/*">
+                                         <button type="button" class="btn ml-2 btn-flat btn-outline-primary btn-title-file">첨부파일 등록</button>
                                      </div>
                                  </div>
                             </div>
                             <div class="form-group row">
                             	<label class="col-sm-3 col-form-label" for="detailImg">상세 이미지</label>
-	                             <div class="col-sm-5 input-group mb-3">
+	                             <div class="col-sm-7 input-group mb-3">
                                      <div class="custom-file">
-                                         <input type="file" class="custom-file-input" name="uploadFile" id="detailImg" accept="image/*">
-                                         <label class="custom-file-label">첨부 파일 등록</label>
+                                     	<input class="upload-detail-name form-control" value="파일선택" disabled="disabled" />
+                                         <input type="file" style="display:none;"class="custom-file-input detail-file"
+                                         name="uploadFile" id="detailImg" accept="image/*">
+                                         <button type="button" class="btn ml-2 btn-flat btn-outline-primary btn-detail-file">첨부파일 등록</button>
                                      </div>
                                  </div>
                             </div>
@@ -200,7 +204,7 @@
         },
         publishedDate: {
             required: true,
-            regex: "^(20)[0-9]{2}(0[1-9]|1[1-2])(0[1-9]|[1-2][0-9]|3[0-1])$"
+            regex: "^(20)[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$"
         },
         isbn: {
             required: true
@@ -263,7 +267,44 @@
          }
       }
     });
-    
+
+
+    $(".btn-title-file").click(function() {
+			$("#titleImg").click();
+		});
+
+    $(".btn-detail-file").click(function() {
+		$("#detailImg").click();
+	});
+		
+	var titleFileTarget = $('.title-file');
+	var detailFileTarget = $('.detail-file');
+	
+	titleFileTarget.on('change', function(e){
+		// 대표 이미지 값이 변경되면 
+		if(window.FileReader){ // modern browser
+			var filename = $(this)[0].files[0].name;
+		} else { // old IE
+			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+		} 
+		
+		// 추출한 파일명 삽입 
+		$(this).siblings('.upload-title-name').val(filename); 
+
+	}); 
+
+	detailFileTarget.on('change', function(e){
+		// 대표 이미지 값이 변경되면 
+		if(window.FileReader){ // modern browser
+			var filename = $(this)[0].files[0].name;
+		} else { // old IE
+			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+		} 
+		
+		// 추출한 파일명 삽입 
+		$(this).siblings('.upload-detail-name').val(filename); 
+
+	}); 
   });
 </script>
 
