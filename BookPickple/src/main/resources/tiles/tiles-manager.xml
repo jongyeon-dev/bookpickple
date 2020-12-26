@@ -27,5 +27,14 @@
        <put-attribute name="body" value="/WEB-INF/views/manager/book/insertBook.jsp" />
     </definition>
     
+    <definition name="manager/book/detailBook" extends="managerLayout">
+       <put-attribute name="title" value="도서 상세 조회 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/manager/book/detailBook.jsp" />
+    </definition>
+    
+    <definition name="manager/book/updateBook" extends="managerLayout">
+       <put-attribute name="title" value="도서 수정 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/manager/book/updateBook.jsp" />
+    </definition>
     
 </tiles-definitions>

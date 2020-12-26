@@ -11,7 +11,6 @@
 <link href="${contextPath}/resources/css/style.css" rel="stylesheet" type="text/css">
 <link href="${contextPath}/resources/css/common/custom.css" rel="stylesheet" type="text/css">
 
-
 	<title><tiles:insertAttribute name="title" ignore="true"/></title>
 	
 </head>
@@ -60,7 +59,7 @@
 		});
    	</script>
    	
-   	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+   	<!--  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> -->
    	
   
 </body>     

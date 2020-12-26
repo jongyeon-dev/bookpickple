@@ -569,7 +569,7 @@ footer {
 	margin-bottom: 0 !important;
 }
 
-.wrap-profile .form-group {
+.wrap-profile .form-group, .wrap-detailBook .form-group {
 	align-items: center;
 }
 
