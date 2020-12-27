@@ -3,59 +3,15 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bookMapper">
 
-	<select id="selectBookList" resultType="Book">
-		SELECT * FROM BOOK ORDER BY CREDATE DESC, BOOKNO DESC
-	</select>
-
-	<insert id="insertBook" parameterType="Book">
-		INSERT INTO BOOK VALUES(
-			SEQ_BOOKNO.NEXTVAL, #{bookType}, #{title}, #{writer}, #{publisher}, #{price}, #{salesPrice}, #{point}, 
-			TO_DATE(#{publishedDate}, 'RR/MM/DD'), #{isbn}, #{deliveryPrice}, #{bookIntro}, #{writerIntro}, DEFAULT, #{status}
-		)
-	</insert>
-	
-	<insert id="insertBookImages" parameterType="BookImages">
-		<selectKey keyProperty="bookNo" resultType="_int" order="BEFORE">
-			SELECT SEQ_BOOKNO.CURRVAL FROM DUAL
-		</selectKey>
-		INSERT INTO BOOKIMAGES VALUES(
-			SEQ_IMAGENO.NEXTVAL, #{bookNo}, #{originFileName}, #{changeFileName}, DEFAULT,
-			#{fileLevel}, DEFAULT
-		)
-	</insert>
-	
-	<select id="selectOneBook" parameterType="_int" resultType="Book">
-		SELECT * FROM BOOK WHERE BOOKNO = #{bookNo}
+	<select id="selectBookList" parameterType="string" resultType="Book">
+		 SELECT ROWNUM, A.*
+         FROM (SELECT B.*, BI.CHANGEFILENAME 
+                FROM BOOK B, BOOKIMAGES BI
+                WHERE B.BOOKNO = BI.BOOKNO AND BI.FILELEVEL= 0 AND TYPE = #{TYPE}
+                ORDER BY B.CREDATE DESC, B.BOOKNO DESC) A
 	</select>
 	
-	<select id="selectOneBookImages" parameterType="_int" resultType="BookImages">
-		SELECT * FROM BOOKIMAGES WHERE BOOKNO = #{bookNo}
+	<select id="selectBookTotalContents" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM BOOK WHERE TYPE = #{TYPE}
 	</select>
-	
-	<update id="updateBook" parameterType="Book">
-		UPDATE BOOK SET
-			BOOKTYPE = #{bookType}, TITLE = #{title}, WRITER = #{writer}, PUBLISHER = #{publisher},
-			PRICE = #{price}, SALESPRICE = #{salesPrice}, POINT = #{point}, PUBLISHEDDATE = TO_DATE(#{publishedDate}, 'RR/MM/DD'), 
-			ISBN = #{isbn}, DELIVERYPRICE = #{deliveryPrice}, BOOKINTRO = #{bookIntro}, WRITERINTRO = #{writerIntro}, STATUS = #{status}
-		WHERE BOOKNO = #{bookNo}
-	</update>
-	
-	<insert id="updateBookImages" parameterType="BookImages">
-		INSERT INTO BOOKIMAGES VALUES(
-			SEQ_IMAGENO.NEXTVAL, #{bookNo}, #{originFileName}, #{changeFileName}, DEFAULT,
-			#{fileLevel}, DEFAULT
-		)
-	</insert>
-	
-	<update id="deleteBook" parameterType="_int">
-		UPDATE BOOK SET STATUS = 'STOP' WHERE BOOKNO = #{bookNo}
-	</update>
-	
-	<delete id="realDeleteBookImages" parameterType="_int">
-		DELETE FROM BOOKIMAGES WHERE BOOKNO = #{bookNo}
-	</delete>
-	
-	<update id="deleteBookImages" parameterType="_int">
-		UPDATE BOOKIMAGES SET STATUS = 'N' WHERE BOOKNO = #{bookNo}
-	</update>
 </mapper>

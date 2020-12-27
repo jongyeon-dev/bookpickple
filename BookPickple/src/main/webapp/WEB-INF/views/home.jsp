@@ -58,43 +58,43 @@
         <div class="quick-menu-area">
 		<ul>
 			<li class="quick-menu-list">
-				<a href="<%=request.getContextPath()%>/selectProductList.pr?type=study">
+				<a href="${contextPath}/book/selectBookList.do?type=IT">
 					<svg viewBox="0 0 44 44" style="fill:#FFC9D3;" class="quick-menu-shape">
 						<path d="M.001 22s-.046 4.493.453 8.846c.428 3.727 1.402 7.614 3.244 9.456 1.842 1.842 5.729 2.816 9.457 3.244 4.352.499 8.845.453 8.845.453s4.493.046 8.846-.453c3.727-.428 7.614-1.402 9.456-3.244 1.842-1.842 2.816-5.729 3.244-9.456.499-4.353.453-8.846.453-8.846s.046-4.493-.453-8.845c-.428-3.728-1.402-7.615-3.244-9.457C38.46 1.856 34.573.882 30.846.454 26.493-.045 22 .001 22 .001s-4.493-.046-8.845.453C9.427.882 5.54 1.856 3.698 3.698 1.856 5.54.882 9.427.454 13.155-.045 17.507.001 22 .001 22"></path>
 					</svg>
-					<img alt="" src="${contextPath}/resources/images/quickmenu/new.png" class="quick-menu-image">
+					<img alt="IT" src="${contextPath}/resources/images/quickmenu/new.png" class="quick-menu-image">
 					<span class="quick-menu-label">IT</span>
 				</a>
 			</li>
 			<li class="quick-menu-list">
-				<a href="<%=request.getContextPath()%>/selectProductList.pr?type=study">
+				<a href="${contextPath}/book/selectBookList.do?type=NOVEL">
 					<svg viewBox="0 0 44 44" style="fill:#FFE17F;" class="quick-menu-shape">
 						<path d="M.001 22s-.046 4.493.453 8.846c.428 3.727 1.402 7.614 3.244 9.456 1.842 1.842 5.729 2.816 9.457 3.244 4.352.499 8.845.453 8.845.453s4.493.046 8.846-.453c3.727-.428 7.614-1.402 9.456-3.244 1.842-1.842 2.816-5.729 3.244-9.456.499-4.353.453-8.846.453-8.846s.046-4.493-.453-8.845c-.428-3.728-1.402-7.615-3.244-9.457C38.46 1.856 34.573.882 30.846.454 26.493-.045 22 .001 22 .001s-4.493-.046-8.845.453C9.427.882 5.54 1.856 3.698 3.698 1.856 5.54.882 9.427.454 13.155-.045 17.507.001 22 .001 22"></path>
 					</svg>
-					<img alt="" src="" class="quick-menu-image">
+					<img alt="소설" src="${contextPath}/resources/images/quickmenu/new.png" class="quick-menu-image">
 					<span class="quick-menu-label">소설</span>
 				</a>
 			</li>
 			<li class="quick-menu-list">
-				<a href="<%=request.getContextPath()%>/selectProductList.pr?type=study">
+				<a href="${contextPath}/book/selectBookList.do?type=ECONOMY">
 					<svg viewBox="0 0 44 44" style="fill:#C8ED7E;" class="quick-menu-shape">
 						<path d="M.001 22s-.046 4.493.453 8.846c.428 3.727 1.402 7.614 3.244 9.456 1.842 1.842 5.729 2.816 9.457 3.244 4.352.499 8.845.453 8.845.453s4.493.046 8.846-.453c3.727-.428 7.614-1.402 9.456-3.244 1.842-1.842 2.816-5.729 3.244-9.456.499-4.353.453-8.846.453-8.846s.046-4.493-.453-8.845c-.428-3.728-1.402-7.615-3.244-9.457C38.46 1.856 34.573.882 30.846.454 26.493-.045 22 .001 22 .001s-4.493-.046-8.845.453C9.427.882 5.54 1.856 3.698 3.698 1.856 5.54.882 9.427.454 13.155-.045 17.507.001 22 .001 22"></path>
 					</svg>
-					<img alt="" src="" class="quick-menu-image">
+					<img alt="경제" src="${contextPath}/resources/images/quickmenu/new.png" class="quick-menu-image">
 					<span class="quick-menu-label">경제</span>
 				</a>
 			</li>
 			<li class="quick-menu-list">
-				<a href="<%=request.getContextPath()%>/selectProductList.pr?type=study">
+				<a href="${contextPath}/book/selectBookList.do?type=SOCIETY">
 					<svg viewBox="0 0 44 44" style="fill:#ADDEFF;" class="quick-menu-shape">
 						<path d="M.001 22s-.046 4.493.453 8.846c.428 3.727 1.402 7.614 3.244 9.456 1.842 1.842 5.729 2.816 9.457 3.244 4.352.499 8.845.453 8.845.453s4.493.046 8.846-.453c3.727-.428 7.614-1.402 9.456-3.244 1.842-1.842 2.816-5.729 3.244-9.456.499-4.353.453-8.846.453-8.846s.046-4.493-.453-8.845c-.428-3.728-1.402-7.615-3.244-9.457C38.46 1.856 34.573.882 30.846.454 26.493-.045 22 .001 22 .001s-4.493-.046-8.845.453C9.427.882 5.54 1.856 3.698 3.698 1.856 5.54.882 9.427.454 13.155-.045 17.507.001 22 .001 22"></path>
 					</svg>
-					<img alt="" src="" class="quick-menu-image">
+					<img alt="사회" src="${contextPath}/resources/images/quickmenu/new.png" class="quick-menu-image">
 					<span class="quick-menu-label">사회</span>
 				</a>
 			</li>
 			<li class="quick-menu-list">
-				<a href="<%=request.getContextPath()%>/selectProductList.pr?type=study">
+				<a href="${contextPath}/book/selectBookList.do?type=HOBBY">
 					<svg viewBox="0 0 44 44" style="fill:#bddee6;" class="quick-menu-shape">
 						<path d="M.001 22s-.046 4.493.453 8.846c.428 3.727 1.402 7.614 3.244 9.456 1.842 1.842 5.729 2.816 9.457 3.244 4.352.499 8.845.453 8.845.453s4.493.046 8.846-.453c3.727-.428 7.614-1.402 9.456-3.244 1.842-1.842 2.816-5.729 3.244-9.456.499-4.353.453-8.846.453-8.846s.046-4.493-.453-8.845c-.428-3.728-1.402-7.615-3.244-9.457C38.46 1.856 34.573.882 30.846.454 26.493-.045 22 .001 22 .001s-4.493-.046-8.845.453C9.427.882 5.54 1.856 3.698 3.698 1.856 5.54.882 9.427.454 13.155-.045 17.507.001 22 .001 22"></path>
 					</svg>
@@ -103,29 +103,29 @@
 				</a>
 			</li>
 			<li class="quick-menu-list">
-				<a href="<%=request.getContextPath()%>/selectProductList.pr?type=study">
+				<a href="${contextPath}/book/selectNewBookList.do">
 					<svg viewBox="0 0 44 44" style="fill:#B08EAD;" class="quick-menu-shape">
 						<path d="M.001 22s-.046 4.493.453 8.846c.428 3.727 1.402 7.614 3.244 9.456 1.842 1.842 5.729 2.816 9.457 3.244 4.352.499 8.845.453 8.845.453s4.493.046 8.846-.453c3.727-.428 7.614-1.402 9.456-3.244 1.842-1.842 2.816-5.729 3.244-9.456.499-4.353.453-8.846.453-8.846s.046-4.493-.453-8.845c-.428-3.728-1.402-7.615-3.244-9.457C38.46 1.856 34.573.882 30.846.454 26.493-.045 22 .001 22 .001s-4.493-.046-8.845.453C9.427.882 5.54 1.856 3.698 3.698 1.856 5.54.882 9.427.454 13.155-.045 17.507.001 22 .001 22"></path>
 					</svg>
-					<img alt="" src="" class="quick-menu-image">
+					<img alt="신간" src="${contextPath}/resources/images/quickmenu/new.png" class="quick-menu-image">
 					<span class="quick-menu-label">신간</span>
 				</a>
 			</li>
 			<li class="quick-menu-list">
-				<a href="<%=request.getContextPath()%>/selectProductList.pr?type=study">
+				<a href="${contextPath}/book/selectBestBookList.do">
 					<svg viewBox="0 0 44 44" style="fill:#b8bfca;" class="quick-menu-shape">
 						<path d="M.001 22s-.046 4.493.453 8.846c.428 3.727 1.402 7.614 3.244 9.456 1.842 1.842 5.729 2.816 9.457 3.244 4.352.499 8.845.453 8.845.453s4.493.046 8.846-.453c3.727-.428 7.614-1.402 9.456-3.244 1.842-1.842 2.816-5.729 3.244-9.456.499-4.353.453-8.846.453-8.846s.046-4.493-.453-8.845c-.428-3.728-1.402-7.615-3.244-9.457C38.46 1.856 34.573.882 30.846.454 26.493-.045 22 .001 22 .001s-4.493-.046-8.845.453C9.427.882 5.54 1.856 3.698 3.698 1.856 5.54.882 9.427.454 13.155-.045 17.507.001 22 .001 22"></path>
 					</svg>
-					<img alt="" src="" class="quick-menu-image">
+					<img alt="베스트" src="${contextPath}/resources/images/quickmenu/new.png" class="quick-menu-image">
 					<span class="quick-menu-label">베스트</span>
 				</a>
 			</li>
 			<li class="quick-menu-list">
-				<a href="<%=request.getContextPath()%>/selectProductList.pr?type=study">
+				<a href="${contextPath}/book/selectPopularBookList.do">
 					<svg viewBox="0 0 44 44" style="fill:#898d94;" class="quick-menu-shape">
 						<path d="M.001 22s-.046 4.493.453 8.846c.428 3.727 1.402 7.614 3.244 9.456 1.842 1.842 5.729 2.816 9.457 3.244 4.352.499 8.845.453 8.845.453s4.493.046 8.846-.453c3.727-.428 7.614-1.402 9.456-3.244 1.842-1.842 2.816-5.729 3.244-9.456.499-4.353.453-8.846.453-8.846s.046-4.493-.453-8.845c-.428-3.728-1.402-7.615-3.244-9.457C38.46 1.856 34.573.882 30.846.454 26.493-.045 22 .001 22 .001s-4.493-.046-8.845.453C9.427.882 5.54 1.856 3.698 3.698 1.856 5.54.882 9.427.454 13.155-.045 17.507.001 22 .001 22"></path>
 					</svg>
-					<img alt="" src="" class="quick-menu-image">
+					<img alt="화제의 책" src="${contextPath}/resources/images/quickmenu/new.png" class="quick-menu-image">
 					<span class="quick-menu-label">화제의 책</span>
 				</a>
 			</li>
