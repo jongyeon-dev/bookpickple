@@ -28,69 +28,69 @@
                         method="post" enctype="multipart/form-data"
                         action="${contextPath}/manager/insertBookEnd.do">
                             <div class="form-group row">
-                             	<label class="col-sm-3 col-form-label" for="bookType">도서 분류</label>
+                             	<label class="col-sm-3 col-form-label" for="type">도서 분류</label>
 	                             <div class="col-sm-5">
-	                                  <select class="form-control" name="bookType" id="bookType">
-                                           <option value="1" selected>IT</option>
-                                           <option value="2">소설</option>
-                                           <option value="3">경제</option>
-                                           <option value="4">사회</option>
-                                           <option value="5">취미</option>
+	                                  <select class="form-control" name="type" id="type">
+                                           <option value="IT" selected>IT</option>
+                                           <option value="NOVEL">소설</option>
+                                           <option value="ECONOMY">경제</option>
+                                           <option value="SOCIETY">사회</option>
+                                           <option value="HOBBY">취미</option>
                                        </select>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="title">도서명</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="title" id="title">
+	                                  <input type="text" class="form-control" name="title" id="title" autocomplete="off">
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="writer">저자</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="writer" id="writer">
+	                                  <input type="text" class="form-control" name="writer" id="writer" autocomplete="off">
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="publisher">출판사</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="publisher" id="publisher">
+	                                  <input type="text" class="form-control" name="publisher" id="publisher" autocomplete="off">
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="publishedDate">출판일</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="publishedDate" id="publishedDate" placeholder="ex)20200101">
+	                                  <input type="text" class="form-control" name="publishedDate" id="publishedDate" placeholder="ex)20200101" autocomplete="off">
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="price">정가</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="price" id="price">
+	                                  <input type="text" class="form-control" name="price" id="price" autocomplete="off">
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="salesPrice">판매가</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="salesPrice" id="salePrice">
+	                                  <input type="text" class="form-control" name="salesPrice" id="salePrice" autocomplete="off">
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="point">포인트</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="point" id="point" placeholder="정가에서 5% 적립">
+	                                  <input type="text" class="form-control" name="point" id="point" placeholder="정가에서 5% 적립" autocomplete="off">
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="isbn">ISBN</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="isbn" id="isbn">
+	                                  <input type="text" class="form-control" name="isbn" id="isbn" autocomplete="off">
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="deliveryPrice">배송비</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="deliveryPrice" id="deliveryPrice" placeholder="기본 2500원 / 1만원 이상 무료배송">
+	                                  <input type="text" class="form-control" name="deliveryPrice" id="deliveryPrice" placeholder="기본 2500원 / 1만원 이상 무료배송" autocomplete="off">
 	                             </div>
                              </div>
 

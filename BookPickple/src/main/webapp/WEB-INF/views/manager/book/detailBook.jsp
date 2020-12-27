@@ -31,15 +31,15 @@
                             <div class="form-group row">
                              	<label class="col-sm-3 col-form-label text-primary font-weight-bold">도서 분류</label>
 	                             <div class="col-sm-7">
-	                             	<c:if test="${book.bookType == 1}"><p class="mb-0">IT</p></c:if>
-	                             	<c:if test="${book.bookType == 2}"><p class="mb-0">소설</p></c:if>
-	                             	<c:if test="${book.bookType == 3}"><p class="mb-0">경제</p></c:if>
-	                             	<c:if test="${book.bookType == 4}"><p class="mb-0">사회</p></c:if>
-	                             	<c:if test="${book.bookType == 5}"><p class="mb-0">취미</p></c:if>
+	                             	<c:if test="${book.type == 'IT'}"><p class="mb-0">IT</p></c:if>
+	                             	<c:if test="${book.type == 'NOVEL'}"><p class="mb-0">소설</p></c:if>
+	                             	<c:if test="${book.type == 'ECONOMY'}"><p class="mb-0">경제</p></c:if>
+	                             	<c:if test="${book.type == 'SOCIETY'}"><p class="mb-0">사회</p></c:if>
+	                             	<c:if test="${book.type == 'HOBBY'}"><p class="mb-0">취미</p></c:if>
 	                             </div>
                              </div>
                              <div class="form-group row">
-                             	<label class="col-sm-3 col-form-label text-primary font-weight-bold"">도서명</label>
+                             	<label class="col-sm-3 col-form-label text-primary font-weight-bold">도서명</label>
 	                             <div class="col-sm-7">
 	                             	<p class="mb-0">${ book.title }</p>
 	                             </div>

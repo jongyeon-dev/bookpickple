@@ -28,70 +28,70 @@
                         action="${contextPath}/manager/bookUpdateEnd.do">
                         	<input type="hidden" name="bookNo" value="${ book.bookNo }"/>
                             <div class="form-group row">
-                             	<label class="col-sm-3 col-form-label" for="bookType">도서 분류</label>
+                             	<label class="col-sm-3 col-form-label" for="type">도서 분류</label>
 	                             <div class="col-sm-5">
-	                                  <select class="form-control" name="bookType" id="bookType">
-                                           <option value="1" ${ book.bookType == "1" ? 'selected':'' }>IT</option>
-                                           <option value="2" ${ book.bookType == "2" ? 'selected':'' }>소설</option>
-                                           <option value="3" ${ book.bookType == "3" ? 'selected':'' }>경제</option>
-                                           <option value="4" ${ book.bookType == "4" ? 'selected':'' }>사회</option>
-                                           <option value="5" ${ book.bookType == "5" ? 'selected':'' }>취미</option>
+	                                  <select class="form-control" name="type" id="type">
+                                           <option value="IT" ${ book.type == "IT" ? 'selected':'' }>IT</option>
+                                           <option value="NOVEL" ${ book.type == "NOVEL" ? 'selected':'' }>소설</option>
+                                           <option value="ECONOMY" ${ book.type == "ECONOMY" ? 'selected':'' }>경제</option>
+                                           <option value="SOCIETY" ${ book.type == "SOCIETY" ? 'selected':'' }>사회</option>
+                                           <option value="HOBBY" ${ book.type == "HOBBY" ? 'selected':'' }>취미</option>
                                        </select>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="title">도서명</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="title" id="title" value="${ book.title }"/>
+	                                  <input type="text" class="form-control" name="title" id="title" value="${ book.title }" autocomplete="off"/>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="writer">저자</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="writer" id="writer" value="${ book.writer }">
+	                                  <input type="text" class="form-control" name="writer" id="writer" value="${ book.writer }" autocomplete="off"/>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="publisher">출판사</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="publisher" id="publisher" value="${ book.publisher }">
+	                                  <input type="text" class="form-control" name="publisher" id="publisher" value="${ book.publisher }" autocomplete="off"/>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="publishedDate">출판일</label>
 	                             <div class="col-sm-5">
 	                             	<input type="hidden" name="dbPublishedDate" id="dbPublishedDate" value="${ book.publishedDate }" />
-	                                  <input type="text" class="form-control" name="publishedDate" id="publishedDate" placeholder="ex)20200101">
+	                                  <input type="text" class="form-control" name="publishedDate" id="publishedDate" placeholder="ex)20200101" autocomplete="off"/>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="price">정가</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="price" id="price" value="${ book.price }">
+	                                  <input type="text" class="form-control" name="price" id="price" value="${ book.price }" autocomplete="off"/>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="salesPrice">판매가</label>
 	                              <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="salesPrice" id="salePrice" value="${ book.salesPrice }">
+	                                  <input type="text" class="form-control" name="salesPrice" id="salePrice" value="${ book.salesPrice }" autocomplete="off"/>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="point">포인트</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="point" id="point" placeholder="정가에서 5% 적립" value="${ book.point }">
+	                                  <input type="text" class="form-control" name="point" id="point" placeholder="정가에서 5% 적립" value="${ book.point }" autocomplete="off"/>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="isbn">ISBN</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="isbn" id="isbn" value="${ book.isbn }">
+	                                  <input type="text" class="form-control" name="isbn" id="isbn" value="${ book.isbn }" autocomplete="off"/>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="deliveryPrice">배송비</label>
 	                             <div class="col-sm-5">
-	                                  <input type="text" class="form-control" name="deliveryPrice" id="deliveryPrice" placeholder="기본 2500원 / 1만원 이상 무료배송" value="${ book.deliveryPrice }">
+	                                  <input type="text" class="form-control" name="deliveryPrice" id="deliveryPrice" placeholder="기본 2500원 / 1만원 이상 무료배송" value="${ book.deliveryPrice }" autocomplete="off"/>
 	                             </div>
                              </div>
 

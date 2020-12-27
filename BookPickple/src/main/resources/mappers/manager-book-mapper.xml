@@ -9,7 +9,7 @@
 
 	<insert id="insertBook" parameterType="Book">
 		INSERT INTO BOOK VALUES(
-			SEQ_BOOKNO.NEXTVAL, #{bookType}, #{title}, #{writer}, #{publisher}, #{price}, #{salesPrice}, #{point}, 
+			SEQ_BOOKNO.NEXTVAL, #{type}, #{title}, #{writer}, #{publisher}, #{price}, #{salesPrice}, #{point}, 
 			TO_DATE(#{publishedDate}, 'RR/MM/DD'), #{isbn}, #{deliveryPrice}, #{bookIntro}, #{writerIntro}, DEFAULT, #{status}
 		)
 	</insert>
@@ -34,7 +34,7 @@
 	
 	<update id="updateBook" parameterType="Book">
 		UPDATE BOOK SET
-			BOOKTYPE = #{bookType}, TITLE = #{title}, WRITER = #{writer}, PUBLISHER = #{publisher},
+			TYPE = #{type}, TITLE = #{title}, WRITER = #{writer}, PUBLISHER = #{publisher},
 			PRICE = #{price}, SALESPRICE = #{salesPrice}, POINT = #{point}, PUBLISHEDDATE = TO_DATE(#{publishedDate}, 'RR/MM/DD'), 
 			ISBN = #{isbn}, DELIVERYPRICE = #{deliveryPrice}, BOOKINTRO = #{bookIntro}, WRITERINTRO = #{writerIntro}, STATUS = #{status}
 		WHERE BOOKNO = #{bookNo}
