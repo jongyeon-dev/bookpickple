@@ -9,8 +9,12 @@
 		<put-attribute name="title" value="도서 리스트 조회" />
 		<put-attribute name="body" value="/WEB-INF/views/book/bookList.jsp" />
 	</definition>
+	
+	<definition name="book/bookDetails" extends="baseLayout">
+		<put-attribute name="title" value="도서 상세 조회" />
+		<put-attribute name="body" value="/WEB-INF/views/book/bookDetails.jsp" />
+	</definition>
 
-    
 </tiles-definitions>
 
 
