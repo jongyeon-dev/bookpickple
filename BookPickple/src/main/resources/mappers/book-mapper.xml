@@ -14,4 +14,20 @@
 	<select id="selectBookTotalContents" parameterType="string" resultType="_int">
 		SELECT COUNT(*) FROM BOOK WHERE TYPE = #{TYPE}
 	</select>
+	
+	<select id="selectOneBook" parameterType="_int" resultType="Book">
+		SELECT * FROM BOOK WHERE BOOKNO = #{bookNo}
+	</select>
+	
+	<select id="selectOneBookImages" parameterType="_int" resultType="BookImages">
+		SELECT * FROM BOOKIMAGES WHERE BOOKNO = #{bookNo}
+	</select>
+	
+	<select id="selectOneQuickList" parameterType="_int" resultType="Book">
+		SELECT B.*, BI.CHANGEFILENAME 
+        FROM BOOK B, BOOKIMAGES BI
+        WHERE B.BOOKNO = BI.BOOKNO AND BI.FILELEVEL= 0 AND B.BOOKNO = #{bookNo}
+        ORDER BY B.CREDATE DESC, B.BOOKNO DESC
+	</select>
+	
 </mapper>

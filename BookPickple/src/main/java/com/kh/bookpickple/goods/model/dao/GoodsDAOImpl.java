@@ -8,6 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.bookpickple.manager.book.model.vo.Book;
+import com.kh.bookpickple.manager.book.model.vo.BookImages;
+
 @Repository
 public class GoodsDAOImpl implements GoodsDAO {
 	
@@ -23,6 +26,21 @@ public class GoodsDAOImpl implements GoodsDAO {
 	@Override
 	public int selectBookTotalContents(String type) {
 		return sqlSession.selectOne("bookMapper.selectBookTotalContents", type);
+	}
+
+	@Override
+	public Book selectOneBook(int bookNo) {
+		return sqlSession.selectOne("bookMapper.selectOneBook", bookNo);
+	}
+
+	@Override
+	public List<BookImages> selectOneBookImagesList(int bookNo) {
+		return sqlSession.selectList("bookMapper.selectOneBookImages", bookNo);
+	}
+
+	@Override
+	public Book selectQuickBook(int bookNo) {
+		return sqlSession.selectOne("bookMapper.selectOneQuickList", bookNo);
 	}
 
 }

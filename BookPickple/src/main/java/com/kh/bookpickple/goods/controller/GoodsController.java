@@ -1,16 +1,23 @@
 package com.kh.bookpickple.goods.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.bookpickple.common.util.Pagination;
 import com.kh.bookpickple.goods.model.service.GoodsService;
+import com.kh.bookpickple.manager.book.model.vo.Book;
+import com.kh.bookpickple.manager.book.model.vo.BookImages;
 
 @Controller
 public class GoodsController {
@@ -40,5 +47,50 @@ public class GoodsController {
 		
 		return "book/bookList";
 	}
+	
+	@RequestMapping("/book/detailBookView.do")
+	public String selectOneBook(@RequestParam int bookNo, Model model, HttpServletRequest request) {
+		
+		Book book = goodsService.selectOneBook(bookNo);
+		List<BookImages> bookImages = goodsService.selectOneBookImagesList(bookNo);
 
+		model.addAttribute("book", book);
+		model.addAttribute("bookImages", bookImages);
+	
+		
+		HttpSession session=request.getSession();
+		Book quickBook = goodsService.selectQuickBook(bookNo);
+		addQuickList(bookNo, quickBook, session);
+		
+		return "book/bookDetails";
+	}
+	
+	private void addQuickList(int bookNo, Book quickBook, HttpSession session) {
+		boolean exist =false;
+		List<Book> quickGoodsList; //최근 본 상품 저장 ArrayList
+		quickGoodsList=(ArrayList<Book>)session.getAttribute("quickGoodsList");
+		
+		if(quickGoodsList!=null){
+			if(quickGoodsList.size() < 5){
+				for(int i=0; i<quickGoodsList.size();i++){
+					Book _goodsBean=(Book)quickGoodsList.get(i);
+					if(bookNo == _goodsBean.getBookNo()){
+						exist=true;
+						break;
+					}
+				}
+				if(exist == false){
+					quickGoodsList.add(quickBook);
+				}
+			}
+			
+		}else{
+			quickGoodsList =new ArrayList<Book>();
+			quickGoodsList.add(quickBook);
+			
+		}
+		session.setAttribute("quickGoodsList",quickGoodsList);
+		session.setAttribute("quickGoodsListNum", quickGoodsList.size());
+		
+	}
 }

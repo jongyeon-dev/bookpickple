@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.bookpickple.goods.model.dao.GoodsDAO;
+import com.kh.bookpickple.manager.book.model.vo.Book;
+import com.kh.bookpickple.manager.book.model.vo.BookImages;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
@@ -22,6 +24,21 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public int selectBookTotalContents(String type) {
 		return goodsDAO.selectBookTotalContents(type);
+	}
+
+	@Override
+	public Book selectOneBook(int bookNo) {
+		return goodsDAO.selectOneBook(bookNo);
+	}
+
+	@Override
+	public List<BookImages> selectOneBookImagesList(int bookNo) {
+		return goodsDAO.selectOneBookImagesList(bookNo);
+	}
+
+	@Override
+	public Book selectQuickBook(int bookNo) {
+		return goodsDAO.selectQuickBook(bookNo);
 	}
 
 }
