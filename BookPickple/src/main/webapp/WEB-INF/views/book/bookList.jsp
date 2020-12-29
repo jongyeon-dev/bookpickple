@@ -6,6 +6,8 @@
 <div class="container">
 	<div class="goods-list">
 		<c:forEach items="${list}" var="book">
+		<input type="hidden" id="isLogin" value="${isLogin}"/>
+		<c:if test="${book.status != 'STOP'}">
 			<table width="100%">
 				<colgroup>
 				    <col width="95">
@@ -62,7 +64,7 @@
 			    				<button class="btn btn-outline-secondary btn-sm btn-flat" disabled="disabled"><i class="fa fa-credit-card"></i> 바로 구매</button>
 		            		</c:when>
 		            		<c:otherwise>
-		            			<button class="btn mb-2 btn-primary btn-sm btn-flat"><i class="fa fa-shopping-cart"></i> 카트에 담기</button>
+		            			<button class="btn mb-2 btn-primary btn-sm btn-flat" onclick="insertCart(${book.bookNo}, ${member.userNo})"><i class="fa fa-shopping-cart"></i> 카트에 담기</button>
 			    				<button class="btn btn-outline-secondary btn-sm btn-flat"><i class="fa fa-credit-card"></i> 바로 구매</button>
 		            		</c:otherwise>
 		            	</c:choose>
@@ -73,6 +75,7 @@
 			    	</tr>
 			    </tbody>
 			</table>
+			</c:if>
 		</c:forEach>
 	</div>
 	<div class="pt-5 pb-1">
@@ -86,4 +89,28 @@
 	var splitDate = $("#dbPublishedDate").val().split(" ")[0].split("-");
 	var finalPubDate = splitDate[0] + "년 " +splitDate[1] + "월"
 	$(".book-pub-date").text(finalPubDate);
+
+	function insertCart(bookNo, userNo) {
+		if($("#isLogin").val() == null || $("#isLogin").val() == "") {
+			alert("로그인 후 카트 사용이 가능합니다.");
+		} else {
+			$.ajax({
+				type : "post",
+				async : false,
+				url: "${contextPath}/cart/insertCart.do",
+				data : {"bookNo":bookNo, "userNo": userNo, "quantity": $('#quantity').val() },
+				success: function(data) {
+					if(data.trim() == "insertCart") {
+						alert("카트에 추가되었습니다.");
+					} else if(data.trim() == "exist"){
+						alert("이미 카트에 등록 된 상품입니다.");
+					}
+				},
+				error : function(data, textStatus) {
+					console.log(userNo);
+					alert("에러가 발생했습니다."+data);
+				}
+			});
+		}
+	}
 </script>

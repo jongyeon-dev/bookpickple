@@ -63,6 +63,7 @@
 			<mapping path="/member/memberDelete.do"/>
 			<mapping path="/member/memberLogout.do"/>
 			<mapping path="/manager/**/*.do"/>
+			<mapping path="/cart/**/*.do"/>
 			<beans:bean id="loginInterceptor" class="com.kh.bookpickple.common.interceptor.LoginInterceptor"/>
 		</interceptor>
 	</interceptors>

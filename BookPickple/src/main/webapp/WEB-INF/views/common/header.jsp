@@ -82,8 +82,20 @@
                         <i class="icon-home menu-icon"></i><span class="nav-text">Home</span>
                     </a>
                 </li>
+                <li>
+                    <a class="has-arrow" href="#" aria-expanded="false">
+                        <i class="icon-book-open menu-icon"></i><span class="nav-text">도서</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="${contextPath}/book/selectBookList.do?type=IT">IT</a></li>
+                        <li><a href="${contextPath}/book/selectBookList.do?type=NOVEL">소설</a></li>
+                        <li><a href="${contextPath}/book/selectBookList.do?type=ECONOMY">경제</a></li>
+                        <li><a href="${contextPath}/book/selectBookList.do?type=SOCIETY">사회</a></li>
+                        <li><a href="${contextPath}/book/selectBookList.do?type=HOBBY">취미</a></li>
+                    </ul>
+                </li>
                 <li class="mega-menu mega-menu-sm">
-                    <a href="#">
+                    <a href="${contextPath}/cart/cartList.do?userNo=${member.userNo}">
                         <i class="icon-basket-loaded menu-icon"></i><span class="nav-text">내 Cart</span>
                     </a>
                 </li>

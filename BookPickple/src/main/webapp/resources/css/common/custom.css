@@ -647,7 +647,8 @@ form .error {
     color: #666;
 }
 
-.goods-list .goods-btn {
+.goods-list .goods-btn,
+.cart-list .cart-btn {
 	padding: 60px 0;
     color: #666;
     display: grid;
@@ -724,7 +725,8 @@ form .error {
     padding: 19px 0 0 0;
     width: 430px;
 }
-.wrap-details .book-info-bot table {
+.wrap-details .book-info-bot table,
+.cart-list table{
 	font-size: 12px;
 }
 
@@ -782,18 +784,23 @@ form .error {
     color: #666;
 }
 
-.wrap-details .book-action .book-quantity dd{
+.wrap-details .book-action .book-quantity dd,
+.goods-list .book-quantity {
     position: relative;
     margin: 0 0 0 56px;
 }
 
-.wrap-details .book-action .book-quantity span{
+.wrap-details .book-action .book-quantity span,
+.goods-list .book-quantity span,
+.cart-list .book-quantity span{
 	display: inline-block;
     width: 59px;
    	height: 24px;
 }
 
-.wrap-details .book-action .book-quantity span input{
+.wrap-details .book-action .book-quantity span input,
+.goods-list .book-quantity span input,
+.cart-list .book-quantity span input{
     width: 100%;
     height: 20px;
     line-height: 20px;
@@ -810,7 +817,8 @@ form .error {
     text-align:center;
 }
 
-.wrap-details .book-action .book-quantity dd button{
+.wrap-details .book-action .book-quantity dd button,
+.goods-list .book-quantity button{
     position: absolute;
     top: 0;
     width: 24px;
@@ -818,17 +826,19 @@ form .error {
     background-color: transparent;
 }
 
-.wrap-details .book-action .book-quantity dd button.minus{
+.wrap-details .book-action .book-quantity dd button.minus,
+.goods-list .book-quantity button.minus{
     left: -23px;
     background-position: -30px -300px;
 }
 
-.wrap-details .book-action .book-quantity dd button.plus{
+.wrap-details .book-action .book-quantity dd button.plus,
+.goods-list .book-quantity button.plus{
     left: 58px;
     background-position: 0 -300px;
 }
 
-.wrap-details .book-action .btn-grp {
+.wrap-details .book-action .btn-grp{
 	display: block;
 	text-align: center;
 }
@@ -837,3 +847,56 @@ form .error {
 	margin: 30px 0;
 }
 
+
+/*-------------------------
+[ cart ]
+---------------------------*/
+.cart-list .book-quantity {
+	padding: 60px 0;
+    color: #666;
+    display: inline-grid;
+    text-align: center;
+}
+.calc-table {
+	position: relative;
+    margin-bottom: 20px;
+    border: solid 1px #9fc7e1;
+    background-color: #F3F1FA;
+}
+
+.calc-table th {
+	position: relative;
+    padding: 15px 0 5px 0;
+    line-height: 20px;
+    text-align: center;
+    color: #000;
+    border-right: solid 1px #cae0f0;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.calc-table .sale {
+	color: #3a85c8;
+}
+
+.calc-table .total {
+	color: #a13b66;
+    background-color: #F3F1FA;
+    border-right: none;
+}
+
+.calc-table tbody td {
+	position: relative;
+    z-index: 21;
+    padding-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+    color: #000;
+    border-right: solid 1px #cae0f0;
+}
+
+.calc-table tbody p {
+	font-size: 24px;
+    vertical-align: -2px;
+    letter-spacing: -1px;
+}

@@ -63,7 +63,7 @@
 		});
    	</script>
    	
-   	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
  	<script src="${contextPath}/resources/js/carousel/owl.carousel.min.js"></script>
 	<script src="${contextPath}/resources/js/carousel/bxslider.min.js"></script>
 	<script src="${contextPath}/resources/js/carousel/script.slider.js"></script>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cartMapper">
+
+	<select id="findCart" parameterType="Cart" resultType="String">
+        SELECT DECODE(COUNT(*), 0, 'false', 'true') FROM CART
+        WHERE BOOKNO = #{bookNo} AND USERNO = #{userNo}
+	</select>
+	
+	<insert id="insertCart" parameterType="Cart">
+		INSERT INTO CART VALUES (
+			#{bookNo}, #{userNo}, SEQ_CARTNO.NEXTVAL ,#{quantity}, DEFAULT 
+		)
+	</insert>
+	
+	<select id="selectCartList" parameterType="Cart" resultType="Cart">
+		SELECT * FROM CART WHERE USERNO = #{userNo} ORDER BY CREDATE DESC
+	</select>
+	
+	
+	<select id="selectBookList" parameterType="java.util.Map" resultType="Book"> <!--  parameterType="hashmap" -->
+		SELECT B.*, BI.CHANGEFILENAME 
+        FROM BOOK B, BOOKIMAGES BI
+        WHERE B.BOOKNO = BI.BOOKNO AND BI.FILELEVEL= 0
+        AND B.BOOKNO IN
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+			#{item.bookNo}
+		</foreach> 
+        ORDER BY B.CREDATE DESC
+	</select>
+	
+	<!-- 
+	SELECT B.*, BI.CHANGEFILENAME 
+        FROM BOOK B, BOOKIMAGES BI
+        WHERE B.BOOKNO = BI.BOOKNO AND BI.FILELEVEL= 0
+        AND B.BOOKNO IN ('0번째의 bookNo', '1번째의 bookNo' ...)
+        ORDER BY B.CREDATE DESC; 
+	-->
+</mapper>

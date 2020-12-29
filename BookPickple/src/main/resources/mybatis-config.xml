@@ -12,6 +12,7 @@
     	<typeAlias type="com.kh.bookpickple.member.model.vo.Member" alias="Member" />
     	<typeAlias type="com.kh.bookpickple.manager.book.model.vo.Book" alias="Book" />
     	<typeAlias type="com.kh.bookpickple.manager.book.model.vo.BookImages" alias="BookImages" />
+    	<typeAlias type="com.kh.bookpickple.cart.model.vo.Cart" alias="Cart" />
     	
   	</typeAliases>
   
