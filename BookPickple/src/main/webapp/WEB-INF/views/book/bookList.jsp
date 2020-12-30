@@ -64,6 +64,7 @@
 			    				<button class="btn btn-outline-secondary btn-sm btn-flat" disabled="disabled"><i class="fa fa-credit-card"></i> 바로 구매</button>
 		            		</c:when>
 		            		<c:otherwise>
+		            			<span><input type="number" class="quantity${book.bookNo}" name="quantity" value="1" min="1" max="5"></span><br>
 		            			<button class="btn mb-2 btn-primary btn-sm btn-flat" onclick="insertCart(${book.bookNo}, ${member.userNo})"><i class="fa fa-shopping-cart"></i> 카트에 담기</button>
 			    				<button class="btn btn-outline-secondary btn-sm btn-flat"><i class="fa fa-credit-card"></i> 바로 구매</button>
 		            		</c:otherwise>
@@ -98,7 +99,7 @@
 				type : "post",
 				async : false,
 				url: "${contextPath}/cart/insertCart.do",
-				data : {"bookNo":bookNo, "userNo": userNo, "quantity": $('#quantity').val() },
+				data : {"bookNo":bookNo, "userNo": userNo, "quantity": $('.quantity' + bookNo).val() },
 				success: function(data) {
 					if(data.trim() == "insertCart") {
 						alert("카트에 추가되었습니다.");

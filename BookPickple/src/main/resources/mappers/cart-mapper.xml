@@ -15,26 +15,24 @@
 	</insert>
 	
 	<select id="selectCartList" parameterType="Cart" resultType="Cart">
-		SELECT * FROM CART WHERE USERNO = #{userNo} ORDER BY CREDATE DESC
+		SELECT * FROM CART WHERE USERNO = #{userNo} ORDER BY CARTNO DESC
 	</select>
 	
-	
-	<select id="selectBookList" parameterType="java.util.Map" resultType="Book"> <!--  parameterType="hashmap" -->
-		SELECT B.*, BI.CHANGEFILENAME 
-        FROM BOOK B, BOOKIMAGES BI
-        WHERE B.BOOKNO = BI.BOOKNO AND BI.FILELEVEL= 0
-        AND B.BOOKNO IN
-        <foreach item="item" collection="list" open="(" separator="," close=")">
-			#{item.bookNo}
-		</foreach> 
-        ORDER BY B.CREDATE DESC
+	<select id="selectBookList" parameterType="Book" resultType="Book">
+		SELECT B.*, BI.CHANGEFILENAME
+        FROM BOOK B INNER JOIN BOOKIMAGES BI ON B.BOOKNO = BI.BOOKNO
+       				INNER JOIN CART C ON B.BOOKNO = C.BOOKNO
+        WHERE C.USERNO = #{userNo} AND BI.FILELEVEL= 0
+        ORDER BY C.CARTNO DESC 
 	</select>
 	
-	<!-- 
-	SELECT B.*, BI.CHANGEFILENAME 
-        FROM BOOK B, BOOKIMAGES BI
-        WHERE B.BOOKNO = BI.BOOKNO AND BI.FILELEVEL= 0
-        AND B.BOOKNO IN ('0번째의 bookNo', '1번째의 bookNo' ...)
-        ORDER BY B.CREDATE DESC; 
-	-->
+	<update id="updateCart" parameterType="Cart">
+		UPDATE CART SET
+		QUANTITY = #{quantity}
+		WHERE USERNO = #{userNo} AND CARTNO = #{cartNo} AND BOOKNO = #{bookNo}
+	</update>
+	
+	<delete id="deleteCart" parameterType="_int">
+		DELETE FROM CART WHERE CARTNO = #{cartNo}
+	</delete>
 </mapper>

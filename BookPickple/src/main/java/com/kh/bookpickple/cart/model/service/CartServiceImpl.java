@@ -38,7 +38,7 @@ public class CartServiceImpl implements CartService {
 			return null;
 		}
 		
-		List<Book> bookList = cartDAO.selectBookList(cartList);
+		List<Book> bookList = cartDAO.selectBookList(cart);
 		
 		cartMap.put("cartList", cartList);
 		cartMap.put("bookList", bookList);
@@ -48,14 +48,12 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public int updateCart(Cart cart) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cartDAO.updateCart(cart);
 	}
 
 	@Override
 	public int deleteCart(int cartNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cartDAO.deleteCart(cartNo);
 	}
 
 }
