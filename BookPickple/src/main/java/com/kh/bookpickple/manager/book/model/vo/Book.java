@@ -1,5 +1,6 @@
 package com.kh.bookpickple.manager.book.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +14,12 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book {
+public class Book implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1002L;
+	
 	private int bookNo;
 	private String type;
 	private String title;
