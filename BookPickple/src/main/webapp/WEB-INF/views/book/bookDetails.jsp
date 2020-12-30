@@ -188,10 +188,13 @@
 						alert("이미 카트에 등록 된 상품입니다.");
 					}
 				},
-				error : function(data, textStatus) {
-					console.log(userNo);
-					alert("에러가 발생했습니다."+data);
-				}
+				error: function(jqxhr, textStatus, errorThrown){
+	                console.log("카트 수량 변경 ajax 실패");
+	                //에러 로그
+	                console.log(jqxhr);
+	                console.log(textStatus);
+	                console.log(errorThrown);
+	            }
 			});
 		}
 	}
