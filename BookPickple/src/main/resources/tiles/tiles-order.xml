@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="order" template="/WEB-INF/views/common/orderLayout.jsp">
+		<put-attribute name="title" value="주문 페이지" />
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
+	<definition name="order/orderForm" extends="order">
+		<put-attribute name="title" value="도서 주문 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/order/orderForm.jsp" />
+	</definition>
+	
+	<definition name="order/orderForm" extends="order">
+		<put-attribute name="title" value="도서 주문 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/order/orderForm.jsp" />
+	</definition>
+	
+	<definition name="order/orderResult" extends="order">
+		<put-attribute name="title" value="주문 결과 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/order/orderResult.jsp" />
+	</definition>
+
+</tiles-definitions>
+
+

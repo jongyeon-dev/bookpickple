@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderMapper">
+
+	<insert id="insertOrder" parameterType="Order">
+		<selectKey keyProperty="orderNum" resultType="_int" order="BEFORE">
+			SELECT SEQ_ORDERNUM.NEXTVAL FROM DAUL
+		</selectKey>
+		INSERT INTO ORDER VALUES (
+			#{orderNum}, #{orderNo}, #{userNo}, #{bookNo}, #{ordererName}, #{quantity},
+			#{totalPrice}, #{totalPoint}, #{receiverName}, #{receiverEmail}, #{receiverTel}, #{deliveryAddr},
+			#{payMethod}, DEFAULT, DEFAULT
+		)
+	</insert>
+	
+</mapper>

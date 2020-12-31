@@ -6,8 +6,6 @@
 <c:set var="cartList"  value="${cartMap.cartList}"  />
 <c:set var="bookList"  value="${cartMap.bookList}"  />
 
-<c:set  var="totalGoodsNum" value="0" />  <!--주문 개수 -->
-
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 <div class="container">
@@ -40,7 +38,7 @@
 	       						 	<c:set var="cartNo" value="${cartList[loop.count-1].cartNo}" />
 	       						 	<td>
 	       						 		<input type="hidden" id="bookNo" value="${book.bookNo}">
-	       						 		<input type="checkbox" name="checked_goods" class="check-book" value="${quantity * book.salesPrice}, ${book.point * quantity}" checked>
+	       						 		<input type="checkbox" name="checked_goods" class="check-book" value="${quantity}, ${quantity * book.salesPrice}, ${book.point * quantity}" checked>
 	       						 	</td>
 	       						 	<td class="bookImage">
 	       						 		<a href="${contextPath}/book/detailBookView.do?bookNo=${book.bookNo}">
@@ -90,6 +88,7 @@
 						            	</c:choose>
 	       						 	</td>
 		        			</tr>
+		        			<c:set var="totalQuantity" value="${totalQuantity + quantity}" />
 		        			<c:set var="totalBooksPrice" value="${totalBooksPrice + book.salesPrice*quantity}" />
 							<c:set var="totalDeliveryPrice" value="0" /> <!-- 총 배송비 --> 
 							<c:set var="totalDiscountedPrice" value="0" /> <!-- 총 할인금액 -->
@@ -103,6 +102,7 @@
 		<table  width="100%">
 			<thead>
 		     <tr>
+		     	<th scope="col">총 도서 수</th>
 		       <th scope="col">총 상품금액</th>
 		       <th scope="col">총 배송비</th>
 		       <th scope="col" class="sale">총 할인 금액 </th>
@@ -111,6 +111,13 @@
 		     </thead>
 		     <tbody>
 				<tr>
+					<td>
+			          <p id="totalQuantity">
+			          <fmt:formatNumber  value="${totalQuantity}" type="number" var="total_quantity" />
+				         ${total_quantity}개
+			          </p>
+			          <input id="inputTotalQuantity" type="hidden" value="${totalQuantity}" />
+			       </td>
 			       <td>
 			          <p id="totalBooksPrice">
 			          <fmt:formatNumber  value="${totalBooksPrice}" type="number" var="total_books_price" />
@@ -172,6 +179,7 @@
 });
 
    function itemSum(){
+	   var quantitySum = 0;
        var priceSum = 0;
        var pointSum = 0;
        
@@ -181,16 +189,18 @@
            if( $(".check-book")[i].checked == true ){
 
         	   var splitCheckValue = $(".check-book")[i].value.split(",");
-        	   var price = splitCheckValue[0];
-        	   var point = splitCheckValue[1];
-        	   
-            priceSum += parseInt(price);
-            pointSum += parseInt(point);
+        	   var quantity = splitCheckValue[0];
+        	   var price = splitCheckValue[1];
+        	   var point = splitCheckValue[2];
+
+	           	quantitySum += parseInt(quantity);
+	            priceSum += parseInt(price);
+	            pointSum += parseInt(point);
            }
        }
 
-       console.log(priceSum);
-       console.log(pointSum);
+       $("#totalQuantity").text(priceToString(quantitySum) + "개");
+       $("#inputTotalQuantity").val(quantitySum);
        
        $("#totalBooksPrice").text(priceToString(priceSum) + "원");
        $("#inputTotalBooksPrice").val(priceSum);
