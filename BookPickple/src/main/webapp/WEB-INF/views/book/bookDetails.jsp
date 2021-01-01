@@ -13,7 +13,7 @@
 	<div class="row">
 		<div class="wrap-details">
 			<div style="overflow: hidden;">
-				<form action="${contextPath}/order/eachOrder.do" method="post" id="orderForm" name="orderForm">
+				
 					<input type="hidden" id="isLogin" value="${isLogin}"/>
 					<div class="details-left">
 						<img src="${contextPath}/resources/bookFileRepo/${book.bookNo}/${bookImages[0].changeFileName}" width="200px" alt="${book.title}" />
@@ -94,26 +94,30 @@
 				            		</c:when>
 				            		<c:otherwise>
 				            			<button class="btn mb-2 btn-primary btn-lg btn-flat" onclick="insertCart(${book.bookNo}, ${member.userNo})">카트에 담기</button>
-				    					<button type="submit" class="btn btn-outline-secondary btn-lg btn-flat">바로 구매</button>
+				            			<form action="${contextPath}/order/eachOrder.do" method="post" id="orderForm" name="orderForm">
+						            			<input type="hidden" name="userNo" value="${member.userNo}" />
+												<input type="hidden" name="bookNo" value="${book.bookNo}" />
+												<input type="hidden" name="orderTitle" value="${book.title}" />
+												<input type="hidden" name="ordererName" value="${member.userName}" />
+												<input type="hidden" id="quantity" name="quantity" value="1" />
+												<input type="hidden" name="salesPrice" value="${book.salesPrice}" />
+												<!-- <input type="hidden" name="totalPrice" value="${book.salesPrice * quantity}"/> -->
+												<!-- <input type="hidden" name="totalPoint" value="${book.point * quantity}"/> -->
+												<input type="hidden" name="point" value="${book.point}"/>
+												<input type="hidden" name="bookImage" value="${bookImages[0].changeFileName}"/>
+												<input type="hidden" name="receiverName" value="${member.userName}"/>
+												<input type="hidden" name="receiverEmail" value="${member.email}"/>
+												<input type="hidden" name="receiverTel" value="${member.tel}"/>
+												<input type="hidden" name="deliveryAddr" value="${member.address}"/>
+				    						<button type="submit"class="btn btn-outline-secondary btn-lg btn-flat">바로 구매</button>
+				    					</form>
 				            		</c:otherwise>
 				            	</c:choose>
 				    		</div>
 						</div>
 						
 					</div>
-					<input type="hidden" name="userNo" value="${member.userNo}" />
-					<input type="hidden" name="bookNo" value="${book.bookNo}" />
-					<input type="hidden" name="ordererName" value="${member.userName}" />
-					<input type="hidden" name="bookTitle" value="${book.title}" />
-					<input type="hidden" id="quantity" name="quantity" value="" />
-					<input type="hidden" name="totalPrice" value="${book.salesPrice * quantity}"/>
-					<input type="hidden" name="totalPoint" value="${book.point * quantity}"/>
-					<input type="hidden" name="bookImage" value="${bookImages[0].changeFileName}"/>
-					<input type="hidden" name="receiverName" value="${member.userName}"/>
-					<input type="hidden" name="receiverTel" value="${member.tel}"/>
-					<input type="hidden" name="deliveryAddr" value="${member.address}"/>
-					<input type="hidden" name="receiverTel" value="${member.tel}"/>
-				</form>
+				
 			</div>
 			
 			<!--

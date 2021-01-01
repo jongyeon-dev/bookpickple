@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<c:set var="orderList"  value="${orderList}"  />
-
+<c:set var="contextPath" value="${pageContext.request.contextPath}"  />
+<c:set var="orderList" value="${orderList}"  />
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<form action="${contaxtPath}/order/orderPayment.do" method="post" name="orderForm" id="orderForm">
+
 	<div class="table-responsive cart-list mb-5">
 		<h3 class="mb-5 font-weight-bold">도서 확인</h3>
 	    <table class="table header-border" style="text-align: center;">
@@ -29,7 +29,7 @@
 	        	</c:if>
 	      			<c:forEach items="${orderList}" var="order">
 	      				<c:set var="bookNo" value="${order.bookNo}" />
-				 		<c:set var="bookTitle" value="${order.bookTitle}" />
+				 		<c:set var="bookTitle" value="${order.orderTitle}" />
 	       			<tr>	
 					 	<td class="bookImage">
 					 		<a href="${contextPath}/book/detailBookView.do?bookNo=${bookNo}">
@@ -46,12 +46,12 @@
 					 	<td>${order.quantity}</td>
 					 	<td>
 					 		<p class="font-weight-bold text-primary mb-0">
-	 			 				<fmt:formatNumber  value="${order.salesPrice*order.quantity}" type="number" var="totalPrice" />
+	 			 				<fmt:formatNumber  value="${order.salesPrice * order.quantity}" type="number" var="totalPrice" />
 	   							${totalPrice}원
 					 		</p> <!-- 합계 -->
 					 	</td>
 					 	<td>
-					 		<fmt:formatNumber value="${order.point*order.quantity}" type="number" var="totalPoint" />
+					 		<fmt:formatNumber value="${order.point * order.quantity}" type="number" var="totalPoint" />
 					 		${totalPoint}원
 					 	</td>
 	       			</tr>
@@ -90,9 +90,11 @@
 			          <fmt:formatNumber  value="${totalBooksPrice}" type="number" var="total_books_price" />
 				         ${total_books_price}원
 			          </p>
+			          <input id="inputTotalBooksPrice" type="hidden" value="${totalBooksPrice}" />
 			       </td>
 			       <td>
-			         <p>${totalDeliveryPrice}원</p>
+			         <p id="totalDeliveryPrice">${totalDeliveryPrice}원</p>
+			         <input id="inputTotalDeliveryPrice" type="hidden" value="${totalDeliveryPrice}" />
 			       </td>
 			       <td class="sale">  
 			         <p>${totalDiscountedPrice}원</p>
@@ -123,29 +125,29 @@
 		      <th class="" scope="row">배송지 선택</th>
 		      <td class="">
 		      	<label class="radio-inline mr-3 col-form-label">
-	               	<input type="radio" name="destination" id="" value="" checked onclick="defaultDest()"> 기본 배송지
+	               	<input type="radio" name="destination" checked onclick="defaultDest()"> 기본 배송지
 	              </label>
 	              <label class="radio-inline mr-3 col-form-label">
-	               	<input type="radio" name="destination" id="" value="" onclick="resetDest()"> 새로 입력
+	               	<input type="radio" name="destination" onclick="resetDest()"> 새로 입력
 	              </label>
 		      </td>
 		    </tr>
 		    <tr>
 		      <th class="" scope="row">수령자 이름</th>
 		      <td class="">
-		      	 <input type="text" class="form-control" name="receiverName" id="userName" value="${member.userName}" >
+		      	 <input type="text" class="form-control" name="receiverName" id="receiverName" value="${member.userName}" >
 		      </td>
 		    </tr>
 		    <tr>
 		      <th class="" scope="row">수령자 이메일</th>
 		      <td class="">
-		      	 <input type="email" class="form-control" name="receiverEmail" id="email" value="${ member.email }">
+		      	 <input type="email" class="form-control" name="receiverEmail" id="receiverEmail" value="${ member.email }">
 		      </td>
 		    </tr>
 		    <tr>
 		      <th class="" scope="row">수령자 연락처</th>
 		      <td class="">
-		      	 <input type="tel" class="form-control" name="receiverTel" id="tel" placeholder="ex)010-1234-5678" value="${ member.tel }">
+		      	 <input type="tel" class="form-control" name="receiverTel" id="receiverTel" placeholder="ex)010-1234-5678" value="${ member.tel }">
 		      </td>
 		    </tr>
 		    <tr>
@@ -179,16 +181,15 @@
 		<div class="text-center mt-5">
 				<input type="hidden" id="userNo" value="${member.userNo}" />
 				<input type="hidden" id="bookNo" value="${bookNo}" />
-				<input type="hidden" id="bookTitle" value="${bookTitle}" />
+				<input type="hidden" id="orderTitle" value="${bookTitle}" />
 				<input type="hidden" id="userName" value="${member.userName}" />
-				<input type="hidden" id="quantity" value="${total_quantity}" />
-				<input type="hidden" id="totalPrice" value="${total_price}" />
-				<input type="hidden" id="totalPoint" value="${total_point}" />
+				<input type="hidden" id="quantity" value="${totalQuantity}" />
+				<input type="hidden" id="totalPrice" value="${totalBooksPrice}" />
+				<input type="hidden" id="totalPoint" value="${totalBooksPoint}" />
 				<!-- 나머지 정보는 배송 정보에 -->
 				<button type="button" class="btn mb-1 btn-primary btn-lg" onclick="requestPay()">결제하기</button>
 		</div>
 	</div>
-</form>
 
 
 <script>
@@ -202,8 +203,26 @@ $(function() {
 	$("#address1").val(address1);
 	$("#address2").val(address2);
 
+	if($("#inputTotalBooksPrice").val() >= 10000 || $("#inputTotalBooksPrice").val() == 0) {
+        $("#totalDeliveryPrice").text("0원");
+        $("#inputTotalDeliveryPrice").val(0);
+    } else {
+ 	   $("#totalDeliveryPrice").text("2,500원");
+ 	   $("#inputTotalDeliveryPrice").val(2500);
+    }
 
-	console.log(${member.tel});
+	var IMP = window.IMP; // 생략가능
+	IMP.init("imp31227075"); // 가맹점 식별 코드
+
+	 console.log($("#orderTitle").val());
+
+	 console.log(${totalBooksPrice});
+	 console.log($("#receiverEmail").val());
+	 console.log($("#userName").val());
+	 console.log($("#receiverTel").val());
+	 console.log($("input[name=deriveryAddr]").val());
+	
+
 });
 </script>
 
@@ -218,45 +237,87 @@ function defaultDest() {
 	$("#zipCode").val(zipCode);
 	$("#address1").val(address1);
 	$("#address2").val(address2);
-
-
-	$("#userName").val("${member.userName}");
-	$("#email").val("${member.email}");
-	$("#tel").val("${member.tel}");
+	$("#receiverName").val("${member.userName}");
+	$("#receiverEmail").val("${member.email}");
+	$("#receiverTel").val("${member.tel}");
 
 };
 
 function resetDest() {
-	$("#userName").val("");
-	$("#email").val("");
+	$("#receiverName").val("");
+	$("#receiverEmail").val("");
 	$("#zipCode").val("");
 	$("#address1").val("");
 	$("#address2").val("");
-	$("#tel").val("");
+	$("#receiverTel").val("");
 };
 
+
 function requestPay() {
+
     // IMP.request_pay(param, callback) 호출
     IMP.request_pay({ // param
         pg: "html5_inicis",
         pay_method: "card",
         merchant_uid: 'merchant_' + new Date().getTime(),
-        name: $("#booktitle").val(),
-        amount: $("#totalPrice").val(),
-        buyer_email: $("#receiverEmail").val(),
+        name: $("#orderTitle").val(),
+        // amount: ${totalBooksPrice},
+        amount: 100,
+        buyer_email: $("#email").val(),
         buyer_name: $("#userName").val(),
-        buyer_tel: ${member.tel},
+        buyer_tel: $("#tel").val(),
         buyer_addr: $("input[name=deriveryAddr]").val()
     }, function (rsp) { // callback
         if (rsp.success) {
-            ...,
-            // 결제 성공 시 로직,
-            ...
+        	$.ajax({
+				url : "${contextPath}/order/orderPayment.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+				type : "post",
+				async: false,
+				data : {
+					imp_uid: rsp.imp_uid,
+					merchant_uid: rsp.merchant_uid,
+					userNo: $("#userNo").val(),
+					bookNo: $("#bookNo").val(),
+					orderTitle: $("#orderTitle").val(),
+					ordererName: $("#userName").val(),
+					quantity: $("#quantity").val(),
+					totalPrice: $("#totalPrice").val(),
+					totalPoint: $("#totalPoint").val(),
+					receiverName: $("#receiverName").val(),
+					receiverEmail: $("#receiverEmail").val(),
+					receiverTel: $("#receiverTel").val(),
+					deliveryAddr: $("input[name=deriveryAddr]").val()
+				//기타 필요한 데이터가 있으면 추가 전달
+				},
+				success: function(data){
+					if(data != null) {
+						alert("결제 완료");
+						location.href="${contextPath}/order/orderSuccess.do?orderNo=" + data + "&userNo=" + ${member.userNo};
+					} else {
+						alert("결제 실패");
+						location.href="${contextPath}/order/orderFail.do";
+					}
+				},
+				error: function(jqxhr, textStatus, errorThrown){
+	                console.log("주문 처리 실패");
+	                //에러 로그
+	                console.log(jqxhr);
+	                console.log(textStatus);
+	                console.log(errorThrown);
+	            }
+			});
+        	var msg = '결제가 완료되었습니다.';
+        	msg += '고유ID : ' + rsp.imp_uid;
+        	msg += '상점 거래ID : ' + rsp.merchant_uid;
+        	msg += '결제 금액 : ' + rsp.paid_amount;
+        	msg += '카드 승인번호 : ' + rsp.apply_num;
+
         } else {
-            ...,
-            // 결제 실패 시 로직,
-            ...
+        	var msg = '결제에 실패하였습니다.';
+			msg += '\n에러내용 : ' + rsp.error_msg;
+			alert(msg);
         }
+        alert(msg);
     });
   }
 </script>

@@ -891,7 +891,6 @@ form .error {
 
 .calc-table tbody td {
 	position: relative;
-    z-index: 21;
     text-align: center;
     font-weight: bold;
     color: #000;
