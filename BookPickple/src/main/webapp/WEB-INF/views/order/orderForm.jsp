@@ -29,7 +29,7 @@
 	        	</c:if>
 	      			<c:forEach items="${orderList}" var="order">
 	      				<c:set var="bookNo" value="${order.bookNo}" />
-				 		<c:set var="bookTitle" value="${order.orderTitle}" />
+				 		<c:set var="bookTitle" value="${order.title}" />
 	       			<tr>	
 					 	<td class="bookImage">
 					 		<a href="${contextPath}/book/detailBookView.do?bookNo=${bookNo}">
@@ -43,7 +43,7 @@
 					 		 <fmt:formatNumber  value="${order.salesPrice}" type="number" var="salesPrice" />
 					 		${salesPrice}원 <br>(10% 할인)
 					 	</td> <!-- 판매가 -->
-					 	<td>${order.quantity}</td>
+					 	<td>${order.quantity}</td> <!-- 수량 -->
 					 	<td>
 					 		<p class="font-weight-bold text-primary mb-0">
 	 			 				<fmt:formatNumber  value="${order.salesPrice * order.quantity}" type="number" var="totalPrice" />
@@ -181,9 +181,9 @@
 		<div class="text-center mt-5">
 				<input type="hidden" id="userNo" value="${member.userNo}" />
 				<input type="hidden" id="bookNo" value="${bookNo}" />
-				<input type="hidden" id="orderTitle" value="${bookTitle}" />
+				<input type="hidden" id="title" value="${bookTitle}" />
 				<input type="hidden" id="userName" value="${member.userName}" />
-				<input type="hidden" id="quantity" value="${totalQuantity}" />
+				<input type="hidden" id="totalQuantity" value="${totalQuantity}" />
 				<input type="hidden" id="totalPrice" value="${totalBooksPrice}" />
 				<input type="hidden" id="totalPoint" value="${totalBooksPoint}" />
 				<!-- 나머지 정보는 배송 정보에 -->
@@ -214,7 +214,7 @@ $(function() {
 	var IMP = window.IMP; // 생략가능
 	IMP.init("imp31227075"); // 가맹점 식별 코드
 
-	 console.log($("#orderTitle").val());
+	 console.log($("#title").val());
 
 	 console.log(${totalBooksPrice});
 	 console.log($("#receiverEmail").val());
@@ -260,9 +260,9 @@ function requestPay() {
         pg: "html5_inicis",
         pay_method: "card",
         merchant_uid: 'merchant_' + new Date().getTime(),
-        name: $("#orderTitle").val(),
-        // amount: ${totalBooksPrice},
-        amount: 100,
+        name: $("#title").val(),
+        amount: ${totalBooksPrice},
+        //amount: 100,
         buyer_email: $("#email").val(),
         buyer_name: $("#userName").val(),
         buyer_tel: $("#tel").val(),
@@ -278,11 +278,14 @@ function requestPay() {
 					merchant_uid: rsp.merchant_uid,
 					userNo: $("#userNo").val(),
 					bookNo: $("#bookNo").val(),
-					orderTitle: $("#orderTitle").val(),
+					orderTitle: $("#title").val(),
 					ordererName: $("#userName").val(),
-					quantity: $("#quantity").val(),
-					totalPrice: $("#totalPrice").val(),
-					totalPoint: $("#totalPoint").val(),
+					//quantity: $("#quantity").val(),
+					totalQuantity: $("#totalQuantity").val(), // 최종 모든 도서 수
+					//salePrice: $("#quantity").val(),
+					totalPrice: $("#totalPrice").val(), // 최종 결제 가격
+					//point: $("#quantity").val(),
+					totalPoint: $("#totalPoint").val(), // 최종 적립 포인트
 					receiverName: $("#receiverName").val(),
 					receiverEmail: $("#receiverEmail").val(),
 					receiverTel: $("#receiverTel").val(),
@@ -292,7 +295,7 @@ function requestPay() {
 				success: function(data){
 					if(data != null) {
 						alert("결제 완료");
-						location.href="${contextPath}/order/orderSuccess.do?orderNo=" + data + "&userNo=" + ${member.userNo};
+						location.href="${contextPath}/order/orderSuccess.do?orderNum=" + data + "&userNo=" + ${member.userNo};
 					} else {
 						alert("결제 실패");
 						location.href="${contextPath}/order/orderFail.do";

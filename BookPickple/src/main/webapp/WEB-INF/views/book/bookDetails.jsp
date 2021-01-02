@@ -97,18 +97,20 @@
 				            			<form action="${contextPath}/order/eachOrder.do" method="post" id="orderForm" name="orderForm">
 						            			<input type="hidden" name="userNo" value="${member.userNo}" />
 												<input type="hidden" name="bookNo" value="${book.bookNo}" />
-												<input type="hidden" name="orderTitle" value="${book.title}" />
-												<input type="hidden" name="ordererName" value="${member.userName}" />
+												<input type="hidden" name="title" value="${book.title}" />
+												<!-- <input type="hidden" name="ordererName" value="${member.userName}" /> -->
 												<input type="hidden" id="quantity" name="quantity" value="1" />
 												<input type="hidden" name="salesPrice" value="${book.salesPrice}" />
 												<!-- <input type="hidden" name="totalPrice" value="${book.salesPrice * quantity}"/> -->
 												<!-- <input type="hidden" name="totalPoint" value="${book.point * quantity}"/> -->
 												<input type="hidden" name="point" value="${book.point}"/>
 												<input type="hidden" name="bookImage" value="${bookImages[0].changeFileName}"/>
+												<!-- 
 												<input type="hidden" name="receiverName" value="${member.userName}"/>
 												<input type="hidden" name="receiverEmail" value="${member.email}"/>
 												<input type="hidden" name="receiverTel" value="${member.tel}"/>
 												<input type="hidden" name="deliveryAddr" value="${member.address}"/>
+												-->
 				    						<button type="submit"class="btn btn-outline-secondary btn-lg btn-flat">바로 구매</button>
 				    					</form>
 				            		</c:otherwise>

@@ -9,6 +9,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 <div class="container">
+
 	<div class="table-responsive cart-list">
 	    <table class="table header-border" style="text-align: center;">
 	        <thead>
@@ -37,8 +38,8 @@
 	        						<c:set var="quantity" value="${cartList[loop.count-1].quantity}" />
 	       						 	<c:set var="cartNo" value="${cartList[loop.count-1].cartNo}" />
 	       						 	<td>
-	       						 		<input type="hidden" id="bookNo" value="${book.bookNo}">
-	       						 		<input type="checkbox" name="checked_goods" class="check-book" value="${quantity}, ${quantity * book.salesPrice}, ${book.point * quantity}" checked>
+	       						 		<input type="hidden" value="${book.bookNo}">
+	       						 		<input type="checkbox" name="checkedBook" class="check-book" value="${quantity}, ${book.salesPrice}, ${book.point}, ${book.bookNo}" checked>
 	       						 	</td>
 	       						 	<td class="bookImage">
 	       						 		<a href="${contextPath}/book/detailBookView.do?bookNo=${book.bookNo}">
@@ -154,6 +155,21 @@
 		</table>
 		
 	</div>
+	
+	<div class="text-center mt-5">
+	<!--  
+		<form name="cartOrderForm">
+		
+			<c:forEach items="${bookList}" var="book" varStatus="loop">
+				<input type="text" name="cartOrderValue" id="cartOrderValue${loop.count-1 }" class="cartOrderValue" value=""/>
+			</c:forEach>
+			
+			<button type="button" class="btn mb-1 btn-primary btn-lg" onclick="cartOrder()">주문하기</button>
+		</form>	
+		-->
+		<button type="button" class="btn mb-1 btn-primary btn-lg" onclick="cartOrder()">주문하기</button>
+	</div>
+
 </div>
 
  <script>
@@ -178,6 +194,46 @@
 		
 });
 
+function cartOrder() {
+	var count = $(".check-book").length;
+	 var $form = $('<form></form>');
+
+     $form.attr('action', '${contextPath}/order/cartOrder.do');
+
+     $form.attr('method', 'post');
+
+     $form.appendTo('body');
+
+	 for(var i=0; i < count; i++ ){
+	
+        if( $(".check-book")[i].checked == true ){
+           
+       	 var checkValue = $(".check-book")[i].value; // 수량, 판매가, 포인트, 도서 번호
+
+       	 console.log(checkValue);
+
+
+		var idx = ($('<input type="hidden" value="' + checkValue + '" name = cartOrderValue>'));
+		$form.append(idx);
+        }
+	 }
+
+	 if($("input[name=cartOrderValue]").length < 1) {
+		alert("주문할 도서를 확인해주세요.");
+		return;
+	 } else {
+		$form.submit();
+	 }
+
+	 console.log($("input[name=cartOrderValue]").length);
+
+	 console.log($form[0]);
+	//$form.submit();
+	//cartOrderForm.method="post";
+	//cartOrderForm.action="${contextPath}/order/cartOrder.do";
+	//cartOrderForm.submit();
+}
+
    function itemSum(){
 	   var quantitySum = 0;
        var priceSum = 0;
@@ -194,8 +250,10 @@
         	   var point = splitCheckValue[2];
 
 	           	quantitySum += parseInt(quantity);
-	            priceSum += parseInt(price);
-	            pointSum += parseInt(point);
+	            // priceSum += parseInt(price);
+	            priceSum = priceSum + parseInt(price) * parseInt(quantity);
+	            //pointSum += parseInt(point);
+	            pointSum = pointSum + parseInt(point) * parseInt(quantity);
            }
        }
 

@@ -13,6 +13,7 @@
 	                <th scope="col">도서명</th>
 	                <th scope="col">수량</th>
 	                <th scope="col">주문 금액</th>
+	                <th scope="col">적립 예정 포인트</th>
 	                <th scope="col">주문 상태</th>
 	                <th scope="col">주문자</th>
 	                <th scope="col">수령자</th>
@@ -22,17 +23,21 @@
 	      			<c:forEach items="${payList}" var="pay">
 	       			<tr>	
 					 	<td>
-					 		<a href="${contextPath}/book/detailBookView.do?bookNo=${bookNo}" class="font-weight-bold">${pay.orderTitle}</a>
+					 		<a href="${contextPath}/book/detailBookView.do?bookNo=${bookNo}" class="font-weight-bold">${pay.title}</a>
 					 	</td>
 					 	<td>
 					 		${pay.quantity}개
 					 	</td>
 					 	<td>
-					 		 <fmt:formatNumber  value="${pay.totalPrice}" type="number" var="totalPrice" />
+					 		 <fmt:formatNumber  value="${pay.salesPrice * pay.quantity}" type="number" var="totalPrice" />
 					 		${totalPrice}원
 					 	</td>
 					 	<td>
-					 		${pay.deliveryStatus}
+					 		 <fmt:formatNumber  value="${pay.point * pay.quantity}" type="number" var="totalPoint" />
+					 		${totalPoint}원
+					 	</td>
+					 	<td>
+					 		${pay.deliveryStatus} <!-- 결제완료 -->
 					 	</td>
 					 	<td>
 					 		${pay.ordererName }
