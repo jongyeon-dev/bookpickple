@@ -65,6 +65,7 @@
 			<mapping path="/manager/**/*.do"/>
 			<mapping path="/cart/**/*.do"/>
 			<mapping path="/order/**/*.do"/>
+			<mapping path="/mypage/**/*.do"/>
 			<beans:bean id="loginInterceptor" class="com.kh.bookpickple.common.interceptor.LoginInterceptor"/>
 		</interceptor>
 	</interceptors>

@@ -26,5 +26,15 @@
 		<put-attribute name="title" value="프로필 수정" />
 		<put-attribute name="body" value="/WEB-INF/views/mypage/member/updateProfile.jsp" />
 	</definition>
+	
+	<definition name="mypage/order/orderList" extends="myPage">
+		<put-attribute name="title" value="주문 내역 조회" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/order/orderList.jsp" />
+	</definition>
+	
+	<definition name="mypage/order/orderDetail" extends="myPage">
+		<put-attribute name="title" value="주문 내역 상세 조회" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/order/orderDetail.jsp" />
+	</definition>
 
 </tiles-definitions>
