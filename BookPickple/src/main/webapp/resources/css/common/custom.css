@@ -594,73 +594,73 @@ form .error {
 /*-------------------------
 [ Goods List ]
 ---------------------------*/
-.goods-list table {
+.books-list table {
 	table-layout: fixed;
 	font-size: 12px;
 }
 
-.goods-list table td{
+.books-list table td{
 	vertical-align: top;
 }
 
-.goods-list .goods-img {
+.books-list .goods-img {
 	position: relative;
     padding: 20px 0 20px 0;
     text-align: center;
 }
 
-.goods-list .goods-count {
+.books-list .goods-count {
 	display: block;
     padding-bottom: 7px;
     text-align: center;
 }
 
-.goods-list .goods-infogrp {
+.books-list .goods-infogrp {
 	padding: 40px 10px 0px 20px;;
 }
 
-.goods-list .goods-infogrp .goods-title {
+.books-list .goods-infogrp .goods-title {
     font-size: 14px;
     line-height: 1.3;
     color: #505050;
     margin-top: 9px;
 }
 
-.goods-list .goods-infogrp .goods-info {
+.books-list .goods-infogrp .goods-info {
     margin-top: 9px;
     color: #676767;
 }
 
-.goods-list .goods-infogrp .good-price {
+.books-list .goods-infogrp .good-price {
     margin-top: 9px;
     color: #333;
 }
 
-.goods-list .goods-infogrp .good-price .price {
+.books-list .goods-infogrp .good-price .price {
 	font-size: 20px;
 }
 
-.goods-list .goods-selling {
+.books-list .goods-selling {
 	margin-top: 7px;
     display: block;
     line-height: 20px;
     color: #666;
 }
 
-.goods-list .goods-btn,
-.cart-list .cart-btn {
+.books-list .goods-btn,
+.custom-list .cart-btn {
 	padding: 40px 0;
     color: #666;
     display: grid;
     text-align: center;
 }
 
-.goods-list .goods-btn input {
+.books-list .goods-btn input {
 	border: 1px solid #ccc;
     padding: 2px 0 2px 10px;
 }
 
-.goods-list .goods-division {
+.books-list .goods-division {
 	border: 1px dashed #ccc;
 }
 
@@ -731,7 +731,7 @@ form .error {
     width: 430px;
 }
 .wrap-details .book-info-bot table,
-.cart-list table{
+.custom-list table{
 	font-size: 12px;
 }
 
@@ -790,22 +790,22 @@ form .error {
 }
 
 .wrap-details .book-action .book-quantity dd,
-.goods-list .book-quantity {
+.books-list .book-quantity {
     position: relative;
     margin: 0 0 0 56px;
 }
 
 .wrap-details .book-action .book-quantity span,
-.goods-list .book-quantity span,
-.cart-list .book-quantity span{
+.books-list .book-quantity span,
+.custom-list .book-quantity span{
 	display: inline-block;
     width: 59px;
    	height: 24px;
 }
 
 .wrap-details .book-action .book-quantity span input,
-.goods-list .book-quantity span input,
-.cart-list .book-quantity span input{
+.books-list .book-quantity span input,
+.custom-list .book-quantity span input{
     width: 100%;
     height: 20px;
     line-height: 20px;
@@ -823,7 +823,7 @@ form .error {
 }
 
 .wrap-details .book-action .book-quantity dd button,
-.goods-list .book-quantity button{
+.books-list .book-quantity button{
     position: absolute;
     top: 0;
     width: 24px;
@@ -832,13 +832,13 @@ form .error {
 }
 
 .wrap-details .book-action .book-quantity dd button.minus,
-.goods-list .book-quantity button.minus{
+.books-list .book-quantity button.minus{
     left: -23px;
     background-position: -30px -300px;
 }
 
 .wrap-details .book-action .book-quantity dd button.plus,
-.goods-list .book-quantity button.plus{
+.books-list .book-quantity button.plus{
     left: 58px;
     background-position: 0 -300px;
 }
@@ -856,7 +856,7 @@ form .error {
 /*-------------------------
 [ cart ]
 ---------------------------*/
-.cart-list .book-quantity {
+.custom-list .book-quantity {
 	padding: 60px 0;
     color: #666;
     display: inline-grid;

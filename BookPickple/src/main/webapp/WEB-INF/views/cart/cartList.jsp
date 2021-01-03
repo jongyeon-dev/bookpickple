@@ -10,7 +10,7 @@
 
 <div class="container">
 
-	<div class="table-responsive cart-list">
+	<div class="table-responsive custom-list">
 	    <table class="table header-border" style="text-align: center;">
 	        <thead>
 	            <tr>

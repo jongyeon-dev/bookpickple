@@ -20,7 +20,7 @@
 	
 	<div class="card">
 		<div class="card-body">
-			<div class="table-responsive cart-list mb-5">
+			<div class="table-responsive custom-list mb-5">
 			
 				<h4 class="mb-5 font-weight-bold">주문 도서 정보</h4>
 			    <table class="table header-border" style="text-align: center;">
@@ -60,7 +60,7 @@
 			    
 			</div>
 			
-			<div class="col-12 table-responsive cart-list mt-5 mb-5">
+			<div class="col-12 table-responsive custom-list mt-5 mb-5">
 				<h4 class="mb-5 font-weight-bold">배송 정보</h4>
 				<table class="table header-border" style="padding: 30px;">
 				  <tbody>
@@ -101,7 +101,7 @@
 			   </table>
 			</div>
 			
-			<div class="col-12 table-responsive cart-list mt-5 mb-5">
+			<div class="col-12 table-responsive custom-list mt-5 mb-5">
 				<h4 class="mb-5 font-weight-bold">결제 정보</h4>
 				<table class="table header-border" style="padding: 30px;">
 				  <tbody>

@@ -19,7 +19,7 @@
 	
 	<div class="card">
 		<div class="card-body">
-			<div class="table-responsive cart-list mb-5">
+			<div class="table-responsive custom-list mb-5">
 				<h3 class="mb-5 font-weight-bold">주문 내역</h3>
 			    <table class="table header-border" style="text-align: center;">
 			        <thead>

@@ -4,7 +4,7 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
 <div class="container">
-	<div class="goods-list">
+	<div class="books-list">
 		<c:forEach items="${list}" var="book">
 		<input type="hidden" id="isLogin" value="${isLogin}"/>
 		<c:if test="${book.status != 'STOP'}">

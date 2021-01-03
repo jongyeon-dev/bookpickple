@@ -10,7 +10,7 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 
-	<div class="table-responsive cart-list mb-5">
+	<div class="table-responsive custom-list mb-5">
 		<h3 class="mb-5 font-weight-bold">도서 확인</h3>
 	    <table class="table header-border" style="text-align: center;">
 	        <thead>
@@ -118,7 +118,7 @@
 		
 	</div>
 		
-	<div class="col-12 table-responsive cart-list mt-5 mb-5">
+	<div class="col-12 table-responsive custom-list mt-5 mb-5">
 		<h3 class="mb-5 font-weight-bold">배송 정보</h3>
 		<table class="table header-border" style="padding: 30px;">
 		  <tbody>
