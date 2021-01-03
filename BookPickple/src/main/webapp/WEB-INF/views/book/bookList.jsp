@@ -18,12 +18,14 @@
 			    <tr>
 			    	<td class="goods-img">
 			    		<span class="goods-count font-weight-bold">${book.rownum}</span>
+			    		<input type="hidden" class="bookImage${book.bookNo}" value="${book.changeFileName}" />
 			    		<a href="${contextPath}/book/detailBookView.do?bookNo=${book.bookNo}">
 			    			<img src="${contextPath}/resources/bookFileRepo/${book.bookNo}/${book.changeFileName}" width="95px" alt="${book.title}">
 			    		</a>
 			    	</td>
 			    	<td class="goods-infogrp">
 			    		<p class="goods-title">
+			    			<input type="hidden" class="title${book.bookNo}" value="${book.title}" />
 			    			<a href="${contextPath}/book/detailBookView.do?bookNo=${book.bookNo}"><em class="font-weight-bold">${book.title}</em>
 			    			</a>
 			    		</p>
@@ -36,9 +38,11 @@
 					        <span class="book-pub-date"></span>
 			    		</div>
 			    		<div class="good-price">
+			    			<input type="hidden" class="salesPrice${book.bookNo}" value="${book.salesPrice}"/>
 			    			<em class="text-primary font-weight-bold book-price">${book.salesPrice}원</em>
 			    			<span>(10% 할인)</span>
 			    			<em class="divi">|</em>
+			    			<input type="hidden" class="point${book.bookNo}" value="${book.point}"/>
 			    			<span class="goods-point">포인트 <em class="text-primary">${book.point}</em>원</span>
 			    		</div>
 			    		<div class="goods-selling">
@@ -66,7 +70,9 @@
 		            		<c:otherwise>
 		            			<span><input type="number" class="quantity${book.bookNo}" name="quantity" value="1" min="1" max="5"></span><br>
 		            			<button class="btn mb-2 btn-primary btn-sm btn-flat" onclick="insertCart(${book.bookNo}, ${member.userNo})"><i class="fa fa-shopping-cart"></i> 카트에 담기</button>
-			    				<button class="btn btn-outline-secondary btn-sm btn-flat"><i class="fa fa-credit-card"></i> 바로 구매</button>
+	    						<button class="btn btn-outline-secondary btn-sm btn-flat" onclick="listEachOrder(${book.bookNo}, ${member.userNo})"><i class="fa fa-credit-card"></i> 바로 구매</button>
+	    					
+			    			
 		            		</c:otherwise>
 		            	</c:choose>
 			    	</td>
@@ -113,5 +119,41 @@
 				}
 			});
 		}
+	}
+
+	function listEachOrder(bookNo, userNo) {
+		// var count = $(".check-book").length;
+		 var orderForm = $('<form></form>');
+	
+		 orderForm.attr('action', '${contextPath}/order/eachOrder.do');
+	
+		 orderForm.attr('method', 'post');
+	
+		 orderForm.appendTo('body');
+	
+		 var title = $('.title' + bookNo).val();
+		 var quant = $('.quantity' + bookNo).val();
+		 var salesPrice = $('.salesPrice' + bookNo).val();
+		 var point = $('.point' + bookNo).val();
+		 var bookImage = $('.bookImage' + bookNo).val();
+
+		var userNo = ($('<input type="hidden" value="${member.userNo}" name = userNo>'));
+		var bookNo = ($('<input type="hidden" value="' + bookNo + '" name = bookNo>'));
+		var title = ($('<input type="hidden" value="' + title + '" name = title>'));
+		var quantity = ($('<input type="hidden" value="' + quant + '" name = quantity>'));
+		var salesPrice = ($('<input type="hidden" value="' + salesPrice + '" name = salesPrice>'));
+		var point = ($('<input type="hidden" value="' + point + '" name = point>'));
+		var bookImage = ($('<input type="hidden" value="' + bookImage + '" name = bookImage>'));
+
+		orderForm.append(userNo);
+		orderForm.append(bookNo);
+		orderForm.append(title);
+		orderForm.append(quantity);
+		orderForm.append(salesPrice);
+		orderForm.append(point);
+		orderForm.append(bookImage);
+
+		 orderForm.submit();
+	
 	}
 </script>

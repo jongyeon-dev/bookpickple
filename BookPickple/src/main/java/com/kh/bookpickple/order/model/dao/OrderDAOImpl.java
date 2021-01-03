@@ -24,15 +24,11 @@ public class OrderDAOImpl implements OrderDAO {
 	public int insertPayDetail(OrderDetail orderDetail) {
 		return sqlSession.insert("orderMapper.insertPayDetail", orderDetail);
 	}
-	
-	@Override
-	public String findOrderNum(Order order) {
-		return sqlSession.selectOne("orderMapper.findOrderNum", order);
-	}
 
 	@Override
-	public List<Order> selectOnePayRecordList(String orderNum) {
-		return sqlSession.selectList("orderMapper.selectOnePayRecord", orderNum);
+	public int deleteBooksFromCart(OrderDetail orderDetail) {
+		return sqlSession.insert("orderMapper.deleteBooksFromCart", orderDetail);
 	}
+
 
 }

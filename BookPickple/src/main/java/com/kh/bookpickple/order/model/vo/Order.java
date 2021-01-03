@@ -20,7 +20,7 @@ public class Order implements Serializable{
 	 */
 	private static final long serialVersionUID = 1005L;
 	
-	private String orderNum;
+	private int orderNo;
 	//private String orderNo;
 	private int userNo;
 	private int bookNo;

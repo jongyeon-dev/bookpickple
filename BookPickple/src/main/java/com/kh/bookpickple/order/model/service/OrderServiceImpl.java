@@ -25,15 +25,11 @@ public class OrderServiceImpl implements OrderService {
 		for(int i = 0; i < orderDetail.size(); i++) {
 			result2 = orderDAO.insertPayDetail(orderDetail.get(i));
 			//if(result2 == 0) throw new OrderException("결제 상세 정보 추가 실패");
+			
+			int result3 = orderDAO.deleteBooksFromCart(orderDetail.get(i));
 		}
 		
 		return result1;
-	}
-
-	@Override
-	public List<Order> selectOnePayRecordList(Order order) {
-		String orderNum = orderDAO.findOrderNum(order);
-		return orderDAO.selectOnePayRecordList(orderNum);
 	}
 
 }

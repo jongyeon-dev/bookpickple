@@ -83,7 +83,8 @@
 							    				<button class="btn btn-outline-secondary btn-sm btn-flat" disabled="disabled">삭제</button>
 						            		</c:when>
 						            		<c:otherwise>
-						            			<button class="btn mb-2 btn-primary btn-sm btn-flat" onclick="">주문하기</button>
+						            			<button class="btn mb-2 btn-primary btn-sm btn-flat"
+						            				onclick="eachOrder('${book.title}', ${quantity}, ${book.salesPrice}, ${book.point}, ${book.bookNo}, '${book.changeFileName}')">주문하기</button>
 							    				<button class="btn btn-outline-secondary btn-sm btn-flat" onclick="deleteCart(${member.userNo}, ${cartNo})">삭제</button>
 						            		</c:otherwise>
 						            	</c:choose>
@@ -194,27 +195,54 @@
 		
 });
 
+function eachOrder(title, quantity, salesPrice, point, bookNo, bookImage) {
+	 var orderForm = $('<form></form>');
+
+	 orderForm.attr('action', '${contextPath}/order/eachOrder.do');
+
+	 orderForm.attr('method', 'post');
+
+	 orderForm.appendTo('body');
+
+	var userNo = ($('<input type="hidden" value="${member.userNo}" name = userNo>'));
+	var bookNo = ($('<input type="hidden" value="' + bookNo + '" name = bookNo>'));
+	var title = ($('<input type="hidden" value="' + title + '" name = title>'));
+	var quantity = ($('<input type="hidden" value="' + quantity + '" name = quantity>'));
+	var salesPrice = ($('<input type="hidden" value="' + salesPrice + '" name = salesPrice>'));
+	var point = ($('<input type="hidden" value="' + point + '" name = point>'));
+	var bookImage = ($('<input type="hidden" value="' + bookImage + '" name = bookImage>'));
+
+
+	orderForm.append(userNo);
+	orderForm.append(bookNo);
+	orderForm.append(title);
+	orderForm.append(quantity);
+	orderForm.append(salesPrice);
+	orderForm.append(point);
+	orderForm.append(bookImage);
+
+	orderForm.submit();
+}
+
 function cartOrder() {
 	var count = $(".check-book").length;
-	 var $form = $('<form></form>');
+	 var cartOrderForm = $('<form></form>');
 
-     $form.attr('action', '${contextPath}/order/cartOrder.do');
+	 cartOrderForm.attr('action', '${contextPath}/order/cartOrder.do');
 
-     $form.attr('method', 'post');
+	 cartOrderForm.attr('method', 'post');
 
-     $form.appendTo('body');
+	 cartOrderForm.appendTo('body');
 
 	 for(var i=0; i < count; i++ ){
 	
         if( $(".check-book")[i].checked == true ){
            
-       	 var checkValue = $(".check-book")[i].value; // 수량, 판매가, 포인트, 도서 번호
-
-       	 console.log(checkValue);
-
-
-		var idx = ($('<input type="hidden" value="' + checkValue + '" name = cartOrderValue>'));
-		$form.append(idx);
+	       	 var checkValue = $(".check-book")[i].value; // 수량, 판매가, 포인트, 도서 번호
+	
+	
+			var idx = ($('<input type="hidden" value="' + checkValue + '" name = cartOrderValue>'));
+			cartOrderForm .append(idx);
         }
 	 }
 
@@ -222,16 +250,8 @@ function cartOrder() {
 		alert("주문할 도서를 확인해주세요.");
 		return;
 	 } else {
-		$form.submit();
+		 cartOrderForm.submit();
 	 }
-
-	 console.log($("input[name=cartOrderValue]").length);
-
-	 console.log($form[0]);
-	//$form.submit();
-	//cartOrderForm.method="post";
-	//cartOrderForm.action="${contextPath}/order/cartOrder.do";
-	//cartOrderForm.submit();
 }
 
    function itemSum(){
@@ -250,9 +270,7 @@ function cartOrder() {
         	   var point = splitCheckValue[2];
 
 	           	quantitySum += parseInt(quantity);
-	            // priceSum += parseInt(price);
 	            priceSum = priceSum + parseInt(price) * parseInt(quantity);
-	            //pointSum += parseInt(point);
 	            pointSum = pointSum + parseInt(point) * parseInt(quantity);
            }
        }
@@ -285,6 +303,8 @@ function cartOrder() {
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     };
 
+
+    // 카트 업데이트
     function updateCart(userNo, cartNo, bookNo, quantity) {
 		$.ajax({
 			type: "post",
@@ -315,6 +335,7 @@ function cartOrder() {
 		});
     };
 
+    // 카트 삭제
     function deleteCart(userNo, cartNo) {
     	var result = confirm("도서를 삭제하시겠습니까?");
         if(result) {

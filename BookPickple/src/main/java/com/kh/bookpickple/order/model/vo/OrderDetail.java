@@ -21,12 +21,15 @@ public class OrderDetail implements Serializable{
 	 */
 	private static final long serialVersionUID = 1006L;
 	
+	private int orderNum;
 	private int orderNo;
-	private String orderNum;
 	private int bookNo;
 	private String title;
 	private int salesPrice;
 	private int quantity;
 	private int point;
+	
+	// 추가 필드
+	private int userNo;
 
 }

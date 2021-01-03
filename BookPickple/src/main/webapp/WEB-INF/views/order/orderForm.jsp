@@ -5,6 +5,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"  />
 <c:set var="orderList" value="${orderList}"  />
 
+
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
@@ -212,16 +213,7 @@ $(function() {
     }
 
 	var IMP = window.IMP; // 생략가능
-	IMP.init("imp31227075"); // 가맹점 식별 코드
-
-	 console.log($("#title").val());
-
-	 console.log(${totalBooksPrice});
-	 console.log($("#receiverEmail").val());
-	 console.log($("#userName").val());
-	 console.log($("#receiverTel").val());
-	 console.log($("input[name=deriveryAddr]").val());
-	
+	IMP.init("imp31227075"); // 가맹점 식별 코드	
 
 });
 </script>
@@ -262,11 +254,10 @@ function requestPay() {
         merchant_uid: 'merchant_' + new Date().getTime(),
         name: $("#title").val(),
         amount: ${totalBooksPrice},
-        //amount: 100,
         buyer_email: $("#email").val(),
         buyer_name: $("#userName").val(),
         buyer_tel: $("#tel").val(),
-        buyer_addr: $("input[name=deriveryAddr]").val()
+        buyer_addr: $("#zipCode").val() + "," + $("#address1").val()+ "," + $("#address2").val()
     }, function (rsp) { // callback
         if (rsp.success) {
         	$.ajax({
@@ -280,25 +271,21 @@ function requestPay() {
 					bookNo: $("#bookNo").val(),
 					orderTitle: $("#title").val(),
 					ordererName: $("#userName").val(),
-					//quantity: $("#quantity").val(),
 					totalQuantity: $("#totalQuantity").val(), // 최종 모든 도서 수
-					//salePrice: $("#quantity").val(),
 					totalPrice: $("#totalPrice").val(), // 최종 결제 가격
-					//point: $("#quantity").val(),
 					totalPoint: $("#totalPoint").val(), // 최종 적립 포인트
 					receiverName: $("#receiverName").val(),
 					receiverEmail: $("#receiverEmail").val(),
 					receiverTel: $("#receiverTel").val(),
-					deliveryAddr: $("input[name=deriveryAddr]").val()
+					deliveryAddr: $("#zipCode").val() + "," + $("#address1").val()+ "," + $("#address2").val()
 				//기타 필요한 데이터가 있으면 추가 전달
 				},
 				success: function(data){
-					if(data != null) {
-						alert("결제 완료");
-						location.href="${contextPath}/order/orderSuccess.do?orderNum=" + data + "&userNo=" + ${member.userNo};
+					if(data == "success") {
+						alert("결제가 완료되었습니다. 주문 내역 페이지로 이동합니다.");
+						location.href="${contextPath}/"; // 주문 내역 페이지로 이동 예정
 					} else {
-						alert("결제 실패");
-						location.href="${contextPath}/order/orderFail.do";
+						location.href="${contextPath}/"; 
 					}
 				},
 				error: function(jqxhr, textStatus, errorThrown){
@@ -309,11 +296,11 @@ function requestPay() {
 	                console.log(errorThrown);
 	            }
 			});
-        	var msg = '결제가 완료되었습니다.';
-        	msg += '고유ID : ' + rsp.imp_uid;
-        	msg += '상점 거래ID : ' + rsp.merchant_uid;
-        	msg += '결제 금액 : ' + rsp.paid_amount;
-        	msg += '카드 승인번호 : ' + rsp.apply_num;
+        	// var msg = '결제가 완료되었습니다.';
+        	// msg += '고유ID : ' + rsp.imp_uid;
+        	// msg += '상점 거래ID : ' + rsp.merchant_uid;
+        	// msg += '결제 금액 : ' + rsp.paid_amount;
+        	// msg += '카드 승인번호 : ' + rsp.apply_num;
 
         } else {
         	var msg = '결제에 실패하였습니다.';

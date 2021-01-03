@@ -5,33 +5,23 @@
 
 	<insert id="insertPayRecord" parameterType="Order">
 		INSERT INTO PAYRECORD VALUES (
-			#{orderNum}, #{userNo}, #{bookNo}, #{orderTitle}, #{ordererName}, #{totalQuantity},
+			SEQ_ORDERNO.NEXTVAL, #{userNo}, #{bookNo}, #{orderTitle}, #{ordererName}, #{totalQuantity},
 			#{totalPrice}, #{totalPoint}, #{receiverName}, #{receiverEmail}, #{receiverTel}, #{deliveryAddr},
 			DEFAULT, DEFAULT, DEFAULT
 		)
 	</insert>
 	
 	<insert id="insertPayDetail" parameterType="OrderDetail">
-		<selectKey keyProperty="orderNum" resultType="String" order="BEFORE">
-			SELECT ORDERNUM 
-        	FROM(SELECT * FROM PAYRECORD ORDER BY ROWNUM DESC)
-        	WHERE ROWNUM = 1
+		<selectKey keyProperty="orderNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_ORDERNO.CURRVAL FROM DUAL
 		</selectKey>
 		INSERT INTO PAYDETAIL VALUES(
-			SEQ_ORDERNO.NEXTVAL, #{orderNum}, #{bookNo}, #{title}, #{salesPrice}, #{quantity}, #{point}
+			SEQ_ORDERNUM.NEXTVAL, #{orderNo}, #{bookNo}, #{title}, #{salesPrice}, #{quantity}, #{point}
 		)
 	</insert>
 	
-	<select id="findOrderNum" resultType="String">
-		SELECT ORDERNUM 
-        FROM(SELECT * FROM PAYRECORD ORDER BY ROWNUM DESC)
-        WHERE ROWNUM = 1
-	</select>
+	<delete id="deleteBooksFromCart" parameterType="Order">
+		DELETE FROM CART WHERE BOOKNO = #{bookNo} AND USERNO = #{userNo}
+	</delete>
 	
-	<select id="selectOnePayRecord" resultType="Order">
-		SELECT P.*, PD.* 
-		FROM PAYRECORD P, PAYDETAIL PD
-		WHERE P.ORDERNUM = PD.ORDERNUM AND PD.ORDERNUM = #{orderNum} AND P.USERNO = ${userNo}
-		ORDER BY PD.ORDERNO DESC
-	</select>
 </mapper>

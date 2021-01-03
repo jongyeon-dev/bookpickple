@@ -9,6 +9,4 @@ public interface OrderService {
 	
 	int insertPayRecord(Order order, List<OrderDetail> orderDetail);
 	
-	List<Order> selectOnePayRecordList(Order order);
-
 }

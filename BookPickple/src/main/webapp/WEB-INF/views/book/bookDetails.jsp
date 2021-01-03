@@ -203,7 +203,6 @@
 			}
 			$('#book-quantity').val(num);
 			$("#quantity").val(num);
-			console.log($("#quantity").val());
 		});
 		
 	});
