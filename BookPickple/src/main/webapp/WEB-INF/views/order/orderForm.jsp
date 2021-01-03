@@ -283,8 +283,9 @@ function requestPay() {
 				success: function(data){
 					if(data == "success") {
 						alert("결제가 완료되었습니다. 주문 내역 페이지로 이동합니다.");
-						location.href="${contextPath}/"; // 주문 내역 페이지로 이동 예정
+						location.href="${contextPath}/order/orderListView.do?userNo=" + ${member.userNo}";
 					} else {
+						alert("결제가 완료되지 않았습니다. 관리자에게 문의해주세요.");
 						location.href="${contextPath}/"; 
 					}
 				},

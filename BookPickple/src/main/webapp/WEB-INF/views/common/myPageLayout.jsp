@@ -33,9 +33,9 @@
 			                <div class="card">
 			                    <div class="card-body">
 			                    	<ul>
-			                    		<li class="nav-label"><a href="${contextPath}/order/orderView.do?userNo=${member.userNo}">주문내역</a></li>
-			                    		<li class="nav-label"><a href="${contextPath}/member/memberProfileView.do?userNo=${member.userNo}" class="text-primary font-weight-bold">프로필</a></li>
-			                    		<li class="nav-label"><a href="${contextPath}/inquiry/inquiryListView.do?userNo=${member.userNo}">1:1 문의</a></li>
+			                    		<li class="nav-label"><a href="${contextPath}/order/orderListView.do?userNo=${member.userNo}" id="orderPage">주문내역</a></li>
+			                    		<li class="nav-label"><a href="${contextPath}/member/memberProfileView.do?userNo=${member.userNo}" id="profilePage">프로필</a></li>
+			                    		<li class="nav-label"><a href="${contextPath}/inquiry/inquiryListView.do?userNo=${member.userNo}" id="inquiryPage">1:1 문의</a></li>
 			                    	</ul>
 			           			</div>
 			                </div>  
@@ -63,6 +63,7 @@
   	<script>hljs.initHighlightingOnLoad();</script>
   	<script>
 		$(function() {
+			     
 			"use strict"
 	
 	        new quixSettings({
@@ -77,6 +78,18 @@
 	            containerLayout: "boxed",  //"boxed" and  "wide". If layout "vertical" and containerLayout "boxed", sidebarStyle will automatically turn into "overlay".
 	            direction: "ltr" //"ltr" = Left to Right; "rtl" = Right to Left
 	        });
+
+			var url = location.href;
+			
+			if (url.indexOf("order") > -1 ) {
+				console.log(url.indexOf("order"));
+			     $("#orderPage").addClass("text-primary font-weight-bold");
+			} else if (url.indexOf("member") > -1 ) {
+			     $("#profilePage").addClass("text-primary font-weight-bold");
+			} else if (url.indexOf("inquiry") > -1 ) {
+			     $("#inquiryPage").addClass("text-primary font-weight-bold");
+			}
+			
 		});
    	</script>
 

@@ -45,7 +45,7 @@
 							 	<td>
 							 	<input type="hidden" id="memberNo" value="${member.userNo}"/>
 							 		<input type="hidden" id="orderNo" value="${myOrder.orderNo}"/>
-							 		<a href="${contextPath}/mypage/order/orderDetail.do?userNo=${member.userNo}&orderNo=${myOrder.orderNo}" class="font-weight-bold">${myOrder.orderTitle}</a>
+							 		<a href="${contextPath}/order/orderDetail.do?userNo=${member.userNo}&orderNo=${myOrder.orderNo}" class="font-weight-bold">${myOrder.orderTitle}</a>
 							 	</td>
 							 	<td>
 							 		<fmt:formatNumber  value="${myOrder.totalPrice}" type="number" var="totalPrice" />

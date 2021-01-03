@@ -24,4 +24,19 @@
 		DELETE FROM CART WHERE BOOKNO = #{bookNo} AND USERNO = #{userNo}
 	</delete>
 	
+	<select id="selectOrderList" parameterType="_int" resultType="Order">
+		SELECT * FROM PAYRECORD WHERE USERNO = #{userNo} ORDER BY PAYDATE DESC, ORDERNO DESC
+	</select>
+	
+	<select id="selectOrderTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM PAYRECORD
+	</select>
+	
+	<select id="selectOrderDetailList" parameterType="Order" resultType="Order">
+		SELECT P.*, PD.* 
+		FROM PAYRECORD P, PAYDETAIL PD
+		WHERE P.ORDERNO = PD.ORDERNO AND P.ORDERNO = ${orderNo} AND P.USERNO = #{userNo}
+		ORDER BY PD.ORDERNUM DESC
+	</select>
+	
 </mapper>

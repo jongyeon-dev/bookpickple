@@ -109,9 +109,9 @@
                         <i class="icon-user menu-icon"></i><span class="nav-text">마이 페이지</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="${contextPath}/mypage/order/orderListView.do?userNo=${member.userNo}">주문내역</a></li>
+                        <li><a href="${contextPath}/order/orderListView.do?userNo=${member.userNo}">주문내역</a></li>
                         <li><a href="${contextPath}/member/memberProfileView.do?userNo=${member.userNo}">프로필</a></li>
-                        <li><a href="#">1:1 문의 내역</a></li>
+                        <li><a href="${contextPath}/inquiry/inquiryListView.do?userNo=${member.userNo}">1:1 문의 내역</a></li>
                     </ul>
                 </li>
             	</c:if>

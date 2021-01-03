@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.bookpickple.common.exception.OrderException;
+import com.kh.bookpickple.common.util.Pagination;
 import com.kh.bookpickple.manager.book.model.vo.Book;
 import com.kh.bookpickple.member.model.vo.Member;
 import com.kh.bookpickple.order.model.service.OrderService;
@@ -60,8 +62,6 @@ public class OrderController {
 		} else {
 			for(int i = 0; i < cartOrderValue.length; i++) {
 				String[] booksInfo = cartOrderValue[i].split(","); //체크박스 value 값 (수량, 가격, 포인트, 도서 번호)
-				System.out.println(booksInfo[3]);
-				System.out.println(bookList.size());//5
 				
 				for(int j = 0; j < bookList.size(); j++) {
 					
@@ -72,8 +72,6 @@ public class OrderController {
 						String title = book.getTitle();
 						int salesPrice = book.getSalesPrice();
 						String changeFileName = book.getChangeFileName();
-						
-						System.out.println(changeFileName);
 						
 						// 주문서에 보여질 도서 정보들
 						order.setBookNo(bookNo);
@@ -91,8 +89,6 @@ public class OrderController {
 			}
 		}
 		
-		
-		System.out.println(orderList);
 		mv.addObject(orderList);
 		mv.setViewName("order/orderForm");
 	
@@ -102,7 +98,7 @@ public class OrderController {
 	
 	@RequestMapping("/order/orderPayment.do")
 	@ResponseBody
-	public String orderPayment(Order order, Model model, HttpServletRequest request) {
+	public String orderPayment(Order order, Model model, HttpServletRequest request) throws OrderException {
 		
 		HttpSession session=request.getSession();
 	
@@ -114,7 +110,7 @@ public class OrderController {
 			// 1종이면 도서 이름 / 2종이면 리스트 첫번째 도서 외 1종
 			  String orderTitle = allOrderList.get(0).getTitle();
 			  int bookNo = allOrderList.get(0).getBookNo();
-			  System.out.println("orderTitle:::::::::::" + orderTitle);
+			  
 			  if(allOrderList.size() == 1) {
 				  order.setOrderTitle(orderTitle);
 			  } else {
@@ -152,6 +148,33 @@ public class OrderController {
 		} else {
 			return "fail";
 		}
+	}
+	
+	@RequestMapping("/order/orderListView.do")
+	public String orderListView(@RequestParam int userNo,  @RequestParam( value="cPage", required=false, defaultValue="1") 
+								int cPage,  Model model) {
+		int numPerPage = 10;
+		List<Order> myOrderList = orderService.selectOrderList(cPage, numPerPage, userNo);
+		int totalContents = orderService.selectOrderTotalContents();
+		String pageBar = Pagination.getPageBar(totalContents, cPage, numPerPage, "orderListView.do");
+	
+		model.addAttribute("myOrderList", myOrderList);
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("pageBar", pageBar);
+		
+		return "mypage/order/orderList";
+	}
+	
+	@RequestMapping("/order/orderDetail.do")
+	public String orderDetail(@RequestParam int userNo, @RequestParam int orderNo, Model model) {
+		Order order = new Order();
+		order.setUserNo(userNo);
+		order.setOrderNo(orderNo);
+		List<Order> myOrderDetailList = orderService.selectOrderDetailList(order);
+
+		model.addAttribute("myOrderDetailList", myOrderDetailList);
+		return "mypage/order/orderDetail";
 	}
 	
 }
