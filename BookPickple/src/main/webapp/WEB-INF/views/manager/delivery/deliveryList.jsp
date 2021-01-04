@@ -165,7 +165,7 @@ function updateStatus(orderNo, selectBoxValue) {
 			}
 		},
 		error: function(jqxhr, textStatus, errorThrown){
-            console.log("장바구니 수량 변경 처리 실패");
+            console.log("배송 상태 변경 처리 실패");
             //에러 로그
             console.log(jqxhr);
             console.log(textStatus);
