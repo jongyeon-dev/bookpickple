@@ -16,7 +16,6 @@
        <put-attribute name="body" value="/WEB-INF/views/manager/main.jsp" />
     </definition>
 	
-	
 	<definition name="manager/book/bookList" extends="managerLayout">
        <put-attribute name="title" value="도서 관리 메인 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/manager/book/bookList.jsp" />
@@ -35,6 +34,16 @@
     <definition name="manager/book/updateBook" extends="managerLayout">
        <put-attribute name="title" value="도서 수정 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/manager/book/updateBook.jsp" />
+    </definition>
+    
+    <definition name="manager/delivery/deliveryList" extends="managerLayout">
+       <put-attribute name="title" value="배송 관리 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/manager/delivery/deliveryList.jsp" />
+    </definition>
+    
+    <definition name="manager/delivery/deliveryDetail" extends="managerLayout">
+       <put-attribute name="title" value="배송 관리 상세 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/manager/delivery/deliveryDetail.jsp" />
     </definition>
     
 </tiles-definitions>

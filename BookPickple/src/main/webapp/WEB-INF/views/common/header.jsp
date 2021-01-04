@@ -127,7 +127,7 @@
 	                    </a>
 	                </li>
 	                <li>
-	                    <a class="has-arrow" href="#" aria-expanded="false">
+	                    <a class="has-arrow" href="${contextPath}/manager/deliveryListView.do" aria-expanded="false">
 	                        <i class="icon-drawer menu-icon"></i><span class="nav-text">배송 관리</span>
 	                    </a>
 	                </li>
