@@ -56,15 +56,11 @@
 								 <c:otherwise>
 								     <c:forEach var="item" items="${deliveryList}" varStatus="i">
 								     	<c:choose>
-								     	<c:when test="${item.orderNo != pre_order_id}">
+								     	<c:when test="${item.orderNo != detailOrderNo}">
 											 <tr>       
 												<td>${ item.orderNo }</td>
 												<td>${ item.payDate }</td>
 												<td onclick="location.href='${contextPath}/manager/deliveryDetail.do?orderNo=${item.orderNo}'" style="cursor: pointer;">
-												<!-- 
-													<a href="${contextPath}/manager/deliveryDetail.do?orderNo=${item.orderNo}" class="font-weight-bold">${item.orderTitle}</a>
-										             <em>/ ${item.totalQuantity}개</em><p>
-												-->	
 													<c:forEach var="item2" items="${deliveryList}" varStatus="j">
 												          <c:if  test="${item.orderNo ==item2.orderNo}" >
 												            <p class="mb-0">
@@ -89,12 +85,12 @@
 			                                       </select>
 												</td>
 												<td>
-													<button type="button" class="btn mb-1 btn-outline-primary btn-xs" onclick="updateStatus(${item.orderNo}, deliveryStatus${item.orderNo})">수정</button>	
+													<button type="button" class="btn mb-1 btn-outline-primary btn-xs" onclick="updateStatus(${item.orderNo}, deliveryStatus${item.orderNo}, ${item.userNo})">수정</button>	
 												</td>
 											</tr>
 											</c:when>
 										</c:choose>
-										<c:set  var="pre_order_id" value="${item.orderNo }" />
+										<c:set  var="detailOrderNo" value="${item.orderNo }" />
 									</c:forEach>
 								</c:otherwise>
 							  </c:choose>
@@ -113,7 +109,6 @@
 $(function($) {
 	 $('#managerDeliveryList').DataTable({
 		 lengthMenu: [ 5, 10, 20, 30, 40, 50 ],
-		 stateSave: true,
 		 order: [
 			 [ 0, "desc" ]
 		],
@@ -146,14 +141,15 @@ $(function($) {
 </script>
 
 <script>
-function updateStatus(orderNo, selectBoxValue) {
+function updateStatus(orderNo, selectBoxValue, userNo) {
 	$.ajax({
 		type: "post",
 		async: false,
 		url: "${contextPath}/manager/updateDeliveryStatus.do",
 		data: {
 			orderNo: orderNo,
-			deliveryStatus: selectBoxValue.value
+			deliveryStatus: selectBoxValue.value,
+			userNo: userNo
 		},
 		success: function(data){
 			if(data.trim() == "success") {

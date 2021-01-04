@@ -283,7 +283,7 @@ function requestPay() {
 				success: function(data){
 					if(data == "success") {
 						alert("결제가 완료되었습니다. 주문 내역 페이지로 이동합니다.");
-						location.href="${contextPath}/order/orderListView.do?userNo=" + ${member.userNo}";
+						location.href="${contextPath}/order/orderListView.do?userNo=" + ${member.userNo};
 					} else {
 						alert("결제가 완료되지 않았습니다. 관리자에게 문의해주세요.");
 						location.href="${contextPath}/"; 
@@ -308,7 +308,7 @@ function requestPay() {
 			msg += '\n에러내용 : ' + rsp.error_msg;
 			alert(msg);
         }
-        alert(msg);
+       // alert(msg);
     });
   }
 </script>

@@ -35,7 +35,7 @@
 	<select id="selectOrderDetailList" parameterType="Order" resultType="Order">
 		SELECT P.*, PD.* 
 		FROM PAYRECORD P, PAYDETAIL PD
-		WHERE P.ORDERNO = PD.ORDERNO AND P.ORDERNO = ${orderNo} AND P.USERNO = #{userNo}
+		WHERE P.ORDERNO = PD.ORDERNO AND P.ORDERNO = #{orderNo} AND P.USERNO = #{userNo}
 		ORDER BY PD.ORDERNUM DESC
 	</select>
 	

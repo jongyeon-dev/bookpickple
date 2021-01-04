@@ -82,7 +82,6 @@
 			var url = location.href;
 			
 			if (url.indexOf("order") > -1 ) {
-				console.log(url.indexOf("order"));
 			     $("#orderPage").addClass("text-primary font-weight-bold");
 			} else if (url.indexOf("member") > -1 ) {
 			     $("#profilePage").addClass("text-primary font-weight-bold");

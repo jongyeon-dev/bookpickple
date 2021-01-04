@@ -4,7 +4,6 @@
 <mapper namespace="deliveryMapper">
 
 	<select id="selectDeliveryList" resultType="Order">
-		<!-- SELECT * FROM PAYRECORD ORDER BY PAYDATE DESC, ORDERNO DESC -->
 		SELECT P.*, PD.* 
 		FROM PAYRECORD P, PAYDETAIL PD
 		WHERE P.ORDERNO = PD.ORDERNO
@@ -16,6 +15,17 @@
 		WHERE P.ORDERNO = PD.ORDERNO AND P.ORDERNO = #{orderNo}
 		ORDER BY PD.ORDERNUM DESC
 	</select>
+	
+	<select id="isFinishedStatus" parameterType="Order" resultType="String">
+		SELECT DECODE(DELIVERYSTATUS, 'FINISHED', 'true', 'false') FROM PAYRECORD
+        WHERE ORDERNO = #{orderNo}
+	</select>
+	
+	<update id="updatePoint" parameterType="_int">
+		UPDATE MEMBER SET 
+        POINT = POINT + (SELECT TOTALPOINT FROM PAYRECORD WHERE ORDERNO = #{orderNo})
+        WHERE USERNO = #{userNo}
+	</update>
 	
 	<update id="updateDeliveryStatus" parameterType="Order">
 		UPDATE PAYRECORD SET

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.bookpickple.manager.delivery.model.service.DeliveryService;
+import com.kh.bookpickple.member.model.vo.Member;
 import com.kh.bookpickple.order.model.vo.Order;
 
 @Controller
@@ -35,10 +36,22 @@ public class DeliveryController {
 	
 	@RequestMapping("/manager/updateDeliveryStatus.do")
 	@ResponseBody
-	public String updateDeliveryStatus(Order order, @RequestParam int orderNo, @RequestParam String deliveryStatus) {
+	public String updateDeliveryStatus(Order order, Member member, @RequestParam int orderNo, @RequestParam String deliveryStatus,
+									@RequestParam int userNo) {
 		order.setOrderNo(orderNo);
 		order.setDeliveryStatus(deliveryStatus);
+		
 		int result = deliveryService.updateDeliveryStatus(order);
+		
+		if(result > 0) {
+			boolean isFinished = deliveryService.isFinished(order);
+			
+			if(isFinished) { // 배송완료면 포인트 적립
+				member.setOrderNo(orderNo);
+				member.setUserNo(userNo);
+				int updatePoint = deliveryService.updatePoint(member);
+			} 
+		}
 		
 		if(result > 0) {
 			return "success";

@@ -56,9 +56,12 @@
 							 		${totalPoint}
 							 	</td>
 							 	<td>
-							 		<c:if test="${myOrder.deliveryStatus eq 'PAY'}">
-							 			결제완료
-							 		</c:if>
+							 		<c:if test="${myOrder.deliveryStatus eq 'PAY'}"><span class="label label-primary">결제완료</span></c:if>
+									<c:if test="${myOrder.deliveryStatus eq 'PREPARED'}"><span class="label label-secondary">배송준비중</span></c:if>
+									<c:if test="${myOrder.deliveryStatus eq 'DELIVERING'}"><span class="label label-info">배송중</span></c:if>
+									<c:if test="${myOrder.deliveryStatus eq 'FINISHED'}"><span class="label label-success">배송완료</span></c:if>
+									<c:if test="${myOrder.deliveryStatus eq 'CANCEL'}"><span class="label label-danger">주문취소</span></c:if>
+									<c:if test="${myOrder.deliveryStatus eq 'RETURN'}"><span class="label label-warning">반품</span></c:if>
 							 	</td>
 							 	<td>
 							 		${myOrder.receiverName}

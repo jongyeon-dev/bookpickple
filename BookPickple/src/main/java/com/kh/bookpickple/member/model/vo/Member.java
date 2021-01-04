@@ -34,5 +34,8 @@ public class Member implements Serializable{
 	private int point;
 	private String status;
 	private Date delDate;
+	
+	// 추가 필드
+	private int orderNo; // 배송 완료 시 포인트 적립용
 
 }

@@ -36,22 +36,29 @@
 			        <tbody>
 		      			<c:forEach items="${myOrderDetailList}" var="detail">
 			       			<tr>
-			       				<td class="text-danger">
-							 		<c:if test="${detail.deliveryStatus eq 'PAY'}">결제완료</c:if>
+			       				<td>
+							 		<c:choose>
+										<c:when test="${orderDetail[0].deliveryStatus eq 'PAY'}"><span class="badge badge-secondary">결제완료</span></c:when>
+										<c:when test="${orderDetail[0].deliveryStatus eq 'PREPARED'}"><span class="badge badge-primary">배송준비중</span></c:when>
+										<c:when test="${orderDetail[0].deliveryStatus eq 'DELIVERING'}"><span class="badge badge-info">배송중</span></c:when>
+										<c:when test="${orderDetail[0].deliveryStatus eq 'FINISHED'}"><span class="badge badge-success">배송완료</span></c:when>
+										<c:when test="${orderDetail[0].deliveryStatus eq 'CANCEL'}"><span class="badge badge-danger">주문취소</span></c:when>
+										<c:when test="${orderDetail[0].deliveryStatus eq 'RETURN'}"><span class="badge badge-warning">반품</span></c:when>
+									</c:choose>
 							 	</td>
 							 	<td>
 							 		${detail.title}
 							 	</td>
 							 	<td>
-							 		${detail.quantity}
+							 		${detail.quantity}개
 							 	</td>
 							 	<td>
 							 		<fmt:formatNumber  value="${detail.salesPrice * detail.quantity}" type="number" var="price" />
-							 		 ${price}
+							 		 ${price}원
 							 	</td>
 							 	<td>
 							 		<fmt:formatNumber  value="${detail.point * detail.quantity}" type="number" var="point" />
-							 		 ${point}
+							 		 ${point}원
 							 	</td>
 			       			</tr>
 		      			</c:forEach>
@@ -60,7 +67,7 @@
 			    
 			</div>
 			
-			<div class="col-12 table-responsive custom-list mt-5 mb-5">
+			<div class="table-responsive custom-list mt-5 mb-5">
 				<h4 class="mb-5 font-weight-bold">배송 정보</h4>
 				<table class="table header-border" style="padding: 30px;">
 				  <tbody>
@@ -90,9 +97,13 @@
 				    <tr>
 				      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">배송 조회</th>
 				      <td colspan="3" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">
+						
 				      	<c:if test="${orderDetail[0].deliveryStatus ne 'PAY' and orderDetail[0].deliveryStatus ne 'PREPARED'}">
-				 			<button type="button" class="btn mb-1 btn-outline-primary btn-xs btn-float">조회</button>
-				 			<span>배송 조회는 배송중 이후에만 가능합니다.</span>
+				      		<em>운송장 번호 : <input type="text" id="invoiceNumberText" value="382690317394" readonly/> </em>
+				      		<form id="invoiceForm" target="popup">
+					            <button type="button" class="btn mb-1 btn-outline-primary btn-xs btn-float btn-delivery">조회</button>
+					        </form>
+					          
 				 		</c:if>
 				 		<small class="text-muted">배송 조회는 배송중 이후에만 가능합니다.</small>
 				      </td>
@@ -101,7 +112,7 @@
 			   </table>
 			</div>
 			
-			<div class="col-12 table-responsive custom-list mt-5 mb-5">
+			<div class="table-responsive custom-list mt-5 mb-5">
 				<h4 class="mb-5 font-weight-bold">결제 정보</h4>
 				<table class="table header-border" style="padding: 30px;">
 				  <tbody>
@@ -140,5 +151,19 @@ $(function() {
 	};
 	
 	$(".full-address").text(fullAddr);
+
+
+	// 스윗트래커
+	var myKey = "fdSTy8APWCaCWfZeG6r1ow";
+
+    // 배송정보와 배송추적 tracking-api
+    $(".btn-delivery").click(function() {
+        // var t_code = $('#tekbeCompnayList option:selected').attr('value');
+        var t_invoice = $('#invoiceNumberText').val();
+        window.open("", "popup", "width=500, height=500, scrollbars=yes");
+        $("#invoiceForm").attr("action", " http://info.sweettracker.co.kr/tracking/5?t_key="+myKey+'&t_code=04&t_invoice='+t_invoice);
+   		$("#invoiceForm").attr("method", "post");
+        $("#invoiceForm").submit();
+    });
 });
 </script>

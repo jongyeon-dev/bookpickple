@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.bookpickple.manager.delivery.model.dao.DeliveryDAO;
+import com.kh.bookpickple.member.model.vo.Member;
 import com.kh.bookpickple.order.model.vo.Order;
 
 @Service
@@ -23,10 +24,21 @@ public class DeliveryServiceImpl implements DeliveryService {
 	public List<Order> selectDeliveryDetail(Order order) {
 		return deliveryDAO.selectDeliveryDetail(order);
 	}
+	
+	@Override
+	public boolean isFinished(Order order) {
+		return deliveryDAO.isFinished(order);
+	}
+	
+	@Override
+	public int updatePoint(Member member) {
+		return deliveryDAO.updatePoint(member);
+	}
 
 	@Override
 	public int updateDeliveryStatus(Order order) {
-		return deliveryDAO.updateDeliveryStatus(order);
+		int result = deliveryDAO.updateDeliveryStatus(order);
+		return result;
 	}
 
 }

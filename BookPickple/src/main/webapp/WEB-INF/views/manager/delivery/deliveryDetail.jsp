@@ -98,10 +98,21 @@
                                        <option value="CANCEL" ${ deliveryDetail[0].deliveryStatus eq 'CANCEL' ? 'selected':'' }>주문취소</option>
                                        <option value="RETURN" ${ deliveryDetail[0].deliveryStatus eq 'RETURN' ? 'selected':'' }>반품</option>
                                    </select>
-							 			<button type="button" class="btn btn-outline-primary btn-xs" onclick="updateStatus(${deliveryDetail[0].orderNo}, deliveryStatus${deliveryDetail[0].orderNo})">수정</button>
-							 		
+							 			<button type="button" class="btn btn-outline-primary btn-xs" onclick="updateStatus(${deliveryDetail[0].orderNo}, deliveryStatus${deliveryDetail[0].orderNo}, ${deliveryDetail[0].userNo})">수정</button>
 							      </td>
 							    </tr>
+							     <tr>
+								      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">배송 조회</th>
+								      <td colspan="3" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">
+								      	<c:if test="${deliveryDetail[0].deliveryStatus ne 'PAY' and deliveryDetail[0].deliveryStatus ne 'PREPARED'}">
+								      		<em>운송장 번호 : <input type="text" id="invoiceNumberText" value="382690317394" readonly/> </em>
+								      		<form id="invoiceForm" target="popup">
+									            <button type="button" class="btn btn-outline-secondary btn-xs btn-float btn-delivery">조회</button>
+									        </form>
+								 		</c:if>
+								 		<small class="text-muted">배송 조회는 배송중 이후에만 가능합니다.</small>
+								      </td>
+								    </tr>
 							   </tbody>
 						   </table>
 						</div>
@@ -143,16 +154,30 @@ $(function() {
 	};
 	
 	$(".full-address").text(fullAddr);
+
+	// 스윗트래커
+	var myKey = "fdSTy8APWCaCWfZeG6r1ow";
+
+    // 배송정보와 배송추적 tracking-api
+    $(".btn-delivery").click(function() {
+        // var t_code = $('#tekbeCompnayList option:selected').attr('value');
+        var t_invoice = $('#invoiceNumberText').val();
+        window.open("", "popup", "width=500, height=500, scrollbars=yes");
+        $("#invoiceForm").attr("action", " http://info.sweettracker.co.kr/tracking/5?t_key="+myKey+'&t_code=04&t_invoice='+t_invoice);
+   		$("#invoiceForm").attr("method", "post");
+        $("#invoiceForm").submit();
+    });
 });
 
-function updateStatus(orderNo, selectBoxValue) {
+function updateStatus(orderNo, selectBoxValue, userNo) {
 	$.ajax({
 		type: "post",
 		async: false,
 		url: "${contextPath}/manager/updateDeliveryStatus.do",
 		data: {
 			orderNo: orderNo,
-			deliveryStatus: selectBoxValue.value
+			deliveryStatus: selectBoxValue.value,
+			userNo: userNo
 		},
 		success: function(data){
 			if(data.trim() == "success") {

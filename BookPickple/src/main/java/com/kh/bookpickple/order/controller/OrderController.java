@@ -118,8 +118,6 @@ public class OrderController {
 			  }
 			  order.setBookNo(bookNo);
 		  }
- 		 
-		  System.out.println(order);
 		  
 		 List<OrderDetail> orderDetail = new ArrayList<OrderDetail>();
 		 // 도서 목록이나 상세페이지에서 조회하면 allOrderList는 도서 1종
@@ -139,9 +137,6 @@ public class OrderController {
 		 }
 
 		int result = orderService.insertPayRecord(order, orderDetail);
-		
-		System.out.println(result);
-	
 		
 		if(result > 0) {
 			return "success";
