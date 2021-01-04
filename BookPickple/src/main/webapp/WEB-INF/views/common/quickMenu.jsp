@@ -12,15 +12,15 @@
 		<h3>최근 본 도서</h3>
 		  <ul>
 		 <c:choose>
-			<c:when test="${ empty quickGoodsList }">
+			<c:when test="${ empty quickBooksList }">
 		     	<p>최근 본 도서가 없습니다.</p>
 			</c:when>
 			<c:otherwise>
-			<form name="frm_sticky"  >	     
-		      <c:forEach var="book" items="${quickGoodsList}" varStatus="bookNum">
+			<form name="frm_sticky">	     
+		      <c:forEach var="book" items="${quickBooksList}" varStatus="bookNum">
 		         <c:choose>
 		           <c:when test="${bookNum.count==1 }">
-				      <a href="javascript:goodsDetail();">
+				      <a href="${contextPath}/book/detailBookView.do?bookNo=${book.bookNo}">
 				  	         <img width="75" height="95" id="quickBookImage"  
 				                 src="${contextPath}/resources/bookFileRepo/${book.bookNo}/${book.changeFileName}">
 				      </a>
@@ -39,10 +39,10 @@
 	      </c:choose>
 		 </ul>
 		 </form>
-	    <c:if test="${ not empty quickGoodsList }">
+	    <c:if test="${ not empty quickBooksList }">
 		    <p>
 	           	<button onclick="preBook()"><i class="icon-arrow-left"></i></button> &nbsp; 
-	          	<span id="currentBook">1</span> / ${quickGoodsListNum}  &nbsp; 
+	          	<span id="currentBook">1</span> / ${quickBooksListNum}  &nbsp; 
 	           	<button class="" onclick="nextBook()"><i class="icon-arrow-right"></i></button>
            </p>
 	    </c:if>	 
@@ -58,21 +58,22 @@
 		var bookNo = document.frm_sticky.bookNo;
 		var bookFileName = document.frm_sticky.bookFileName;
 
+		if(index == bookNo.length -1) {
+			index = -1;
+		}
+		
 		if(index < bookNo.length - 1) {
 			index++;
 		}	
 
 		var nextBookNo = bookNo[index].value;
-
+		
 		var nextFileName = bookFileName[index].value;
 		
 		bookImage.src = "${contextPath}/resources/bookFileRepo/" + nextBookNo + "/" + nextFileName;
 
 		currentBook.innerHTML = index+1;
 
-		if(index == 4) {
-			index = -1;
-		}
 	}
 
 
@@ -82,6 +83,10 @@
 		var bookNo = document.frm_sticky.bookNo;
 		var bookFileName = document.frm_sticky.bookFileName;
 
+		if(index == 0) {
+			index = bookNo.length;
+		}
+		
 		if(index > 0) {
 			index--;
 		}	
@@ -94,9 +99,6 @@
 
 		currentBook.innerHTML = index+1;
 
-		if(index == 0) {
-			index = 5;
-		}
 }
 
 </script>  

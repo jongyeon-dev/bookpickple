@@ -56,7 +56,6 @@ public class GoodsController {
 
 		model.addAttribute("book", book);
 		model.addAttribute("bookImages", bookImages);
-	
 		
 		HttpSession session=request.getSession();
 		Book quickBook = goodsService.selectQuickBook(bookNo);
@@ -67,30 +66,29 @@ public class GoodsController {
 	
 	private void addQuickList(int bookNo, Book quickBook, HttpSession session) {
 		boolean exist =false;
-		List<Book> quickGoodsList; //최근 본 상품 저장 ArrayList
-		quickGoodsList=(ArrayList<Book>)session.getAttribute("quickGoodsList");
-		
-		if(quickGoodsList!=null){
-			if(quickGoodsList.size() < 5){
-				for(int i=0; i<quickGoodsList.size();i++){
-					Book _goodsBean=(Book)quickGoodsList.get(i);
-					if(bookNo == _goodsBean.getBookNo()){
+		List<Book> quickBooksList=(ArrayList<Book>)session.getAttribute("quickBooksList");
+	
+		if(quickBooksList!=null){
+			if(quickBooksList.size() < 5){
+				for(int i = 0; i < quickBooksList.size(); i++){
+					Book book= (Book) quickBooksList.get(i);
+					if(bookNo == book.getBookNo()){
 						exist=true;
 						break;
 					}
 				}
 				if(exist == false){
-					quickGoodsList.add(quickBook);
+					quickBooksList.add(quickBook);
 				}
 			}
 			
 		}else{
-			quickGoodsList =new ArrayList<Book>();
-			quickGoodsList.add(quickBook);
+			quickBooksList =new ArrayList<Book>();
+			quickBooksList.add(quickBook);
 			
 		}
-		session.setAttribute("quickGoodsList",quickGoodsList);
-		session.setAttribute("quickGoodsListNum", quickGoodsList.size());
+		session.setAttribute("quickBooksList", quickBooksList);
+		session.setAttribute("quickBooksListNum", quickBooksList.size());
 		
 	}
 }
