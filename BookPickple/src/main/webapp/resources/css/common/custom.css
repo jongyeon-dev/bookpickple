@@ -712,17 +712,21 @@ form .error {
     color: #666;
 } /*안써도 될듯*/
 
+.wrap-details .book-info-top .book-selling {
+	display: flex;
+}
+
 .wrap-details .divi {
-	margin: 4px 4px 0 4px;
+    margin: 4px -5px 0 12px;
     width: 1px;
     height: 12px;
     text-indent: -999em;
-    border-right: solid 1px #ccc;
+    border-right: solid 1px #aaa;
     display: inline-block;
     zoom: 1;
     overflow: hidden;
     text-align: left;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 .wrap-details .book-info-bot {

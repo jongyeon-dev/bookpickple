@@ -13,6 +13,7 @@
 <link href="${contextPath}/resources/css/carousel/owl.theme.default.min.css" rel="stylesheet" type="text/css">
 <link href="${contextPath}/resources/css/common/custom.css" rel="stylesheet" type="text/css">
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 	<title><tiles:insertAttribute name="title" ignore="true"/></title>
 	
@@ -63,7 +64,7 @@
 		});
    	</script>
    	
-  	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  
  	<script src="${contextPath}/resources/js/carousel/owl.carousel.min.js"></script>
 	<script src="${contextPath}/resources/js/carousel/bxslider.min.js"></script>
 	<script src="${contextPath}/resources/js/carousel/script.slider.js"></script>

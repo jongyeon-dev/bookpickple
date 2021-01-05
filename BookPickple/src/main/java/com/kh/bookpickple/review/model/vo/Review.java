@@ -29,4 +29,7 @@ public class Review implements Serializable{
 	private int rating;
 	private Date creDate;
 	
+	// 추가 필드
+	private String userId; // 도서 상세조회 리뷰 조회 시 사용
+	
 }

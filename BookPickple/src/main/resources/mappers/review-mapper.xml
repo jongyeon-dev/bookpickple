@@ -20,4 +20,26 @@
 		SELECT DECODE(COUNT(*), 0, 'FALSE', 'TRUE') FROM REVIEW
         WHERE ORDERNUM = #{orderNum} AND ORDERNO = #{orderNo} AND USERNO = #{userNo}
 	</select>
+	
+	<select id="selectOneBookReivewList" parameterType="_int" resultType="Review">
+		SELECT ROWNUM, A.*
+         FROM (SELECT SUBSTR(M.USERID,1,1) || LPAD('*',LENGTH(M.USERID)-2,'*') || SUBSTR(M.USERID, LENGTH(M.USERID), 1) USERID, 
+				R.CONTENT, R.RATING, R.CREDATE
+				FROM REVIEW R INNER JOIN MEMBER M ON R.USERNO = M.USERNO
+				WHERE R.BOOKNO = #{bookNo}
+				ORDER BY R.REVIEWNO DESC
+		) A
+	</select>
+	
+	<select id="selectBookTotalContents" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM REVIEW WHERE BOOKNO = #{bookNo}
+	</select>
+	
+	<select id="oneBookAvgRating" parameterType="_int" resultType="_double">
+		SELECT ROUND(AVG(RATING), 1) FROM REVIEW WHERE BOOKNO = #{bookNo}
+	</select>
+	
+	<select id="oneBookReviewCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM REVIEW WHERE BOOKNO = #{bookNo}
+	</select>
 </mapper>

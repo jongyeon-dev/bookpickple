@@ -9,6 +9,14 @@
 	pageContext.setAttribute("br", "<br>");
 %>
 
+<link href="${contextPath}/resources/plugins/barrating/fontawesome-stars.css" rel="stylesheet" type="text/css">
+<script src="${contextPath}/resources/plugins/barrating/jquery.barrating.min.js"></script>
+<style>
+.br-theme-fontawesome-stars .br-widget a {
+font-size: 16px !important;
+}
+</style>
+
 <div class="container">
 	<div class="row">
 		<div class="wrap-details">
@@ -32,11 +40,20 @@
 						        <span class="book-pub-date"></span>
 							</div>
 							<div class="book-selling">
-								<span class="book-rating">10.0(수정)</span>
+								<select class="rating" name="rating" autocomplete="off">
+									<option ${ 0 < avgRating ? 'selected':'' }>1</option>
+									<option ${ 1 < avgRating ? 'selected':'' }>2</option>
+									<option ${ 2 < avgRating ? 'selected':'' }>3</option>
+									<option ${ 3 < avgRating ? 'selected':'' }>4</option>
+									<option ${ 4 < avgRating ? 'selected':'' }>5</option>
+								</select>
+								<span class="book-rating text-muted ml-1 font-weight-bold">${avgRating}</span>
 								<em class="divi">|</em>
-								<span class="book-review">
-				    				회원 리뷰( <em class="text-secondary">100수정</em> 건)
-				    			</span>
+								<a href="#reviewArea">
+									<span class="book-review">
+					    				회원 리뷰( <em class="text-muted font-weight-bold">${reviewCount}</em> 건)
+					    			</span>
+				    			</a>
 							</div>
 						</div>
 						<div class="book-info-bot">
@@ -98,19 +115,10 @@
 						            			<input type="hidden" name="userNo" value="${member.userNo}" />
 												<input type="hidden" name="bookNo" value="${book.bookNo}" />
 												<input type="hidden" name="title" value="${book.title}" />
-												<!-- <input type="hidden" name="ordererName" value="${member.userName}" /> -->
 												<input type="hidden" id="quantity" name="quantity" value="1" />
 												<input type="hidden" name="salesPrice" value="${book.salesPrice}" />
-												<!-- <input type="hidden" name="totalPrice" value="${book.salesPrice * quantity}"/> -->
-												<!-- <input type="hidden" name="totalPoint" value="${book.point * quantity}"/> -->
 												<input type="hidden" name="point" value="${book.point}"/>
 												<input type="hidden" name="bookImage" value="${bookImages[0].changeFileName}"/>
-												<!-- 
-												<input type="hidden" name="receiverName" value="${member.userName}"/>
-												<input type="hidden" name="receiverEmail" value="${member.email}"/>
-												<input type="hidden" name="receiverTel" value="${member.tel}"/>
-												<input type="hidden" name="deliveryAddr" value="${member.address}"/>
-												-->
 				    						<button type="submit"class="btn btn-outline-secondary btn-lg btn-flat">바로 구매</button>
 				    					</form>
 				            		</c:otherwise>
@@ -150,17 +158,35 @@
 					<p>${fn:replace(book.writerIntro,crcn,br)}</p>
 				</div>
 				
-				<div class="review mt-5">
-					<h3 class="font-weight-bold">회원 리뷰</h3>
-					<div class="media media-reply">
-                                    
-                         <div class="media-body">
+				<div id="reviewArea" class="review mt-5" style="background: #F3F3F9; padding: 30px">
+					<h4 class="font-weight-bold">회원 리뷰</h4>
+					<div class="media media-reply" style="display:block;">
+						<c:forEach items="${reviewList}" var="review">
+                         <div class="media-body mb-3" style="background: #fff;">
                              <div class="d-sm-flex justify-content-between mb-2">
-                                 <h5 class="mb-sm-0">u****1 <small class="text-muted ml-3">등록일</small> <em class="divi">|</em> <small class="text-muted ml-3">평점 <em>8</em></small></h5>
+                                 <h5 class="mb-sm-0" style="display: flex;">${review.userId }
+                                 	<small class="text-muted ml-3">${review.creDate}</small> 
+                                 	<em class="divi">|</em>
+                                 	<small class="text-muted ml-3 mr-1">평점 : </small>
+									<select class="rating" name="rating" autocomplete="off">
+										<option ${ review.rating == 1 ? 'selected':'' }>1</option>
+										<option ${ review.rating == 2 ? 'selected':'' }>2</option>
+										<option ${ review.rating == 3 ? 'selected':'' }>3</option>
+										<option ${ review.rating == 4 ? 'selected':'' }>4</option>
+										<option ${ review.rating == 5 ? 'selected':'' }>5</option>
+									</select>
+									<span class="your-rating">
+										<span class="value text-muted ml-1" style="font-size: 12px;">${review.rating}</span>
+									</span>
+                                 </h5>
                              </div>
-                             <p>리뷰내용</p>
+                             <p>${fn:replace(review.content,crcn,br)}</p>
                         </div>
+                        </c:forEach>
                     </div>
+                    <div class="pt-3 pb-1">
+						<c:out value="${pageBar}" escapeXml="false"/>
+					</div>
 				</div>
 				
 			</div>
@@ -168,7 +194,6 @@
 	</div>
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 <script>
 	// 출판일 파싱
@@ -176,7 +201,7 @@
 	var finalPubDate = splitDate[0] + "년 " +splitDate[1] + "월 " + splitDate[2] + "일"
 	$(".book-pub-date").text(finalPubDate);
 
-	$(function(){
+	$(function($){
 		$('.minus').click(function(e){
 			e.preventDefault();
 			var stat = $('#book-quantity').val();
@@ -204,7 +229,12 @@
 			$('#book-quantity').val(num);
 			$("#quantity").val(num);
 		});
-		
+
+	    $('.rating').barrating({
+	        theme: 'fontawesome-stars',
+	        readonly: true
+	    });
+
 	});
 
 	function insertCart(bookNo, userNo) {

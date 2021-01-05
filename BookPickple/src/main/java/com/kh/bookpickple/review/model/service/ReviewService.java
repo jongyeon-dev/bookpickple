@@ -12,4 +12,12 @@ public interface ReviewService {
 	int insertReview(Review review);
 	
 	List<String> isExistReview(List<Review> reviewList);
+	
+	List<Review> selectOneBookReivewList(int cPage, int numPerPage, int bookNo);
+	
+	int totalReviewContents(int bookNo);
+	
+	double oneBookAvgRating(int bookNo);
+	
+	int oneBookReviewCount(int bookNo);
 }

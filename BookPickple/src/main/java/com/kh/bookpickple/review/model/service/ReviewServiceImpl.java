@@ -38,4 +38,24 @@ public class ReviewServiceImpl implements ReviewService{
 		return checkReview;
 	}
 
+	@Override
+	public List<Review> selectOneBookReivewList(int cPage, int numPerPage, int bookNo) {
+		return reviewDAO.selectOneBookReivewList(cPage, numPerPage, bookNo);
+	}
+
+	@Override
+	public int totalReviewContents(int bookNo) {
+		return reviewDAO.totalReviewContents(bookNo);
+	}
+
+	@Override
+	public double oneBookAvgRating(int bookNo) {
+		return reviewDAO.oneBookAvgRating(bookNo);
+	}
+
+	@Override
+	public int oneBookReviewCount(int bookNo) {
+		return reviewDAO.oneBookReviewCount(bookNo);
+	}
+
 }

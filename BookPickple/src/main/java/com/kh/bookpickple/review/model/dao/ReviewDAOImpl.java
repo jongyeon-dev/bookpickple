@@ -1,5 +1,8 @@
 package com.kh.bookpickple.review.model.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,6 +29,27 @@ public class ReviewDAOImpl implements ReviewDAO {
 	@Override
 	public String isExistReview(Review review) {
 		return sqlSession.selectOne("reviewMapper.isExistReview", review);
+	}
+
+	@Override
+	public List<Review> selectOneBookReivewList(int cPage, int numPerPage, int bookNo) {
+		RowBounds rows = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("reviewMapper.selectOneBookReivewList", bookNo, rows);
+	}
+
+	@Override
+	public int totalReviewContents(int bookNo) {
+		return sqlSession.selectOne("reviewMapper.selectBookTotalContents", bookNo);
+	}
+
+	@Override
+	public double oneBookAvgRating(int bookNo) {
+		return sqlSession.selectOne("reviewMapper.oneBookAvgRating", bookNo);
+	}
+
+	@Override
+	public int oneBookReviewCount(int bookNo) {
+		return sqlSession.selectOne("reviewMapper.oneBookReviewCount", bookNo);
 	}
 
 }
