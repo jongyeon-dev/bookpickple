@@ -36,5 +36,10 @@
 		<put-attribute name="title" value="주문 내역 상세 조회" />
 		<put-attribute name="body" value="/WEB-INF/views/mypage/order/orderDetail.jsp" />
 	</definition>
+	
+	<definition name="mypage/review/insertReview" extends="myPage">
+		<put-attribute name="title" value="후기 등록" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/review/insertReview.jsp" />
+	</definition>
 
 </tiles-definitions>

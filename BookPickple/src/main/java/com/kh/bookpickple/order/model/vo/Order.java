@@ -44,4 +44,6 @@ public class Order implements Serializable{
 	private int salesPrice;
 	private int point;
 	private String bookImage;
+	
+	private int orderNum; // 여러 권 주문 시 리뷰 작성에 필요
 }

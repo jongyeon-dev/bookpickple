@@ -31,5 +31,11 @@ public class OrderDetail implements Serializable{
 	
 	// 추가 필드
 	private int userNo;
+	
+	// 리뷰 작성 보여줄 도서 정보들
+	private String writer;
+	private String publisher;
+	private Date publishedDate;
+	private String changeFileName;
 
 }

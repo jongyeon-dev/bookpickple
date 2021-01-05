@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
  <c:set var="orderDetail"  value="${myOrderDetailList}"  />
- 
 <div class="col-lg-8 col-xl-9">
 
 	<div class="row page-titles">
@@ -31,10 +30,13 @@
 			                <th scope="col">주문 수량</th>
 			                <th scope="col">가격</th>
 			                <th scope="col">포인트</th>
+			                <c:if test="${orderDetail[0].deliveryStatus eq 'FINISHED'}">
+			                	<th scope="col">후기</th>
+			                </c:if>
 			            </tr>
 			        </thead>
 			        <tbody>
-		      			<c:forEach items="${myOrderDetailList}" var="detail">
+		      			<c:forEach items="${myOrderDetailList}" var="detail" varStatus="i">
 			       			<tr>
 			       				<td>
 							 		<c:choose>
@@ -60,6 +62,19 @@
 							 		<fmt:formatNumber  value="${detail.point * detail.quantity}" type="number" var="point" />
 							 		 ${point}원
 							 	</td>
+							 	<c:if test="${orderDetail[0].deliveryStatus eq 'FINISHED'}">
+				                	<td>
+			                			<c:choose>
+			                				<c:when test="${isExistReview[i.index] eq 'FALSE' }">
+			                					<button type="button" class="btn btn-flat btn-dark btn-xs" 
+		                					onclick="location.href='${contextPath}/review/insertReviewView.do?userNo=${member.userNo}&orderNum=${detail.orderNum}'">등록</button>
+			                				</c:when>
+			                				<c:when test="${isExistReview[i.index] eq 'TRUE' }">
+			                					<button type="button" class="btn btn-flat btn-outline-dark btn-xs" disabled="disabled">등록 완료</button>
+			                				</c:when>
+                						</c:choose>
+				                	</td>
+				                </c:if>
 			       			</tr>
 		      			</c:forEach>
 			        </tbody>

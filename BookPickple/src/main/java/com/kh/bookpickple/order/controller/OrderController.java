@@ -24,6 +24,8 @@ import com.kh.bookpickple.member.model.vo.Member;
 import com.kh.bookpickple.order.model.service.OrderService;
 import com.kh.bookpickple.order.model.vo.Order;
 import com.kh.bookpickple.order.model.vo.OrderDetail;
+import com.kh.bookpickple.review.model.service.ReviewService;
+import com.kh.bookpickple.review.model.vo.Review;
 
 @SessionAttributes("orderList")
 @Controller
@@ -31,6 +33,9 @@ public class OrderController {
 
 	@Autowired
 	OrderService orderService;
+	
+	@Autowired
+	ReviewService reviewService;
 
 	@RequestMapping("/order/eachOrder.do")
 	public ModelAndView eachOrder(@ModelAttribute Order order) {
@@ -167,8 +172,23 @@ public class OrderController {
 		order.setUserNo(userNo);
 		order.setOrderNo(orderNo);
 		List<Order> myOrderDetailList = orderService.selectOrderDetailList(order);
+		
+		List<Review> reviewList = new ArrayList<Review>();
+		
+		for(int i = 0; i < myOrderDetailList.size(); i++) {
+			Review review = new Review();
+			review.setOrderNum(myOrderDetailList.get(i).getOrderNum());
+			review.setOrderNo(myOrderDetailList.get(i).getOrderNo());
+			review.setUserNo(myOrderDetailList.get(i).getUserNo());
+			
+			reviewList.add(review);
+		}
+		
+		// 주문한 도서의 리뷰가 등록 된 상태인지 조회
+		List<String> isExistReview = reviewService.isExistReview(reviewList); 
 
 		model.addAttribute("myOrderDetailList", myOrderDetailList);
+		model.addAttribute("isExistReview", isExistReview);
 		return "mypage/order/orderDetail";
 	}
 	

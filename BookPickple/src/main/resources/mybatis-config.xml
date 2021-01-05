@@ -15,6 +15,7 @@
     	<typeAlias type="com.kh.bookpickple.cart.model.vo.Cart" alias="Cart" />
     	<typeAlias type="com.kh.bookpickple.order.model.vo.Order" alias="Order" />
     	<typeAlias type="com.kh.bookpickple.order.model.vo.OrderDetail" alias="OrderDetail" />
+    	<typeAlias type="com.kh.bookpickple.review.model.vo.Review" alias="Review" />
     	
   	</typeAliases>
   

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reviewMapper">
+
+	<select id="selectOneOrder" parameterType="_int" resultType="OrderDetail">
+		SELECT PD.*, B.WRITER, B.PUBLISHER, B.PUBLISHEDDATE, BI.CHANGEFILENAME
+		FROM PAYDETAIL PD INNER JOIN BOOK B ON PD.BOOKNO = B.BOOKNO
+							INNER JOIN BOOKIMAGES BI ON B.BOOKNO = BI.BOOKNO
+		WHERE PD.ORDERNUM = #{orderNum} AND BI.FILELEVEL= 0
+	</select>
+	
+	<insert id="insertReview" parameterType="Review">
+		INSERT INTO REVIEW VALUES(
+			SEQ_REVIEWNO.NEXTVAL, #{orderNum}, #{orderNo}, #{userNo}, #{bookNo}, #{content}, #{rating}, DEFAULT
+		)
+	</insert>
+	
+	<select id="isExistReview" parameterType="Review" resultType="string">
+		SELECT DECODE(COUNT(*), 0, 'FALSE', 'TRUE') FROM REVIEW
+        WHERE ORDERNUM = #{orderNum} AND ORDERNO = #{orderNo} AND USERNO = #{userNo}
+	</select>
+</mapper>

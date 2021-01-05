@@ -81,7 +81,7 @@
 
 			var url = location.href;
 			
-			if (url.indexOf("order") > -1 ) {
+			if (url.indexOf("order") > -1 || url.indexOf("review") > -1) {
 			     $("#orderPage").addClass("text-primary font-weight-bold");
 			} else if (url.indexOf("member") > -1 ) {
 			     $("#profilePage").addClass("text-primary font-weight-bold");
