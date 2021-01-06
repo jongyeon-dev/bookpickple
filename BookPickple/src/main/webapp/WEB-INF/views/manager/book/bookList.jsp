@@ -34,14 +34,14 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered zero-configuration" id="managerBookList">
+                        <table class="table table-striped table-bordered zero-configuration" id="managerBookList" style="font-size:12px;">
                             <thead>
                                 <tr>
                                     <th>번호</th>
                                     <th>도서명</th>
                                     <th>저자</th>
                                     <th>출판사</th>
-                                    <th>가격</th>
+                                    <th>판매가</th>
                                     <th>입고일</th>
                                     <th>출판일</th>
                                     <th>상태</th>
@@ -63,13 +63,15 @@
 												<td>${ item.bookNo }</td>
 												<td>
 													 <a href="${contextPath}/manager/detailBookView.do?bookNo=${item.bookNo}">
-													    <p class="font-weight-bold">${item.title} </p>
+													    <p class="font-weight-bold mb-0">${item.title}<br>
+													    <em class="font-weight-normal">${item.isbn}</em></p>
 													 </a> 
 												</td>
 												<td>${item.writer}</td>
 												<td>${item.publisher}</td>
-												<td>
-													<fmt:formatNumber value="${item.salesPrice}" groupingUsed="true"/>
+												<td class="font-weight-bold">
+													<fmt:formatNumber  value="${item.salesPrice}" type="number" var="salePrice" />
+													${salePrice}원
 												</td>
 												<td>${item.creDate}
 												</td>
@@ -79,9 +81,9 @@
 												   <c:out value="${arr[0]}" />
 												</td>
 												<td>
-												   <c:if test="${item.status == 'ONSALE'}">판매중</c:if>
-												   <c:if test="${item.status == 'SOLDOUT'}">품절</c:if>
-												   <c:if test="${item.status == 'OUTOFPRINT'}">절판</c:if>
+												   <c:if test="${item.status == 'ONSALE'}"><span class="label label-secondary">판매중</span></c:if>
+												   <c:if test="${item.status == 'SOLDOUT'}"><span class="label label-danger">품절</span></c:if>
+												   <c:if test="${item.status == 'OUTOFPRINT'}"><span class="label label-primary">절판</span></c:if>
 												</td>
 											</tr>
 										</c:if>
@@ -96,12 +98,16 @@
         </div>
     </div>
 </div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
 <script src="${contextPath}/resources/plugins/tables/js/jquery.dataTables.min.js"></script>
 <script src="${contextPath}/resources/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
 <script>
 $(function($) {
 	 $('#managerBookList').DataTable({
+		 lengthMenu: [ 10, 20, 30, 40, 50 ],
+		 order: [
+			 [ 0, "desc" ]
+		],
 		 "language": {
 	            "decimal": "",
 	            "emptyTable": "데이터가 없습니다.",

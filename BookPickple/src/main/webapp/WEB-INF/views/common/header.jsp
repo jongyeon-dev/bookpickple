@@ -78,44 +78,47 @@
             <ul class="metismenu" id="menu">
             	<c:if test="${ isLogin != true or empty member or member.type == 'MEMBER'}">
             		<li>
-                    <a href="${contextPath}/">
-                        <i class="icon-home menu-icon"></i><span class="nav-text">Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="has-arrow" href="#" aria-expanded="false">
-                        <i class="icon-book-open menu-icon"></i><span class="nav-text">도서</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="${contextPath}/book/selectBookList.do?type=IT">IT</a></li>
-                        <li><a href="${contextPath}/book/selectBookList.do?type=NOVEL">소설</a></li>
-                        <li><a href="${contextPath}/book/selectBookList.do?type=ECONOMY">경제</a></li>
-                        <li><a href="${contextPath}/book/selectBookList.do?type=SOCIETY">사회</a></li>
-                        <li><a href="${contextPath}/book/selectBookList.do?type=HOBBY">취미</a></li>
-                    </ul>
-                </li>
-                <li class="mega-menu mega-menu-sm">
-                    <a href="${contextPath}/cart/cartList.do?userNo=${member.userNo}">
-                        <i class="icon-basket-loaded menu-icon"></i><span class="nav-text">내 Cart</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                         <i class="icon-note menu-icon"></i><span class="nav-text">1:1 문의하기</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="has-arrow" href="#" aria-expanded="false">
-                        <i class="icon-user menu-icon"></i><span class="nav-text">마이 페이지</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="${contextPath}/order/orderListView.do?userNo=${member.userNo}">주문내역</a></li>
-                        <li><a href="${contextPath}/member/memberProfileView.do?userNo=${member.userNo}">프로필</a></li>
-                        <li><a href="${contextPath}/inquiry/inquiryListView.do?userNo=${member.userNo}">1:1 문의 내역</a></li>
-                    </ul>
-                </li>
+	                    <a href="${contextPath}/">
+	                        <i class="icon-home menu-icon"></i><span class="nav-text">Home</span>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a class="has-arrow" href="#" aria-expanded="false">
+	                        <i class="icon-book-open menu-icon"></i><span class="nav-text">도서</span>
+	                    </a>
+	                    <ul aria-expanded="false">
+	                        <li><a href="${contextPath}/book/selectBookList.do?type=IT">IT</a></li>
+	                        <li><a href="${contextPath}/book/selectBookList.do?type=NOVEL">소설</a></li>
+	                        <li><a href="${contextPath}/book/selectBookList.do?type=ECONOMY">경제</a></li>
+	                        <li><a href="${contextPath}/book/selectBookList.do?type=SOCIETY">사회</a></li>
+	                        <li><a href="${contextPath}/book/selectBookList.do?type=HOBBY">취미</a></li>
+	                    </ul>
+	                </li>
+	                <li class="mega-menu mega-menu-sm">
+	                    <a href="${contextPath}/cart/cartList.do?userNo=${member.userNo}">
+	                        <i class="icon-basket-loaded menu-icon"></i><span class="nav-text">내 Cart</span>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="#">
+	                         <i class="icon-note menu-icon"></i><span class="nav-text">1:1 문의하기</span>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a class="has-arrow" href="#" aria-expanded="false">
+	                        <i class="icon-user menu-icon"></i><span class="nav-text">마이 페이지</span>
+	                    </a>
+	                    <ul aria-expanded="false">
+	                        <li><a href="${contextPath}/order/orderListView.do?userNo=${member.userNo}">주문내역</a></li>
+	                        <li><a href="${contextPath}/member/memberProfileView.do?userNo=${member.userNo}">프로필</a></li>
+	                        <li><a href="${contextPath}/inquiry/inquiryListView.do?userNo=${member.userNo}">1:1 문의 내역</a></li>
+	                    </ul>
+	                </li>
             	</c:if>
                <c:if test="${isLogin == true and not empty member and member.type == 'MANAGER'}">
+               		<a href="${contextPath}/">
+                        <i class="icon-home menu-icon"></i><span class="nav-text">Home</span>
+                    </a>
                 	<li class="mega-menu mega-menu-sm">
 	                    <a href="${contextPath}/manager/memberListView.do">
 	                        <i class="icon-people menu-icon"></i><span class="nav-text">회원 관리</span>
