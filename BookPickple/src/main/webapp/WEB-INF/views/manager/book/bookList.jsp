@@ -135,6 +135,5 @@ $(function($) {
 	 });
 });
 </script>
-<!-- <script src="${contextPath}/resources/plugins/tables/js/datatable-init/datatable-basic.min.js"></script> -->
 
 </body>
