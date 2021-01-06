@@ -13,6 +13,10 @@ public interface ReviewDAO {
 	
 	String isExistReview(Review review);
 	
+	Double eachBookReviewCount(Review review);
+	
+	Double eachBookReviewAvg(Review review);
+	
 	List<Review> selectOneBookReivewList(int cPage, int numPerPage, int bookNo);
 	
 	int totalReviewContents(int bookNo);

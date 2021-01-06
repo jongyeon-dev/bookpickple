@@ -21,6 +21,18 @@
         WHERE ORDERNUM = #{orderNum} AND ORDERNO = #{orderNo} AND USERNO = #{userNo}
 	</select>
 	
+	<select id="eachBookReviewCount" parameterType="Review" resultType="_double">
+		SELECT COUNT(R.RATING) REVIEWCOUNT
+		FROM REVIEW R, BOOK B
+		WHERE R.BOOKNO = B.BOOKNO AND R.BOOKNO = #{bookNo} AND B.TYPE = #{type}
+	</select>
+	
+	<select id="eachBookReviewAvg" parameterType="Review" resultType="_double">
+		SELECT NVL(ROUND(AVG(R.RATING), 1), 0) RATING
+		FROM REVIEW R, BOOK B
+		WHERE R.BOOKNO = B.BOOKNO AND R.BOOKNO = #{bookNo} AND B.TYPE = #{type}
+	</select>
+	
 	<select id="selectOneBookReivewList" parameterType="_int" resultType="Review">
 		SELECT ROWNUM, A.*
          FROM (SELECT SUBSTR(M.USERID,1,1) || LPAD('*',LENGTH(M.USERID)-2,'*') || SUBSTR(M.USERID, LENGTH(M.USERID), 1) USERID, 
@@ -42,4 +54,5 @@
 	<select id="oneBookReviewCount" parameterType="_int" resultType="_int">
 		SELECT COUNT(*) FROM REVIEW WHERE BOOKNO = #{bookNo}
 	</select>
+	
 </mapper>

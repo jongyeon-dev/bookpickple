@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+
+<link href="${contextPath}/resources/plugins/barrating/fontawesome-stars.css" rel="stylesheet" type="text/css">
+<script src="${contextPath}/resources/plugins/barrating/jquery.barrating.min.js"></script>
+<style>
+.br-theme-fontawesome-stars .br-widget a {
+font-size: 16px !important;
+}
+</style>
 
 <div class="container">
 	<div class="books-list">
-		<c:forEach items="${list}" var="book">
+		<c:forEach items="${list}" var="book" varStatus="loop">
 		<input type="hidden" id="isLogin" value="${isLogin}"/>
 		<c:if test="${book.status != 'STOP'}">
 			<table width="100%">
@@ -45,12 +54,21 @@
 			    			<input type="hidden" class="point${book.bookNo}" value="${book.point}"/>
 			    			<span class="goods-point">포인트 <em class="text-primary">${book.point}</em>원</span>
 			    		</div>
-			    		<div class="goods-selling">
+			    		<div class="goods-selling" style="display: flex;">
+			    			<fmt:parseNumber var="reviewCount" integerOnly="true" type="number" value="${eachReviewList[loop.count-1].count}" />
 			    			<span class="goods-review">
-			    				회원 리뷰( <em class="text-secondary">100수정</em> 건)
+			    				회원 리뷰( <em class="text-muted font-weight-bold">${reviewCount}</em> 건)
 			    			</span>
-			    			<em class="divi">|</em>
-			    			<span class="goods-rating"><em>9.5수정</em></span>
+			    			<em class="divi" style="margin: 0 5px;">|</em>
+			    			<select class="rating" name="rating" autocomplete="off">
+		    					<option ${ 0.0 == eachReviewList[loop.count-1].avg ? 'selected':'' } value=""></option>
+								<option ${ 0 < eachReviewList[loop.count-1].avg ? 'selected':'' }>1</option>
+								<option ${ 1 < eachReviewList[loop.count-1].avg ? 'selected':'' }>2</option>
+								<option ${ 2 < eachReviewList[loop.count-1].avg ? 'selected':'' }>3</option>
+								<option ${ 3 < eachReviewList[loop.count-1].avg ? 'selected':'' }>4</option>
+								<option ${ 4 < eachReviewList[loop.count-1].avg ? 'selected':'' }>5</option>
+							</select>
+							<span class="book-rating text-muted ml-1 font-weight-bold">${eachReviewList[loop.count-1].avg}</span>
 			    		</div>
 			    		<div class="goods_deli">
 			    			<strong>출고 예상일 : 1일 이내</strong>
@@ -90,12 +108,19 @@
 	</div>
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script>
-	// 출판일 파싱
-	var splitDate = $("#dbPublishedDate").val().split(" ")[0].split("-");
-	var finalPubDate = splitDate[0] + "년 " +splitDate[1] + "월"
-	$(".book-pub-date").text(finalPubDate);
+
+	$(function($){
+		// 출판일 파싱
+		var splitDate = $("#dbPublishedDate").val().split(" ")[0].split("-");
+		var finalPubDate = splitDate[0] + "년 " +splitDate[1] + "월"
+		$(".book-pub-date").text(finalPubDate);
+
+		$('.rating').barrating({
+	        theme: 'fontawesome-stars',
+	        readonly: true
+	    });
+	});
 
 	function insertCart(bookNo, userNo) {
 		if($("#isLogin").val() == null || $("#isLogin").val() == "") {

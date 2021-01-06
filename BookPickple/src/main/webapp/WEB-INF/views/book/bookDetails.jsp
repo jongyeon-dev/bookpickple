@@ -166,7 +166,7 @@ font-size: 16px !important;
                              <div class="d-sm-flex justify-content-between mb-2">
                                  <h5 class="mb-sm-0" style="display: flex;">${review.userId }
                                  	<small class="text-muted ml-3">${review.creDate}</small> 
-                                 	<em class="divi">|</em>
+                                 	<em class="divi" style="margin: 4px -5px 0 12px;">|</em>
                                  	<small class="text-muted ml-3 mr-1">평점 : </small>
 									<select class="rating" name="rating" autocomplete="off">
 										<option ${ review.rating == 1 ? 'selected':'' }>1</option>

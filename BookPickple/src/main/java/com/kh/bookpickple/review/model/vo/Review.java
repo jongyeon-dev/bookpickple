@@ -30,6 +30,7 @@ public class Review implements Serializable{
 	private Date creDate;
 	
 	// 추가 필드
+	private String type; // 도서 목록 조회 -> 도서 개별 리뷰 조회 시 사용
 	private String userId; // 도서 상세조회 리뷰 조회 시 사용
 	
 }
