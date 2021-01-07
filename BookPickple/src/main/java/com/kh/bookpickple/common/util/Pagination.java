@@ -18,8 +18,8 @@ public class Pagination {
 		int pageNo = ((cPage - 1)/pageBarSize) * pageBarSize +1;
 		//종료페이지 번호 세팅
 		int pageEnd = pageNo+pageBarSize-1;
-		System.out.println("totalPage : "+totalPage);
-		System.out.println("pageStart["+pageNo+"] ~ pageEnd["+pageEnd+"]");
+		// System.out.println("totalPage : "+totalPage);
+		// System.out.println("pageStart["+pageNo+"] ~ pageEnd["+pageEnd+"]");
 		
 		pageBar += "<ul class='pagination justify-content-center pagination-sm'>";
 		//[이전]section
@@ -67,7 +67,11 @@ public class Pagination {
 		//fn_paging함수
 		pageBar += "<script>";
 		pageBar += "function fn_paging(cPage,numPerPage){";
-		pageBar += "location.href='"+url+"?cPage='+cPage;";
+		if(url.indexOf("?") > -1) {
+			pageBar += "location.href='"+url+"&cPage='+cPage;";
+		} else {
+			pageBar += "location.href='"+url+"?cPage='+cPage;";
+		}
 		pageBar += "}";
 		pageBar += "</script>";
 		

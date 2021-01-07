@@ -15,7 +15,9 @@ public interface OrderDAO {
 	
 	List<Order> selectOrderList(int cPage, int numPerPage, int userNo);
 	
-	int selectOrderTotalContents();
+	int selectOrderTotalContents(int userNo);
 	
 	List<Order> selectOrderDetailList(Order order);
+	
+	int eachBookSalesCount(OrderDetail orderDetail);
 }

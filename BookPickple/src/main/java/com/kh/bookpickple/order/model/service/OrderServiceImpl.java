@@ -40,13 +40,18 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int selectOrderTotalContents() {
-		return orderDAO.selectOrderTotalContents();
+	public int selectOrderTotalContents(int userNo) {
+		return orderDAO.selectOrderTotalContents(userNo);
 	}
 
 	@Override
 	public List<Order> selectOrderDetailList(Order order) {
 		return orderDAO.selectOrderDetailList(order);
+	}
+
+	@Override
+	public int eachBookSalesCount(OrderDetail orderDetail) {
+		return orderDAO.eachBookSalesCount(orderDetail);
 	}
 
 }

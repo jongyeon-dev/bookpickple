@@ -25,11 +25,15 @@
 	</delete>
 	
 	<select id="selectOrderList" parameterType="_int" resultType="Order">
-		SELECT * FROM PAYRECORD WHERE USERNO = #{userNo} ORDER BY PAYDATE DESC, ORDERNO DESC
+		SELECT ROWNUM, A.* 
+		FROM ( SELECT * FROM PAYRECORD 
+				WHERE USERNO = #{userNo} 
+				ORDER BY PAYDATE DESC, ORDERNO DESC
+			) A
 	</select>
 	
 	<select id="selectOrderTotalContents" resultType="_int">
-		SELECT COUNT(*) FROM PAYRECORD
+		SELECT COUNT(*) FROM PAYRECORD WHERE USERNO = #{userNo}
 	</select>
 	
 	<select id="selectOrderDetailList" parameterType="Order" resultType="Order">
@@ -37,6 +41,12 @@
 		FROM PAYRECORD P, PAYDETAIL PD
 		WHERE P.ORDERNO = PD.ORDERNO AND P.ORDERNO = #{orderNo} AND P.USERNO = #{userNo}
 		ORDER BY PD.ORDERNUM DESC
+	</select>
+	
+	<select id="eachBookSalesCount" parameterType="OrderDetail" resultType="_int">
+	   SELECT NVL(SUM(P.QUANTITY), 0)
+		FROM PAYDETAIL P, BOOK B
+		WHERE P.BOOKNO = B.BOOKNO AND P.BOOKNO = #{bookNo}
 	</select>
 	
 </mapper>

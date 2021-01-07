@@ -36,13 +36,18 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public int selectOrderTotalContents() {
-		return sqlSession.selectOne("orderMapper.selectOrderTotalContents");
+	public int selectOrderTotalContents(int userNo) {
+		return sqlSession.selectOne("orderMapper.selectOrderTotalContents", userNo);
 	}
 
 	@Override
 	public List<Order> selectOrderDetailList(Order order) {
 		return sqlSession.selectList("orderMapper.selectOrderDetailList", order);
+	}
+
+	@Override
+	public int eachBookSalesCount(OrderDetail orderDetail) {
+		return sqlSession.selectOne("orderMapper.eachBookSalesCount", orderDetail);
 	}
 
 

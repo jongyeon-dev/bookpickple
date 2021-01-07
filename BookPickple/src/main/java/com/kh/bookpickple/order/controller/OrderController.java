@@ -155,8 +155,8 @@ public class OrderController {
 								int cPage,  Model model) {
 		int numPerPage = 10;
 		List<Order> myOrderList = orderService.selectOrderList(cPage, numPerPage, userNo);
-		int totalContents = orderService.selectOrderTotalContents();
-		String pageBar = Pagination.getPageBar(totalContents, cPage, numPerPage, "orderListView.do");
+		int totalContents = orderService.selectOrderTotalContents(userNo);
+		String pageBar = Pagination.getPageBar(totalContents, cPage, numPerPage, "orderListView.do?userNo=" + userNo);
 	
 		model.addAttribute("myOrderList", myOrderList);
 		model.addAttribute("totalContents", totalContents);
@@ -183,6 +183,8 @@ public class OrderController {
 			
 			reviewList.add(review);
 		}
+		
+		System.out.println(myOrderDetailList);
 		
 		// 주문한 도서의 리뷰가 등록 된 상태인지 조회
 		List<String> isExistReview = reviewService.isExistReview(reviewList); 

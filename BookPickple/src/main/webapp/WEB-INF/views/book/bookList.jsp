@@ -48,7 +48,8 @@ font-size: 16px !important;
 			    		</div>
 			    		<div class="good-price">
 			    			<input type="hidden" class="salesPrice${book.bookNo}" value="${book.salesPrice}"/>
-			    			<em class="text-primary font-weight-bold book-price">${book.salesPrice}원</em>
+			    			<fmt:formatNumber  value="${book.salesPrice}" type="number" var="salesPrice" />
+			    			<em class="text-primary font-weight-bold book-price">${salesPrice}원</em>
 			    			<span>(10% 할인)</span>
 			    			<em class="divi">|</em>
 			    			<input type="hidden" class="point${book.bookNo}" value="${book.point}"/>
@@ -69,6 +70,10 @@ font-size: 16px !important;
 								<option ${ 4 < eachReviewList[loop.count-1].avg ? 'selected':'' }>5</option>
 							</select>
 							<span class="book-rating text-muted ml-1 font-weight-bold">${eachReviewList[loop.count-1].avg}</span>
+							<em class="divi" style="margin: 0 5px;">|</em>
+							<span class="goods-review">
+			    				판매량( <em class="text-muted font-weight-bold">${eachSalesCount[loop.count-1]}</em> 권)
+			    			</span>
 			    		</div>
 			    		<div class="goods_deli">
 			    			<strong>출고 예상일 : 1일 이내</strong>
@@ -147,7 +152,6 @@ font-size: 16px !important;
 	}
 
 	function listEachOrder(bookNo, userNo) {
-		// var count = $(".check-book").length;
 		 var orderForm = $('<form></form>');
 	
 		 orderForm.attr('action', '${contextPath}/order/eachOrder.do');
@@ -178,7 +182,7 @@ font-size: 16px !important;
 		orderForm.append(point);
 		orderForm.append(bookImage);
 
-		 orderForm.submit();
+		orderForm.submit();
 	
 	}
 </script>

@@ -24,13 +24,13 @@
 	<select id="eachBookReviewCount" parameterType="Review" resultType="_double">
 		SELECT COUNT(R.RATING) REVIEWCOUNT
 		FROM REVIEW R, BOOK B
-		WHERE R.BOOKNO = B.BOOKNO AND R.BOOKNO = #{bookNo} AND B.TYPE = #{type}
+		WHERE R.BOOKNO = B.BOOKNO AND R.BOOKNO = #{bookNo}
 	</select>
 	
 	<select id="eachBookReviewAvg" parameterType="Review" resultType="_double">
 		SELECT NVL(ROUND(AVG(R.RATING), 1), 0) RATING
 		FROM REVIEW R, BOOK B
-		WHERE R.BOOKNO = B.BOOKNO AND R.BOOKNO = #{bookNo} AND B.TYPE = #{type}
+		WHERE R.BOOKNO = B.BOOKNO AND R.BOOKNO = #{bookNo}
 	</select>
 	
 	<select id="selectOneBookReivewList" parameterType="_int" resultType="Review">

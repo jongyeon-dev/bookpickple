@@ -18,6 +18,8 @@ import com.kh.bookpickple.common.util.Pagination;
 import com.kh.bookpickple.goods.model.service.GoodsService;
 import com.kh.bookpickple.manager.book.model.vo.Book;
 import com.kh.bookpickple.manager.book.model.vo.BookImages;
+import com.kh.bookpickple.order.model.service.OrderService;
+import com.kh.bookpickple.order.model.vo.OrderDetail;
 import com.kh.bookpickple.review.model.service.ReviewService;
 import com.kh.bookpickple.review.model.vo.Review;
 
@@ -30,7 +32,10 @@ public class GoodsController {
 	@Autowired
 	ReviewService reviewService;
 	
-	@RequestMapping("/book/selectBookList.do")
+	@Autowired
+	OrderService orderService;
+	
+	@RequestMapping("/book/bookList.do")
 	public String selectBookList(@RequestParam String type, @RequestParam( value="cPage", required=false, defaultValue="1") 
 									int cPage, Model model) {
 		// 한 페이지당 게시글
@@ -38,15 +43,14 @@ public class GoodsController {
 		
 		// 1. 현재 페이지 게시글 구하기
 		List<Map<String, String>> list = goodsService.selectBookList(cPage, numPerPage, type);
-		// System.out.println(list);
 		
 		// 2. 전페 게시글 수 (페이징 처리)
 		int totalContents = goodsService.selectBookTotalContents(type);
 		
 		// 3. 페이지 계산된 html 구하기
-		String pageBar = Pagination.getPageBar(totalContents, cPage, numPerPage, "selectBookList.do?type=" + type);
+		String pageBar = Pagination.getPageBar(totalContents, cPage, numPerPage, "bookList.do?type=" + type);
 		
-		// 4. 도서 각각의 리뷰 개수와 평점
+		// 4. 도서 각각의 리뷰 개수, 평점, 판매량
 		List<Book> bookList = new ArrayList<Book>();
 		
 		for(int i = 0; i < list.size(); i++) {
@@ -54,24 +58,29 @@ public class GoodsController {
 		}
 
 		List<Object> eachReviewList = new ArrayList<Object>(); // 빈 리스트 생성
-		Map<String, Double> reviewMap = new HashMap<>(); // 빈 맵 생성
+		Map<String, Double> reviewMap = new HashMap<>(); // 리뷰용 빈 맵 생성
+		List<Integer> eachSalesCount = new ArrayList<>(); // 판매지수용 빈 리스트 생성
 		
 		for(int j = 0; j < bookList.size(); j ++) {
 			Review review = new Review();
 			review.setBookNo(bookList.get(j).getBookNo());
-			review.setType(bookList.get(j).getType());
-
 			// bookList 크기만큼 반복하며 review객체를 사용하여 조회한 avg와 count를 Map 형태로 가져온다.
 			reviewMap = reviewService.eachBookReview(review); // 출력 형식 : {avg=4.3, count=3.0}
 			eachReviewList.add(reviewMap); // 조회한 모든 Map을 다시 List에 넣는다.
+			
+			OrderDetail orderDetail = new OrderDetail();
+			orderDetail.setBookNo(bookList.get(j).getBookNo());
+			int salesCount = orderService.eachBookSalesCount(orderDetail);
+			eachSalesCount.add(salesCount);
+			
 		}
 		
 		model.addAttribute("list", list);
 		model.addAttribute("totalContents", totalContents);
 		model.addAttribute("numPerPage", numPerPage);
 		model.addAttribute("pageBar", pageBar);
-		model.addAttribute("pageBar", pageBar);
 		model.addAttribute("eachReviewList", eachReviewList); // 출력 형식 : [{avg=4.3, count=3.0}, {avg=0.0, count=0.0}]
+		model.addAttribute("eachSalesCount", eachSalesCount); // 출력 형식 : [4, 0, 1, 1, 2]
 		
 		return "book/bookList";
 	}
@@ -87,7 +96,7 @@ public class GoodsController {
 		int numPerPage = 5;
 		List<Review> reviewList = reviewService.selectOneBookReivewList(cPage, numPerPage, bookNo);
 		int totalReviewContents = reviewService.totalReviewContents(bookNo);
-		String pageBar = Pagination.getPageBar(totalReviewContents, cPage, numPerPage, "detailBookView.do");
+		String pageBar = Pagination.getPageBar(totalReviewContents, cPage, numPerPage, "detailBookView.do?bookNo=" + bookNo);
 		
 		// 해당 도서의 평균 평점 조회
 		double oneBookAvgRating = reviewService.oneBookAvgRating(bookNo);
