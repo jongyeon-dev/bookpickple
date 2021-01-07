@@ -3,16 +3,60 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bookMapper">
 
+	<!-- 현재 월을 기준으로 첫째날과 마지막 날의 사이에 등록된 도서 내림차순 기준 조회-->
+	<select id="mainNewBookList" resultType="Book">
+		 <![CDATA[
+			SELECT NEW.BOOKNO, NEW.TITLE, NEW.WRITER, NEW.PUBLISHER, NEW.SALESPRICE, NEW.CHANGEFILENAME
+			FROM (SELECT B.*, BI.CHANGEFILENAME 
+	                FROM BOOK B, BOOKIMAGES BI
+	                WHERE B.BOOKNO = BI.BOOKNO AND BI.FILELEVEL= 0 AND B.STATUS = 'ONSALE'
+	                	AND B.CREDATE BETWEEN ADD_MONTHS(LAST_DAY(SYSDATE)+1, -1) AND LAST_DAY(SYSDATE)
+	                ORDER BY B.PUBLISHEDDATE DESC, B.BOOKNO DESC
+	             ) NEW
+			WHERE 1=1 AND ROWNUM <= 10
+		]]>
+	</select>
+	
+	<!-- 판매량 순 TOP9 -->
+	<select id="mainBestBookList" resultType="Book">
+		 <![CDATA[
+			SELECT ROWNUM, A.*
+			FROM ( SELECT B.BOOKNO, B.TITLE, B.WRITER, B.PUBLISHER, B.SALESPRICE, BI.CHANGEFILENAME
+			        FROM PAYDETAIL P INNER JOIN BOOK B ON P.BOOKNO = B.BOOKNO
+			                        INNER JOIN BOOKIMAGES BI ON B.BOOKNO = BI.BOOKNO
+			        WHERE BI.FILELEVEL= 0 AND B.STATUS = 'ONSALE'
+			        GROUP BY B.BOOKNO, B.TITLE, B.WRITER, B.PUBLISHER, B.SALESPRICE, BI.CHANGEFILENAME
+			        ORDER BY SUM(P.QUANTITY) DESC
+				) A
+			WHERE 1=1 AND ROWNUM <= 9
+		]]>
+	</select>
+	
+	<!-- 리뷰 개수 기준 내림차순 / 리뷰 개수가 같으면 평점 내림차순, 평점이 같으면 도서 고유번호 내림차순 -->
+	<select id="mainSteadyBookList" resultType="Book">
+		 <![CDATA[
+			SELECT * FROM (
+			        SELECT B.BOOKNO, B.TITLE, B.WRITER, B.PUBLISHER, B.SALESPRICE, BI.CHANGEFILENAME
+			        FROM REVIEW R INNER JOIN BOOK B ON R.BOOKNO = B.BOOKNO
+			                        INNER JOIN BOOKIMAGES BI ON B.BOOKNO = BI.BOOKNO
+			        WHERE BI.FILELEVEL= 0 AND B.STATUS = 'ONSALE'
+			        GROUP BY B.BOOKNO, B.TITLE, B.WRITER, B.PUBLISHER, B.SALESPRICE, BI.CHANGEFILENAME
+			        ORDER BY COUNT(R.CONTENT) DESC,  NVL(ROUND(AVG(R.RATING), 1), 0) DESC, B.BOOKNO DESC
+			)
+			WHERE 1=1 AND ROWNUM <= 10
+		]]>
+	</select>
+
 	<select id="selectBookList" parameterType="string" resultType="Book">
 		 SELECT ROWNUM, A.*
          FROM (SELECT B.*, BI.CHANGEFILENAME 
                 FROM BOOK B, BOOKIMAGES BI
-                WHERE B.BOOKNO = BI.BOOKNO AND BI.FILELEVEL= 0 AND TYPE = #{TYPE}
+                WHERE B.BOOKNO = BI.BOOKNO AND BI.FILELEVEL= 0 AND TYPE = #{type}
                 ORDER BY B.CREDATE DESC, B.BOOKNO DESC) A
 	</select>
 	
 	<select id="selectBookTotalContents" parameterType="string" resultType="_int">
-		SELECT COUNT(*) FROM BOOK WHERE TYPE = #{TYPE}
+		SELECT COUNT(*) FROM BOOK WHERE TYPE = #{type}
 	</select>
 	
 	<select id="selectOneBook" parameterType="_int" resultType="Book">

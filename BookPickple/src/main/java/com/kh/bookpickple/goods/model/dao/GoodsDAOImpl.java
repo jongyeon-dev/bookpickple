@@ -16,6 +16,24 @@ public class GoodsDAOImpl implements GoodsDAO {
 	
 	@Autowired
 	SqlSessionTemplate sqlSession;
+	
+	@Override
+	public List<Book> selectMainNewBookList() {
+		List<Book> mainNewBookList = sqlSession.selectList("bookMapper.mainNewBookList");
+		return mainNewBookList;
+	}
+
+	@Override
+	public List<Book> selectMainBestBookList() {
+		List<Book> mainBestBookList = sqlSession.selectList("bookMapper.mainBestBookList");
+		return mainBestBookList;
+	}
+
+	@Override
+	public List<Book> selectMainSteadyBookList() {
+		List<Book> mainSteadyBookList = sqlSession.selectList("bookMapper.mainSteadyBookList");
+		return mainSteadyBookList;
+	}
 
 	@Override
 	public List<Map<String, String>> selectBookList(int cPage, int numPerPage, String type) {

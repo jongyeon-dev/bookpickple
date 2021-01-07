@@ -1,5 +1,6 @@
 package com.kh.bookpickple.goods.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,22 @@ public class GoodsServiceImpl implements GoodsService {
 	
 	@Autowired
 	GoodsDAO goodsDAO;
+	
+	@Override
+	public Map<String, List<Book>> selectMainBooksList() {
+		Map<String, List<Book>> mainBooksMap = new HashMap<String, List<Book>>();
+		
+		List<Book> mainBooksList = goodsDAO.selectMainNewBookList();
+		mainBooksMap.put("newBooksList", mainBooksList);
+		
+		mainBooksList = goodsDAO.selectMainBestBookList();
+		mainBooksMap.put("bestBooksList", mainBooksList);
+		
+		mainBooksList = goodsDAO.selectMainSteadyBookList();
+		mainBooksMap.put("steadyBooksList", mainBooksList);
+		
+		return mainBooksMap;
+	}
 
 	@Override
 	public List<Map<String, String>> selectBookList(int cPage, int numPerPage, String type) {

@@ -7,6 +7,16 @@ import com.kh.bookpickple.manager.book.model.vo.Book;
 import com.kh.bookpickple.manager.book.model.vo.BookImages;
 
 public interface GoodsDAO {
+	
+	/**
+	 * 메인 신간 조회
+	 * @return
+	 */
+	List<Book> selectMainNewBookList();
+	
+	List<Book> selectMainBestBookList();
+	
+	List<Book> selectMainSteadyBookList();
 
 	List<Map<String, String>> selectBookList(int cPage, int numPerPage, String type);
 	

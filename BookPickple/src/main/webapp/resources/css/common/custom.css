@@ -352,8 +352,11 @@ a:hover { text-decoration: none; }
 [ book-info ]
 ---------------------------*/
 
+.owl-item .item img {
+	width: 125px;
+}
 .book-info {
-	margin: 16px 20px;
+	margin: 16px 0;
 }
 
 .book-info .book-title {
@@ -368,6 +371,18 @@ a:hover { text-decoration: none; }
     font-size: 14px;
     font-weight: bold;
     color: #333;
+}
+
+.book-info .book-title a {
+ 	overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    white-space: normal;
+    word-break: keep-all;
 }
 
 .book-info .book-publish {

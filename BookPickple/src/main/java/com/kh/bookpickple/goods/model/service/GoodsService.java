@@ -7,6 +7,12 @@ import com.kh.bookpickple.manager.book.model.vo.Book;
 import com.kh.bookpickple.manager.book.model.vo.BookImages;
 
 public interface GoodsService {
+	
+	/**
+	 * 신간, 베스트셀러, 화제의 책을 List에 담아 Map으로 합치는 메소드
+	 * @return
+	 */
+	Map<String,List<Book>> selectMainBooksList();
 
 	List<Map<String, String>> selectBookList(int cPage, int numPerPage, String type);
 	
