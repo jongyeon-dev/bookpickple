@@ -50,5 +50,10 @@ public class OrderDAOImpl implements OrderDAO {
 		return sqlSession.selectOne("orderMapper.eachBookSalesCount", orderDetail);
 	}
 
+	@Override
+	public int oneBookSalesCount(int bookNo) {
+		return sqlSession.selectOne("orderMapper.oneBookSalesCount", bookNo);
+	}
+
 
 }

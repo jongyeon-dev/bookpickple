@@ -71,7 +71,7 @@ font-size: 16px !important;
 							</select>
 							<span class="book-rating text-muted ml-1 font-weight-bold">${eachReviewList[loop.count-1].avg}</span>
 							<em class="divi" style="margin: 0 5px;">|</em>
-							<span class="goods-review">
+							<span class="goods-salesCount">
 			    				판매량( <em class="text-muted font-weight-bold">${eachSalesCount[loop.count-1]}</em> 권)
 			    			</span>
 			    		</div>

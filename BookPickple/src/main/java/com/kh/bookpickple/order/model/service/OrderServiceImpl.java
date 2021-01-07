@@ -54,4 +54,9 @@ public class OrderServiceImpl implements OrderService {
 		return orderDAO.eachBookSalesCount(orderDetail);
 	}
 
+	@Override
+	public int oneBookSalesCount(int bookNo) {
+		return orderDAO.oneBookSalesCount(bookNo);
+	}
+
 }

@@ -108,11 +108,14 @@ public class GoodsController {
 		double oneBookAvgRating = reviewService.oneBookAvgRating(bookNo);
 		// 해당 도서의 리뷰 개수 조회
 		int oneBookReviewCount = reviewService.oneBookReviewCount(bookNo);
+		// 해당 도서의 판매량 조회
+		int oneBookSalesCount = orderService.oneBookSalesCount(bookNo);
 
 		model.addAttribute("book", book);
 		model.addAttribute("bookImages", bookImages);
 		model.addAttribute("avgRating", oneBookAvgRating);
 		model.addAttribute("reviewCount", oneBookReviewCount);
+		model.addAttribute("salesCount", oneBookSalesCount);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("totalContents", totalReviewContents);
 		model.addAttribute("numPerPage", numPerPage);

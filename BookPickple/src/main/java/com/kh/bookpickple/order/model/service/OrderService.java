@@ -18,4 +18,5 @@ public interface OrderService {
 	
 	int eachBookSalesCount(OrderDetail orderDetail);
 	
+	int oneBookSalesCount(int bookNo);
 }

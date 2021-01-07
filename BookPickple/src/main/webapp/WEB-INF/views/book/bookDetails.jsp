@@ -40,6 +40,12 @@ font-size: 16px !important;
 						        <span class="book-pub-date"></span>
 							</div>
 							<div class="book-selling">
+								<a href="#reviewArea">
+									<span class="book-review">
+					    				회원 리뷰( <em class="text-muted font-weight-bold">${reviewCount}</em> 건)
+					    			</span>
+				    			</a>
+				    			<em class="divi">|</em>
 								<select class="rating" name="rating" autocomplete="off">
 									<option ${ 0.0 == eachReviewList[loop.count-1].avg ? 'selected':'' } value=""></option>
 									<option ${ 0 < avgRating ? 'selected':'' }>1</option>
@@ -49,12 +55,10 @@ font-size: 16px !important;
 									<option ${ 4 < avgRating ? 'selected':'' }>5</option>
 								</select>
 								<span class="book-rating text-muted ml-1 font-weight-bold">${avgRating}</span>
-								<em class="divi">|</em>
-								<a href="#reviewArea">
-									<span class="book-review">
-					    				회원 리뷰( <em class="text-muted font-weight-bold">${reviewCount}</em> 건)
-					    			</span>
-				    			</a>
+				    			<em class="divi">|</em>
+				    			<span class="goods-salesCount">
+				    				판매량( <em class="text-muted font-weight-bold">${salesCount}</em> 권)
+				    			</span>
 							</div>
 						</div>
 						<div class="book-info-bot">

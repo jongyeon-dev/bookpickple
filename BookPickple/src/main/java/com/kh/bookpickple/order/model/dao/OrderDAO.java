@@ -20,4 +20,6 @@ public interface OrderDAO {
 	List<Order> selectOrderDetailList(Order order);
 	
 	int eachBookSalesCount(OrderDetail orderDetail);
+	
+	int oneBookSalesCount(int bookNo);
 }

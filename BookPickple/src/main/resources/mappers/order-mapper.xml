@@ -49,4 +49,10 @@
 		WHERE P.BOOKNO = B.BOOKNO AND P.BOOKNO = #{bookNo}
 	</select>
 	
+	<select id="oneBookSalesCount" parameterType="_int" resultType="_int">
+	   SELECT NVL(SUM(P.QUANTITY), 0)
+		FROM PAYDETAIL P, BOOK B
+		WHERE P.BOOKNO = B.BOOKNO AND P.BOOKNO = #{bookNo}
+	</select>
+	
 </mapper>
