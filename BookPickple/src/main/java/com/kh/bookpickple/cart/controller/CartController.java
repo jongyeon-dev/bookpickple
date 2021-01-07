@@ -3,6 +3,9 @@ package com.kh.bookpickple.cart.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.bookpickple.cart.model.service.CartService;
 import com.kh.bookpickple.cart.model.vo.Cart;
 
-@SessionAttributes("cartMap")
 @Controller
 public class CartController {
 	
@@ -42,14 +44,16 @@ public class CartController {
 	}
 	
 	@RequestMapping("/cart/cartList.do")
-	public String cartList(Cart cart, @RequestParam int userNo, Model model) {
+	public String cartList(Cart cart, @RequestParam int userNo, Model model, HttpServletRequest request) {
 		
 		cart.setUserNo(userNo);
 		
 		Map<String, List> cartMap = cartService.selectCartList(cart);
 		
-		System.out.println("cartMap:::::::::::::" + cartMap);
-	
+		// @SessionAttributes로 담으면 다른 계정에 카트 기록이 남아있어서 이렇게 담음
+		HttpSession session=request.getSession();
+		session.setAttribute("cartMap", cartMap);
+		
 		model.addAttribute("cartMap", cartMap);
 		
 		return "cart/cartList";

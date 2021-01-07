@@ -158,16 +158,6 @@
 	</div>
 	
 	<div class="text-center mt-5">
-	<!--  
-		<form name="cartOrderForm">
-		
-			<c:forEach items="${bookList}" var="book" varStatus="loop">
-				<input type="text" name="cartOrderValue" id="cartOrderValue${loop.count-1 }" class="cartOrderValue" value=""/>
-			</c:forEach>
-			
-			<button type="button" class="btn mb-1 btn-primary btn-lg" onclick="cartOrder()">주문하기</button>
-		</form>	
-		-->
 		<button type="button" class="btn mb-1 btn-primary btn-lg" onclick="cartOrder()">주문하기</button>
 	</div>
 
@@ -199,9 +189,7 @@ function eachOrder(title, quantity, salesPrice, point, bookNo, bookImage) {
 	 var orderForm = $('<form></form>');
 
 	 orderForm.attr('action', '${contextPath}/order/eachOrder.do');
-
 	 orderForm.attr('method', 'post');
-
 	 orderForm.appendTo('body');
 
 	var userNo = ($('<input type="hidden" value="${member.userNo}" name = userNo>'));
@@ -229,18 +217,12 @@ function cartOrder() {
 	 var cartOrderForm = $('<form></form>');
 
 	 cartOrderForm.attr('action', '${contextPath}/order/cartOrder.do');
-
 	 cartOrderForm.attr('method', 'post');
-
 	 cartOrderForm.appendTo('body');
 
 	 for(var i=0; i < count; i++ ){
-	
         if( $(".check-book")[i].checked == true ){
-           
-	       	 var checkValue = $(".check-book")[i].value; // 수량, 판매가, 포인트, 도서 번호
-	
-	
+	       	var checkValue = $(".check-book")[i].value; // 수량, 판매가, 포인트, 도서 번호
 			var idx = ($('<input type="hidden" value="' + checkValue + '" name = cartOrderValue>'));
 			cartOrderForm .append(idx);
         }
