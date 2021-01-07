@@ -146,4 +146,32 @@
         ORDER BY B.CREDATE DESC, B.BOOKNO DESC
 	</select>
 	
+	<select id="selectAjaxKeywordSeach" parameterType="string" resultType="Book">
+		SELECT B.BOOKNO, B.TITLE, B.WRITER, B.PUBLISHER, B.SALESPRICE, BI.CHANGEFILENAME 
+        FROM BOOK B, BOOKIMAGES BI
+        WHERE B.BOOKNO = BI.BOOKNO AND BI.FILELEVEL= 0 AND B.STATUS = 'ONSALE'
+        AND B.TITLE LIKE '%'|| #{keyword} || '%'
+        ORDER BY B.CREDATE DESC, B.BOOKNO DESC
+       
+	</select>
+	
+	<select id="selectBookSearchList" parameterType="string" resultType="Book">
+		SELECT ROWNUM, A.*
+         FROM (SELECT B.*, BI.CHANGEFILENAME 
+                FROM BOOK B, BOOKIMAGES BI
+                WHERE B.BOOKNO = BI.BOOKNO AND BI.FILELEVEL= 0 AND B.STATUS = 'ONSALE'
+                AND B.TITLE LIKE '%'|| #{keyword} || '%'
+                ORDER BY B.CREDATE DESC, B.BOOKNO DESC) A
+	</select>
+	
+	<select id="selectSearchBookTotalContents" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM (
+			SELECT B.*, BI.CHANGEFILENAME 
+	        FROM BOOK B, BOOKIMAGES BI
+	        WHERE B.BOOKNO = BI.BOOKNO AND BI.FILELEVEL= 0 AND B.STATUS = 'ONSALE'
+	        AND B.TITLE LIKE '%'|| #{keyword} || '%'
+	        ORDER BY B.CREDATE DESC, B.BOOKNO DESC
+		)
+	</select>
+	
 </mapper>

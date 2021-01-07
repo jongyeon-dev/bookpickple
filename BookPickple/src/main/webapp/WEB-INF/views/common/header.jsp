@@ -2,9 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 
-
-<body>
-	
     <div class="nav-header">
         <div class="brand-logo">
             <a href="${contextPath}/">
@@ -22,16 +19,20 @@
             </div>
             <div class="header-left">
                 <div class="input-group icons">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
-                    </div>
-                    <input type="search" class="form-control" placeholder="Search" aria-label="Search">
-                    <div class="drop-down   d-md-none">
-						<form action="#">
-							<input type="text" class="form-control" placeholder="Search">
-						</form>
-                    </div>
+                	<form name="searchForm" action="${contextPath}/book/searchBookList.do" style="display: inline-flex; align-items: center;">
+						<input type="text" name="keyword" id="keyword" class="form-control" placeholder="도서명 검색" onkeyup="searchKeyword()" autocomplete="off">
+						<button type="submit" name="search" class="btn mb-1 btn-flat btn-outline-primary ml-3 btn-sm">검색</button>
+					</form>
                 </div>
+                <div id="quickSearch">
+                	<div class="result">
+				        <table class="searchTable">
+				        	<tbody id="searchTbody">
+				        	</tbody>
+				        </table>
+			        </div>
+			   </div>
+                
             </div>
             <div class="header-right">
                 <ul class="clearfix">
@@ -168,5 +169,61 @@
         </div>
       </div>
            
-</body>
-</html>
+<script>
+$(function(){
+	$("#quickSearch").css("display", "none");
+});
+var continueSearch = true;
+
+function searchKeyword() {
+
+	if (window.event.keyCode == 13) {
+    	$("#searchForm").submit();
+    }
+    
+	if(continueSearch == false) return;
+	
+	var keyword = $("#keyword").val();
+	if(keyword == "" || keyword == null) {
+		$("#quickSearch").css("display", "none");
+	} else {
+		$.ajax({
+			type : "get",
+			async : true,
+			url : "${contextPath}/book/ajaxKeywordSearch.do",
+			data : {keyword: keyword},
+			success : function(data, textStatus) {
+			    var keywordInfo = JSON.parse(data);
+				displayResult(keywordInfo);
+			},
+			error: function(jqxhr, textStatus, errorThrown){
+                console.log("도서 검색 처리 실패");
+                //에러 로그
+                console.log(jqxhr);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+		}); 
+	}
+}
+
+function displayResult(keywordInfo){
+	var count = keywordInfo.keyword.length;
+	if(count > 0) {
+	    var html = '';
+	    for(var i in keywordInfo.keyword){
+	    	html += "<tr><td class='pb-1' style='width: 50px;'>";
+	    	html += "<a href=\"${contextPath}/book/detailBookView.do?bookNo="+keywordInfo.keyword[i].bookNo+"\">";
+	    	html += "<img src=\"${contextPath}/resources/bookFileRepo/"+keywordInfo.keyword[i].bookNo+"/"+keywordInfo.keyword[i].changeFileName+"\" width='40px' class='pr-1'></a></td>";
+	    	html += "<td class='pb-2'><a href=\"${contextPath}/book/detailBookView.do?bookNo="+keywordInfo.keyword[i].bookNo+"\" class='font-weight-bold'>"+keywordInfo.keyword[i].title+"</a>";
+	    	html += "<p class='mb-0'>"+keywordInfo.keyword[i].writer+" 저 | " + keywordInfo.keyword[i].publisher +"</p>";
+	    	html += "<span>"+keywordInfo.keyword[i].salesPrice+"원</span>";
+		    html += "</td></tr>";
+	    }
+	   var listView = document.getElementById("searchTbody");
+	    listView.innerHTML = html;
+	    $("#quickSearch").css("display", "block");
+	}
+}
+	
+</script>

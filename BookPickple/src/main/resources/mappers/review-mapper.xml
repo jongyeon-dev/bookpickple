@@ -48,7 +48,7 @@
 	</select>
 	
 	<select id="oneBookAvgRating" parameterType="_int" resultType="_double">
-		SELECT ROUND(AVG(RATING), 1) FROM REVIEW WHERE BOOKNO = #{bookNo}
+		SELECT NVL(ROUND(AVG(RATING), 1), 0) FROM REVIEW WHERE BOOKNO = #{bookNo}
 	</select>
 	
 	<select id="oneBookReviewCount" parameterType="_int" resultType="_int">

@@ -58,4 +58,20 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDAO.selectQuickBook(bookNo);
 	}
 
+	@Override
+	public List<String> selectAjaxKeywordSeach(String keyword) {
+		List<String> ajaxKeywordSearch = goodsDAO.selectAjaxKeywordSeach(keyword);
+		return ajaxKeywordSearch;
+	}
+
+	@Override
+	public List<Map<String, String>> selectSearchBookList(int cPage, int numPerPage, String keyword) {
+		return goodsDAO.selectSearchBookList(cPage, numPerPage, keyword);
+	}
+
+	@Override
+	public int selectSearchBookTotalContents(String keyword) {
+		return goodsDAO.selectSearchBookTotalContents(keyword);
+	}
+
 }

@@ -92,4 +92,21 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return sqlSession.selectOne("bookMapper.selectOneQuickList", bookNo);
 	}
 
+	@Override
+	public List<String> selectAjaxKeywordSeach(String keyword) {
+		List<String> ajaxKeywordSearch = sqlSession.selectList("bookMapper.selectAjaxKeywordSeach", keyword);
+		return ajaxKeywordSearch;
+	}
+
+	@Override
+	public List<Map<String, String>> selectSearchBookList(int cPage, int numPerPage, String keyword) {
+		RowBounds rows = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("bookMapper.selectBookSearchList", keyword, rows);
+	}
+
+	@Override
+	public int selectSearchBookTotalContents(String keyword) {
+		return sqlSession.selectOne("bookMapper.selectSearchBookTotalContents", keyword);
+	}
+
 }

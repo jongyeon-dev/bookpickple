@@ -207,8 +207,31 @@ a:hover { text-decoration: none; }
 .block-slider .caption-group .primary{
 	color: #1bd172;
 }
-.block-slider .caption-group .caption{
 
+/*-------------------------
+[ search-header ]
+---------------------------*/
+#quickSearch {
+	width: 400px;
+    background: #fff;
+    border: 2px solid #7571f9;
+    clear: left;
+    text-align: left;
+    position: absolute;
+    left: 20px;
+    top: 63px;
+}
+
+#quickSearch .result {
+	float: left;
+    position: relative;
+}
+
+#quickSearch table.searchTable {
+    height: 200px;
+    border-collapse: collapse;
+    margin: 15px 0 10px 15px;
+    font-size: 12px;
 }
 
 /*-------------------------

@@ -41,6 +41,7 @@ font-size: 16px !important;
 							</div>
 							<div class="book-selling">
 								<select class="rating" name="rating" autocomplete="off">
+									<option ${ 0.0 == eachReviewList[loop.count-1].avg ? 'selected':'' } value=""></option>
 									<option ${ 0 < avgRating ? 'selected':'' }>1</option>
 									<option ${ 1 < avgRating ? 'selected':'' }>2</option>
 									<option ${ 2 < avgRating ? 'selected':'' }>3</option>
@@ -161,32 +162,40 @@ font-size: 16px !important;
 				<div id="reviewArea" class="review mt-5" style="background: #F3F3F9; padding: 30px">
 					<h4 class="font-weight-bold">회원 리뷰</h4>
 					<div class="media media-reply" style="display:block;">
-						<c:forEach items="${reviewList}" var="review">
-                         <div class="media-body mb-3" style="background: #fff;">
-                             <div class="d-sm-flex justify-content-between mb-2">
-                                 <h5 class="mb-sm-0" style="display: flex;">${review.userId }
-                                 	<small class="text-muted ml-3">${review.creDate}</small> 
-                                 	<em class="divi" style="margin: 4px -5px 0 12px;">|</em>
-                                 	<small class="text-muted ml-3 mr-1">평점 : </small>
-									<select class="rating" name="rating" autocomplete="off">
-										<option ${ review.rating == 1 ? 'selected':'' }>1</option>
-										<option ${ review.rating == 2 ? 'selected':'' }>2</option>
-										<option ${ review.rating == 3 ? 'selected':'' }>3</option>
-										<option ${ review.rating == 4 ? 'selected':'' }>4</option>
-										<option ${ review.rating == 5 ? 'selected':'' }>5</option>
-									</select>
-									<span class="your-rating">
-										<span class="value text-muted ml-1" style="font-size: 12px;">${review.rating}</span>
-									</span>
-                                 </h5>
-                             </div>
-                             <p>${fn:replace(review.content,crcn,br)}</p>
-                        </div>
-                        </c:forEach>
+						<c:choose>
+							<c:when test="${ empty reviewList }">
+								<p class="text-center">등록된 리뷰가 없습니다.<br>첫번째 리뷰어가 되어주세요!</p>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${reviewList}" var="review">
+		                         <div class="media-body mb-3" style="background: #fff;">
+		                             <div class="d-sm-flex justify-content-between mb-2">
+		                                 <h5 class="mb-sm-0" style="display: flex;">${review.userId }
+		                                 	<small class="text-muted ml-3">${review.creDate}</small> 
+		                                 	<em class="divi" style="margin: 4px -5px 0 12px;">|</em>
+		                                 	<small class="text-muted ml-3 mr-1">평점 : </small>
+											<select class="rating" name="rating" autocomplete="off">
+												<option ${ review.rating == 1 ? 'selected':'' }>1</option>
+												<option ${ review.rating == 2 ? 'selected':'' }>2</option>
+												<option ${ review.rating == 3 ? 'selected':'' }>3</option>
+												<option ${ review.rating == 4 ? 'selected':'' }>4</option>
+												<option ${ review.rating == 5 ? 'selected':'' }>5</option>
+											</select>
+											<span class="your-rating">
+												<span class="value text-muted ml-1" style="font-size: 12px;">${review.rating}</span>
+											</span>
+		                                 </h5>
+		                             </div>
+		                             <p>${fn:replace(review.content,crcn,br)}</p>
+		                        </div>
+		                        </c:forEach>
+		                          <div class="pt-3 pb-1">
+									<c:out value="${pageBar}" escapeXml="false"/>
+								</div>
+							</c:otherwise>
+						</c:choose>
                     </div>
-                    <div class="pt-3 pb-1">
-						<c:out value="${pageBar}" escapeXml="false"/>
-					</div>
+         
 				</div>
 				
 			</div>

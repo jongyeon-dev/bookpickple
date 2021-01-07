@@ -23,4 +23,10 @@ public interface GoodsService {
 	List<BookImages> selectOneBookImagesList(int bookNo);
 	
 	Book selectQuickBook(int BookNo);
+	
+	List<String> selectAjaxKeywordSeach(String keyword);
+	
+	List<Map<String, String>> selectSearchBookList(int cPage, int numPerPage, String keyword);
+	
+	int selectSearchBookTotalContents(String keyword);
 }
