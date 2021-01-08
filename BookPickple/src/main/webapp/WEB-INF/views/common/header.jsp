@@ -155,7 +155,7 @@
 	                    </a>
 	                </li>
 	                <li>
-	                    <a class="has-arrow" href="#" aria-expanded="false">
+	                    <a class="has-arrow" href="${contextPath}/mail/sendMailView.do" aria-expanded="false">
 	                        <i class="icon-envelope-letter menu-icon"></i><span class="nav-text">EDM 전송</span>
 	                    </a>
 	                </li>

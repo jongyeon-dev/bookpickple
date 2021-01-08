@@ -10,4 +10,8 @@
 	<select id="selectOneMember" parameterType="_int" resultType="Member">
 		SELECT * FROM MEMBER WHERE USERNO = #{userNo}
 	</select>
+	
+	<select id="EmailReceiverList" resultType="string">
+		SELECT EMAIL FROM MEMBER WHERE EMAILSTATUS = 'Y'
+	</select>
 </mapper>

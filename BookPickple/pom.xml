@@ -260,7 +260,26 @@
          <groupId>net.coobird</groupId> 
          <artifactId>thumbnailator</artifactId> 
          <version>0.4.8</version> 
-        </dependency> 
+        </dependency>
+        
+        <!-- 메일 -->
+        <!--  스프링 4 이상 사용 시 추가 -->
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<!-- 자바 메일 관련 라이브러리 -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.5.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.3</version>
+		</dependency>
 				 
 	</dependencies>
     <build>

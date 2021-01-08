@@ -56,4 +56,9 @@
        <put-attribute name="body" value="/WEB-INF/views/manager/delivery/deliveryDetail.jsp" />
     </definition>
     
+    <definition name="manager/mail/sendMail" extends="managerLayout">
+       <put-attribute name="title" value="EDM 전송 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/manager/mail/sendMail.jsp" />
+    </definition>
+    
 </tiles-definitions>
