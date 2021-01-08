@@ -41,9 +41,10 @@
 	
 	<update id="deleteMember" parameterType="_int">
 		UPDATE MEMBER SET
+			EMAILSTATUS = 'N',
 			STATUS = 'N',
 			DELDATE = SYSDATE
-		WHERE USERNo = #{userNo}
+		WHERE USERNO = #{userNo}
 	</update>
 	
 </mapper>

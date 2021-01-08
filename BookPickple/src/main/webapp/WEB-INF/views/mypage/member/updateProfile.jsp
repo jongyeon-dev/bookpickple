@@ -10,126 +10,126 @@
 </head>
 <body>
 
-	
+<div class="col-lg-8 col-xl-9">
+  	<div class="row page-titles">
+	    <div class="col">
+	        <ol class="breadcrumb">
+	            <li class="breadcrumb-item"><a href="javascript:void(0)">홈</a></li>
+	            <li class="breadcrumb-item"><a href="javascript:void(0)">프로필</a></li>
+	            <li class="breadcrumb-item"><a href="javascript:void(0)">프로필 조회</a></li>
+	            <li class="breadcrumb-item"><a href="javascript:void(0)" class="text-primary">프로필 수정</a></li>
+	        </ol>
+	    </div>
+	</div>
+         <div class="card">
+             <div class="card-body">
+                 <form id="updateMemberForm" class="mt-3 mb-3" method="post" name="updateMemberForm"
+							action="memberUpdateEnd.do">
+                      <div class="form-group row">
+                      	<input type="hidden" name="userNo" id="userNo" value="${ member.userNo }" />
+	                	<label class="col-sm-3 col-form-label" for="userId">아이디</label>
+	                 <div class="col-sm-9">
+	                      <input type="text" class="form-control" name="userId" id="userId" value="${ member.userId }" readonly>
+	                 </div>
+	                </div>
+	                <div class="form-group row">
+	                	<label class="col-sm-3 col-form-label" for="password">비밀번호<span class="text-danger">*</span></label>
+	                 <div class="col-sm-9">
+	                      <input type="password" class="form-control" name="password" id="password" maxlength="15">
+	                      <small id="infoPwd" class="form-text text-muted">영대문자, 숫자, 특수문자를 조합하여 8~15자를 입력해주세요.</small>
+	                      <small id="okPwd" class="form-text text-success" style="display:none;">사용 가능한 비밀번호입니다.</small>
+	                      <small id="validatePwd" class="form-text text-danger" style="display:none;">영대문자, 숫자, 특수문자를 조합하여 8~15자를 입력해주세요.</small>
+	                      <small id="checkPwdSpace" class="form-text text-danger" style="display:none;">공백은 입력하실 수 없습니다.</small>
+	                      <small id="reqPwd" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
+	                 </div>
+	                </div>
+	                <div class="form-group row">
+	                	<label class="col-sm-3 col-form-label" for="pwdCheck">비밀번호 확인<span class="text-danger">*</span></label>
+	                 <div class="col-sm-9">
+	                      <input type="password" class="form-control" name="pwdCheck" id="pwdCheck" maxlength="15">
+	                      <small id="okPwdCheck" class="form-text text-success" style="display:none;">비밀번호가 일치합니다.</small>
+	                      <small id="validatePwdCheck" class="form-text text-danger" style="display:none;">입력하신 비밀번호와 일치하지 않습니다.</small>
+	                      <small id="reqPwdCheck" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
+	                 </div>
+	                </div>
+	                <div class="form-group row">
+	                	<label class="col-sm-3 col-form-label" for="userName">이름</label>
+	                 <div class="col-sm-9">
+	                      <input type="text" class="form-control" name="userName" id="userName" value="${ member.userName}" readonly>
+	                 </div>
+	                </div>
+	                <div class="form-group row">
+	                	<label class="col-sm-3 col-form-label">성별<span class="text-danger">*</span></label>
+	                 <div class="col-sm-9">
+	                      <label class="radio-inline mr-3 col-form-label">
+	                       	<input type="radio" name="gender" id="genderM" value="M" ${ member.gender == 'M' ? 'checked' : ''} onclick="return(false);"> 남
+	                       </label>
+	                       <label class="radio-inline mr-3 col-form-label">
+	                       	<input type="radio" name="gender" id="genderF" value="F" ${ member.gender == 'F' ? 'checked' : ''} onclick="return(false);"> 여
+	                       </label>
+	                 </div>
+	                </div>
+	                <div class="form-group row">
+	                	<label class="col-sm-3 col-form-label" for="tel">연락처<span class="text-danger">*</span></label>
+	                 <div class="col-sm-9">
+	                      <input type="tel" class="form-control" name="tel" id="tel" placeholder="ex)010-1234-5678" value="${ member.tel }">
+	                      <small id="validateTel" class="form-text text-danger" style="display:none;">입력하신 연락처 형식이 올바르지 않습니다.</small>
+	                      <small id="reqTel" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
+	                 </div>
+	                </div>
+	                <div class="form-group row">
+	                	<label class="col-sm-3 col-form-label" for="birth">생년월일</label>
+	                 <div class="col-sm-9">
+	                      <input type="text" class="form-control" name="birth" id="birth" value="${ member.birth}" readonly>
+	                 </div>
+	                </div>
+	                <div class="form-group row">
+	                	<label class="col-sm-3 col-form-label" for="email">이메일<span class="text-danger">*</span></label>
+	                 <div class="col-sm-9">
+	                      <input type="email" class="form-control" name="email" id="email" value="${ member.email }">
+	                      <small id="infoEmail" class="form-text text-muted">비밀번호 찾기 시에 사용할 이메일을 입력해주세요.</small>
+	                      <small id="okEmail" class="form-text text-success" style="display:none;">사용 가능한 이메일입니다.</small>
+	                      <small id="duplicateEmail" class="form-text text-danger" style="display:none;">이미 사용중인 이메일입니다.</small>
+	                      <small id="validateEmail" class="form-text text-danger" style="display:none;">입력하신 이메일 형식이 올바르지 않습니다.</small>
+	                      <small id="reqEmail" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
+	                       <input type="hidden" name="duplicateEmailCheck" id="duplicateEmailCheck" value="0"/>
+	                  </div>
+	                 </div>
+	                 <div class="form-group row">
+	                 	<label class="col-sm-3 col-form-label">이메일 수신여부<span class="text-danger">*</span></label>
+	                  <div class="col-sm-9">
+	                      	<label class="radio-inline mr-3 col-form-label">
+	                        	<input type="radio" name="emailStatus" id="emailY" value="Y" checked> 수신
+	                        </label>
+	                        <label class="radio-inline col-form-label">
+	                        	<input type="radio" name="emailStatus" id="emailN" value="N"> 미수신
+	                        </label>
+	                  </div>
+	                 </div>
+	                 <div class="form-group row">
+	                 	<label class="col-sm-3 col-form-label" for="address">주소<span class="text-danger">*</span></label>
+	                  <div class="col-sm-7">
+	                      	<input type="text" name="address" id="zipCode" class="form-control" readonly/>
+							<input type="text" name="address" id="address1" class="form-control" readonly/>
+							<input type="text" name="address" id="address2" class="form-control" placeholder="상세 주소 입력"/>
+							<input type="hidden" name="dbAddress" id="dbAddress" value="${member.address}" />
+							<small id="reqAddr" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
+	                 </div>
+	                 <div class="col-sm-2">
+	                        <button type="button" class="btn btn-flat btn-outline-secondary" onclick="searchAddr()">검색</button>
+	                    </div>
+	                </div>
+	                <div class="mt-5 text-center">
+	                	<button type="button" class="btn btn-primary" onclick="checkForm()">수정 하기</button>
+	                	<button type="button" class="btn btn-outline-secondary"
+	                			onclick="location.href='${contextPath}/member/memberProfileView.do?userNo=${member.userNo}'">프로필로 돌아가기</button>
+	             	</div>
+	             </form>
+	        </div>
+	    </div>
+	</div>
     
-            <div class="col-lg-8 col-xl-9">
-            	<div class="row page-titles">
-			        <div class="col">
-			            <ol class="breadcrumb">
-			                <li class="breadcrumb-item"><a href="javascript:void(0)">홈</a></li>
-			                <li class="breadcrumb-item"><a href="javascript:void(0)">프로필</a></li>
-			                <li class="breadcrumb-item"><a href="javascript:void(0)">프로필 조회</a></li>
-			                <li class="breadcrumb-item"><a href="javascript:void(0)" class="text-primary">프로필 수정</a></li>
-			            </ol>
-			        </div>
-			    </div>
-                <div class="card">
-                    <div class="card-body">
-                        <form id="updateMemberForm" class="mt-3 mb-3" method="post" name="updateMemberForm"
-								action="memberUpdateEnd.do">
-                             <div class="form-group row">
-                             	<input type="hidden" name="userNo" id="userNo" value="${ member.userNo }" />
-                             	<label class="col-sm-3 col-form-label" for="userId">아이디</label>
-	                             <div class="col-sm-9">
-	                                  <input type="text" class="form-control" name="userId" id="userId" value="${ member.userId }" readonly>
-	                             </div>
-                             </div>
-                             <div class="form-group row">
-                             	<label class="col-sm-3 col-form-label" for="password">비밀번호<span class="text-danger">*</span></label>
-	                             <div class="col-sm-9">
-	                                  <input type="password" class="form-control" name="password" id="password" maxlength="15">
-	                                  <small id="infoPwd" class="form-text text-muted">영대문자, 숫자, 특수문자를 조합하여 8~15자를 입력해주세요.</small>
-	                                  <small id="okPwd" class="form-text text-success" style="display:none;">사용 가능한 비밀번호입니다.</small>
-	                                  <small id="validatePwd" class="form-text text-danger" style="display:none;">영대문자, 숫자, 특수문자를 조합하여 8~15자를 입력해주세요.</small>
-	                                  <small id="checkPwdSpace" class="form-text text-danger" style="display:none;">공백은 입력하실 수 없습니다.</small>
-	                                  <small id="reqPwd" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
-	                             </div>
-                             </div>
-                             <div class="form-group row">
-                             	<label class="col-sm-3 col-form-label" for="pwdCheck">비밀번호 확인<span class="text-danger">*</span></label>
-	                             <div class="col-sm-9">
-	                                  <input type="password" class="form-control" name="pwdCheck" id="pwdCheck" maxlength="15">
-	                                  <small id="okPwdCheck" class="form-text text-success" style="display:none;">비밀번호가 일치합니다.</small>
-	                                  <small id="validatePwdCheck" class="form-text text-danger" style="display:none;">입력하신 비밀번호와 일치하지 않습니다.</small>
-	                                  <small id="reqPwdCheck" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
-	                             </div>
-                             </div>
-                             <div class="form-group row">
-                             	<label class="col-sm-3 col-form-label" for="userName">이름</label>
-	                             <div class="col-sm-9">
-	                                  <input type="text" class="form-control" name="userName" id="userName" value="${ member.userName}" readonly>
-	                             </div>
-                             </div>
-                             <div class="form-group row">
-                             	<label class="col-sm-3 col-form-label">성별<span class="text-danger">*</span></label>
-	                             <div class="col-sm-9">
-	                                  <label class="radio-inline mr-3 col-form-label">
-                                    	<input type="radio" name="gender" id="genderM" value="M" ${ member.gender == 'M' ? 'checked' : ''} onclick="return(false);"> 남
-                                    </label>
-                                    <label class="radio-inline mr-3 col-form-label">
-                                    	<input type="radio" name="gender" id="genderF" value="F" ${ member.gender == 'F' ? 'checked' : ''} onclick="return(false);"> 여
-                                    </label>
-	                             </div>
-                             </div>
-                             <div class="form-group row">
-                             	<label class="col-sm-3 col-form-label" for="tel">연락처<span class="text-danger">*</span></label>
-	                             <div class="col-sm-9">
-	                                  <input type="tel" class="form-control" name="tel" id="tel" placeholder="ex)010-1234-5678" value="${ member.tel }">
-	                                  <small id="validateTel" class="form-text text-danger" style="display:none;">입력하신 연락처 형식이 올바르지 않습니다.</small>
-	                                  <small id="reqTel" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
-	                             </div>
-                             </div>
-                             <div class="form-group row">
-                             	<label class="col-sm-3 col-form-label" for="birth">생년월일</label>
-	                             <div class="col-sm-9">
-	                                  <input type="text" class="form-control" name="birth" id="birth" value="${ member.birth}" readonly>
-	                             </div>
-                             </div>
-                             <div class="form-group row">
-                             	<label class="col-sm-3 col-form-label" for="email">이메일<span class="text-danger">*</span></label>
-	                             <div class="col-sm-9">
-	                                  <input type="email" class="form-control" name="email" id="email" value="${ member.email }">
-	                                  <small id="infoEmail" class="form-text text-muted">비밀번호 찾기 시에 사용할 이메일을 입력해주세요.</small>
-	                                  <small id="okEmail" class="form-text text-success" style="display:none;">사용 가능한 이메일입니다.</small>
-	                                  <small id="duplicateEmail" class="form-text text-danger" style="display:none;">이미 사용중인 이메일입니다.</small>
-	                                  <small id="validateEmail" class="form-text text-danger" style="display:none;">입력하신 이메일 형식이 올바르지 않습니다.</small>
-	                                  <small id="reqEmail" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
-	                                  <input type="hidden" name="duplicateEmailCheck" id="duplicateEmailCheck" value="0"/>
-	                             </div>
-                             </div>
-                             <div class="form-group row">
-                             	<label class="col-sm-3 col-form-label">이메일 수신여부<span class="text-danger">*</span></label>
-	                             <div class="col-sm-9">
-                                  	<label class="radio-inline mr-3 col-form-label">
-                                    	<input type="radio" name="emailStatus" id="emailY" value="Y" checked> 수신
-                                    </label>
-                                    <label class="radio-inline col-form-label">
-                                    	<input type="radio" name="emailStatus" id="emailN" value="N"> 미수신
-                                    </label>
-	                             </div>
-                             </div>
-                             <div class="form-group row">
-                             	<label class="col-sm-3 col-form-label" for="address">주소<span class="text-danger">*</span></label>
-	                             <div class="col-sm-7">
-                                  	<input type="text" name="address" id="zipCode" class="form-control" readonly/>
-		    						<input type="text" name="address" id="address1" class="form-control" readonly/>
-		    						<input type="text" name="address" id="address2" class="form-control" placeholder="상세 주소 입력"/>
-		    						<input type="hidden" name="dbAddress" id="dbAddress" value="${member.address}" />
-			   						<small id="reqAddr" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
-	                             </div>
-	                             <div class="col-sm-2">
-                                     <button type="button" class="btn btn-flat btn-outline-secondary" onclick="searchAddr()">검색</button>
-                                 </div>
-                             </div>
-                             <div class="mt-5 text-center">
-                             	<button type="button" class="btn btn-primary" onclick="checkForm()">수정 하기</button>
-                             	<button type="button" class="btn btn-outline-secondary"
-                             			onclick="location.href='${contextPath}/member/memberProfileView.do?userNo=${member.userNo}'">프로필로 돌아가기</button>
-                         	</div>
-                         </form>
-                    </div>
-                </div>
-            </div>
+           
     <script>
     	$(function() {
 			var dbAddr = $("#dbAddress").val();

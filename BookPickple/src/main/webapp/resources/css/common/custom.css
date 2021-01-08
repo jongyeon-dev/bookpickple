@@ -376,10 +376,14 @@ a:hover { text-decoration: none; }
 ---------------------------*/
 
 .owl-item .item img {
-	width: 125px;
+    width: 125px;
+    display: block;
+    width: 150px;
+    height: 200px;
+    margin: 0 20px;
 }
 .book-info {
-	margin: 16px 0;
+    margin: 16px 20px;
 }
 
 .book-info .book-title {

@@ -157,7 +157,7 @@
     			<ul>
     				<c:forEach items="${mainBooksMap.bestBooksList}" var="bestList">
 	    				<li class="bestseller-list">
-							<a href="${contextPath}/resources/bookFileRepo/${bestList.bookNo}/${bestList.changeFileName}">
+							<a href="${contextPath}/book/detailBookView.do?bookNo=${bestList.bookNo}">
 								<img src="${contextPath}/resources/bookFileRepo/${bestList.bookNo}/${bestList.changeFileName}" alt="${bestList.title}" width="50">
 							</a>
 							<div class="bestseller-content">

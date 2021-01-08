@@ -20,17 +20,32 @@
      <div class="card">
          <div class="card-body">
              <div class="wrap-profile">
-                 <div class="form-group row">
+             	<div class="form-group row">
+                 	<label class="col-sm-3 col-form-label text-primary font-weight-bold">등급</label>
+	                   <div class="col-sm-7">
+		                    <c:if test="${member.gradeType == 1}"> <p class="mb-0"><span class="label label-light">일반</span></p></c:if>
+						   	<c:if test="${member.gradeType == 2}"> <p class="mb-0"><span class="label label-primary">실버</span></p></c:if>
+						   	<c:if test="${member.gradeType == 3}"> <p class="mb-0"><span class="label label-warning">골드</span></p></c:if>
+						   	<c:if test="${member.gradeType == 4}"> <p class="mb-0"><span class="label label-secondary">프리미엄</span></p></c:if>
+	                   </div>
+                  </div>
+                  <div class="form-group row">
                  	<label class="col-sm-3 col-form-label text-primary font-weight-bold">아이디</label>
 	                   <div class="col-sm-7">
 	                        <p class="mb-0">${ member.userId }</p>
 	                   </div>
                   </div>
-                  
                   <div class="form-group row">
 	                  	<label class="col-sm-3 col-form-label text-primary font-weight-bold">이름</label>
 	                   <div class="col-sm-7">
 	                   	<p class="mb-0">${ member.userName }</p>
+	                   </div>
+                  </div>
+                 <div class="form-group row">
+                 	<label class="col-sm-3 col-form-label text-primary font-weight-bold">포인트</label>
+	                   <div class="col-sm-7">
+	                   		<fmt:formatNumber  value="${ member.point }" type="number" var="memberPoint" />
+	                        <p class="mb-0">${ memberPoint }원</p>
 	                   </div>
                   </div>
                   <div class="form-group row">
@@ -60,7 +75,12 @@
                   <div class="form-group row">
 	                  	<label class="col-sm-3 col-form-label text-primary font-weight-bold">이메일 수신여부</label>
 	                   <div class="col-sm-7">
-	                   		<p class="mb-0">${ member.emailStatus }</p>
+	                   	<c:if test="${ member.emailStatus == 'Y'}">
+	                   		<p class="mb-0">수신</p>
+	                   	</c:if>
+	                   	<c:if test="${ member.emailStatus == 'N'}">
+	                   		<p class="mb-0">미수신</p>
+	                   	</c:if>
 	                  </div>
                   </div>
                   <div class="form-group row">
