@@ -28,6 +28,14 @@
             <div class="form-input-content">
                 <div class="card mb-0">
                     <div class="card-body pt-2 pb-5 pt-5 pl-5 wrap-detailBook">
+                    	<div class="form-group row">
+                           	<label class="col-sm-3 col-form-label text-primary font-weight-bold">상태</label>
+                             <div class="col-sm-7">
+                             	<c:if test="${book.status == 'ONSALE'}"><span class="label label-success">판매중</span></c:if>
+							  	<c:if test="${book.status == 'SOLDOUT'}"><span class="label label-danger">품절</span></c:if>
+							  	<c:if test="${book.status == 'OUTOFPRINT'}"><span class="label label-light">절판</span></c:if>
+                             </div>
+                            </div>
                             <div class="form-group row">
                              	<label class="col-sm-3 col-form-label text-primary font-weight-bold">도서 분류</label>
 	                             <div class="col-sm-7">
@@ -66,31 +74,49 @@
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label text-primary font-weight-bold">정가</label>
 	                             <div class="col-sm-7">
-	                            	 <p class="mb-0" id="publishedDate">${ book.price }</p>
+	                             	<fmt:formatNumber  value="${ book.price }" type="number" var="price" />
+	                            	 <p class="mb-0">${ price }원</p>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label text-primary font-weight-bold">판매가</label>
 	                              <div class="col-sm-7">
-	                              	<p class="mb-0" id="publishedDate">${ book.salesPrice }</p>
+	                              	<fmt:formatNumber  value="${ book.salesPrice }" type="number" var="salesPrice" />
+	                              	<p class="mb-0">${ salesPrice }원</p>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label text-primary font-weight-bold">포인트</label>
 	                             <div class="col-sm-7">
-	                             	<p class="mb-0" id="publishedDate">${ book.point }</p>
+	                             	<fmt:formatNumber  value="${ book.point }" type="number" var="point" />
+	                             	<p class="mb-0">${ point }원</p>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label text-primary font-weight-bold">ISBN</label>
 	                             <div class="col-sm-5">
-	                             	<p class="mb-0" id="publishedDate">${ book.isbn }</p>
+	                             	<p class="mb-0">${ book.isbn }</p>
+	                             </div>
+                             </div>
+                             <div class="form-group row">
+                             	<label class="col-sm-3 col-form-label text-primary font-weight-bold">입고 수량</label>
+	                             <div class="col-sm-5">
+	                             	<fmt:formatNumber  value="${ book.creStock }" type="number" var="creStock" />
+	                             	<p class="mb-0">${ creStock }개</p>
+	                             </div>
+                             </div>
+                             <div class="form-group row">
+                             	<label class="col-sm-3 col-form-label text-primary font-weight-bold">재고 수량</label>
+	                             <div class="col-sm-5">
+	                             	<fmt:formatNumber  value="${ book.stock }" type="number" var="stock" />
+	                             	<p class="mb-0">${ stock }개</p>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label text-primary font-weight-bold">배송비</label>
 	                             <div class="col-sm-7">
-	                             	<p class="mb-0" id="publishedDate">${ book.deliveryPrice }</p>
+	                             	<fmt:formatNumber  value="${ book.deliveryPrice }" type="number" var="deliveryPrice" />
+	                             	<p class="mb-0">${ deliveryPrice }원</p>
 	                             </div>
                              </div>
 
@@ -124,14 +150,6 @@
                                      </div>
                                  </div>
                             </div>
-                            <div class="form-group row">
-                             	<label class="col-sm-3 col-form-label text-primary font-weight-bold">상태</label>
-	                             <div class="col-sm-7">
-	                             	<c:if test="${book.status == 'ONSALE'}"><p class="mb-0">판매중</p></c:if>
-								  	<c:if test="${book.status == 'SOLDOUT'}"><p class="mb-0">품절</p></c:if>
-								  	<c:if test="${book.status == 'OUTOFPRINT'}"><p class="mb-0">절판</p></c:if>
-	                             </div>
-                             </div>
                             <div class="mt-5 text-center">
 			                  	<button type="submit" class="btn btn-primary"  onclick="location.href='${contextPath}/manager/bookUpdateView.do?bookNo=${book.bookNo}'">수정하기</button>
 			                  	<button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#deleteBookModal">삭제하기</button>

@@ -35,6 +35,8 @@ public class Book implements Serializable{
 	private String writerIntro;
 	private Date creDate;
 	private String status;
+	private int creStock;
+	private int stock;
 	
 	// 필드 추가
 	private int rownum; // 도서 목록 조회 시 순번

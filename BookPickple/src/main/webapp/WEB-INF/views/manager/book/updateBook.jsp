@@ -89,6 +89,12 @@
 	                             </div>
                              </div>
                              <div class="form-group row">
+                             	<label class="col-sm-3 col-form-label" for="isbn">입고 수량</label>
+	                             <div class="col-sm-5">
+	                                  <input type="text" class="form-control" name="creStock" id="creStock" value="${ book.creStock }" autocomplete="off"/>
+	                             </div>
+                             </div>
+                             <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="deliveryPrice">배송비</label>
 	                             <div class="col-sm-5">
 	                                  <input type="text" class="form-control" name="deliveryPrice" id="deliveryPrice" placeholder="기본 2500원 / 1만원 이상 무료배송" value="${ book.deliveryPrice }" autocomplete="off"/>
@@ -209,6 +215,10 @@
         isbn: {
             required: true
         },
+        creStock: {
+            required: true,
+            digits: true
+        },
         deliveryPrice: {
             required: true,
             digits: true
@@ -251,6 +261,10 @@
          },
          isbn: {
         	 required: "필수 입력 사항입니다."
+         },
+         creStock: {
+        	 required: "필수 입력 사항입니다.",
+             digits: "숫자만 입력하세요."
          },
          deliveryPrice: {
         	 required: "필수 입력 사항입니다.",

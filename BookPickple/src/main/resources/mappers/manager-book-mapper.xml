@@ -7,10 +7,11 @@
 		SELECT * FROM BOOK ORDER BY CREDATE DESC, BOOKNO DESC
 	</select>
 
+	<!-- 처음 도서 추가할 때는 입고수량과 재고수량 같게 -->
 	<insert id="insertBook" parameterType="Book">
 		INSERT INTO BOOK VALUES(
 			SEQ_BOOKNO.NEXTVAL, #{type}, #{title}, #{writer}, #{publisher}, #{price}, #{salesPrice}, #{point}, 
-			TO_DATE(#{publishedDate}, 'RR/MM/DD'), #{isbn}, #{deliveryPrice}, #{bookIntro}, #{writerIntro}, DEFAULT, #{status}
+			TO_DATE(#{publishedDate}, 'RR/MM/DD'), #{isbn}, #{deliveryPrice}, #{bookIntro}, #{writerIntro}, DEFAULT, #{status}, #{creStock}, #{creStock}
 		)
 	</insert>
 	
@@ -32,11 +33,12 @@
 		SELECT * FROM BOOKIMAGES WHERE BOOKNO = #{bookNo}
 	</select>
 	
+	<!-- 입고 수량 업데이트는 트리거 사용 / 같으면 업데이트 안함 -->
 	<update id="updateBook" parameterType="Book">
 		UPDATE BOOK SET
 			TYPE = #{type}, TITLE = #{title}, WRITER = #{writer}, PUBLISHER = #{publisher},
 			PRICE = #{price}, SALESPRICE = #{salesPrice}, POINT = #{point}, PUBLISHEDDATE = TO_DATE(#{publishedDate}, 'RR/MM/DD'), 
-			ISBN = #{isbn}, DELIVERYPRICE = #{deliveryPrice}, BOOKINTRO = #{bookIntro}, WRITERINTRO = #{writerIntro}, STATUS = #{status}
+			ISBN = #{isbn}, DELIVERYPRICE = #{deliveryPrice}, BOOKINTRO = #{bookIntro}, WRITERINTRO = #{writerIntro}, STATUS = #{status}, CRESTOCK = #{creStock}
 		WHERE BOOKNO = #{bookNo}
 	</update>
 	

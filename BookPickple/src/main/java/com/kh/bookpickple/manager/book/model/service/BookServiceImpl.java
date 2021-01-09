@@ -44,7 +44,7 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public Book selectOneBook(int bookNo) {
-		Book book = bookDAO.selectOneBook(bookNo);  //X
+		Book book = bookDAO.selectOneBook(bookNo);
 		return book;
 	}
 	
