@@ -222,14 +222,12 @@ public class MemberController {
 			model.addAttribute("loc", loc);
 			model.addAttribute("msg", msg);
 		} catch (Exception e) {
-			System.out.println("회원 가입 에러 발생");
+			System.out.println("회원 정보 수정 에러 발생");
 			throw new MemberException(e.getMessage());
 		}
 		
 		return "common/msg";
 	}
-	
-	// @RequestMapping("/member/memberUpdateEnd.do")
 	
 	@RequestMapping("/member/memberDelete.do")
 	public String memberDelete(SessionStatus sessionStatus, Model model, Member member) {
@@ -248,5 +246,75 @@ public class MemberController {
 		model.addAttribute("msg", msg);
 		
 		return "common/msg";
+	}
+	
+	@RequestMapping("/member/findIdPwdView.do")
+	public String findIdPwdView() {
+		return "common/findIdPwd";
+	}
+	
+	@RequestMapping("/member/findId.do")
+	@ResponseBody 
+	public String findId(@RequestParam String findIdByEmail) {
+		
+		String userId = memberService.findIdByEmail(findIdByEmail);
+
+		if(userId != null) {
+			return userId;
+		} else {
+			return "failFindId";
+		}
+	};
+	
+	@RequestMapping("/member/findPwd.do")
+	@ResponseBody 
+	public String findPwd(@RequestParam String userId, @RequestParam String email, Member member) {
+		Member m = memberService.isExistMember(member);
+		
+		if(m != null) {
+			String newPwd = getRandomPwd(7);
+			String encryptPassword = bcryptPasswordEncoder.encode(newPwd);
+			member.setPassword(encryptPassword);
+			
+			sendMail(email, newPwd);
+			
+			int result = memberService.updateNewPwd(member);
+			
+			if(result > 0) {
+				return "successNewPwd";
+			} else {
+				return "failNewPwd";
+			}
+		} else {
+			return "nonexistent";
+		}
+	}
+
+	public static String getRandomPwd(int len) {
+      char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+            'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+      };
+      
+      int idx = 0; 
+      
+      StringBuffer sb = new StringBuffer();
+      
+      for (int i = 0; i < len; i++) {
+         idx = (int)(charSet.length * Math.random()); // 36 * 생성된 난수를 Int로 추출
+         sb.append(charSet[idx]);
+      }
+      
+      return sb.toString();
+   }
+	
+	 private void sendMail(String email, String newPwd) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<html><body>");
+		sb.append("<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>");
+		sb.append("<h3>BookPickple에서 임시 비밀번호를 발급하였습니다.</h3>");
+		sb.append("<p>"+ newPwd +"</p>");
+		sb.append("</body></html>");
+		String body = sb.toString();
+		memberService.sendMail(email, "[BookPickple] 임시 비밀번호입니다.", body);
 	}
 }

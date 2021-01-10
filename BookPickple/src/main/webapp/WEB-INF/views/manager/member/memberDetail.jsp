@@ -67,14 +67,19 @@
 							  <tbody>
 							    <tr>
 							      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">등급</th>
-							      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">
+							      <td width="140" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">
 							      	<c:if test="${oneMember.gradeType == 1}"><span class="label label-light">일반</span></c:if>
 								   <c:if test="${oneMember.gradeType == 2}"><span class="label label-primary">실버</span></c:if>
 								   <c:if test="${oneMember.gradeType == 3}"><span class="label label-warning">골드</span></c:if>
 								   <c:if test="${oneMember.gradeType == 4}"><span class="label label-secondary">프리미엄</span></c:if>
 							      </td>
-							      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">적립 포인트</th>
-							      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">
+							      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">총 구매액</th>
+							      <td width="140" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;" class="font-weight-bold text-primary">
+							      	<fmt:formatNumber  value="${oneMember.totalPrice}" type="number" var="totalPrice" />
+							      	${totalPrice}원
+							      </td>
+							      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">보유 포인트</th>
+							      <td width="140" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;" class="font-weight-bold">
 							      	<fmt:formatNumber  value="${oneMember.point}" type="number" var="totalPoint" />
 							      	${totalPoint}원
 							      </td>

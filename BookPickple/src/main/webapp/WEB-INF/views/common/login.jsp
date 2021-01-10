@@ -25,14 +25,14 @@
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="userId">아이디</label>
 	                             <div class="col-sm-9">
-	                                  <input type="text" class="form-control" name="userId" id="userId" maxlength="20">
+	                                  <input type="text" class="form-control" name="userId" id="userId" maxlength="20" autocomplete="off">
 	                                  <small id="reqId" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
 	                             </div>
                              </div>
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="password">비밀번호</label>
 	                             <div class="col-sm-9">
-	                                  <input type="password" class="form-control" name="password" id="password" maxlength="15" onkeyup="enterkey()">
+	                                  <input type="password" class="form-control" name="password" id="password" maxlength="15" onkeyup="enterkey()" autocomplete="off">
 	                                  <small id="reqPwd" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
 	                             </div>
                              </div>
@@ -40,7 +40,7 @@
                          </form>
                              <p class="mt-5 login-form__footer text-center">
                              	<a href="${contextPath}/member/memberJoinView.do" class="text-primary mr-4" style="font-size:12px;">회원가입</a>
-                             	<a href="${contextPath}/member/findIdPwd.do" class="text-primary ml-3" style="font-size:12px;">아이디/비밀번호 찾기</a>
+                             	<a href="${contextPath}/member/findIdPwdView.do" class="text-primary ml-3" style="font-size:12px;">아이디/비밀번호 찾기</a>
                              </p>
                          </div>
                      </div>

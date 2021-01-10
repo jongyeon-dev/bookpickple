@@ -48,4 +48,16 @@
 		WHERE USERNO = #{userNo}
 	</update>
 	
+	<select id="findIdByEmail" parameterType="string" resultType="string">
+		SELECT USERID FROM MEMBER WHERE EMAIL = #{email}
+	</select>
+	
+	<select id="isExistMember" parameterType="string" resultType="Member">
+		SELECT USERID, EMAIL FROM MEMBER WHERE USERID = #{userId} AND EMAIL = #{email}
+	</select>
+	
+	<update id="updateNewPwd" parameterType="string">
+		UPDATE MEMBER SET PASSWORD = #{password} WHERE USERID = #{userId}
+	</update>
+	
 </mapper>

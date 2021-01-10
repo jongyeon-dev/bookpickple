@@ -17,5 +17,13 @@ public interface MemberService {
 	int updateMember(Member member);
 
 	int deleteMember(int userNo);
+	
+	String findIdByEmail(String email);
+	
+	Member isExistMember(Member member);
+	
+	int updateNewPwd(Member member);
+	
+	void sendMail(String to, String subject, String body);
 
 }

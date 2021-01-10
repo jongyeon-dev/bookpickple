@@ -19,5 +19,11 @@ public interface MemberDAO {
 	int updateMember(Member member);
 	
 	int deleteMember(int userNo);
+	
+	String findIdByEmail(String email);
+	
+	Member isExistMember(Member member);
+	
+	int updateNewPwd(Member member);
 
 }

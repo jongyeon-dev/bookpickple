@@ -17,5 +17,10 @@
 	<definition name="common/join" extends="joinLogin">
 		<put-attribute name="title" value="회원가입" />
 		<put-attribute name="body" value="/WEB-INF/views/common/join.jsp" />
-	</definition>    
+	</definition>
+	
+	<definition name="common/findIdPwd" extends="joinLogin">
+		<put-attribute name="title" value="아이디/비밀번호 찾기" />
+		<put-attribute name="body" value="/WEB-INF/views/common/findIdPwd.jsp" />
+	</definition>     
 </tiles-definitions>

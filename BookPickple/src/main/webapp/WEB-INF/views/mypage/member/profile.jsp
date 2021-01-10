@@ -21,7 +21,9 @@
          <div class="card-body">
              <div class="wrap-profile">
              	<div class="form-group row">
-                 	<label class="col-sm-3 col-form-label text-primary font-weight-bold">등급</label>
+                 	<label class="col-sm-3 col-form-label text-primary font-weight-bold">등급
+                 	<i class="fa fa-info-circle grade-info" style="cursor: pointer;"></i>
+                 	</label>
 	                   <div class="col-sm-7">
 		                    <c:if test="${member.gradeType == 1}"> <p class="mb-0"><span class="label label-light">일반</span></p></c:if>
 						   	<c:if test="${member.gradeType == 2}"> <p class="mb-0"><span class="label label-primary">실버</span></p></c:if>
@@ -63,7 +65,8 @@
                   <div class="form-group row">
                  	<label class="col-sm-3 col-form-label text-primary font-weight-bold">생년월일</label>
 	                  <div class="col-sm-7">
-	                  	<p class="mb-0">${ member.birth }</p>
+	                  	<input type="hidden" id="dbBirth" value="${ member.birth }"/>
+	                  	<p class="mb-0 full-birth"></p>
 	                 </div>
                   </div>
                   <div class="form-group row">
@@ -130,6 +133,19 @@
 			};
 			
 			$(".full-address").text(fullAddr);
+
+			var dbBirth = $("#dbBirth").val();
+			$(".full-birth").text(dbBirth.substring(0, 4) + "년 " + dbBirth.substring(4, 6) + "월 " + dbBirth.substring(6, 8) + "일");
+		});
+
+		$(".grade-info").hover(function () {
+		    $(this).popover({
+		        title: "등급 안내",
+		        content: "<p>일반 : 기본 5% 적립</p><p>실버 : 기본 5% 적립 + 1% 적립</p><p>골드 : 기본 5% 적립 + 2% 적립</p><p>프리미엄 : 기본 5% 적립 + 3% 적립</p>",
+		        html: true
+		    }).popover('show');
+		}, function () {
+		    $(this).popover('hide');
 		});
 	</script>
     

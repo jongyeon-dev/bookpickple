@@ -7,7 +7,7 @@
   <property name="host" value="smtp.gmail.com" /> <!-- host서버에 smtp 서버 설정 -->
   <property name="port" value="587" /> <!-- 구글 smtp 메일 서버 포트 465 or 587 -->
   <property name="username" value="jongyeony@gmail.com" /> <!-- 발신자 메일 -->
-  <property name="password" value="" /> <!-- 발신자 비밀번호 (2차인증받은) -->
+  <property name="password" value="rhthxmarcdqpeeeo" /> <!-- 발신자 비밀번호 (2차인증받은) -->
   <property name="javaMailProperties">
     <props>
        <prop key="mail.transport.protocol">smtp</prop>
@@ -18,12 +18,5 @@
     </props>
   </property>
 </bean>
- 
-	<!-- 
-	<bean id="preConfiguredMessage" class="org.springframework.mail.SimpleMailMessage">
-   <property name="to" value="jongyeony@naver.com"></property>
-   <property name="from" value="jongyeony@gmail.com"></property>
-   <property name="subject" value="테스트 메일입니다."/>
-	</bean>
- -->
+
 </beans>

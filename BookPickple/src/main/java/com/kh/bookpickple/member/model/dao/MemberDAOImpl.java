@@ -51,4 +51,19 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.update("memberMapper.deleteMember", userNo);
 	}
 
+	@Override
+	public String findIdByEmail(String email) {
+		return sqlSession.selectOne("memberMapper.findIdByEmail", email);
+	}
+
+	@Override
+	public Member isExistMember(Member member) {
+		return sqlSession.selectOne("memberMapper.isExistMember", member);
+	}
+
+	@Override
+	public int updateNewPwd(Member member) {
+		return sqlSession.update("memberMapper.updateNewPwd", member);
+	}
+
 }
