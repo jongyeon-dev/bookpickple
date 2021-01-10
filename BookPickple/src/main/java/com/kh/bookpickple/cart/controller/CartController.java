@@ -70,7 +70,6 @@ public class CartController {
 		
 		int result = cartService.updateCart(cart);
 		
-		System.out.println(result);
 		if(result > 0) {
 			return "updateCart";
 		} else {
@@ -85,7 +84,6 @@ public class CartController {
 		
 		int result = cartService.deleteCart(cartNo);
 		
-
 		if(result > 0) {
 			return "deleteCart";
 		} else {

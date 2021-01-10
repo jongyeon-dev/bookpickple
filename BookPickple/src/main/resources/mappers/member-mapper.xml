@@ -3,9 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
 
-	<resultMap id="resultMember" type="Member">
-	</resultMap>
-
 	<select id="checkIdDuplicate" statementType="CALLABLE" parameterType="hashmap">
 		{ CALL ID_DUP_CHK( #{userId, mode=IN, jdbcType=VARCHAR}, #{result, mode=OUT, jdbcType=NUMERIC, javaType=integer} ) }
 	</select>
@@ -17,16 +14,20 @@
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER VALUES (
 			SEQ_USERNO.NEXTVAL, 1, DEFAULT, #{userId}, #{password}, #{userName}, #{gender},
-			#{tel}, #{birth}, #{email}, #{emailStatus}, #{address}, DEFAULT, DEFAULT, DEFAULT, NULL
+			#{tel}, #{birth}, #{email}, #{emailStatus}, #{address}, DEFAULT, DEFAULT, DEFAULT, NULL, DEFAULT
 		)
 	</insert>
 	
-	<select id="loginMember" parameterType="string" resultMap="resultMember">
-		SELECT * FROM MEMBER WHERE USERID = #{userId}
+	<select id="loginMember" parameterType="string" resultType="Member">
+		SELECT M.*, G.GRADENAME, G.GRADEPOINT
+		FROM MEMBER M, GRADE G
+		WHERE M.GRADETYPE = G.GRADETYPE AND M.USERID = #{userId}
 	</select>
 	
-	<select id="selectOneMember" parameterType="_int" resultMap="resultMember">
-		SELECT * FROM MEMBER WHERE USERNO = #{userNo}
+	<select id="selectOneMember" parameterType="_int" resultType="Member">
+		SELECT M.*, G.GRADENAME, G.GRADEPOINT
+		FROM MEMBER M, GRADE G
+		WHERE M.GRADETYPE = G.GRADETYPE AND M.USERNO = #{userNo}
 	</select>
 	
 	<update id="updateMember" parameterType="string">

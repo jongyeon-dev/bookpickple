@@ -31,6 +31,11 @@ public class DeliveryServiceImpl implements DeliveryService {
 	}
 	
 	@Override
+	public int updateTotalPrice(Member member) {
+		return deliveryDAO.updateTotalPrice(member);
+	}
+	
+	@Override
 	public int updatePoint(Member member) {
 		return deliveryDAO.updatePoint(member);
 	}

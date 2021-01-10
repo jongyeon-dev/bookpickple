@@ -80,8 +80,10 @@
 			                                           <option value="PREPARED" ${ item.deliveryStatus eq 'PREPARED' ? 'selected':'' }>배송준비중</option>
 			                                           <option value="DELIVERING" ${ item.deliveryStatus eq 'DELIVERING' ? 'selected':'' }>배송중</option>
 			                                           <option value="FINISHED" ${ item.deliveryStatus eq 'FINISHED' ? 'selected':'' }>배송완료</option>
+			                                           <!-- 
 			                                           <option value="CANCEL" ${ item.deliveryStatus eq 'CANCEL' ? 'selected':'' }>주문취소</option>
 			                                           <option value="RETURN" ${ item.deliveryStatus eq 'RETURN' ? 'selected':'' }>반품</option>
+			                                           -->
 			                                       </select>
 												</td>
 												<td>

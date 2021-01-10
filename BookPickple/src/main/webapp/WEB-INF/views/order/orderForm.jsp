@@ -19,7 +19,9 @@
 	                <th scope="col">판매가</th>
 	                <th scope="col">수량</th>
 	                <th scope="col">합계</th>
-	                <th scope="col">적립 포인트</th>
+	                <th scope="col">적립 포인트
+	                <i class="fa fa-info-circle" style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" data-original-title="고객님의 등급은 ${member.gradeName}입니다.">
+	                </th>
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -52,8 +54,12 @@
 					 		</p> <!-- 합계 -->
 					 	</td>
 					 	<td>
-					 		<fmt:formatNumber value="${order.point * order.quantity}" type="number" var="totalPoint" />
-					 		${totalPoint}원
+					 		<fmt:formatNumber value="${order.point * order.quantity}" type="number" var="defaultPoint" />
+					 		${defaultPoint}원
+				 			<c:if test="${member.gradeType != 1 }">
+					 			<fmt:formatNumber value="${order.gradePoint * order.quantity}" type="number" var="gradePoint" />
+					 			<p>추가 포인트 : ${gradePoint}원</p>
+					 		</c:if>
 					 	</td>
 	       			</tr>
 	       			<!-- 모든 도서들의 정보 -->
@@ -61,7 +67,7 @@
 	       			<c:set var="totalBooksPrice" value="${totalBooksPrice + order.salesPrice*order.quantity}" /> <!-- 총 가격 -->
 					<c:set var="totalDeliveryPrice" value="0" /> <!-- 총 배송비 --> 
 					<c:set var="totalDiscountedPrice" value="0" /> <!-- 총 할인금액 -->
-					<c:set var="totalBooksPoint" value="${totalBooksPoint + order.point*order.quantity}"/> <!-- 총 포인트 -->
+					<c:set var="totalBooksPoint" value="${totalBooksPoint + order.point*order.quantity + (order.gradePoint * order.quantity)}"/> <!-- 총 포인트 -->
 	      			</c:forEach>
 	        </tbody>
 	    </table>
@@ -74,7 +80,7 @@
 		     	<th scope="col">총 도서 수</th>
 		       <th scope="col">총 상품금액</th>
 		       <th scope="col">총 배송비</th>
-		       <th scope="col" class="sale">총 할인 금액 </th>
+		       <th scope="col" class="sale">총 할인 금액</th>
 		       <th scope="col" class="total">최종 결제금액</th>
 		     </tr>
 		     </thead>
@@ -101,7 +107,7 @@
 			         <p>${totalDiscountedPrice}원</p>
 			       </td>
 			       <td class="total">
-			          <p>
+			          <p class="totalPrice">
 			          <fmt:formatNumber value="${totalBooksPrice+totalDeliveryPrice-totalDiscountedPrice}" type="number" var="total_price" />
 			            ${total_price}원<br>
 			          </p>
@@ -169,11 +175,13 @@
 		      <th scope="row">포인트 사용</th>
 		      <td class="">
 		      	<div style="width: 200px; float: left;">
-		      	 	<input type="text" class="form-control" name="point" id="point" value="${ member.point }">
+		      	 	<input type="text" class="form-control" name="usePoint" id="memberPoint" value="0" readonly>
 		      	</div>
 		      	<div style="float: left; padding: 10px 0 10px 10px;">
-	      				<button type="button" class="btn mb-1 btn-outline-primary btn-xs" onclick="">전체 사용</button>
-	  					(잔여 : <em>0원</em>)
+	      				<button type="button" class="btn mb-1 btn-primary btn-xs" onclick="usePoint(${member.point})">사용</button>
+	      				<button type="button" class="btn mb-1 btn-outline-primary btn-xs" onclick="canclePoint()">취소</button>
+	      				<fmt:formatNumber value="${member.point}" type="number" var="memberPoint" />
+	  					(사용 가능 포인트 : <em>${memberPoint}원</em>)
 	  				</div>
 		      </td>
 		    </tr>
@@ -212,6 +220,7 @@ $(function() {
  	   $("#inputTotalDeliveryPrice").val(2500);
     }
 
+	// 아임포트
 	var IMP = window.IMP; // 생략가능
 	IMP.init("imp31227075"); // 가맹점 식별 코드	
 
@@ -244,6 +253,22 @@ function resetDest() {
 	$("#receiverTel").val("");
 };
 
+function usePoint() {
+	$("#memberPoint").val(${member.point});
+	$(".totalPrice").text(priceToString(${totalBooksPrice} - ${member.point}) + "원"); //최종 결제 금액 P 태그 변경
+	$("#totalPrice").val(${totalBooksPrice} - ${member.point}); // 실제 결제할때 금액 변경
+}
+
+function canclePoint() {
+	$("#memberPoint").val(0);
+	$(".totalPrice").text(priceToString(${totalBooksPrice}) + "원"); //최종 결제 금액 P 태그 변경
+	$("#totalPrice").val(${totalBooksPrice}); // 실제 결제할때 금액 변경
+}
+
+function priceToString(price) {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
 
 function requestPay() {
 
@@ -253,7 +278,7 @@ function requestPay() {
         pay_method: "card",
         merchant_uid: 'merchant_' + new Date().getTime(),
         name: $("#title").val(),
-        amount: ${totalBooksPrice},
+        amount: $("#totalPrice").val(),
         buyer_email: $("#email").val(),
         buyer_name: $("#userName").val(),
         buyer_tel: $("#tel").val(),
@@ -277,7 +302,8 @@ function requestPay() {
 					receiverName: $("#receiverName").val(),
 					receiverEmail: $("#receiverEmail").val(),
 					receiverTel: $("#receiverTel").val(),
-					deliveryAddr: $("#zipCode").val() + "," + $("#address1").val()+ "," + $("#address2").val()
+					deliveryAddr: $("#zipCode").val() + "," + $("#address1").val()+ "," + $("#address2").val(),
+					usePoint: $("#memberPoint").val()
 				//기타 필요한 데이터가 있으면 추가 전달
 				},
 				success: function(data){

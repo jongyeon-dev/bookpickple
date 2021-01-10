@@ -21,13 +21,23 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 	
 	@Override
+	public int updateMemberPoint(Order order) {
+		return sqlSession.update("orderMapper.updateMemberPoint", order);
+	}
+	
+	@Override
 	public int insertPayDetail(OrderDetail orderDetail) {
 		return sqlSession.insert("orderMapper.insertPayDetail", orderDetail);
 	}
 
 	@Override
 	public int deleteBooksFromCart(OrderDetail orderDetail) {
-		return sqlSession.insert("orderMapper.deleteBooksFromCart", orderDetail);
+		return sqlSession.delete("orderMapper.deleteBooksFromCart", orderDetail);
+	}
+	
+	@Override
+	public int updateBookStock(OrderDetail orderDetail) {
+		return sqlSession.update("orderMapper.updateBookStock", orderDetail);
 	}
 
 	@Override
@@ -54,6 +64,5 @@ public class OrderDAOImpl implements OrderDAO {
 	public int oneBookSalesCount(int bookNo) {
 		return sqlSession.selectOne("orderMapper.oneBookSalesCount", bookNo);
 	}
-
 
 }

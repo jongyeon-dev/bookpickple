@@ -28,6 +28,7 @@ public class OrderDetail implements Serializable{
 	private int salesPrice;
 	private int quantity;
 	private int point;
+	private int gradePoint;
 	
 	// 추가 필드
 	private int userNo;

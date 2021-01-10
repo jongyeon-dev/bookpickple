@@ -116,6 +116,7 @@ font-size: 16px !important;
 				            		</c:when>
 				            		<c:otherwise>
 				            			<button class="btn mb-2 btn-primary btn-lg btn-flat" onclick="insertCart(${book.bookNo}, ${member.userNo})">카트에 담기</button>
+				            			<fmt:formatNumber value="${book.price*member.gradePoint}" type="number" var="gradePoint" />
 				            			<form action="${contextPath}/order/eachOrder.do" method="post" id="orderForm" name="orderForm">
 						            			<input type="hidden" name="userNo" value="${member.userNo}" />
 												<input type="hidden" name="bookNo" value="${book.bookNo}" />
@@ -123,6 +124,7 @@ font-size: 16px !important;
 												<input type="hidden" id="quantity" name="quantity" value="1" />
 												<input type="hidden" name="salesPrice" value="${book.salesPrice}" />
 												<input type="hidden" name="point" value="${book.point}"/>
+												<input type="hidden" name="gradePoint" value="${gradePoint}"/>
 												<input type="hidden" name="bookImage" value="${bookImages[0].changeFileName}"/>
 				    						<button type="submit"class="btn btn-outline-secondary btn-lg btn-flat">바로 구매</button>
 				    					</form>
@@ -134,18 +136,6 @@ font-size: 16px !important;
 					</div>
 				
 			</div>
-			
-			<!--
-			<div class="detail-list">
-				<div class=""><h2>${book.title}</h2></div>
-				<ul>
-					<li class="active"><a href="#bookIntro">도서 소개</a></li>
-					<li><a href="#bookImage">도서 상세</a></li>
-					<li><a href="#wirterIntro">저자 소개</a></li>
-					<li><a href="#review">회원 리뷰</a></li>
-				</ul>
-			</div>
-			 -->
 			
 			<div class="details">
 				<div id="bookIntro">

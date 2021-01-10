@@ -50,7 +50,7 @@
 										 		 ${price}원
 										 	</td>
 										 	<td>
-										 		<fmt:formatNumber  value="${detail.point * detail.quantity}" type="number" var="point" />
+										 		<fmt:formatNumber  value="${detail.point * detail.quantity + detail.gradePoint}" type="number" var="point" />
 										 		 ${point}원
 										 	</td>
 						       			</tr>
@@ -95,8 +95,6 @@
                                        <option value="PREPARED" ${ deliveryDetail[0].deliveryStatus eq 'PREPARED' ? 'selected':'' }>배송준비중</option>
                                        <option value="DELIVERING" ${ deliveryDetail[0].deliveryStatus eq 'DELIVERING' ? 'selected':'' }>배송중</option>
                                        <option value="FINISHED" ${ deliveryDetail[0].deliveryStatus eq 'FINISHED' ? 'selected':'' }>배송완료</option>
-                                       <option value="CANCEL" ${ deliveryDetail[0].deliveryStatus eq 'CANCEL' ? 'selected':'' }>주문취소</option>
-                                       <option value="RETURN" ${ deliveryDetail[0].deliveryStatus eq 'RETURN' ? 'selected':'' }>반품</option>
                                    </select>
 							 			<button type="button" class="btn btn-outline-primary btn-xs" onclick="updateStatus(${deliveryDetail[0].orderNo}, deliveryStatus${deliveryDetail[0].orderNo}, ${deliveryDetail[0].userNo})">수정</button>
 							      </td>
@@ -122,16 +120,23 @@
 							<table class="table header-border" style="padding: 30px;">
 							  <tbody>
 							    <tr>
-							      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">총 주문 금액</th>
+							      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">결제 금액</th>
 							      <fmt:formatNumber value="${deliveryDetail[0].totalPrice}" type="number" var="totalPrice" />
 							      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">${totalPrice}원</td>
+							      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">포인트 사용액</th>
+							      <fmt:formatNumber value="${deliveryDetail[0].usePoint}" type="number" var="usePoint" />
+							      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">${usePoint}원</td>
 							    </tr>
 							    <tr>
-							      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">실 결제 금액</th>
-							      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;" class="text-primary font-weight-bold">${totalPrice}원</td>
-							      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">포인트 적립 액</th>
+							      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">총 결제 금액</th>
+							      <fmt:formatNumber value="${deliveryDetail[0].totalPrice + deliveryDetail[0].usePoint}" type="number" var="finalPrice" />
+							      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;" class="text-danger font-weight-bold">${finalPrice}원</td>
+							      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">포인트 적립액</th>
 							      <fmt:formatNumber value="${deliveryDetail[0].totalPoint}" type="number" var="totalPoint" />
-							      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">${totalPoint}원</td>
+							      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;" class="text-primary font-weight-bold">
+							      	${totalPoint}원
+							      	<i class="fa fa-info-circle" style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" data-original-title="등급 합산 된 최종 포인트 적립액"></i>
+							      </td>
 							    </tr>
 							   </tbody>
 						   </table>
@@ -160,7 +165,6 @@ $(function() {
 
     // 배송정보와 배송추적 tracking-api
     $(".btn-delivery").click(function() {
-        // var t_code = $('#tekbeCompnayList option:selected').attr('value');
         var t_invoice = $('#invoiceNumberText').val();
         window.open("", "popup", "width=500, height=500, scrollbars=yes");
         $("#invoiceForm").attr("action", " http://info.sweettracker.co.kr/tracking/5?t_key="+myKey+'&t_code=04&t_invoice='+t_invoice);

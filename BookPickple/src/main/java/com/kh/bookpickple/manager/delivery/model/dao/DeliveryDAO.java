@@ -13,6 +13,8 @@ public interface DeliveryDAO {
 	
 	boolean isFinished(Order order);
 	
+	int updateTotalPrice(Member member);
+	
 	int updatePoint(Member member);
 
 	int updateDeliveryStatus(Order order);

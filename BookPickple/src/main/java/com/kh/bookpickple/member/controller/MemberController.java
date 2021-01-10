@@ -57,7 +57,6 @@ public class MemberController {
 	
 	@RequestMapping("/member/memberJoinEnd.do")
 	public String memberJoin(Member member, Model model) {
-		System.out.println("member : " + member);
 		
 		String plainPassword = member.getPassword();
 		String encryptPassword = bcryptPasswordEncoder.encode(plainPassword);

@@ -9,9 +9,13 @@ public interface OrderDAO {
 
 	int insertPayRecord(Order order);
 	
+	int updateMemberPoint(Order order);
+	
 	int insertPayDetail(OrderDetail orderDetail);
 	
 	int deleteBooksFromCart(OrderDetail orderDetail);
+	
+	int updateBookStock(OrderDetail orderDetail);
 	
 	List<Order> selectOrderList(int cPage, int numPerPage, int userNo);
 	

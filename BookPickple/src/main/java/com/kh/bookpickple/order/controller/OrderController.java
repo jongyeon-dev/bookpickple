@@ -54,25 +54,24 @@ public class OrderController {
 	}
 	
 	@RequestMapping("order/cartOrder.do")
-	public ModelAndView cartOrder( @RequestParam("cartOrderValue") String[] cartOrderValue, HttpServletRequest request ) {
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView cartOrder( @RequestParam String[] cartOrderValue, HttpServletRequest request ) {
 		
+		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
 		Map cartMap = (Map) session.getAttribute("cartMap");
 		List<Order> orderList = new ArrayList<Order>();
 		List<Book> bookList = (List<Book>) cartMap.get("bookList");
-		
 		if(cartOrderValue == null || cartOrderValue.length == 0) {
 			mv.setViewName("redirect:/");
 		} else {
 			for(int i = 0; i < cartOrderValue.length; i++) {
-				String[] booksInfo = cartOrderValue[i].split(","); //체크박스 value 값 (수량, 가격, 포인트, 도서 번호)
+				String[] booksInfo = cartOrderValue[i].split(","); //체크박스 value 값 (수량, 정가, 판매가, 포인트, 추가 포인트, 도서 번호)
 				
 				for(int j = 0; j < bookList.size(); j++) {
 					
 					Book book = bookList.get(j);
 					int bookNo = book.getBookNo();
-					if(bookNo == Integer.parseInt(booksInfo[3].trim())) {
+					if(bookNo == Integer.parseInt(booksInfo[5].trim())) {
 						Order order = new Order();
 						String title = book.getTitle();
 						int salesPrice = book.getSalesPrice();
@@ -82,10 +81,12 @@ public class OrderController {
 						order.setBookNo(bookNo);
 						order.setBookImage(changeFileName);
 						order.setTitle(title);
+						order.setPrice(Integer.parseInt(booksInfo[1].trim()));
 						order.setSalesPrice(salesPrice);
 						order.setQuantity(Integer.parseInt(booksInfo[0].trim()));
-						order.setTotalPrice(Integer.parseInt(booksInfo[1].trim()));
-						order.setPoint(Integer.parseInt(booksInfo[2].trim()));
+						order.setTotalPrice(Integer.parseInt(booksInfo[2].trim()));
+						order.setPoint(Integer.parseInt(booksInfo[3].trim()));
+						order.setGradePoint(Integer.parseInt(booksInfo[4].trim()));
 						
 						orderList.add(order);
 						break;
@@ -103,7 +104,7 @@ public class OrderController {
 	
 	@RequestMapping("/order/orderPayment.do")
 	@ResponseBody
-	public String orderPayment(Order order, Model model, HttpServletRequest request) throws OrderException {
+	public String orderPayment(@RequestParam int usePoint, Order order, Model model, HttpServletRequest request) throws OrderException {
 		
 		HttpSession session=request.getSession();
 	
@@ -123,6 +124,15 @@ public class OrderController {
 			  }
 			  order.setBookNo(bookNo);
 		  }
+
+		  if(usePoint > 0) {
+			  // 포인트를 사용했으면 멤버의 포인트를 0으로 바꿔야함
+			  order.setUsePoint(member.getPoint());  
+		  } else {
+			  // 아니면 원래의 멤버 포인트 유지
+			  // 우선 PAYRECORD 테이블에 안쓰면 안 썼다고 넣어야하기 때문
+			  order.setUsePoint(0); 
+		  }
 		  
 		 List<OrderDetail> orderDetail = new ArrayList<OrderDetail>();
 		 // 도서 목록이나 상세페이지에서 조회하면 allOrderList는 도서 1종
@@ -137,6 +147,7 @@ public class OrderController {
 			 od.setSalesPrice(orList.getSalesPrice());
 			 od.setQuantity(orList.getQuantity());
 			 od.setPoint(orList.getPoint());
+			 od.setGradePoint(orList.getGradePoint());
 			 
 			 orderDetail.add(od);
 		 }
@@ -183,8 +194,6 @@ public class OrderController {
 			
 			reviewList.add(review);
 		}
-		
-		System.out.println(myOrderDetailList);
 		
 		// 주문한 도서의 리뷰가 등록 된 상태인지 조회
 		List<String> isExistReview = reviewService.isExistReview(reviewList); 

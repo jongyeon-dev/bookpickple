@@ -36,14 +36,17 @@ public class Order implements Serializable{
 	private String payMethod;
 	private Date payDate;
 	private String deliveryStatus;
+	private int usePoint;
 	
 	// 추가 필드 -- 주문작성 시 사용(세션)
 	// 하기 정보를 세션에서 사용하다 insert시 orderDetail에 넣는다. 
 	private String title; 
 	private int quantity;
+	private int price; // 테이블 저장 X
 	private int salesPrice;
 	private int point;
-	private String bookImage;
+	private int gradePoint;
+	private String bookImage; //테이블 저장 X
 	
 	private int orderNum; // 여러 권 주문 시 리뷰 작성에 필요
 }

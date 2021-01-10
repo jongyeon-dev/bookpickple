@@ -32,6 +32,11 @@ public class DeliveryDAOImpl implements DeliveryDAO {
 	}
 	
 	@Override
+	public int updateTotalPrice(Member member) {
+		return sqlSession.update("deliveryMapper.updateTotalPrice", member);
+	}
+	
+	@Override
 	public int updatePoint(Member member) {
 		return sqlSession.update("deliveryMapper.updatePoint", member);
 	}

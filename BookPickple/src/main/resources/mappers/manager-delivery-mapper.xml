@@ -21,6 +21,12 @@
         WHERE ORDERNO = #{orderNo}
 	</select>
 	
+	<update id="updateTotalPrice" parameterType="_int">
+		UPDATE MEMBER SET 
+        TOTALPRICE = TOTALPRICE + (SELECT TOTALPRICE FROM PAYRECORD WHERE ORDERNO = #{orderNo})
+        WHERE USERNO = #{userNo}
+	</update>
+	
 	<update id="updatePoint" parameterType="_int">
 		UPDATE MEMBER SET 
         POINT = POINT + (SELECT TOTALPOINT FROM PAYRECORD WHERE ORDERNO = #{orderNo})

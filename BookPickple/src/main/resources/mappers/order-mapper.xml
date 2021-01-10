@@ -7,22 +7,30 @@
 		INSERT INTO PAYRECORD VALUES (
 			SEQ_ORDERNO.NEXTVAL, #{userNo}, #{bookNo}, #{orderTitle}, #{ordererName}, #{totalQuantity},
 			#{totalPrice}, #{totalPoint}, #{receiverName}, #{receiverEmail}, #{receiverTel}, #{deliveryAddr},
-			DEFAULT, DEFAULT, DEFAULT
+			DEFAULT, DEFAULT, DEFAULT, #{usePoint}
 		)
 	</insert>
+	
+	<update id="updateMemberPoint" parameterType="Order">
+		UPDATE MEMBER SET POINT = POINT - #{usePoint} WHERE USERNO = #{userNo}
+	</update>
 	
 	<insert id="insertPayDetail" parameterType="OrderDetail">
 		<selectKey keyProperty="orderNo" resultType="_int" order="BEFORE">
 			SELECT SEQ_ORDERNO.CURRVAL FROM DUAL
 		</selectKey>
 		INSERT INTO PAYDETAIL VALUES(
-			SEQ_ORDERNUM.NEXTVAL, #{orderNo}, #{bookNo}, #{title}, #{salesPrice}, #{quantity}, #{point}
+			SEQ_ORDERNUM.NEXTVAL, #{orderNo}, #{bookNo}, #{title}, #{salesPrice}, #{quantity}, #{point}, #{gradePoint}
 		)
 	</insert>
 	
 	<delete id="deleteBooksFromCart" parameterType="Order">
 		DELETE FROM CART WHERE BOOKNO = #{bookNo} AND USERNO = #{userNo}
 	</delete>
+	
+	<update id="updateBookStock" parameterType="Order">
+		UPDATE BOOK SET STOCK = STOCK - #{quantity} WHERE BOOKNO = #{bookNo}
+	</update>
 	
 	<select id="selectOrderList" parameterType="_int" resultType="Order">
 		SELECT ROWNUM, A.* 
@@ -40,7 +48,7 @@
 		SELECT P.*, PD.* 
 		FROM PAYRECORD P, PAYDETAIL PD
 		WHERE P.ORDERNO = PD.ORDERNO AND P.ORDERNO = #{orderNo} AND P.USERNO = #{userNo}
-		ORDER BY PD.ORDERNUM DESC
+		ORDER BY PD.ORDERNUM
 	</select>
 	
 	<select id="eachBookSalesCount" parameterType="OrderDetail" resultType="_int">

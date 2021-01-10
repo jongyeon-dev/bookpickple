@@ -46,9 +46,10 @@ public class DeliveryController {
 		if(result > 0) {
 			boolean isFinished = deliveryService.isFinished(order);
 			
-			if(isFinished) { // 배송완료면 포인트 적립
+			if(isFinished) { // 배송완료면 멤버의 총 구매 금액과 포인트 적립
 				member.setOrderNo(orderNo);
 				member.setUserNo(userNo);
+				int updateTotalPrice = deliveryService.updateTotalPrice(member);
 				int updatePoint = deliveryService.updatePoint(member);
 			} 
 		}

@@ -49,7 +49,9 @@
 									</c:choose>
 							 	</td>
 							 	<td>
-							 		${detail.title}
+							 		<a href="${contextPath}/book/detailBookView.do?bookNo=${detail.bookNo}">
+							 			${detail.title}
+							 		</a>
 							 	</td>
 							 	<td>
 							 		${detail.quantity}개
@@ -59,7 +61,7 @@
 							 		 ${price}원
 							 	</td>
 							 	<td>
-							 		<fmt:formatNumber  value="${detail.point * detail.quantity}" type="number" var="point" />
+							 		<fmt:formatNumber  value="${detail.point * detail.quantity + detail.gradePoint}" type="number" var="point" />
 							 		 ${point}원
 							 	</td>
 							 	<c:if test="${orderDetail[0].deliveryStatus eq 'FINISHED'}">
@@ -132,16 +134,23 @@
 				<table class="table header-border" style="padding: 30px;">
 				  <tbody>
 				    <tr>
-				      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">총 주문 금액</th>
+				      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">결제 금액</th>
 				      <fmt:formatNumber value="${orderDetail[0].totalPrice}" type="number" var="totalPrice" />
 				      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">${totalPrice}원</td>
+				      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">포인트 사용액</th>
+				      <fmt:formatNumber value="${orderDetail[0].usePoint}" type="number" var="usePoint" />
+				      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">${usePoint}원</td>
 				    </tr>
 				    <tr>
-				      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">실 결제 금액</th>
-				      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;" class="text-primary font-weight-bold">${totalPrice}원</td>
-				      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">포인트 적립 액</th>
+				      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">총 결제 금액</th>
+				      <fmt:formatNumber value="${orderDetail[0].totalPrice + orderDetail[0].usePoint}" type="number" var="finalPrice" />
+				      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;" class="text-danger font-weight-bold">${finalPrice}원</td>
+				      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">포인트 적립액</th>
 				      <fmt:formatNumber value="${orderDetail[0].totalPoint}" type="number" var="totalPoint" />
-				      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">${totalPoint}원</td>
+				      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;" class="text-primary font-weight-bold">
+				      	${totalPoint}원
+				      	<i class="fa fa-info-circle" style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" data-original-title="등급 합산 된 최종 포인트 적립액"></i>
+				      </td>
 				    </tr>
 				   </tbody>
 			   </table>

@@ -53,6 +53,7 @@ font-size: 16px !important;
 			    			<span>(10% 할인)</span>
 			    			<em class="divi">|</em>
 			    			<input type="hidden" class="point${book.bookNo}" value="${book.point}"/>
+			    			<input type="hidden" class="gradePoint${book.bookNo}" value="${book.price*member.gradePoint}"/>
 			    			<span class="goods-point">포인트 <em class="text-primary">${book.point}</em>원</span>
 			    		</div>
 			    		<div class="goods-selling" style="display: flex;">
@@ -144,26 +145,25 @@ font-size: 16px !important;
 					}
 				},
 				error : function(data, textStatus) {
-					console.log(userNo);
 					alert("에러가 발생했습니다."+data);
 				}
 			});
 		}
 	}
 
-	function listEachOrder(bookNo, userNo) {
+	function listEachOrder(bookNo, userNo, gradePoint) {
 		 var orderForm = $('<form></form>');
 	
 		 orderForm.attr('action', '${contextPath}/order/eachOrder.do');
-	
 		 orderForm.attr('method', 'post');
-	
 		 orderForm.appendTo('body');
+
 	
 		 var title = $('.title' + bookNo).val();
 		 var quant = $('.quantity' + bookNo).val();
 		 var salesPrice = $('.salesPrice' + bookNo).val();
 		 var point = $('.point' + bookNo).val();
+		 var gradePoint = parseInt($('.gradePoint' + bookNo).val());
 		 var bookImage = $('.bookImage' + bookNo).val();
 
 		var userNo = ($('<input type="hidden" value="${member.userNo}" name = userNo>'));
@@ -172,6 +172,7 @@ font-size: 16px !important;
 		var quantity = ($('<input type="hidden" value="' + quant + '" name = quantity>'));
 		var salesPrice = ($('<input type="hidden" value="' + salesPrice + '" name = salesPrice>'));
 		var point = ($('<input type="hidden" value="' + point + '" name = point>'));
+		var gradePoint = ($('<input type="hidden" value="' + gradePoint + '" name = gradePoint>'));
 		var bookImage = ($('<input type="hidden" value="' + bookImage + '" name = bookImage>'));
 
 		orderForm.append(userNo);
@@ -180,6 +181,7 @@ font-size: 16px !important;
 		orderForm.append(quantity);
 		orderForm.append(salesPrice);
 		orderForm.append(point);
+		orderForm.append(gradePoint);
 		orderForm.append(bookImage);
 
 		orderForm.submit();

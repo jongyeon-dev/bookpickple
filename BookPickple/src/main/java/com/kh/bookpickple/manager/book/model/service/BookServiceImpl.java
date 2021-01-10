@@ -79,7 +79,6 @@ public class BookServiceImpl implements BookService {
 
 		for(int i = 0; i < bookImages.size(); i++) {
 			bookImages.get(i).setFileLevel(i == 0 ? 0 : 1);
-			System.out.println("dddddddddddd : " + bookImages.get(i));
 			totalResult = bookDAO.updateBookImages(bookImages.get(i));  //insert로 다시 진행
 			
 			if(totalResult == 0) throw new BookException("도서 이미지 추가 실패");

@@ -22,13 +22,20 @@ public class OrderServiceImpl implements OrderService {
 		
 		if(result1 == 0) throw new OrderException();
 		
-		int result2 = 0;
+		// 포인트를 사용 했든 안했든 member의 포인트 변경
+		// 사용했으면 넘겨받은 0 값으로 바꿔주고
+		// 사용 안했으면 기존에 갖고있던 포인트 그대로 다시 update
+		int result2 = orderDAO.updateMemberPoint(order);
+		
+		int result3 = 0;
 		
 		for(int i = 0; i < orderDetail.size(); i++) {
-			result2 = orderDAO.insertPayDetail(orderDetail.get(i));
-			if(result2 == 0) throw new OrderException("결제 상세 정보 추가 실패");
+			result3 = orderDAO.insertPayDetail(orderDetail.get(i));
+			if(result3 == 0) throw new OrderException("결제 상세 정보 추가 실패");
 			
-			int result3 = orderDAO.deleteBooksFromCart(orderDetail.get(i));
+			int result4 = orderDAO.deleteBooksFromCart(orderDetail.get(i));
+			
+			int result5 = orderDAO.updateBookStock(orderDetail.get(i));
 		}
 		
 		return result1;

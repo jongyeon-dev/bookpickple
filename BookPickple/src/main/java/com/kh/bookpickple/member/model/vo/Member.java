@@ -36,6 +36,8 @@ public class Member implements Serializable{
 	private Date delDate;
 	
 	// 추가 필드
+	private String gradeName;
+	private double gradePoint;
 	private int orderNo; // 배송 완료 시 포인트 적립용
 	private int totalPrice; // 회원 목록 조회 시 사용
 
