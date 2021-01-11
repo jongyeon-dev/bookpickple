@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="managerMainMapper">
+
+	<select id="getDailyJoin" resultType="hashmap">
+		<![CDATA[
+			SELECT TO_CHAR(D.DUALDATE, 'DD') AS JOINDATE, NVL(SUM(M.CNT), 0) CNT
+			  FROM ( SELECT TO_CHAR(JOINDATE, 'YYYY-MM-DD') AS JOINDATE, COUNT(*) CNT
+			        FROM MEMBER
+			          WHERE JOINDATE BETWEEN TRUNC(SYSDATE, 'MM') AND LAST_DAY(SYSDATE)
+			          GROUP BY JOINDATE, TO_CHAR(JOINDATE, 'YYYY-MM-DD')
+			        ) M
+			      , ( SELECT TRUNC(SYSDATE, 'MM') + LEVEL - 1 AS DUALDATE
+			            FROM DUAL 
+			         CONNECT BY LEVEL <= (LAST_DAY(SYSDATE)- TRUNC(SYSDATE, 'MM') + 1)
+			        ) D
+			  WHERE D.DUALDATE = M.JOINDATE(+)
+			  GROUP BY D.DUALDATE, TO_CHAR(D.DUALDATE, 'DD')
+			  ORDER BY D.DUALDATE
+		]]>
+	</select>
+
+	<select id="getMenCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER WHERE GENDER = 'M' AND TYPE = 'MEMBER' AND STATUS = 'Y'
+	</select>
+	
+	<select id="getWomenCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER WHERE GENDER = 'F' AND TYPE = 'MEMBER' AND STATUS = 'Y'
+	</select>
+	
+	<select id="getSalesRatio" resultType="java.util.Map">
+		SELECT B.TYPE, 
+		NVL(ROUND(RATIO_TO_REPORT(SUM(P.QUANTITY)) OVER(),2) * 100,0) RATIO
+		FROM BOOK B, PAYDETAIL P
+		WHERE B.BOOKNO = P.BOOKNO(+)
+		GROUP BY B.TYPE
+	</select>
+	
+	<select id="getAgeCount" resultType="java.util.Map">
+		<![CDATA[
+		SELECT BIRTH, COUNT(*) CNT
+		  FROM (SELECT CASE WHEN               age < 20 THEN '10대'
+		                    WHEN age >= 20 AND age < 30 THEN '20대'
+		                    WHEN age >= 30 AND age < 40 THEN '30대'
+		                    WHEN age >= 40 AND age < 50 THEN '40대'
+		                    WHEN age >= 50 AND age < 60 THEN '50대'
+		                    WHEN age >= 60              THEN '60대 이상'
+		                END BIRTH
+		          FROM (SELECT TRUNC(MONTHS_BETWEEN(SYSDATE, TO_DATE(BIRTH, 'YYYYMMDD'))/12) AGE
+		                  FROM MEMBER
+		                )
+		        )
+		 GROUP BY BIRTH
+		 ORDER BY BIRTH
+		 ]]>
+	</select>
+	
+</mapper>
