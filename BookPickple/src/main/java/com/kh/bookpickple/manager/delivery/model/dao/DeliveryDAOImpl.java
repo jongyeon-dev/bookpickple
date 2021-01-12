@@ -16,8 +16,8 @@ public class DeliveryDAOImpl implements DeliveryDAO {
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<Order> selectDeliveryList() {
-		return sqlSession.selectList("deliveryMapper.selectDeliveryList");
+	public List<Order> selectDeliveryList(Order order) {
+		return sqlSession.selectList("deliveryMapper.selectDeliveryList", order);
 	}
 
 	@Override

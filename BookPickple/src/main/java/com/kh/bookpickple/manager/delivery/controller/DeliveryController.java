@@ -20,8 +20,18 @@ public class DeliveryController {
 	DeliveryService deliveryService;
 	
 	@RequestMapping("/manager/deliveryListView.do")
-	public String deliveryListView(Model model) {
-		List<Order> deliveryList = deliveryService.selectDeliveryList();
+	public String deliveryListView(@RequestParam(value="periodFrom", required=false) String periodFrom,
+									@RequestParam(value="periodTo", required=false) String periodTo,
+									@RequestParam(value="searchType", required=false) String searchType,
+									@RequestParam(value="searchKeyword", required=false) String searchKeyword,
+									Model model) {
+		Order order = new Order();
+		order.setPeriodFrom(periodFrom);
+		order.setPeriodTo(periodTo);
+		order.setSearchType(searchType);
+		order.setSearchKeyword(searchKeyword);
+		
+		List<Order> deliveryList = deliveryService.selectDeliveryList(order);
 		model.addAttribute("deliveryList", deliveryList);
 		return "manager/delivery/deliveryList";
 	}

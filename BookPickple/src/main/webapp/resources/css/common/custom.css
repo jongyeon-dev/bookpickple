@@ -959,13 +959,7 @@ form .error {
 ---------------------------*/
 .period-search {
 	margin: 0 23px;
-    vertical-align: middle;
-    align-items: center;
     display: inline-block;
-    zoom: 1;
-    display: inline;
-    text-align: left;
-    vertical-align: top;
 }
 
 .period-search ul {
@@ -973,7 +967,7 @@ form .error {
     display: inline-block;
     table-layout: fixed;
     margin-bottom: 0;
-    margin: 7px 0;
+    margin: 7px 10px 0 7px;
 }
 
 .period-search ul li {

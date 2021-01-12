@@ -16,8 +16,8 @@ public class DeliveryServiceImpl implements DeliveryService {
 	DeliveryDAO deliveryDAO;
 
 	@Override
-	public List<Order> selectDeliveryList() {
-		return deliveryDAO.selectDeliveryList();
+	public List<Order> selectDeliveryList(Order order) {
+		return deliveryDAO.selectDeliveryList(order);
 	}
 
 	@Override

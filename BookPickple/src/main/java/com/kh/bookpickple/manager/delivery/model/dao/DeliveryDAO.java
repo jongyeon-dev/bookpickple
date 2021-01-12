@@ -7,7 +7,7 @@ import com.kh.bookpickple.order.model.vo.Order;
 
 public interface DeliveryDAO {
 	
-	List<Order> selectDeliveryList();
+	List<Order> selectDeliveryList(Order order);
 	
 	List<Order> selectDeliveryDetail(Order order);
 	
