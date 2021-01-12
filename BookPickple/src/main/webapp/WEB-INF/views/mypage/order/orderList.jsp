@@ -21,8 +21,8 @@
 	</div>
 	
 	<div class="card">
-		<div class="card-body">
-			<div class="period-search">
+		<div class="card-body" style="margin: 0 auto;">
+			<div class="period-search mb-3">
 				<ul>
 					<li id="1w"><a href="${contextPath}/order/orderListView.do?userNo=${member.userNo}&searchType=1w" class="btn mb-1 btn-outline-primary btn-sm">최근 1주일</a></li>
 					<li id="1m"><a href="${contextPath}/order/orderListView.do?userNo=${member.userNo}&searchType=1m" class="btn mb-1 btn-outline-primary btn-sm">최근 1개월</a></li>
@@ -38,10 +38,10 @@
 	    				<input type="text" name="periodTo" id="periodTo"
 	    				data-language="en" class="form-control input-flat" autocomplete="off"/>
     				</span>
-    				<button type="button" class="btn mb-1 btn-flat btn-primary mb-0" onclick="periodSearch()">기간 검색</button>
+    				<button type="button" class="btn btn-flat btn-secondary" onclick="periodSearch()">기간 검색</button>
 				</div>
 			</div>
-			<div class="keyword-search">
+			<div class="keyword-search ml-4">
 				<span>
 					<select class="search-type" name="searchType" id="searchType">
 						<option value="title">주문내역</option>
@@ -52,7 +52,7 @@
 				<span class="form-group">
                     <input type="text" class="form-control input-flat" name="searchKeyword" id="searchKeyword">
                 </span>
-				<button type="button" class="btn mb-1 btn-flat btn-primary mb-0" onclick="keywordSearch()">검색</button>
+				<button type="button" class="btn btn-flat btn-secondary" onclick="keywordSearch()">검색</button>
 			</div>
 		</div>
 		

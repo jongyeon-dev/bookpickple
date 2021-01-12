@@ -149,6 +149,7 @@
 $(function($) {
 	 $('#managerDeliveryList').DataTable({
 		 lengthMenu: [ 5, 10, 20, 30, 40, 50 ],
+		 searching: false,
 		 order: [
 			 [ 0, "desc" ]
 		],

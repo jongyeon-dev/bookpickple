@@ -32,49 +32,51 @@
 		</div>
 		
 		<div class="col-md-10 offset-md-1">
-		<div class="card">
-			<div class="card-body">
-				<div class="period-search">
-					<p style="font-size: 12px">입고일 기준</p>
-					<ul>
-						<li id="1w"><a href="${contextPath}/manager/bookListView.do?searchType=1w" class="btn mb-1 btn-outline-primary btn-sm">최근 1주일</a></li>
-						<li id="1m"><a href="${contextPath}/manager/bookListView.do?searchType=1m" class="btn mb-1 btn-outline-primary btn-sm">최근 1개월</a></li>
-						<li id="3m"><a href="${contextPath}/manager/bookListView.do?searchType=3m" class="btn mb-1 btn-outline-primary btn-sm">최근 3개월</a></li>
-						<li id="6m"><a href="${contextPath}/manager/bookListView.do?searchType=6m" class="btn mb-1 btn-outline-primary btn-sm">최근 6개월</a></li>
-					</ul>
-					<div class="period">
+			<div class="card">
+				<div class="card-body" style="margin: 0 auto;">
+					<div class="period-search mb-3">
+						<p class="mb-0 text-primary font-weight-bold" style="font-size: 12px"><i class="fa fa-search"></i> 입고일 기준</p>
+						<ul>
+							<li id="1w"><a href="${contextPath}/manager/bookListView.do?searchType=1w" class="btn mb-1 btn-outline-primary btn-sm">최근 1주일</a></li>
+							<li id="1m"><a href="${contextPath}/manager/bookListView.do?searchType=1m" class="btn mb-1 btn-outline-primary btn-sm">최근 1개월</a></li>
+							<li id="3m"><a href="${contextPath}/manager/bookListView.do?searchType=3m" class="btn mb-1 btn-outline-primary btn-sm">최근 3개월</a></li>
+							<li id="6m"><a href="${contextPath}/manager/bookListView.do?searchType=6m" class="btn mb-1 btn-outline-primary btn-sm">최근 6개월</a></li>
+						</ul>
+						<div class="period">
+							<span>
+								<input type="text" name="periodFrom" id="periodFrom"
+			    				data-language="en" class="form-control input-flat" autocomplete="off"/>
+		    				</span> ~ 
+		    				<span>
+			    				<input type="text" name="periodTo" id="periodTo"
+			    				data-language="en" class="form-control input-flat" autocomplete="off"/>
+		    				</span>
+		    				<button type="button" class="btn btn-flat btn-secondary" onclick="periodSearch()">기간 검색</button>
+						</div>
+					</div>
+					<div class="keyword-search ml-4">
 						<span>
-							<input type="text" name="periodFrom" id="periodFrom"
-		    				data-language="en" class="form-control input-flat" autocomplete="off"/>
-	    				</span> ~ 
-	    				<span>
-		    				<input type="text" name="periodTo" id="periodTo"
-		    				data-language="en" class="form-control input-flat" autocomplete="off"/>
-	    				</span>
-	    				<button type="button" class="btn mb-1 btn-flat btn-primary mb-0" onclick="periodSearch()">기간 검색</button>
+							<select class="search-type" name="searchType" id="searchType">
+								<option value="title">도서명</option>
+								<option value="isbn">ISBN</option>
+								<option value="writer">저자</option>
+								<option value="publisher">출판사</option>
+							</select>
+						</span>
+						<span class="form-group">
+		                    <input type="text" class="form-control input-flat" name="searchKeyword" id="searchKeyword">
+		                </span>
+						<button type="button" class="btn btn-flat btn-secondary" onclick="keywordSearch()">검색</button>
 					</div>
 				</div>
-				<div class="keyword-search ml-4">
-					<span>
-						<select class="search-type" name="searchType" id="searchType">
-							<option value="title">도서명</option>
-							<option value="isbn">ISBN</option>
-							<option value="writer">저자</option>
-							<option value="publisher">출판사</option>
-						</select>
-					</span>
-					<span class="form-group">
-	                    <input type="text" class="form-control input-flat" name="searchKeyword" id="searchKeyword">
-	                </span>
-					<button type="button" class="btn mb-1 btn-flat btn-primary mb-0" onclick="keywordSearch()">검색</button>
-				</div>
+				
 			</div>
-			
-		</div>
 		</div>
     	
         <div class="col-md-12">
-         <button type="button" class="mb-3 btn btn-primary" onclick="location.href='${contextPath}/manager/insertBookView.do'">도서 추가</button>
+        	<div style="text-align: right;">
+        		<button type="button" class="mb-3 btn btn-primary" onclick="location.href='${contextPath}/manager/insertBookView.do'">도서 추가</button>
+        	</div>
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
