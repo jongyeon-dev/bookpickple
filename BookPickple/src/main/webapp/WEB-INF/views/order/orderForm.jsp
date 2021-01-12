@@ -129,8 +129,8 @@
 		<table class="table header-border" style="padding: 30px;">
 		  <tbody>
 		    <tr>
-		      <th class="" scope="row">배송지 선택</th>
-		      <td class="">
+		      <th scope="row">배송지 선택</th>
+		      <td>
 		      	<label class="radio-inline mr-3 col-form-label">
 	               	<input type="radio" name="destination" checked onclick="defaultDest()"> 기본 배송지
 	              </label>
@@ -140,26 +140,26 @@
 		      </td>
 		    </tr>
 		    <tr>
-		      <th class="" scope="row">수령자 이름</th>
-		      <td class="">
+		      <th scope="row">수령자 이름</th>
+		      <td>
 		      	 <input type="text" class="form-control" name="receiverName" id="receiverName" value="${member.userName}" >
 		      </td>
 		    </tr>
 		    <tr>
-		      <th class="" scope="row">수령자 이메일</th>
-		      <td class="">
+		      <th scope="row">수령자 이메일</th>
+		      <td>
 		      	 <input type="email" class="form-control" name="receiverEmail" id="receiverEmail" value="${ member.email }">
 		      </td>
 		    </tr>
 		    <tr>
-		      <th class="" scope="row">수령자 연락처</th>
-		      <td class="">
+		      <th scope="row">수령자 연락처</th>
+		      <td>
 		      	 <input type="tel" class="form-control" name="receiverTel" id="receiverTel" placeholder="ex)010-1234-5678" value="${ member.tel }">
 		      </td>
 		    </tr>
 		    <tr>
-		      <th class="" scope="row">배송 주소</th>
-		      <td class="">
+		      <th scope="row">배송 주소</th>
+		      <td>
 		      	<div style="width: 700px; float: left;">
 	                 <input type="text" name="deriveryAddr" id="zipCode" class="form-control" readonly/>
 					<input type="text" name="deriveryAddr" id="address1" class="form-control" readonly/>
@@ -173,7 +173,7 @@
 		    </tr>
 		    <tr>
 		      <th scope="row">포인트 사용</th>
-		      <td class="">
+		      <td>
 		      	<div style="width: 200px; float: left;">
 		      	 	<input type="text" class="form-control" name="usePoint" id="memberPoint" value="0" readonly>
 		      	</div>

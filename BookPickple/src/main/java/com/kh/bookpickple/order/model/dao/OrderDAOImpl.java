@@ -1,7 +1,10 @@
 package com.kh.bookpickple.order.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,13 +44,14 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public List<Order> selectOrderList(int cPage, int numPerPage, int userNo) {
-		return sqlSession.selectList("orderMapper.selectOrderList", userNo);
+	public List<Order> selectOrderList(int cPage, int numPerPage, Order order) {
+		RowBounds rows = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("orderMapper.selectOrderList", order, rows);
 	}
 
 	@Override
-	public int selectOrderTotalContents(int userNo) {
-		return sqlSession.selectOne("orderMapper.selectOrderTotalContents", userNo);
+	public int selectOrderTotalContents(Order order) {
+		return sqlSession.selectOne("orderMapper.selectOrderTotalContents", order);
 	}
 
 	@Override
@@ -64,5 +68,17 @@ public class OrderDAOImpl implements OrderDAO {
 	public int oneBookSalesCount(int bookNo) {
 		return sqlSession.selectOne("orderMapper.oneBookSalesCount", bookNo);
 	}
+
+	@Override
+	public List<Order> selectPeriodOrderList(int cPage, int numPerPage, Order order) {
+		RowBounds rows = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("orderMapper.selectPeriodOrderList", order, rows);
+	}
+
+	@Override
+	public int selectSearchTotalContent(Order order) {
+		return sqlSession.selectOne("orderMapper.selectSearchTotalContent", order);
+	}
+
 
 }

@@ -146,8 +146,6 @@ public class GoodsController {
 	@RequestMapping("/book/searchBookList.do")
 	public String searchBookList(@RequestParam String keyword, @RequestParam( value="cPage", required=false, defaultValue="1") 
 								int cPage, Model model) {
-		//List<Book> bookSearchList = goodsService.selectBookSearchList(searchWord);
-		//model.addAttribute("list", bookSearchList);
 		
 		/******** !!!!!! /book/bookList.do 랑 코드 동일 !!!!!!!!!! ********/
 		

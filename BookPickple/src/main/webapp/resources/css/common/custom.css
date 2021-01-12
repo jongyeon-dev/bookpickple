@@ -953,3 +953,66 @@ form .error {
     font-weight: normal;
     color: #666;
 }
+
+/*-------------------------
+[ search ]
+---------------------------*/
+.period-search {
+	margin: 0 23px;
+    text-align: left;
+}
+
+.period-search ul {
+	width: 317px;
+    display: inline-block;
+}
+
+.period-search ul li {
+	    width: 25%;
+    display: table-cell;
+    position: relative;
+    z-index: 1;
+    height: 28px;
+    text-align: center;
+}
+
+.period-search ul li a {
+	display: block;
+    position: relative;
+    z-index: 2;
+    height: 28px;
+}
+
+.period-search .period {
+	display: flex;
+    vertical-align: middle;
+    width: 400px;
+    float: right;
+    align-items: center;
+}
+
+.period-search .period span {
+	margin: 0 5px;
+}
+
+.period-search .period span input {
+	width: 100px;
+    padding: 0px 10px;
+    height: 40px;
+}
+
+.keyword-search .search-type {
+	float: left;
+    margin-right: 6px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+}
+.keyword-search input {
+	margin-right: 6px;
+    width: 338px;
+    float: left;
+    padding: 0px 10px;
+    height: 40px;
+}

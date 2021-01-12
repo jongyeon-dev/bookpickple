@@ -32,16 +32,61 @@
 		UPDATE BOOK SET STOCK = STOCK - #{quantity} WHERE BOOKNO = #{bookNo}
 	</update>
 	
-	<select id="selectOrderList" parameterType="_int" resultType="Order">
+	<select id="selectOrderList" parameterType="Order" resultType="Order">
 		SELECT ROWNUM, A.* 
 		FROM ( SELECT * FROM PAYRECORD 
-				WHERE USERNO = #{userNo} 
+				WHERE USERNO = #{userNo}
+				<if test="periodFrom != null and periodTo != null">
+					AND PAYDATE BETWEEN TO_DATE(#{periodFrom}) AND TO_DATE(#{periodTo})
+				</if>
+				<if test="searchType== '1w'">
+					AND PAYDATE BETWEEN SYSDATE-7 AND SYSDATE
+				</if>
+				<if test="searchType == '1m'">
+					AND PAYDATE BETWEEN ADD_MONTHS(SYSDATE, -1) AND SYSDATE
+				</if>
+				<if test="searchType == '3m'">
+					AND PAYDATE BETWEEN ADD_MONTHS(SYSDATE, -3) AND SYSDATE
+				</if>
+				<if test="searchType == '6m'">
+					AND PAYDATE BETWEEN ADD_MONTHS(SYSDATE, -6) AND SYSDATE
+				</if>
+				<if test="searchType == 'title' and searchKeyword != null and searchKeyword !=''">
+					AND ORDERTITLE LIKE '%'|| #{searchKeyword} || '%'
+				</if>
+				<if test="searchType == 'receiver' and searchKeyword != null and searchKeyword !=''">
+					AND RECEIVERNAME LIKE '%'|| #{searchKeyword} || '%'
+				</if>
+				<if test="searchType == 'orderNo' and searchKeyword != null and searchKeyword !=''">
+					AND ORDERNO LIKE '%'|| #{searchKeyword} || '%'
+				</if>  
 				ORDER BY PAYDATE DESC, ORDERNO DESC
 			) A
 	</select>
 	
 	<select id="selectOrderTotalContents" resultType="_int">
 		SELECT COUNT(*) FROM PAYRECORD WHERE USERNO = #{userNo}
+			<if test="searchType== '1w'">
+				AND PAYDATE BETWEEN SYSDATE-7 AND SYSDATE
+			</if>
+			<if test="searchType == '1m'">
+				AND PAYDATE BETWEEN ADD_MONTHS(SYSDATE, -1) AND SYSDATE
+			</if>
+			<if test="searchType == '3m'">
+				AND PAYDATE BETWEEN ADD_MONTHS(SYSDATE, -3) AND SYSDATE
+			</if>
+			<if test="searchType == '6m'">
+				AND PAYDATE BETWEEN ADD_MONTHS(SYSDATE, -6) AND SYSDATE
+			</if>
+			<if test="searchType == 'title' and searchKeyword != null and searchKeyword !=''">
+				AND ORDERTITLE LIKE '%'|| #{searchKeyword} || '%'
+			</if>
+			<if test="searchType == 'receiver' and searchKeyword != null and searchKeyword !=''">
+				AND RECEIVERNAME LIKE '%'|| #{searchKeyword} || '%'
+			</if>
+			<if test="searchType == 'orderNo' and searchKeyword != null and searchKeyword !=''">
+				AND ORDERNO LIKE '%'|| #{searchKeyword} || '%'
+			</if>
 	</select>
 	
 	<select id="selectOrderDetailList" parameterType="Order" resultType="Order">

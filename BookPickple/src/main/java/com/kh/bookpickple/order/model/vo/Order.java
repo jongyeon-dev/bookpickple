@@ -49,4 +49,9 @@ public class Order implements Serializable{
 	private String bookImage; //테이블 저장 X
 	
 	private int orderNum; // 여러 권 주문 시 리뷰 작성에 필요
+	
+	private String periodFrom; // 기간 검색 시
+	private String periodTo; // 기간 검색 시
+	private String searchType; // 검색 시 사용
+	private String searchKeyword; // 검색 시 사용
 }

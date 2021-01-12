@@ -42,13 +42,13 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> selectOrderList(int cPage, int numPerPage, int userNo) {
-		return orderDAO.selectOrderList(cPage, numPerPage, userNo);
+	public List<Order> selectOrderList(int cPage, int numPerPage, Order order) {
+		return orderDAO.selectOrderList(cPage, numPerPage, order);
 	}
 
 	@Override
-	public int selectOrderTotalContents(int userNo) {
-		return orderDAO.selectOrderTotalContents(userNo);
+	public int selectOrderTotalContents(Order order) {
+		return orderDAO.selectOrderTotalContents(order);
 	}
 
 	@Override
@@ -64,6 +64,16 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public int oneBookSalesCount(int bookNo) {
 		return orderDAO.oneBookSalesCount(bookNo);
+	}
+
+	@Override
+	public List<Order> selectPeriodOrderList(int cPage, int numPerPage, Order order) {
+		return orderDAO.selectPeriodOrderList(cPage, numPerPage, order);
+	}
+
+	@Override
+	public int selectSearchTotalContent(Order order) {
+		return orderDAO.selectSearchTotalContent(order);
 	}
 
 }

@@ -5,6 +5,9 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <c:set var="myOrderList"  value="${myOrderList}"  />
  
+<link rel="stylesheet" href="${contextPath}/resources/plugins/datepicker/datepicker.min.css" type="text/css" />
+<script src="${contextPath}/resources/plugins/datepicker/datepicker.min.js"></script>
+<script src="${contextPath}/resources/plugins/datepicker/datepicker.en.js"></script>
 <div class="col-lg-8 col-xl-9">
 
 	<div class="row page-titles">
@@ -19,8 +22,45 @@
 	
 	<div class="card">
 		<div class="card-body">
+			<div class="period-search">
+				<ul>
+					<li id="1w"><a href="${contextPath}/order/orderListView.do?userNo=${member.userNo}&searchType=1w" class="btn mb-1 btn-outline-primary btn-sm">최근 1주일</a></li>
+					<li id="1m"><a href="${contextPath}/order/orderListView.do?userNo=${member.userNo}&searchType=1m" class="btn mb-1 btn-outline-primary btn-sm">최근 1개월</a></li>
+					<li id="3m"><a href="${contextPath}/order/orderListView.do?userNo=${member.userNo}&searchType=3m" class="btn mb-1 btn-outline-primary btn-sm">최근 3개월</a></li>
+					<li id="6m"><a href="${contextPath}/order/orderListView.do?userNo=${member.userNo}&searchType=6m" class="btn mb-1 btn-outline-primary btn-sm">최근 6개월</a></li>
+				</ul>
+				<div class="period">
+					<span>
+						<input type="text" name="periodFrom" id="periodFrom"
+	    				data-language="en" class="form-control input-flat" autocomplete="off"/>
+    				</span> ~ 
+    				<span>
+	    				<input type="text" name="periodTo" id="periodTo"
+	    				data-language="en" class="form-control input-flat" autocomplete="off"/>
+    				</span>
+    				<button type="button" class="btn mb-1 btn-flat btn-primary mb-0" onclick="periodSearch()">기간 검색</button>
+				</div>
+			</div>
+			<div class="keyword-search">
+				<span>
+					<select class="search-type" name="searchType" id="searchType">
+						<option value="title">주문내역</option>
+						<option value="receiver">수령자</option>
+						<option value="orderNo">주문번호</option>
+					</select>
+				</span>
+				<span class="form-group">
+                    <input type="text" class="form-control input-flat" name="searchKeyword" id="searchKeyword">
+                </span>
+				<button type="button" class="btn mb-1 btn-flat btn-primary mb-0" onclick="keywordSearch()">검색</button>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="card">
+		<div class="card-body">
 			<div class="table-responsive custom-list mb-5">
-				<h3 class="mb-5 font-weight-bold">주문 내역</h3>
 			    <table class="table header-border" style="text-align: center;">
 			        <thead>
 			            <tr>
@@ -80,3 +120,38 @@
 	</div>
 	
 </div>
+
+<script>
+$(function($) {
+    $("#periodFrom").datepicker({
+        language: "en",
+        maxDate: new Date(),
+        todayButton: new Date(),
+        dateFormat: "yyyy/mm/dd",
+        onSelect: function onSelect(fd) {
+            $("#periodFrom").val(fd);
+        }
+    })
+    
+    $("#periodFrom").datepicker().data('datepicker').selectDate(new Date());
+    
+    $("#periodTo").datepicker({
+        language: "en",
+        maxDate: new Date(),
+        todayButton: new Date(),
+        dateFormat: "yyyy/mm/dd",
+        onSelect: function onSelect(fd) {
+            $("#periodTo").val(fd);
+        }
+    })
+
+    $("#periodTo").datepicker().data('datepicker').selectDate(new Date());
+});
+function keywordSearch() {
+	location.href = "${contextPath}/order/orderListView.do?userNo=${member.userNo}&searchType=" + $('#searchType').val() + "&searchKeyword=" + $('#searchKeyword').val();
+}
+
+function periodSearch() {
+	location.href = "${contextPath}/order/orderListView.do?userNo=${member.userNo}&periodFrom=" +  $("#periodFrom").val() + "&periodTo=" +  $("#periodTo").val();
+}
+</script>

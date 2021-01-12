@@ -162,12 +162,36 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/order/orderListView.do")
-	public String orderListView(@RequestParam int userNo,  @RequestParam( value="cPage", required=false, defaultValue="1") 
-								int cPage,  Model model) {
+	public String orderListView(@RequestParam int userNo,
+								@RequestParam(value="periodFrom", required=false) String periodFrom,
+								@RequestParam(value="periodTo", required=false) String periodTo,
+								@RequestParam(value="searchType", required=false) String searchType,
+								@RequestParam(value="searchKeyword", required=false) String searchKeyword,
+								@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,  Model model) {
+		
+		Order order = new Order();
+		order.setUserNo(userNo);
+		order.setPeriodFrom(periodFrom);
+		order.setPeriodTo(periodTo);
+		order.setSearchType(searchType);
+		order.setSearchKeyword(searchKeyword);
+		
 		int numPerPage = 10;
-		List<Order> myOrderList = orderService.selectOrderList(cPage, numPerPage, userNo);
-		int totalContents = orderService.selectOrderTotalContents(userNo);
-		String pageBar = Pagination.getPageBar(totalContents, cPage, numPerPage, "orderListView.do?userNo=" + userNo);
+		List<Order> myOrderList = orderService.selectOrderList(cPage, numPerPage, order);
+		int totalContents = orderService.selectOrderTotalContents(order);
+		String pageBar = null;
+		
+		if( order.getPeriodFrom() == null && order.getPeriodTo() == null && order.getSearchType() == null && order.getSearchKeyword()== null) {
+			pageBar = Pagination.getPageBar(totalContents, cPage, numPerPage, "orderListView.do?userNo=" + userNo);
+		} else if(order.getPeriodFrom() != null && order.getPeriodTo() != null) {
+			pageBar = Pagination.getPageBar(totalContents, cPage, numPerPage, 
+					"orderListView.do?userNo=" + userNo + "&periodFrom=" + periodFrom + "&periodTo=" + periodTo);
+		} else if(order.getSearchType() != null && order.getSearchKeyword() == "") {
+			pageBar = Pagination.getPageBar(totalContents, cPage, numPerPage, "orderListView.do?userNo=" + userNo + "&searchType=" + searchType);
+		} else if(order.getSearchType() != null && order.getSearchKeyword() != ""){
+			pageBar = Pagination.getPageBar(totalContents, cPage, numPerPage, 
+											"orderListView.do?userNo=" + userNo + "&searchType=" + searchType + "&searchKeyword=" + searchKeyword);
+		}
 	
 		model.addAttribute("myOrderList", myOrderList);
 		model.addAttribute("totalContents", totalContents);
@@ -202,5 +226,6 @@ public class OrderController {
 		model.addAttribute("isExistReview", isExistReview);
 		return "mypage/order/orderDetail";
 	}
+	
 	
 }

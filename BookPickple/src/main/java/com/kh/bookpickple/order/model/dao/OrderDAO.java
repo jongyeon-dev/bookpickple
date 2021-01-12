@@ -17,13 +17,17 @@ public interface OrderDAO {
 	
 	int updateBookStock(OrderDetail orderDetail);
 	
-	List<Order> selectOrderList(int cPage, int numPerPage, int userNo);
+	List<Order> selectOrderList(int cPage, int numPerPage, Order order);
 	
-	int selectOrderTotalContents(int userNo);
+	int selectOrderTotalContents(Order order);
 	
 	List<Order> selectOrderDetailList(Order order);
 	
 	int eachBookSalesCount(OrderDetail orderDetail);
 	
 	int oneBookSalesCount(int bookNo);
+	
+	List<Order> selectPeriodOrderList(int cPage, int numPerPage, Order order);
+	
+	int selectSearchTotalContent(Order order);
 }
