@@ -104,7 +104,7 @@ a:hover { text-decoration: none; }
 [ bxslider ]
 ---------------------------*/
 
-.slider-area { width:80%; position:relative; margin:0 auto; padding:5px;}
+.slider-area { position:relative; margin:0 auto; padding:5px;}
 
 .block-slider{
 	border:none;
@@ -112,10 +112,10 @@ a:hover { text-decoration: none; }
 }
 
 .block-slider .bx-viewport{
-	height: 369px;
+	height: 348px;
 }
 .block-slider ul li{
-	list-style: none;
+	/*width: 1150px !important;*/
 }
 .block-slider .bx-pager{
 	display: none;
@@ -169,6 +169,7 @@ a:hover { text-decoration: none; }
 .block-slider .bx-pager{
 	display: block;
     text-align: center;
+    margin-top: 20px;
 }
 .block-slider .bx-pager-item{
 	width: 15px;
@@ -205,7 +206,7 @@ a:hover { text-decoration: none; }
 	margin-top: 27px;
 }
 .block-slider .caption-group .primary{
-	color: #1bd172;
+	color: #7571f9;
 }
 
 /*-------------------------

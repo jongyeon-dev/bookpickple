@@ -11,33 +11,34 @@
 		<div class="block-slider block-slider4">
 			<ul class="" id="bxslider-home4">
 				<li>
-					<img src="http://fakeimg.pl/1163x365/?text=1">
+					<img src="${contextPath}/resources/images/common/main1.png">
 					<div class="caption-group">
 						<h2 class="caption title">
-							iPhone <span class="primary">6 <strong>Plus</strong></span>
+							이 시대의 90년생과<span class="text-warning"><em class="font-weight-bold">관종</em></span>이란?
 						</h2>
-						<h4 class="caption subtitle">Dual SIM</h4>
-						<a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+						<h4 class="caption subtitle mb-1">새로운 화두를 던지는 작가, <span class="text-warning">임홍택</span></h4>
+						<a class="caption button-radius" href="#"><span class="icon">보러 가기</span></a>
 					</div>
 				</li>
 				<li>
-					<img src="http://fakeimg.pl/1163x365/?text=2">
+					<img src="${contextPath}/resources/images/common/main2.png">
 					<div class="caption-group">
 						<h2 class="caption title">
-							by one, get one <span class="primary">50% <strong>off</strong></span>
+							The 친절한<span class="text-info"><em class="font-weight-bold"> 자바 입문</em></span>
 						</h2>
-						<h4 class="caption subtitle">school supplies & backpacks.*</h4>
-						<a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+						<h4 class="caption subtitle">앱 화면을 만들면서 재밌게 배우자!</h4>
+						<a class="caption button-radius" href="#"><span class="icon"></span>보러가기</a>
 					</div>
 				</li>
 				<li>
-					<img src="http://fakeimg.pl/1163x365/?text=3">
+					<img src="${contextPath}/resources/images/common/main3.png">
 					<div class="caption-group">
 						<h2 class="caption title">
-							Apple <span class="primary">Store <strong>Ipod</strong></span>
+							50억 자산가가 된 <br> 엄마가 전하는
+							<span class="text-primary"> 부자의<em class="font-weight-bold">비밀</em></span>
 						</h2>
-						<h4 class="caption subtitle">Select Item</h4>
-						<a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+						<h4 class="caption subtitle">재태크 노하우와 부자의 비밀을 담았다!</h4>
+						<a class="caption button-radius" href="#"><span class="icon"></span>보러가기</a>
 					</div>
 				</li>
 			</ul>
