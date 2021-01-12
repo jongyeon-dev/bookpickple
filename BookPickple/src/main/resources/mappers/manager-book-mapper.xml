@@ -4,7 +4,35 @@
 <mapper namespace="managerBookMapper">
 
 	<select id="selectBookList" resultType="Book">
-		SELECT * FROM BOOK ORDER BY CREDATE DESC, BOOKNO DESC
+		SELECT * FROM BOOK 
+			<if test="periodFrom != null and periodTo != null">
+				WHERE CREDATE BETWEEN TO_DATE(#{periodFrom}) AND TO_DATE(#{periodTo})
+			</if>
+			<if test="searchType== '1w'">
+				WHERE CREDATE BETWEEN SYSDATE-7 AND SYSDATE
+			</if>
+			<if test="searchType == '1m'">
+				WHERE CREDATE BETWEEN ADD_MONTHS(SYSDATE, -1) AND SYSDATE
+			</if>
+			<if test="searchType == '3m'">
+				WHERE CREDATE BETWEEN ADD_MONTHS(SYSDATE, -3) AND SYSDATE
+			</if>
+			<if test="searchType == '6m'">
+				WHERE CREDATE BETWEEN ADD_MONTHS(SYSDATE, -6) AND SYSDATE
+			</if>
+			<if test="searchType == 'title' and searchKeyword != null and searchKeyword !=''">
+				WHERE TITLE LIKE '%'|| #{searchKeyword} || '%'
+			</if>
+			<if test="searchType == 'isbn' and searchKeyword != null and searchKeyword !=''">
+				WHERE ISBN LIKE '%'|| #{searchKeyword} || '%'
+			</if>
+			<if test="searchType == 'writer' and searchKeyword != null and searchKeyword !=''">
+				WHERE WRITER LIKE '%'|| #{searchKeyword} || '%'
+			</if>
+			<if test="searchType == 'publisher' and searchKeyword != null and searchKeyword !=''">
+				WHERE PUBLISHER LIKE '%'|| #{searchKeyword} || '%'
+			</if>
+		ORDER BY CREDATE DESC, BOOKNO DESC
 	</select>
 
 	<!-- 처음 도서 추가할 때는 입고수량과 재고수량 같게 -->

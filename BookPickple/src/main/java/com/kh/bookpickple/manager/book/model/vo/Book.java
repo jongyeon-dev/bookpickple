@@ -41,4 +41,9 @@ public class Book implements Serializable{
 	// 필드 추가
 	private int rownum; // 도서 목록 조회 시 순번
 	private String changeFileName; // 도서 목록 조회 시 이미지
+	
+	private String periodFrom; // 기간 검색 시
+	private String periodTo; // 기간 검색 시
+	private String searchType; // 검색 시 사용
+	private String searchKeyword; // 검색 시 사용
 }

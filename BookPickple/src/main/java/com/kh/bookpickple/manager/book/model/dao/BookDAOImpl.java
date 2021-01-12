@@ -17,8 +17,8 @@ public class BookDAOImpl implements BookDAO {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<Map<String, String>> selectBookList() {
-		return sqlSession.selectList("managerBookMapper.selectBookList");
+	public List<Map<String, String>> selectBookList(Book book) {
+		return sqlSession.selectList("managerBookMapper.selectBookList", book);
 	}
 
 	@Override

@@ -18,8 +18,8 @@ public class BookServiceImpl implements BookService {
 	BookDAO bookDAO;
 	
 	@Override
-	public List<Map<String, String>> selectBookList() {
-		return bookDAO.selectBookList();
+	public List<Map<String, String>> selectBookList(Book book) {
+		return bookDAO.selectBookList(book);
 	}
 
 

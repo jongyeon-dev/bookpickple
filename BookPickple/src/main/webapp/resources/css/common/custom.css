@@ -959,16 +959,25 @@ form .error {
 ---------------------------*/
 .period-search {
 	margin: 0 23px;
+    vertical-align: middle;
+    align-items: center;
+    display: inline-block;
+    zoom: 1;
+    display: inline;
     text-align: left;
+    vertical-align: top;
 }
 
 .period-search ul {
 	width: 317px;
     display: inline-block;
+    table-layout: fixed;
+    margin-bottom: 0;
+    margin: 7px 0;
 }
 
 .period-search ul li {
-	    width: 25%;
+    width: 25%;
     display: table-cell;
     position: relative;
     z-index: 1;

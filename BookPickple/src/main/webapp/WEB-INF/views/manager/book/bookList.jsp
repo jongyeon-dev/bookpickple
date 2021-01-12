@@ -7,7 +7,9 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <head>
 <link href="${contextPath}/resources/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
-
+<link rel="stylesheet" href="${contextPath}/resources/plugins/datepicker/datepicker.min.css" type="text/css" />
+<script src="${contextPath}/resources/plugins/datepicker/datepicker.min.js"></script>
+<script src="${contextPath}/resources/plugins/datepicker/datepicker.en.js"></script>
 
 <style>
 #managerBookList_wrapper select, #managerBookList_wrapper input {
@@ -27,6 +29,48 @@
 		            <li class="breadcrumb-item"><a href="javascript:void(0)" class="text-primary">도서 목록 조회</a></li>
 		        </ol>
 		    </div>
+		</div>
+		
+		<div class="col-md-10 offset-md-1">
+		<div class="card">
+			<div class="card-body">
+				<div class="period-search">
+					<p style="font-size: 12px">입고일 기준</p>
+					<ul>
+						<li id="1w"><a href="${contextPath}/manager/bookListView.do?searchType=1w" class="btn mb-1 btn-outline-primary btn-sm">최근 1주일</a></li>
+						<li id="1m"><a href="${contextPath}/manager/bookListView.do?searchType=1m" class="btn mb-1 btn-outline-primary btn-sm">최근 1개월</a></li>
+						<li id="3m"><a href="${contextPath}/manager/bookListView.do?searchType=3m" class="btn mb-1 btn-outline-primary btn-sm">최근 3개월</a></li>
+						<li id="6m"><a href="${contextPath}/manager/bookListView.do?searchType=6m" class="btn mb-1 btn-outline-primary btn-sm">최근 6개월</a></li>
+					</ul>
+					<div class="period">
+						<span>
+							<input type="text" name="periodFrom" id="periodFrom"
+		    				data-language="en" class="form-control input-flat" autocomplete="off"/>
+	    				</span> ~ 
+	    				<span>
+		    				<input type="text" name="periodTo" id="periodTo"
+		    				data-language="en" class="form-control input-flat" autocomplete="off"/>
+	    				</span>
+	    				<button type="button" class="btn mb-1 btn-flat btn-primary mb-0" onclick="periodSearch()">기간 검색</button>
+					</div>
+				</div>
+				<div class="keyword-search ml-4">
+					<span>
+						<select class="search-type" name="searchType" id="searchType">
+							<option value="title">도서명</option>
+							<option value="isbn">ISBN</option>
+							<option value="writer">저자</option>
+							<option value="publisher">출판사</option>
+						</select>
+					</span>
+					<span class="form-group">
+	                    <input type="text" class="form-control input-flat" name="searchKeyword" id="searchKeyword">
+	                </span>
+					<button type="button" class="btn mb-1 btn-flat btn-primary mb-0" onclick="keywordSearch()">검색</button>
+				</div>
+			</div>
+			
+		</div>
 		</div>
     	
         <div class="col-md-12">
@@ -105,6 +149,7 @@
 $(function($) {
 	 $('#managerBookList').DataTable({
 		 lengthMenu: [ 10, 20, 30, 40, 50 ],
+		 searching: false,
 		 order: [
 			 [ 0, "desc" ]
 		],
@@ -113,7 +158,7 @@ $(function($) {
 	            "emptyTable": "데이터가 없습니다.",
 	            "info": "총 _TOTAL_권 중 _START_에서 _END_까지 표시",
 	            "infoEmpty": "0 개 항목 중 0 ~ 0 개 표시",
-	            "infoFiltered": "(_MAX_ 총 항목에서 필터링 됨)",
+	            "infoFiltered": "(총 _MAX_ 권 항목에서 필터링 됨)",
 	            "infoPostFix": "",
 	            "thousands": ",",
 	            "lengthMenu" : "_MENU_ 개씩 보기",
@@ -133,7 +178,39 @@ $(function($) {
 	            }
 	        }
 	 });
+
+	 $("#periodFrom").datepicker({
+	        language: "en",
+	        maxDate: new Date(),
+	        todayButton: new Date(),
+	        dateFormat: "yyyy/mm/dd",
+	        onSelect: function onSelect(fd) {
+	            $("#periodFrom").val(fd);
+	        }
+	    })
+	    
+	    $("#periodFrom").datepicker().data('datepicker').selectDate(new Date());
+	    
+	    $("#periodTo").datepicker({
+	        language: "en",
+	        maxDate: new Date(),
+	        todayButton: new Date(),
+	        dateFormat: "yyyy/mm/dd",
+	        onSelect: function onSelect(fd) {
+	            $("#periodTo").val(fd);
+	        }
+	    })
+
+	    $("#periodTo").datepicker().data('datepicker').selectDate(new Date());
 });
+
+function keywordSearch() {
+	location.href = "${contextPath}/manager/bookListView.do?searchType=" + $('#searchType').val() + "&searchKeyword=" + $('#searchKeyword').val();
+}
+
+function periodSearch() {
+	location.href = "${contextPath}/manager/bookListView.do?periodFrom=" +  $("#periodFrom").val() + "&periodTo=" +  $("#periodTo").val();
+}
 </script>
 
 </body>

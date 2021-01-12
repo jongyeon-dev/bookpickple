@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.bookpickple.common.util.Pagination;
 import com.kh.bookpickple.manager.book.model.service.BookService;
 import com.kh.bookpickple.manager.book.model.vo.Book;
 import com.kh.bookpickple.manager.book.model.vo.BookImages;
@@ -31,9 +32,19 @@ public class BookController {
 	BookService bookService;
 	
 	@RequestMapping("/manager/bookListView.do")
-	public String bookListView(Model model) {
+	public String bookListView(@RequestParam(value="periodFrom", required=false) String periodFrom,
+								@RequestParam(value="periodTo", required=false) String periodTo,
+								@RequestParam(value="searchType", required=false) String searchType,
+								@RequestParam(value="searchKeyword", required=false) String searchKeyword,
+								Model model) {
 		
-		List<Map<String, String>> list = bookService.selectBookList();
+		Book book = new Book();
+		book.setPeriodFrom(periodFrom);
+		book.setPeriodTo(periodTo);
+		book.setSearchType(searchType);
+		book.setSearchKeyword(searchKeyword);
+		
+		List<Map<String, String>> list = bookService.selectBookList(book);
 		
 		model.addAttribute("list", list);
 		return "manager/book/bookList";
@@ -187,7 +198,7 @@ public class BookController {
 			idx++;
 		}
 		
-		int result = bookService.updateBook(book, bookImages); // 그냥 book해도 되지 않나?
+		int result = bookService.updateBook(book, bookImages);
 		
 		String loc = "";
 		String msg = "";

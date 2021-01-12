@@ -8,7 +8,7 @@ import com.kh.bookpickple.manager.book.model.vo.BookImages;
 
 public interface BookDAO {
 	
-	List<Map<String, String>> selectBookList();
+	List<Map<String, String>> selectBookList(Book book);
 	
 	int insertBook(Book book);
 	
