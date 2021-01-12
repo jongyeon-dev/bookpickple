@@ -20,7 +20,4 @@ public interface OrderService {
 	
 	int oneBookSalesCount(int bookNo);
 	
-	List<Order> selectPeriodOrderList(int cPage, int numPerPage, Order order);
-	
-	int selectSearchTotalContent(Order order);
 }

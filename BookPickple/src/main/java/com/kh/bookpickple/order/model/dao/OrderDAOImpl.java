@@ -69,16 +69,4 @@ public class OrderDAOImpl implements OrderDAO {
 		return sqlSession.selectOne("orderMapper.oneBookSalesCount", bookNo);
 	}
 
-	@Override
-	public List<Order> selectPeriodOrderList(int cPage, int numPerPage, Order order) {
-		RowBounds rows = new RowBounds((cPage-1)*numPerPage, numPerPage);
-		return sqlSession.selectList("orderMapper.selectPeriodOrderList", order, rows);
-	}
-
-	@Override
-	public int selectSearchTotalContent(Order order) {
-		return sqlSession.selectOne("orderMapper.selectSearchTotalContent", order);
-	}
-
-
 }

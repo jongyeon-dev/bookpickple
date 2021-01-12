@@ -66,14 +66,4 @@ public class OrderServiceImpl implements OrderService {
 		return orderDAO.oneBookSalesCount(bookNo);
 	}
 
-	@Override
-	public List<Order> selectPeriodOrderList(int cPage, int numPerPage, Order order) {
-		return orderDAO.selectPeriodOrderList(cPage, numPerPage, order);
-	}
-
-	@Override
-	public int selectSearchTotalContent(Order order) {
-		return orderDAO.selectSearchTotalContent(order);
-	}
-
 }
