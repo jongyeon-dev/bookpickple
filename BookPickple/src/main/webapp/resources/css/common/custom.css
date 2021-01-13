@@ -115,7 +115,7 @@ a:hover { text-decoration: none; }
 	height: 348px;
 }
 .block-slider ul li{
-	/*width: 1150px !important;*/
+	width: 1150px !important;
 }
 .block-slider .bx-pager{
 	display: none;
