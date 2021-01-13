@@ -52,7 +52,7 @@
 	                    	</li>
 	                    	<li class="icons">    
 		                        <button type="button" class="btn mb-1 btn-secondary btn-flat btn-sm"
-		                        onclick="location.href='${contextPath}/manager/managerMain.do'">관리자 페이지</button>
+		                        onclick="location.href='${contextPath}/manager/managerMain.do'">현황 조회</button>
 		                    </li>
 		                    <li class="icons">    
 		                        <button type="button" class="btn mb-1 btn-outline-primary btn-flat btn-sm"
@@ -101,7 +101,7 @@
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="#">
+	                    <a href="${contextPath}/inquiry/insertInquiryView.do">
 	                         <i class="icon-note menu-icon"></i><span class="nav-text">1:1 문의하기</span>
 	                    </a>
 	                </li>

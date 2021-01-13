@@ -41,5 +41,20 @@
 		<put-attribute name="title" value="후기 등록" />
 		<put-attribute name="body" value="/WEB-INF/views/mypage/review/insertReview.jsp" />
 	</definition>
+	
+	<definition name="mypage/inquiry/inquiryList" extends="myPage">
+		<put-attribute name="title" value="1:1 문의 내역" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/inquiry/inquiryList.jsp" />
+	</definition>
+	
+	<definition name="mypage/inquiry/insertInquiry" extends="myPage">
+		<put-attribute name="title" value="1:1 문의 하기" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/inquiry/insertInquiry.jsp" />
+	</definition>
+	
+	<definition name="mypage/inquiry/inquiryDetail" extends="myPage">
+		<put-attribute name="title" value="1:1 문의 상세" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/inquiry/inquiryDetail.jsp" />
+	</definition>
 
 </tiles-definitions>

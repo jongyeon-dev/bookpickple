@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="inquiryMapper">
+
+	<select id="selectInquiryList" parameterType="_int" resultType="Inquiry">
+		SELECT * FROM INQUIRY WHERE USERNO = #{userNo}
+	</select>
+	
+	<select id="selectInquiryTotalContents" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM INQUIRY WHERE USERNO = #{userNo}
+	</select>
+	
+	<insert id="insertInquiry" parameterType="Inquiry">
+		INSERT INTO INQUIRY VALUES(
+			SEQ_INQUIRYNO.NEXTVAL, #{userNo}, #{type}, #{title}, #{content}, DEFAULT, DEFAULT, NULL, 1
+		)
+	</insert>
+	
+	<select id="selectOneInquiry" parameterType="Inquiry" resultType="Inquiry">
+		SELECT * FROM INQUIRY WHERE USERNO = #{userNo} AND INQUIRYNO = #{inquiryNo}
+	</select>
+</mapper>
