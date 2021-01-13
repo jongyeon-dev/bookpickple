@@ -29,5 +29,12 @@ public class Inquiry implements Serializable{
 	private Date creDate;
 	private String status;
 	private int refNo;
-	private int level;
+	private int clevel;
+	
+	// 추가 필드
+	private String userId; // 매니저가 문의 조회 시
+	private String periodFrom; // 기간 검색 시
+	private String periodTo; // 기간 검색 시
+	private String searchType; // 검색 시 사용
+	private String searchKeyword; // 검색 시 사용
 }

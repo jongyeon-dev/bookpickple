@@ -150,7 +150,7 @@
 	                    </a>
 	                </li>
 	                <li>
-	                    <a class="has-arrow" href="#" aria-expanded="false">
+	                    <a class="has-arrow" href="${contextPath}/manager/inquiryListView.do" aria-expanded="false">
 	                        <i class="icon-note menu-icon"></i><span class="nav-text">1:1 문의 관리</span>
 	                    </a>
 	                </li>

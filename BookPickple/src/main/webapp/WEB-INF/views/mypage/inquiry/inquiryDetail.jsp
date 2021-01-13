@@ -4,7 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
- <c:set var="orderDetail"  value="${myOrderDetailList}"  />
 <%
 	pageContext.setAttribute("crcn", "\r\n");
 	pageContext.setAttribute("br", "<br>");
@@ -38,8 +37,8 @@
 				      </td>
 				      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">문의 상태</th>
 				      <td width="140" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">
-				      	<c:if test="${inquiryDetail.status eq 'N'}"><span class="label label-primary">미답변</span></c:if>
-						<c:if test="${inquiryDetail.status eq 'Y'}"><span class="label label-secondary">답변완료</span></c:if>
+				      	<c:if test="${inquiryDetail.status eq 'N'}"><span class="label label-primary">답변 대기</span></c:if>
+						<c:if test="${inquiryDetail.status eq 'Y'}"><span class="label label-secondary">답변 완료</span></c:if>
 				      </td>
 				      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">문의 날짜</th>
 				      <td width="140" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">${inquiryDetail.creDate }</td>
@@ -50,7 +49,7 @@
 				    </tr>
 				    <tr>
 				    	<td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">문의 내용</th>
-				      	<td width="420" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">${fn:replace(inquiryDetail.content,crcn,br)}</td>
+				      	<td width="420" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;"><p>${fn:replace(inquiryDetail.content,crcn,br)}</p></td>
 				    </tr>
 				   </tbody>
 			   </table>

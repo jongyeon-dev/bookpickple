@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="answerMapper">
+
+	<select id="selectInquiryList" resultType="Inquiry">
+		SELECT I.*, M.USERID
+             FROM INQUIRY I, MEMBER M
+             WHERE I.USERNO = M.USERNO
+        <choose>
+       		<when test="periodFrom != null and periodTo != null">
+	       		AND I.CREDATE BETWEEN TO_DATE(#{periodFrom}) AND TO_DATE(#{periodTo})
+	       	</when>
+	       	<when test="searchType== '1w'">
+	       		AND I.CREDATE BETWEEN SYSDATE-7 AND SYSDATE
+	       	</when>
+	       	<when test="searchType == '1m'">
+	       		AND I.CREDATE BETWEEN ADD_MONTHS(SYSDATE, -1) AND SYSDATE
+	       	</when>
+	       	<when test="searchType == '3m'">
+	       		AND I.CREDATE BETWEEN ADD_MONTHS(SYSDATE, -3) AND SYSDATE
+	       	</when>
+	       	<when test="searchType == '6m'">
+	       		AND I.CREDATE BETWEEN ADD_MONTHS(SYSDATE, -6) AND SYSDATE
+	       	</when>
+	       	<when test="searchType == 'all' and searchKeyword != null and searchKeyword !=''">
+	       		AND I.TYPE LIKE '%'|| #{searchKeyword} || '%'
+	       		OR I.TITLE LIKE '%'|| #{searchKeyword} || '%'
+	       		OR M.USERID LIKE '%'|| #{searchKeyword} || '%'
+	       		OR I.CREDATE LIKE '%'|| #{searchKeyword} || '%'
+	       	</when>
+	       	<when test="searchType == 'title' and searchKeyword != null and searchKeyword !=''">
+	       		AND I.TITLE LIKE '%'|| #{searchKeyword} || '%'
+	       	</when>
+	       	<when test="searchType == 'userName' and searchKeyword != null and searchKeyword !=''">
+	       		AND I.USERID LIKE '%'|| #{searchKeyword} || '%'
+	       	</when>
+        </choose>
+       	START WITH CLEVEL = 1
+        CONNECT BY PRIOR INQUIRYNO = REFNO
+        ORDER SIBLINGS BY INQUIRYNO DESC
+	</select>
+	
+	<select id="selectOneInquiry" parameterType="_int" resultType="Inquiry">
+		SELECT I.*, M.USERID
+        FROM INQUIRY I, MEMBER M
+        WHERE I.USERNO = M.USERNO AND I.INQUIRYNO = #{inquiryNo}
+	</select>
+	
+	<insert id="insertAnswer" parameterType="Inquiry">
+		INSERT INTO INQUIRY VALUES(
+			SEQ_INQUIRYNO.NEXTVAL, #{userNo}, #{type}, #{title}, #{content}, DEFAULT, NULL, #{refNo}, 2
+		)
+	</insert>
+	
+	<update id="updateInquiryStatus" parameterType="int">
+		UPDATE INQUIRY SET STATUS = 'Y' WHERE INQUIRYNO = #{inquiryNo}
+	</update>
+
+</mapper>

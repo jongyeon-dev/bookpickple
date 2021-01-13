@@ -28,7 +28,7 @@
 			            	<th scope="col">유형</th>
 			                <th scope="col" width="350px;">제목</th>
 			                <th scope="col">날짜</th>
-			                <th scope="col">진행현황</th>
+			                <th scope="col">문의 상태</th>
 			            </tr>
 			        </thead>
 			        <tbody>
@@ -56,7 +56,7 @@
 											${inquiry.creDate}
 									 	</td>
 									 	<td>
-									 		<c:if test="${inquiry.status eq 'N'}"><span class="label label-primary">미답변</span></c:if>
+									 		<c:if test="${inquiry.status eq 'N'}"><span class="label label-primary">답변 대기</span></c:if>
 											<c:if test="${inquiry.status eq 'Y'}"><span class="label label-secondary">답변완료</span></c:if>
 									 	</td>
 					       			</tr>

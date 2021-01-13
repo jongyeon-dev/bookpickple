@@ -4,14 +4,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
  
-<div class="col-lg-8 col-xl-9">
+<div class="container">
 
 	<div class="row page-titles">
 	    <div class="col">
 	        <ol class="breadcrumb">
 	            <li class="breadcrumb-item"><a href="javascript:void(0)">홈</a></li>
 	            <li class="breadcrumb-item"><a href="javascript:void(0)">마이 페이지</a></li>
-	            <li class="breadcrumb-item"><a href="javascript:void(0)" class="text-primary">1:1 문의 하기</a></li>
+	            <li class="breadcrumb-item"><a href="javascript:void(0)" class="text-primary">1:1 문의 답변 하기</a></li>
 	        </ol>
 	    </div>
 	</div>
@@ -75,7 +75,8 @@ $(function($) {
             			userNo: ${member.userNo},
         				type: $("#type").val(),
         				title: $("#title").val(),
-        				content: $("#content").val()
+        				content: $("#content").val(),
+        				refNo: $("#refNo").val()
         			},
         			success: function(data){
         				if(data.trim() == "success") {

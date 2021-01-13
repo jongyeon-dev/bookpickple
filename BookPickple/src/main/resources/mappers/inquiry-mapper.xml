@@ -4,7 +4,11 @@
 <mapper namespace="inquiryMapper">
 
 	<select id="selectInquiryList" parameterType="_int" resultType="Inquiry">
-		SELECT * FROM INQUIRY WHERE USERNO = #{userNo}
+		SELECT * FROM INQUIRY
+             WHERE USERNO = #{userNo}
+             START WITH CLEVEL = 1
+	        CONNECT BY PRIOR INQUIRYNO = REFNO
+	        ORDER SIBLINGS BY INQUIRYNO DESC
 	</select>
 	
 	<select id="selectInquiryTotalContents" parameterType="_int" resultType="_int">
@@ -13,7 +17,7 @@
 	
 	<insert id="insertInquiry" parameterType="Inquiry">
 		INSERT INTO INQUIRY VALUES(
-			SEQ_INQUIRYNO.NEXTVAL, #{userNo}, #{type}, #{title}, #{content}, DEFAULT, DEFAULT, NULL, 1
+			SEQ_INQUIRYNO.NEXTVAL, #{userNo}, #{type}, #{title}, #{content}, DEFAULT, 'N', NULL, 1
 		)
 	</insert>
 	

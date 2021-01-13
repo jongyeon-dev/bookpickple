@@ -61,4 +61,14 @@
        <put-attribute name="body" value="/WEB-INF/views/manager/mail/sendMail.jsp" />
     </definition>
     
+    <definition name="manager/inquiry/inquiryList" extends="managerLayout">
+       <put-attribute name="title" value="1:1 문의 내역 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/manager/inquiry/inquiryList.jsp" />
+    </definition>
+    
+    <definition name="manager/inquiry/inquiryDetail" extends="managerLayout">
+       <put-attribute name="title" value="1:1 문의 상세 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/manager/inquiry/inquiryDetail.jsp" />
+    </definition>
+    
 </tiles-definitions>
