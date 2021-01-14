@@ -56,5 +56,10 @@
 		<put-attribute name="title" value="1:1 문의 상세" />
 		<put-attribute name="body" value="/WEB-INF/views/mypage/inquiry/inquiryDetail.jsp" />
 	</definition>
+	
+	<definition name="mypage/inquiry/inquiryAllDetail" extends="myPage">
+		<put-attribute name="title" value="1:1 문의 상세" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/inquiry/inquiryAllDetail.jsp" />
+	</definition>
 
 </tiles-definitions>

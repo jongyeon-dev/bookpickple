@@ -63,4 +63,15 @@ public class InquiryController {
 		
 		return "mypage/inquiry/inquiryDetail";
 	}
+	
+	@RequestMapping("/inquiry/inquiryAllDetail.do")
+	public String inquiryAllDetail(Inquiry inquiry, @RequestParam int inquiryNo, @RequestParam int refNo, Model model) {
+		inquiry.setInquiryNo(inquiryNo);
+		inquiry.setRefNo(inquiryNo);
+		
+		List<Inquiry> inquiryAllDetail = inquiryService.selectOneInquriyList(inquiry);
+		model.addAttribute("inquiryAllDetail", inquiryAllDetail);
+		
+		return "mypage/inquiry/inquiryAllDetail";
+	}
 }

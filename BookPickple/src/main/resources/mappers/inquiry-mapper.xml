@@ -4,11 +4,10 @@
 <mapper namespace="inquiryMapper">
 
 	<select id="selectInquiryList" parameterType="_int" resultType="Inquiry">
-		SELECT * FROM INQUIRY
-             WHERE USERNO = #{userNo}
-             START WITH CLEVEL = 1
-	        CONNECT BY PRIOR INQUIRYNO = REFNO
-	        ORDER SIBLINGS BY INQUIRYNO DESC
+		SELECT ROWNUM, A.*
+		FROM ( SELECT * FROM INQUIRY
+        WHERE USERNO = #{userNo}
+        ORDER BY INQUIRYNO DESC ) A
 	</select>
 	
 	<select id="selectInquiryTotalContents" parameterType="_int" resultType="_int">
@@ -23,5 +22,12 @@
 	
 	<select id="selectOneInquiry" parameterType="Inquiry" resultType="Inquiry">
 		SELECT * FROM INQUIRY WHERE USERNO = #{userNo} AND INQUIRYNO = #{inquiryNo}
+	</select>
+	
+	<select id="selectOneInquiryList" parameterType="Inquiry" resultType="Inquiry">
+		SELECT I.* , (SELECT USERID FROM MEMBER
+                       WHERE USERNO = I.USERNO ) USERID
+		FROM INQUIRY I
+		WHERE INQUIRYNO = #{inquiryNo} OR REFNO = #{refNo} 
 	</select>
 </mapper>

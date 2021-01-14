@@ -50,14 +50,19 @@
 					       					<c:if test="${inquiry.type eq 'ETC'}">기타</c:if>
 									 	</td>
 									 	<td>
-									 		<a href="${contextPath}/inquiry/inquiryDetail.do?userNo=${member.userNo}&inquiryNo=${inquiry.inquiryNo}" class="font-weight-bold">${inquiry.title}</a>
+									 		<c:if test="${inquiry.status eq 'N'}">
+									 			<a href="${contextPath}/inquiry/inquiryDetail.do?userNo=${member.userNo}&inquiryNo=${inquiry.inquiryNo}" class="font-weight-bold">${inquiry.title}</a>
+									 		</c:if>
+									 		<c:if test="${inquiry.status eq 'Y'}">
+									 			<a href="${contextPath}/inquiry/inquiryAllDetail.do?inquiryNo=${inquiry.inquiryNo}&refNo=${inquiry.inquiryNo}" class="font-weight-bold">${inquiry.title}</a>
+									 		</c:if>
 									 	</td>	
 									 	<td>
 											${inquiry.creDate}
 									 	</td>
 									 	<td>
 									 		<c:if test="${inquiry.status eq 'N'}"><span class="label label-primary">답변 대기</span></c:if>
-											<c:if test="${inquiry.status eq 'Y'}"><span class="label label-secondary">답변완료</span></c:if>
+											<c:if test="${inquiry.status eq 'Y'}"><span class="label label-secondary">답변 완료</span></c:if>
 									 	</td>
 					       			</tr>
 				      			</c:forEach>

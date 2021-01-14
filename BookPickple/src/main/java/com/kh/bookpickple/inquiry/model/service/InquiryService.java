@@ -14,4 +14,6 @@ public interface InquiryService {
 	int insertInquiry(Inquiry inquiry);
 	
 	Inquiry selectOneInquiry(Inquiry inquiry);
+	
+	List<Inquiry> selectOneInquriyList(Inquiry inquiry);
 }

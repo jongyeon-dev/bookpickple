@@ -36,4 +36,9 @@ public class InquiryDAOImpl implements InquiryDAO {
 		return sqlSession.selectOne("inquiryMapper.selectOneInquiry", inquiry);
 	}
 
+	@Override
+	public List<Inquiry> selectOneInquriyList(Inquiry inquiry) {
+		return sqlSession.selectList("inquiryMapper.selectOneInquiryList", inquiry);
+	}
+
 }

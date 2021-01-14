@@ -16,8 +16,8 @@
 	        <ol class="breadcrumb">
 	            <li class="breadcrumb-item"><a href="javascript:void(0)">홈</a></li>
 	            <li class="breadcrumb-item"><a href="javascript:void(0)">마이 페이지</a></li>
-	            <li class="breadcrumb-item"><a href="javascript:void(0)">주문 내역 조회</a></li>
-	            <li class="breadcrumb-item"><a href="javascript:void(0)" class="text-primary">주문 내역 상세</a></li>
+	            <li class="breadcrumb-item"><a href="javascript:void(0)">1:1 문의 내역 조회</a></li>
+	            <li class="breadcrumb-item"><a href="javascript:void(0)" class="text-primary">1:1 문의 내역 상세</a></li>
 	        </ol>
 	    </div>
 	</div>
@@ -54,20 +54,6 @@
 				   </tbody>
 			   </table>
 			</div>
-			
-			<c:if test="${inquiryDetail.status eq 'Y'}">
-				<div class="table-responsive custom-list mt-5 mb-5">
-					<h4 class="mb-5 font-weight-bold">결제 정보</h4>
-					<table class="table header-border" style="padding: 30px;">
-					  <tbody>
-					    <tr>
-					      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">답변</th>
-					      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;"></td>
-					    </tr>
-					   </tbody>
-				   </table>
-				</div>
-			</c:if>
 			
 			<div class="text-center">
 				<button type="button" class="btn mb-1 btn-outline-primary btn-flat" onclick="javascirpt:history.back()">목록으로 돌아가기</button>

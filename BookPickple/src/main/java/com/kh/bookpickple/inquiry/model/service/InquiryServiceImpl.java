@@ -34,4 +34,9 @@ public class InquiryServiceImpl implements InquiryService {
 		return inquiryDAO.selectOneInquiry(inquiry);
 	}
 
+	@Override
+	public List<Inquiry> selectOneInquriyList(Inquiry inquiry) {
+		return inquiryDAO.selectOneInquriyList(inquiry);
+	}
+
 }

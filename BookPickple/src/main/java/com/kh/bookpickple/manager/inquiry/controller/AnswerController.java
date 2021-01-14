@@ -45,8 +45,6 @@ public class AnswerController {
 		return "manager/inquiry/inquiryDetail";
 	}
 	
-
-	
 	@RequestMapping("/manager/insertAnswerEnd.do")
 	@ResponseBody
 	public String insertAnswer(@RequestParam int inquiryNo, Inquiry inquiry) {
