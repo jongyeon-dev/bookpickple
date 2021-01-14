@@ -157,7 +157,7 @@
 			</div>
 			
 			<div class="text-center">
-				<button type="button" class="btn mb-1 btn-outline-primary btn-flat" onclick="javascirpt:history.back()">목록으로 돌아가기</button>
+				<button type="button" class="btn mb-1 btn-outline-primary btn-flat" onclick="location.href='${contextPath}/order/orderListView.do?userNo=${member.userNo}'">목록으로 돌아가기</button>
 			</div>
 			
 		</div>
