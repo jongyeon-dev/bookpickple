@@ -165,7 +165,7 @@
 							<div class="bestseller-content">
 								<h3>${bestList.rownum}</h3>
 								<div class="bestseller">
-									<a href="${contextPath}/resources/bookFileRepo/${bestList.bookNo}/${bestList.changeFileName}">
+									<a href="${contextPath}/book/detailBookView.do?bookNo=${bestList.bookNo}">
 	  									<div class="book-info">
 						                	<p class="book-title">${bestList.title}</p>
 						                	<p class="book-publish">

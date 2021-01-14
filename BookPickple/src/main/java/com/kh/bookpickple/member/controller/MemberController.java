@@ -3,6 +3,9 @@ package com.kh.bookpickple.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -126,9 +129,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/memberLogout.do")
-	public ModelAndView memberLogout(SessionStatus sessionStatus) {
+	public ModelAndView memberLogout(SessionStatus sessionStatus, HttpServletRequest request) {
 		
 		ModelAndView mv = new ModelAndView();
+		HttpSession session = request.getSession(false);
 
 		String loc = "";
 		String msg = "";
@@ -138,6 +142,12 @@ public class MemberController {
 			msg = "로그아웃 되었습니다.";
 			mv.addObject("isLogin", false);
 			sessionStatus.setComplete();
+			
+			// 다른 controller에서 session으로 연결한 부분들도 끊기
+			// ex) 최근 본 도서.. 이게 없으면 로그아웃해도 계속 최근 본 도서가 유지되고있음.
+			if( session != null) {
+				session.invalidate();  
+			}
 			
 		}
 		mv.addObject("msg", msg);
