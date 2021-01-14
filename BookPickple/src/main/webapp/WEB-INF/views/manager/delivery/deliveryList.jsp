@@ -58,7 +58,6 @@
 							<select class="search-type" name="searchType" id="searchType">
 								<option value="orderNo">주문번호</option>
 								<option value="orderTitle">주문 내역</option>
-								<option value="deliveryStatus">배송 상태</option>
 							</select>
 						</span>
 						<span class="form-group">
@@ -75,6 +74,16 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
+                    	<div style="float: right; font-size: 12px;">
+	                    	<span>주문상태</span>
+	                    	<select id="searchStatus">
+	                    		<option value="all">전체</option>
+	                    		<option value="PAY">결제완료</option>
+	                    		<option value="PREPARED">배송준비중</option>
+	                    		<option value="DELIVERING">배송중</option>
+	                    		<option value="FINISHED">배송완료</option>
+	                    	</select>
+                    	</div>
                         <table class="table zero-configuration" id="managerDeliveryList" style="font-size:12px;">
                             <thead>
                                 <tr>
@@ -88,12 +97,16 @@
                             </thead>
                             <tbody>
                             <c:choose>
-							     <c:when test="${empty deliveryList}">			
-										<tr>
-									       <td colspan="9" class="fixed">
-											  <p class="font-weight-bold">조회된 주문내역이 없습니다.</p>
-										   </td>
-									     </tr>
+							     <c:when test="${empty deliveryList}">
+							     	<!-- dataTable에서 colspan을 지원하지 않아서 데이터가 없을때 error발생하여 이렇게 구성 -->			
+									<tr>
+								       <td style="visibility: hidden;"></td>
+									   <td style="visibility: hidden;"></td>
+									    <td style="visibility: hidden;"></td>
+									    <td><p class="font-weight-bold">조회된 주문내역이 없습니다.</p></td>
+									    <td style="visibility: hidden;"></td>
+									    <td style="visibility: hidden;"></td>
+								     </tr>
 								 </c:when>
 								 <c:otherwise>
 								     <c:forEach var="item" items="${deliveryList}" varStatus="i">
@@ -202,6 +215,32 @@ $(function($) {
 	    })
 
 	    $("#periodTo").datepicker().data('datepicker').selectDate(new Date());
+
+
+	    // 검색 한 후 searchType selectbox 유지
+	    var url = location.href;
+
+	    if(url.indexOf("1w") > -1) {
+	    	$("#1w a").attr('class','btn mb-1 btn-primary btn-sm');
+		} else if (url.indexOf("1m") > -1) {
+			$("#1m a").attr('class','btn mb-1 btn-primary btn-sm');
+		} else if (url.indexOf("3m") > -1) {
+			$("#3m a").attr('class','btn mb-1 btn-primary btn-sm');
+		} else if (url.indexOf("6m") > -1) {
+			$("#6m a").attr('class','btn mb-1 btn-primary btn-sm');
+		} else if (url.indexOf("orderNo") > -1) {
+		     $("#searchType").val("orderNo").prop("selected", true);
+		} else if (url.indexOf("orderTitle") > -1) {
+		     $("#searchType").val("orderTitle").prop("selected", true);
+		} else if (url.indexOf("PAY") > -1) {
+		     $("#searchStatus").val("PAY").prop("selected", true);
+		} else if (url.indexOf("PREPARED") > -1 ) {
+			$("#searchStatus").val("PREPARED").prop("selected", true);
+		} else if (url.indexOf("DELIVERING") > -1 ) {
+			$("#searchStatus").val("DELIVERING").prop("selected", true);
+		} else if (url.indexOf("FINISHED") > -1 ) {
+			$("#searchStatus").val("FINISHED").prop("selected", true);
+		}
 });
 </script>
 
@@ -213,6 +252,14 @@ function keywordSearch() {
 function periodSearch() {
 	location.href = "${contextPath}/manager/deliveryListView.do?periodFrom=" +  $("#periodFrom").val() + "&periodTo=" +  $("#periodTo").val();
 }
+
+$("#searchStatus").change(function() {
+	if($(this).val() == 'all') {
+		location.href = "${contextPath}/manager/deliveryListView.do";
+	} else {
+		location.href = "${contextPath}/manager/deliveryListView.do?searchType=deliveryStatus&searchKeyword=" + $(this).val();
+	}
+});
 
 function updateStatus(orderNo, selectBoxValue, userNo) {
 	$.ajax({

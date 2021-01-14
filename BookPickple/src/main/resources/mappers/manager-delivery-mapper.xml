@@ -8,37 +8,28 @@
 		FROM PAYRECORD P, PAYDETAIL PD
 		WHERE P.ORDERNO = PD.ORDERNO
 		<if test="periodFrom != null and periodTo != null">
-			AND PAYDATE BETWEEN TO_DATE(#{periodFrom}) AND TO_DATE(#{periodTo})
+			AND P.PAYDATE BETWEEN TO_DATE(#{periodFrom}) AND TO_DATE(#{periodTo})
 		</if>
 		<if test="searchType== '1w'">
-			AND PAYDATE BETWEEN SYSDATE-7 AND SYSDATE
+			AND P.PAYDATE BETWEEN SYSDATE-7 AND SYSDATE
 		</if>
 		<if test="searchType == '1m'">
-			AND PAYDATE BETWEEN ADD_MONTHS(SYSDATE, -1) AND SYSDATE
+			AND P.PAYDATE BETWEEN ADD_MONTHS(SYSDATE, -1) AND SYSDATE
 		</if>
 		<if test="searchType == '3m'">
-			AND PAYDATE BETWEEN ADD_MONTHS(SYSDATE, -3) AND SYSDATE
+			AND P.PAYDATE BETWEEN ADD_MONTHS(SYSDATE, -3) AND SYSDATE
 		</if>
 		<if test="searchType == '6m'">
-			AND PAYDATE BETWEEN ADD_MONTHS(SYSDATE, -6) AND SYSDATE
+			AND P.PAYDATE BETWEEN ADD_MONTHS(SYSDATE, -6) AND SYSDATE
 		</if>
 		<if test="searchType == 'orderNo' and searchKeyword != null and searchKeyword !=''">
-			AND ORDERNO LIKE '%'|| #{searchKeyword} || '%'
+			AND P.ORDERNO LIKE '%'|| #{searchKeyword} || '%'
 		</if>
 		<if test="searchType == 'orderTitle' and searchKeyword != null and searchKeyword !=''">
-			AND ORDERTITLE LIKE '%'|| #{searchKeyword} || '%'
+			AND P.ORDERTITLE LIKE '%'|| #{searchKeyword} || '%'
 		</if>
-		<if test="searchType == 'deliveryStatus' and searchKeyword == '결제완료'">
-			AND DELIVERYSTATUS LIKE '%'|| 'PAY' || '%'
-		</if>
-		<if test="searchType == 'deliveryStatus' and searchKeyword == '배송준비중'">
-			AND DELIVERYSTATUS LIKE '%'|| 'PREPARED' || '%'
-		</if>
-		<if test="searchType == 'deliveryStatus' and searchKeyword == '배송중'">
-			AND DELIVERYSTATUS LIKE '%'|| 'DELIVERING' || '%'
-		</if>
-		<if test="searchType == 'deliveryStatus' and searchKeyword == '배송완료'">
-			AND DELIVERYSTATUS LIKE '%'|| 'FINISHED' || '%'
+		<if test="searchType == 'deliveryStatus' and searchKeyword != null and searchKeyword !=''">
+			AND P.DELIVERYSTATUS LIKE '%'|| #{searchKeyword} || '%'
 		</if>
 	</select>
 	
