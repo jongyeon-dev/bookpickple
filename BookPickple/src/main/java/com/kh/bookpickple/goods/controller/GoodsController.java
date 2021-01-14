@@ -1,20 +1,18 @@
 package com.kh.bookpickple.goods.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -200,9 +198,9 @@ public class GoodsController {
 	private void addQuickList(int bookNo, Book quickBook, HttpSession session) {
 		boolean exist =false;
 		List<Book> quickBooksList=(ArrayList<Book>)session.getAttribute("quickBooksList");
-	
+		
 		if(quickBooksList!=null){
-			if(quickBooksList.size() < 5){
+			if(quickBooksList.size() < 5){ 
 				for(int i = 0; i < quickBooksList.size(); i++){
 					Book book= (Book) quickBooksList.get(i);
 					if(bookNo == book.getBookNo()){
@@ -220,6 +218,7 @@ public class GoodsController {
 			quickBooksList.add(quickBook);
 			
 		}
+		
 		session.setAttribute("quickBooksList", quickBooksList);
 		session.setAttribute("quickBooksListNum", quickBooksList.size());
 		

@@ -20,7 +20,7 @@
 		      <c:forEach var="book" items="${quickBooksList}" varStatus="bookNum">
 		         <c:choose>
 		           <c:when test="${bookNum.count==1 }">
-				      <a href="${contextPath}/book/detailBookView.do?bookNo=${book.bookNo}">
+				      <a href="${contextPath}/book/detailBookView.do?bookNo=${book.bookNo}" id="bookLink">
 				  	         <img width="75" height="95" id="quickBookImage"  
 				                 src="${contextPath}/resources/bookFileRepo/${book.bookNo}/${book.changeFileName}">
 				      </a>
@@ -53,6 +53,7 @@
 	var index = 0;
 	
 	function nextBook(){
+		var bookLink = document.getElementById("bookLink");
 		var bookImage = document.getElementById("quickBookImage");
 		var currentBook = document.getElementById("currentBook");
 		var bookNo = document.frm_sticky.bookNo;
@@ -69,7 +70,8 @@
 		var nextBookNo = bookNo[index].value;
 		
 		var nextFileName = bookFileName[index].value;
-		
+
+		bookLink.setAttribute("href", "${contextPath}/book/detailBookView.do?bookNo=" + nextBookNo);
 		bookImage.src = "${contextPath}/resources/bookFileRepo/" + nextBookNo + "/" + nextFileName;
 
 		currentBook.innerHTML = index+1;
@@ -78,7 +80,8 @@
 
 
  function preBook(){
-	 var bookImage = document.getElementById("quickBookImage");
+	 	var bookLink = document.getElementById("bookLink");
+	 	var bookImage = document.getElementById("quickBookImage");
 		var currentBook = document.getElementById("currentBook");
 		var bookNo = document.frm_sticky.bookNo;
 		var bookFileName = document.frm_sticky.bookFileName;
@@ -93,9 +96,10 @@
 
 		var preBookNo = bookNo[index].value;
 
-		var nextFileName = bookFileName[index].value;
-
-		bookImage.src = "${contextPath}/resources/bookFileRepo/" + preBookNo + "/" + nextFileName;
+		var preFileName = bookFileName[index].value;
+		
+		bookLink.setAttribute("href", "${contextPath}/book/detailBookView.do?bookNo=" + preBookNo);
+		bookImage.src = "${contextPath}/resources/bookFileRepo/" + preBookNo + "/" + preFileName;
 
 		currentBook.innerHTML = index+1;
 
