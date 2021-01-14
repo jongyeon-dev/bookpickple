@@ -25,7 +25,7 @@
                              <div class="form-group row">
                              	<label class="col-sm-3 col-form-label" for="userId">아이디</label>
 	                             <div class="col-sm-9">
-	                                  <input type="text" class="form-control" name="userId" id="userId" maxlength="20" autocomplete="off">
+	                                  <input type="text" class="form-control" name="userId" id="userId" maxlength="20" autocomplete="off" autofocus>
 	                                  <small id="reqId" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
 	                             </div>
                              </div>

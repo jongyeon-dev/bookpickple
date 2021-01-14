@@ -72,7 +72,7 @@
 	                <div class="form-group row">
 	                	<label class="col-sm-3 col-form-label" for="tel">연락처<span class="text-danger">*</span></label>
 	                 <div class="col-sm-9">
-	                      <input type="tel" class="form-control" name="tel" id="tel" placeholder="ex)010-1234-5678" value="${ member.tel }">
+	                      <input type="tel" class="form-control" name="tel" id="tel" placeholder="ex)010-1234-5678" value="${ member.tel }" autocomplete="off">
 	                      <small id="validateTel" class="form-text text-danger" style="display:none;">입력하신 연락처 형식이 올바르지 않습니다.</small>
 	                      <small id="reqTel" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
 	                 </div>
@@ -86,7 +86,7 @@
 	                <div class="form-group row">
 	                	<label class="col-sm-3 col-form-label" for="email">이메일<span class="text-danger">*</span></label>
 	                 <div class="col-sm-9">
-	                      <input type="email" class="form-control" name="email" id="email" value="${ member.email }">
+	                      <input type="email" class="form-control" name="email" id="email" value="${ member.email }" autocomplete="off">
 	                      <small id="infoEmail" class="form-text text-muted">비밀번호 찾기 시에 사용할 이메일을 입력해주세요.</small>
 	                      <small id="okEmail" class="form-text text-success" style="display:none;">사용 가능한 이메일입니다.</small>
 	                      <small id="duplicateEmail" class="form-text text-danger" style="display:none;">이미 사용중인 이메일입니다.</small>
@@ -111,7 +111,7 @@
 	                  <div class="col-sm-7">
 	                      	<input type="text" name="address" id="zipCode" class="form-control" readonly/>
 							<input type="text" name="address" id="address1" class="form-control" readonly/>
-							<input type="text" name="address" id="address2" class="form-control" placeholder="상세 주소 입력"/>
+							<input type="text" name="address" id="address2" class="form-control" placeholder="상세 주소 입력" autocomplete="off"/>
 							<input type="hidden" name="dbAddress" id="dbAddress" value="${member.address}" />
 							<small id="reqAddr" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
 	                 </div>

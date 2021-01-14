@@ -11,7 +11,7 @@
 <body>
 	 <div class="container-fluid h-100">
 	     <div class="row justify-content-center h-100">
-	         <div class="col-xl-6">
+	         <div class="col-xl-4">
 	             <div class="form-input-content">
 	                 <div class="card mb-0">
 	                     <div class="card-body pt-3 pb-3">
@@ -25,7 +25,7 @@
 	                             <div class="form-group row">
 	                             	<label class="col-sm-3 col-form-label" for="userId">아이디<span class="text-danger">*</span></label>
 		                             <div class="col-sm-9">
-		                                  <input type="text" class="form-control" name="userId" id="userId" maxlength="20">
+		                                  <input type="text" class="form-control" name="userId" id="userId" maxlength="20" autocomplete="off" autofocus>
 		                                  <small id="infoId" class="form-text text-muted">영문 소문자로 시작해야하며 5~20자로 입력해주세요.</small>
 		                                  <small id="okId" class="form-text text-success" style="display:none;">사용 가능한 아이디입니다.</small>
 		                                  <small id="duplicateId" class="form-text text-danger" style="display:none;">이미 사용중인 아이디입니다.</small>
@@ -57,7 +57,7 @@
 	                             <div class="form-group row">
 	                             	<label class="col-sm-3 col-form-label" for="userName">이름<span class="text-danger">*</span></label>
 		                             <div class="col-sm-9">
-		                                  <input type="text" class="form-control" name="userName" id="userName" maxlength="5">
+		                                  <input type="text" class="form-control" name="userName" id="userName" maxlength="5" autocomplete="off">
 		                                  <small id="infoName" class="form-text text-muted">한글로 2~5자 입력 가능합니다.</small>
 		                                  <small id="validateName" class="form-text text-danger" style="display:none;">한글로 2~5자 입력 가능합니다.</small>
 		                                  <small id="reqName" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
@@ -77,7 +77,7 @@
 	                             <div class="form-group row">
 	                             	<label class="col-sm-3 col-form-label" for="tel">연락처<span class="text-danger">*</span></label>
 		                             <div class="col-sm-9">
-		                                  <input type="tel" class="form-control" name="tel" id="tel" placeholder="ex)010-1234-5678">
+		                                  <input type="tel" class="form-control" name="tel" id="tel" placeholder="ex)010-1234-5678" autocomplete="off">
 		                                  <small id="validateTel" class="form-text text-danger" style="display:none;">입력하신 연락처 형식이 올바르지 않습니다.</small>
 		                                  <small id="reqTel" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
 		                             </div>
@@ -85,7 +85,7 @@
 	                             <div class="form-group row">
 	                             	<label class="col-sm-3 col-form-label" for="birth">생년월일<span class="text-danger">*</span></label>
 		                             <div class="col-sm-9">
-		                                  <input type="text" class="form-control" name="birth" id="birth" placeholder="ex)19800101">
+		                                  <input type="text" class="form-control" name="birth" id="birth" placeholder="ex)19800101" autocomplete="off">
 		                                  <small id="validateBirth" class="form-text text-danger" style="display:none;">입력하신 생년월일 형식이 올바르지 않습니다.</small>
 		                                  <small id="reqBirth" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
 		                             </div>
@@ -93,7 +93,7 @@
 	                             <div class="form-group row">
 	                             	<label class="col-sm-3 col-form-label" for="email">이메일<span class="text-danger">*</span></label>
 		                             <div class="col-sm-9">
-		                                  <input type="email" class="form-control" name="email" id="email">
+		                                  <input type="email" class="form-control" name="email" id="email" autocomplete="off">
 		                                  <small id="infoEmail" class="form-text text-muted">비밀번호 찾기 시에 사용할 이메일을 입력해주세요.</small>
 		                                  <small id="okEmail" class="form-text text-success" style="display:none;">사용 가능한 이메일입니다.</small>
 		                                  <small id="duplicateEmail" class="form-text text-danger" style="display:none;">이미 사용중인 이메일입니다.</small>
@@ -118,7 +118,7 @@
 		                             <div class="col-sm-7">
 	                                  	<input type="text" name="address" id="zipCode" class="form-control" readonly/>
 			    						<input type="text" name="address" id="address1" class="form-control" readonly/>
-			    						<input type="text" name="address" id="address2" class="form-control" placeholder="상세 주소 입력"/>
+			    						<input type="text" name="address" id="address2" class="form-control" placeholder="상세 주소 입력" autocomplete="off"/>
 				   						<small id="reqAddr" class="form-text text-danger" style="display:none;">필수 입력 사항 입니다.</small>
 				   						
 		                             </div>
@@ -392,7 +392,7 @@
 			/* 생년월일 */
 			$("#birth").blur(function() {
 				var birth = $("#birth").val();
-				var birthReg = /^(19|20)[0-9]{2}(0[1-9]|1[1-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+				var birthReg = /^(19|20)[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 
 				if(birth.length == 0 || birth == "") {
 					// 생년월일을 입력하지 않았으면 req 메세지 보여주기
