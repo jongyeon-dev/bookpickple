@@ -7,7 +7,7 @@
 		INSERT INTO PAYRECORD VALUES (
 			SEQ_ORDERNO.NEXTVAL, #{userNo}, #{bookNo}, #{orderTitle}, #{ordererName}, #{totalQuantity},
 			#{totalPrice}, #{totalPoint}, #{receiverName}, #{receiverEmail}, #{receiverTel}, #{deliveryAddr},
-			DEFAULT, DEFAULT, DEFAULT, #{usePoint}
+			DEFAULT, DEFAULT, DEFAULT, #{usePoint}, NULL
 		)
 	</insert>
 	

@@ -37,6 +37,7 @@ public class Order implements Serializable{
 	private Date payDate;
 	private String deliveryStatus;
 	private int usePoint;
+	private String invoiceNo;
 	
 	// 추가 필드 -- 주문작성 시 사용(세션)
 	// 하기 정보를 세션에서 사용하다 insert시 orderDetail에 넣는다. 

@@ -44,8 +44,6 @@
 										<c:when test="${orderDetail[0].deliveryStatus eq 'PREPARED'}"><span class="badge badge-primary">배송준비중</span></c:when>
 										<c:when test="${orderDetail[0].deliveryStatus eq 'DELIVERING'}"><span class="badge badge-info">배송중</span></c:when>
 										<c:when test="${orderDetail[0].deliveryStatus eq 'FINISHED'}"><span class="badge badge-success">배송완료</span></c:when>
-										<c:when test="${orderDetail[0].deliveryStatus eq 'CANCEL'}"><span class="badge badge-danger">주문취소</span></c:when>
-										<c:when test="${orderDetail[0].deliveryStatus eq 'RETURN'}"><span class="badge badge-warning">반품</span></c:when>
 									</c:choose>
 							 	</td>
 							 	<td>
@@ -116,7 +114,7 @@
 				      <td colspan="3" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">
 						
 				      	<c:if test="${orderDetail[0].deliveryStatus ne 'PAY' and orderDetail[0].deliveryStatus ne 'PREPARED'}">
-				      		<em>운송장 번호 : <input type="text" id="invoiceNumberText" value="382690317394" readonly/> </em>
+				      		<em>운송장 번호 : <input type="text" id="invoiceNumberText" value="${orderDetail[0].invoiceNo}" readonly/> </em>
 				      		<form id="invoiceForm" target="popup">
 					            <button type="button" class="btn mb-1 btn-outline-primary btn-xs btn-float btn-delivery">조회</button>
 					        </form>
