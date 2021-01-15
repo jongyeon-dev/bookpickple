@@ -87,8 +87,8 @@
 									   	<c:if test="${book.status == 'OUTOFPRINT'}"><p class="text-danger font-weight-bold">절판</p></c:if>
 							    		<c:choose>
 						            		<c:when test="${book.status != 'ONSALE'}">
-						            			<button class="btn mb-2 btn-primary btn-sm btn-flat" disabled="disabled">주문하기</button> <br>
-							    				<button class="btn btn-outline-secondary btn-sm btn-flat" disabled="disabled">삭제</button>
+						            			<button class="btn mb-2 btn-primary btn-sm btn-flat btn-order-disable" disabled="disabled">주문하기</button> <br>
+							    				<button class="btn btn-outline-secondary btn-sm btn-flat btn-order-disable" disabled="disabled">삭제</button>
 						            		</c:when>
 						            		<c:otherwise>
 						            			<button class="btn mb-2 btn-primary btn-sm btn-flat"
@@ -229,10 +229,12 @@ function cartOrder() {
 			cartOrderForm.append(idx);
         }
 	 }
+
 	 if($("input[name=cartOrderValue]").length < 1) {
-		alert("주문할 도서를 확인해주세요.");
-		return;
-	 } else {
+			alert("주문할 도서를 확인해주세요.");
+	 } else if($(".btn-order-disable").length > 0) {
+			alert("주문할 수 없는 도서가 포함되어 있습니다.");
+	 }else {
 		 cartOrderForm.submit();
 	 }
 }
