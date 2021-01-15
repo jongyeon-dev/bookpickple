@@ -180,7 +180,7 @@ font-size: 16px !important;
 											</span>
 		                                 </h5>
 		                             </div>
-		                             <p>${fn:replace(review.content,crcn,br)}</p>
+		                             <p style="white-space:pre;"><c:out value="${review.content}" /></p>
 		                        </div>
 		                        </c:forEach>
 		                          <div class="pt-3 pb-1">
