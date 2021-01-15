@@ -43,7 +43,7 @@
 	       						 	<td>
 	       						 		<input type="hidden" value="${book.bookNo}">
 	       						 		<input type="checkbox" name="checkedBook" class="check-book"
-	       						 			value="${quantity}, ${book.price}, ${book.salesPrice}, ${book.point}, ${gradePoint}, ${book.bookNo}" checked>
+	       						 			value="${quantity}, ${book.price}, ${book.salesPrice}, ${book.point}, ${gradePoint}, ${book.bookNo}, ${book.status}" checked>
 	       						 	</td>
 	       						 	<td class="bookImage">
 	       						 		<a href="${contextPath}/book/detailBookView.do?bookNo=${book.bookNo}">
@@ -217,6 +217,7 @@ function eachOrder(title, quantity, salesPrice, point, gradePoint, bookNo, bookI
 	orderForm.submit();
 }
 function cartOrder() {
+
 	var count = $(".check-book").length;
 	 var cartOrderForm = $('<form></form>');
 	 cartOrderForm.attr('action', '${contextPath}/order/cartOrder.do');
@@ -224,20 +225,21 @@ function cartOrder() {
 	 cartOrderForm.appendTo('body');
 	 for(var i=0; i < count; i++ ){
         if( $(".check-book")[i].checked == true ){
-	       	var checkValue = $(".check-book")[i].value; // 수량, 정가, 판매가, 포인트, 멤버 포인트, 도서 번호
-			var idx = ($('<input type="hidden" value="' + checkValue + '" name = cartOrderValue>'));
-			cartOrderForm.append(idx);
+            if($(".check-book")[i].value.includes('ONSALE')) { // 판매중인 상품만 골라오기
+            	var checkValue = $(".check-book")[i].value; // 수량, 정가, 판매가, 포인트, 멤버 포인트, 도서 번호, 판매상태
+    			var idx = ($('<input type="hidden" value="' + checkValue + '" name = cartOrderValue>'));
+    			cartOrderForm.append(idx);
+            }
         }
 	 }
 
 	 if($("input[name=cartOrderValue]").length < 1) {
 			alert("주문할 도서를 확인해주세요.");
-	 } else if($(".btn-order-disable").length > 0) {
-			alert("주문할 수 없는 도서가 포함되어 있습니다.");
-	 }else {
+	 } else {
 		 cartOrderForm.submit();
 	 }
 }
+
    function itemSum(){
 	   var quantitySum = 0;
        var priceSum = 0;
