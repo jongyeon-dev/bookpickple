@@ -92,7 +92,6 @@
                                     <th>주문 내역</th>
                                     <th>총 가격</th>
                                     <th>배송 상태</th>
-                                    <th>수정</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -100,7 +99,6 @@
 							     <c:when test="${empty deliveryList}">
 							     	<!-- dataTable에서 colspan을 지원하지 않아서 데이터가 없을때 error발생하여 이렇게 구성 -->			
 									<tr>
-								       <td style="visibility: hidden;"></td>
 									   <td style="visibility: hidden;"></td>
 									    <td style="visibility: hidden;"></td>
 									    <td><p class="font-weight-bold">조회된 주문내역이 없습니다.</p></td>
@@ -130,31 +128,10 @@
 													${totalPrice}원
 												</td>
 												<td>
-													<c:choose>
-														<c:when test="${item.deliveryStatus eq 'FINISHED'}">
-															<select disabled>
-																<option>배송완료</option>
-															</select>
-														</c:when>
-														<c:otherwise>
-															<select name="deliveryStatus" id="deliveryStatus${item.orderNo}" style="background: #fff; border: 1px solid #ccc; padding: 10px; cursor: pointer">
-					                                           <option value="PAY" ${ item.deliveryStatus eq 'PAY' ? 'selected':'' }>결제완료</option>
-					                                           <option value="PREPARED" ${ item.deliveryStatus eq 'PREPARED' ? 'selected':'' }>배송준비중</option>
-					                                           <option value="DELIVERING" ${ item.deliveryStatus eq 'DELIVERING' ? 'selected':'' }>배송중</option>
-					                                           <option value="FINISHED" ${ item.deliveryStatus eq 'FINISHED' ? 'selected':'' }>배송완료</option>
-					                                       </select>
-														</c:otherwise>
-													</c:choose>
-												</td>
-												<td>
-													<c:choose>
-														<c:when test="${item.deliveryStatus eq 'FINISHED'}">
-															<button type="button" class="btn mb-1 btn-outline-primary btn-xs" disabled="disabled">수정</button>	
-														</c:when>
-														<c:otherwise>
-															<button type="button" class="btn mb-1 btn-outline-primary btn-xs" onclick="updateStatus(${item.orderNo}, deliveryStatus${item.orderNo}, ${item.userNo})">수정</button>	
-														</c:otherwise>
-													</c:choose>
+													<c:if test="${ item.deliveryStatus eq 'PAY'}"><span class="label label-primary">결제완료</span></c:if>
+													<c:if test="${ item.deliveryStatus eq 'PREPARED'}"><span class="label label-secondary">배송준비중</span></c:if>
+													<c:if test="${ item.deliveryStatus eq 'DELIVERING'}"><span class="label label-info">배송중</span></c:if>
+													<c:if test="${ item.deliveryStatus eq 'FINISHED'}"><span class="label label-success">배송완료</span></c:if>
 												</td>
 											</tr>
 											</c:when>

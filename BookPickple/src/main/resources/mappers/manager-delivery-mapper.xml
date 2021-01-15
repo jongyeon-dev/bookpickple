@@ -59,7 +59,8 @@
 	
 	<update id="updateDeliveryStatus" parameterType="Order">
 		UPDATE PAYRECORD SET
-		DELIVERYSTATUS = #{deliveryStatus}
+		DELIVERYSTATUS = #{deliveryStatus},
+		INVOICENO = #{invoiceNo}
 		WHERE ORDERNO = #{orderNo}
 	</update>
 	

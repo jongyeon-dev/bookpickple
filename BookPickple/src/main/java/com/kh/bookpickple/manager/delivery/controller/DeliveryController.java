@@ -47,16 +47,18 @@ public class DeliveryController {
 	@RequestMapping("/manager/updateDeliveryStatus.do")
 	@ResponseBody
 	public String updateDeliveryStatus(Order order, Member member, @RequestParam int orderNo, @RequestParam String deliveryStatus,
-									@RequestParam int userNo) {
+									@RequestParam int userNo, @RequestParam(value="invoiceNo", required=false) String invoiceNo) {
 		order.setOrderNo(orderNo);
 		order.setDeliveryStatus(deliveryStatus);
+		order.setInvoiceNo(invoiceNo);
 		
 		int result = deliveryService.updateDeliveryStatus(order);
 		
 		if(result > 0) {
 			boolean isFinished = deliveryService.isFinished(order);
 			
-			if(isFinished) { // 배송완료면 멤버의 총 구매 금액과 포인트 적립
+			if(isFinished) { 
+				// 배송완료면 멤버의 총 구매 금액과 포인트 적립
 				member.setOrderNo(orderNo);
 				member.setUserNo(userNo);
 				int updateTotalPrice = deliveryService.updateTotalPrice(member);

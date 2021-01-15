@@ -98,13 +98,18 @@
 											<button type="button" class="btn btn-outline-primary btn-xs" disabled="disabled">수정</button>
 										</c:when>
 										<c:otherwise>
+											<c:if test="${deliveryDetail[0].deliveryStatus eq 'PREPARED'}">
+		                                   		<span>운송장 번호 입력 : </span><input class="form-control-sm" type="text" name="invoiceNo" id="invoiceNo" style="border:1px solid #ccc; padding: 10px;"/>
+		                                   </c:if>
 											<select name="deliveryStatus" id="deliveryStatus${deliveryDetail[0].orderNo}" style="background: #fff; border: 1px solid #ccc; padding: 10px; align-items: center; vertical-align: middle;">
 		                                       <option value="PAY" ${ deliveryDetail[0].deliveryStatus eq 'PAY' ? 'selected':'' }>결제완료</option>
 		                                       <option value="PREPARED" ${ deliveryDetail[0].deliveryStatus eq 'PREPARED' ? 'selected':'' }>배송준비중</option>
 		                                       <option value="DELIVERING" ${ deliveryDetail[0].deliveryStatus eq 'DELIVERING' ? 'selected':'' }>배송중</option>
 		                                       <option value="FINISHED" ${ deliveryDetail[0].deliveryStatus eq 'FINISHED' ? 'selected':'' }>배송완료</option>
 		                                   </select>
-		                                   <button type="button" class="btn btn-outline-primary btn-xs" onclick="updateStatus(${deliveryDetail[0].orderNo}, deliveryStatus${deliveryDetail[0].orderNo}, ${deliveryDetail[0].userNo})">수정</button>
+		                                   <button type="button" class="btn btn-outline-primary btn-xs"
+		                                   		onclick="updateStatus(${deliveryDetail[0].orderNo}, deliveryStatus${deliveryDetail[0].orderNo}, ${deliveryDetail[0].userNo})">수정
+		                                   </button>
 										</c:otherwise>
 									</c:choose>
 							      </td>
@@ -113,7 +118,7 @@
 								      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">배송 조회</th>
 								      <td colspan="3" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">
 								      	<c:if test="${deliveryDetail[0].deliveryStatus ne 'PAY' and deliveryDetail[0].deliveryStatus ne 'PREPARED'}">
-								      		<em>운송장 번호 : <input type="text" id="invoiceNumberText" value="382690317394" readonly/> </em>
+								      		<em>운송장 번호 : <input type="text" id="invoiceNumberText" value="${deliveryDetail[0].invoiceNo}" readonly/> </em>
 								      		<form id="invoiceForm" target="popup">
 									            <button type="button" class="btn btn-outline-secondary btn-xs btn-float btn-delivery">조회</button>
 									        </form>
@@ -184,32 +189,62 @@ $(function() {
 });
 
 function updateStatus(orderNo, selectBoxValue, userNo) {
-	$.ajax({
-		type: "post",
-		async: false,
-		url: "${contextPath}/manager/updateDeliveryStatus.do",
-		data: {
-			orderNo: orderNo,
-			deliveryStatus: selectBoxValue.value,
-			userNo: userNo
-		},
-		success: function(data){
-			if(data.trim() == "success") {
-				alert("배송 상태를 변경했습니다.");
-				window.location.reload();
-			} else {
-				alert("배송 상태가 변경되지 않았습니다.");
-				window.location.reload();
-			}
-		},
-		error: function(jqxhr, textStatus, errorThrown){
-            console.log("배송 상태 변경 처리 실패");
-            //에러 로그
-            console.log(jqxhr);
-            console.log(textStatus);
-            console.log(errorThrown);
-        }
-	});
+	if(selectBoxValue.value == "DELIVERING" ) {
+		$.ajax({
+			type: "post",
+			async: false,
+			url: "${contextPath}/manager/updateDeliveryStatus.do",
+			data: {
+				orderNo: orderNo,
+				deliveryStatus: selectBoxValue.value,
+				userNo: userNo,
+				invoiceNo: $("#invoiceNo").val()
+			},
+			success: function(data){
+				if(data.trim() == "success") {
+					alert("배송 상태를 변경했습니다.");
+					window.location.reload();
+				} else {
+					alert("배송 상태가 변경되지 않았습니다.");
+					window.location.reload();
+				}
+			},
+			error: function(jqxhr, textStatus, errorThrown){
+	            console.log("배송 상태 변경 처리 실패");
+	            //에러 로그
+	            console.log(jqxhr);
+	            console.log(textStatus);
+	            console.log(errorThrown);
+	        }
+		});	
+	} else {
+		$.ajax({
+			type: "post",
+			async: false,
+			url: "${contextPath}/manager/updateDeliveryStatus.do",
+			data: {
+				orderNo: orderNo,
+				deliveryStatus: selectBoxValue.value,
+				userNo: userNo
+			},
+			success: function(data){
+				if(data.trim() == "success") {
+					alert("배송 상태를 변경했습니다.");
+					window.location.reload();
+				} else {
+					alert("배송 상태가 변경되지 않았습니다.");
+					window.location.reload();
+				}
+			},
+			error: function(jqxhr, textStatus, errorThrown){
+	            console.log("배송 상태 변경 처리 실패");
+	            //에러 로그
+	            console.log(jqxhr);
+	            console.log(textStatus);
+	            console.log(errorThrown);
+	        }
+		});
+	}
 };
 
 </script>
