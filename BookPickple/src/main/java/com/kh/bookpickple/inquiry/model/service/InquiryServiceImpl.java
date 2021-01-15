@@ -20,8 +20,8 @@ public class InquiryServiceImpl implements InquiryService {
 	}
 
 	@Override
-	public int selectInquiryTotalContents() {
-		return inquiryDAO.selectInquiryTotalContents();
+	public int selectInquiryTotalContents(int userNo) {
+		return inquiryDAO.selectInquiryTotalContents(userNo);
 	}
 
 	@Override

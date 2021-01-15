@@ -8,7 +8,7 @@ public interface InquiryDAO {
 
 	List<Inquiry> selectInquiryList(int cPage, int numPerPage, int userNo);
 	
-	int selectInquiryTotalContents();
+	int selectInquiryTotalContents(int userNo);
 	
 	int insertInquiry(Inquiry inquiry);
 	

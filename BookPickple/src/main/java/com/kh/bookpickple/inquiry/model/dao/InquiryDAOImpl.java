@@ -22,8 +22,8 @@ public class InquiryDAOImpl implements InquiryDAO {
 	}
 
 	@Override
-	public int selectInquiryTotalContents() {
-		return sqlSession.selectOne("inquiryMapper.selectInquiryTotalContents");
+	public int selectInquiryTotalContents(int userNo) {
+		return sqlSession.selectOne("inquiryMapper.selectInquiryTotalContents", userNo);
 	}
 
 	@Override

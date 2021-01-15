@@ -53,7 +53,7 @@
 					    </tr>
 					    <tr>
 					    	<td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">문의 내용</td>
-					      	<td width="420" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">${fn:replace(inquiryAllDetail.content,crcn,br)}</td>
+					    	<td width="420" height="31" bgcolor="#FFFFFF" class="mt-2 mb-2"style="padding: 0 0 0 10px; white-space:pre; line-height: 30px;"><c:out value="${inquiryAllDetail.content}" /></td>
 					    </tr>
 				    </c:if>
 				    <tr>
@@ -74,7 +74,7 @@
 					    </tr>
 					    <tr>
 					    	<td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">답변 내용</td>
-					      	<td width="420" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;"><p>${fn:replace(inquiryAllDetail.content,crcn,br)}</p></td>
+					    	<td width="420" height="31" bgcolor="#FFFFFF" class="mt-2 mb-2"style="padding: 0 0 0 10px; white-space:pre; line-height: 30px;"><c:out value="${inquiryAllDetail.content}" /></td>
 					    </tr>
 				    </c:if>
 				    </c:forEach>

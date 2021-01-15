@@ -25,7 +25,7 @@ public class InquiryController {
 		
 		int numPerPage = 10;
 		List<Inquiry> myInquiryList = inquiryService.selectInquiryList(cPage, numPerPage, userNo);
-		int totalContents = inquiryService.selectInquiryTotalContents();
+		int totalContents = inquiryService.selectInquiryTotalContents(userNo);
 		String pageBar = Pagination.getPageBar(totalContents, cPage, numPerPage, "inquiryListView.do?userNo=" + userNo);
 		
 		model.addAttribute("myInquiryList", myInquiryList);
