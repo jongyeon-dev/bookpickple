@@ -130,15 +130,31 @@
 													${totalPrice}원
 												</td>
 												<td>
-													<select name="deliveryStatus" id="deliveryStatus${item.orderNo}" style="background: #fff; border: 1px solid #ccc; padding: 10px; cursor: pointer">
-			                                           <option value="PAY" ${ item.deliveryStatus eq 'PAY' ? 'selected':'' }>결제완료</option>
-			                                           <option value="PREPARED" ${ item.deliveryStatus eq 'PREPARED' ? 'selected':'' }>배송준비중</option>
-			                                           <option value="DELIVERING" ${ item.deliveryStatus eq 'DELIVERING' ? 'selected':'' }>배송중</option>
-			                                           <option value="FINISHED" ${ item.deliveryStatus eq 'FINISHED' ? 'selected':'' }>배송완료</option>
-			                                       </select>
+													<c:choose>
+														<c:when test="${item.deliveryStatus eq 'FINISHED'}">
+															<select disabled>
+																<option>배송완료</option>
+															</select>
+														</c:when>
+														<c:otherwise>
+															<select name="deliveryStatus" id="deliveryStatus${item.orderNo}" style="background: #fff; border: 1px solid #ccc; padding: 10px; cursor: pointer">
+					                                           <option value="PAY" ${ item.deliveryStatus eq 'PAY' ? 'selected':'' }>결제완료</option>
+					                                           <option value="PREPARED" ${ item.deliveryStatus eq 'PREPARED' ? 'selected':'' }>배송준비중</option>
+					                                           <option value="DELIVERING" ${ item.deliveryStatus eq 'DELIVERING' ? 'selected':'' }>배송중</option>
+					                                           <option value="FINISHED" ${ item.deliveryStatus eq 'FINISHED' ? 'selected':'' }>배송완료</option>
+					                                       </select>
+														</c:otherwise>
+													</c:choose>
 												</td>
 												<td>
-													<button type="button" class="btn mb-1 btn-outline-primary btn-xs" onclick="updateStatus(${item.orderNo}, deliveryStatus${item.orderNo}, ${item.userNo})">수정</button>	
+													<c:choose>
+														<c:when test="${item.deliveryStatus eq 'FINISHED'}">
+															<button type="button" class="btn mb-1 btn-outline-primary btn-xs" disabled="disabled">수정</button>	
+														</c:when>
+														<c:otherwise>
+															<button type="button" class="btn mb-1 btn-outline-primary btn-xs" onclick="updateStatus(${item.orderNo}, deliveryStatus${item.orderNo}, ${item.userNo})">수정</button>	
+														</c:otherwise>
+													</c:choose>
 												</td>
 											</tr>
 											</c:when>

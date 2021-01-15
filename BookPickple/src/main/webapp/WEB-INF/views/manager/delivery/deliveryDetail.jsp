@@ -90,13 +90,23 @@
 							    <tr>
 							      <td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">배송 상태</th>
 							      <td colspan="3" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">
-							      <select name="deliveryStatus" id="deliveryStatus${deliveryDetail[0].orderNo}" style="background: #fff; border: 1px solid #ccc; padding: 10px; align-items: center; vertical-align: middle;">
-                                       <option value="PAY" ${ deliveryDetail[0].deliveryStatus eq 'PAY' ? 'selected':'' }>결제완료</option>
-                                       <option value="PREPARED" ${ deliveryDetail[0].deliveryStatus eq 'PREPARED' ? 'selected':'' }>배송준비중</option>
-                                       <option value="DELIVERING" ${ deliveryDetail[0].deliveryStatus eq 'DELIVERING' ? 'selected':'' }>배송중</option>
-                                       <option value="FINISHED" ${ deliveryDetail[0].deliveryStatus eq 'FINISHED' ? 'selected':'' }>배송완료</option>
-                                   </select>
-							 			<button type="button" class="btn btn-outline-primary btn-xs" onclick="updateStatus(${deliveryDetail[0].orderNo}, deliveryStatus${deliveryDetail[0].orderNo}, ${deliveryDetail[0].userNo})">수정</button>
+							      	<c:choose>
+										<c:when test="${deliveryDetail[0].deliveryStatus eq 'FINISHED'}">
+											<select disabled>
+												<option>배송완료</option>
+											</select>
+											<button type="button" class="btn btn-outline-primary btn-xs" disabled="disabled">수정</button>
+										</c:when>
+										<c:otherwise>
+											<select name="deliveryStatus" id="deliveryStatus${deliveryDetail[0].orderNo}" style="background: #fff; border: 1px solid #ccc; padding: 10px; align-items: center; vertical-align: middle;">
+		                                       <option value="PAY" ${ deliveryDetail[0].deliveryStatus eq 'PAY' ? 'selected':'' }>결제완료</option>
+		                                       <option value="PREPARED" ${ deliveryDetail[0].deliveryStatus eq 'PREPARED' ? 'selected':'' }>배송준비중</option>
+		                                       <option value="DELIVERING" ${ deliveryDetail[0].deliveryStatus eq 'DELIVERING' ? 'selected':'' }>배송중</option>
+		                                       <option value="FINISHED" ${ deliveryDetail[0].deliveryStatus eq 'FINISHED' ? 'selected':'' }>배송완료</option>
+		                                   </select>
+		                                   <button type="button" class="btn btn-outline-primary btn-xs" onclick="updateStatus(${deliveryDetail[0].orderNo}, deliveryStatus${deliveryDetail[0].orderNo}, ${deliveryDetail[0].userNo})">수정</button>
+										</c:otherwise>
+									</c:choose>
 							      </td>
 							    </tr>
 							     <tr>
