@@ -87,12 +87,15 @@
                             </thead>
                             <tbody>
                             <c:choose>
-							     <c:when test="${empty inquiryList}">			
-										<tr>
-									       <td colspan="6">
-											  <p class="font-weight-bold text-center">조회된 문의 내역이 없습니다.</p>
-										   </td>
-									     </tr>
+							     <c:when test="${empty inquiryList}">
+							     	<!-- dataTable에서 colspan을 지원하지 않아서 데이터가 없을때 error발생하여 이렇게 구성 -->			
+									<tr>
+									   <td style="visibility: hidden;"></td>
+									    <td style="visibility: hidden;"></td>
+									    <td><p class="font-weight-bold">조회된 문의 내역이 없습니다.</p></td>
+									    <td style="visibility: hidden;"></td>
+									    <td style="visibility: hidden;"></td>
+								     </tr>	
 								 </c:when>
 								 <c:otherwise>
 								     <c:forEach var="item" items="${inquiryList}">

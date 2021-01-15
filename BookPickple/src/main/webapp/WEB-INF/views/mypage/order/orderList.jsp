@@ -74,40 +74,51 @@
 			            </tr>
 			        </thead>
 			        <tbody>
-		      			<c:forEach items="${myOrderList}" var="myOrder">
-			       			<tr>
-			       				<td>
-							 		${myOrder.orderNo}
-							 	</td>
-							 	<td>
-							 		${myOrder.payDate}
-							 	</td>	
-							 	<td>
-							 	<input type="hidden" id="memberNo" value="${member.userNo}"/>
-							 		<input type="hidden" id="orderNo" value="${myOrder.orderNo}"/>
-							 		<a href="${contextPath}/order/orderDetail.do?userNo=${member.userNo}&orderNo=${myOrder.orderNo}" class="font-weight-bold">${myOrder.orderTitle}</a>
-							 	</td>
-							 	<td>
-							 		<fmt:formatNumber  value="${myOrder.totalPrice}" type="number" var="totalPrice" />
-							 		<em class="font-weight-bold text-primary">${totalPrice}</em>/${myOrder.totalQuantity}
-							 	</td>
-							 	<td>
-							 		 <fmt:formatNumber  value="${myOrder.totalPoint}" type="number" var="totalPoint" />
-							 		${totalPoint}
-							 	</td>
-							 	<td>
-							 		<c:if test="${myOrder.deliveryStatus eq 'PAY'}"><span class="label label-primary">결제완료</span></c:if>
-									<c:if test="${myOrder.deliveryStatus eq 'PREPARED'}"><span class="label label-secondary">배송준비중</span></c:if>
-									<c:if test="${myOrder.deliveryStatus eq 'DELIVERING'}"><span class="label label-info">배송중</span></c:if>
-									<c:if test="${myOrder.deliveryStatus eq 'FINISHED'}"><span class="label label-success">배송완료</span></c:if>
-									<c:if test="${myOrder.deliveryStatus eq 'CANCEL'}"><span class="label label-danger">주문취소</span></c:if>
-									<c:if test="${myOrder.deliveryStatus eq 'RETURN'}"><span class="label label-warning">반품</span></c:if>
-							 	</td>
-							 	<td>
-							 		${myOrder.receiverName}
-							 	</td>
-			       			</tr>
-		      			</c:forEach>
+			        	<c:choose>
+			        		<c:when test="${empty myOrderList}">			
+									<tr>
+								       <td colspan="7">
+										  <p class="font-weight-bold">주문 내역이 없습니다.</p>
+									   </td>
+								     </tr>
+							 </c:when>
+							 <c:otherwise>
+				      			<c:forEach items="${myOrderList}" var="myOrder">
+					       			<tr>
+					       				<td>
+									 		${myOrder.orderNo}
+									 	</td>
+									 	<td>
+									 		${myOrder.payDate}
+									 	</td>	
+									 	<td>
+									 	<input type="hidden" id="memberNo" value="${member.userNo}"/>
+									 		<input type="hidden" id="orderNo" value="${myOrder.orderNo}"/>
+									 		<a href="${contextPath}/order/orderDetail.do?userNo=${member.userNo}&orderNo=${myOrder.orderNo}" class="font-weight-bold">${myOrder.orderTitle}</a>
+									 	</td>
+									 	<td>
+									 		<fmt:formatNumber  value="${myOrder.totalPrice}" type="number" var="totalPrice" />
+									 		<em class="font-weight-bold text-primary">${totalPrice}</em>/${myOrder.totalQuantity}
+									 	</td>
+									 	<td>
+									 		 <fmt:formatNumber  value="${myOrder.totalPoint}" type="number" var="totalPoint" />
+									 		${totalPoint}
+									 	</td>
+									 	<td>
+									 		<c:if test="${myOrder.deliveryStatus eq 'PAY'}"><span class="label label-primary">결제완료</span></c:if>
+											<c:if test="${myOrder.deliveryStatus eq 'PREPARED'}"><span class="label label-secondary">배송준비중</span></c:if>
+											<c:if test="${myOrder.deliveryStatus eq 'DELIVERING'}"><span class="label label-info">배송중</span></c:if>
+											<c:if test="${myOrder.deliveryStatus eq 'FINISHED'}"><span class="label label-success">배송완료</span></c:if>
+											<c:if test="${myOrder.deliveryStatus eq 'CANCEL'}"><span class="label label-danger">주문취소</span></c:if>
+											<c:if test="${myOrder.deliveryStatus eq 'RETURN'}"><span class="label label-warning">반품</span></c:if>
+									 	</td>
+									 	<td>
+									 		${myOrder.receiverName}
+									 	</td>
+					       			</tr>
+				      			</c:forEach>
+			      			</c:otherwise>
+		      			</c:choose>
 			        </tbody>
 			    </table>
 			</div>
