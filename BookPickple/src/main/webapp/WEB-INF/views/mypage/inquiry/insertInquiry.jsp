@@ -62,7 +62,7 @@
 <script src="${contextPath}/resources/plugins/validation/additional-methods.min.js"></script>
 <script src="${contextPath}/resources/plugins/validation/messages_ko.min.js"></script>
 <script>
-$(function($) {
+$(function() {
     $("#inquiryForm").validate({
     	submitHandler: function() {
             var f = confirm("문의 하시겠습니까?");

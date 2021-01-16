@@ -133,7 +133,7 @@
 </div>
 
 <script>
-$(function($) {
+$(function() {
     $("#periodFrom").datepicker({
         language: "en",
         maxDate: new Date(),

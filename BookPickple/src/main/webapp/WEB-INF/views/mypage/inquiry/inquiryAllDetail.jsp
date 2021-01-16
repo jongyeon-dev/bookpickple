@@ -53,7 +53,7 @@
 					    </tr>
 					    <tr>
 					    	<td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">문의 내용</td>
-					    	<td width="420" height="31" bgcolor="#FFFFFF" class="mt-2 mb-2"style="padding: 0 0 0 10px; white-space:pre; line-height: 30px;"><c:out value="${inquiryAllDetail.content}" /></td>
+					    	<td width="420" height="31" bgcolor="#FFFFFF" class="mt-2 mb-2"style="padding: 0 0 0 10px; white-space: break-spaces; line-height: 30px;"><c:out value="${inquiryAllDetail.content}" /></td>
 					    </tr>
 				    </c:if>
 				    <tr>
@@ -74,7 +74,7 @@
 					    </tr>
 					    <tr>
 					    	<td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">답변 내용</td>
-					    	<td width="420" height="31" bgcolor="#FFFFFF" class="mt-2 mb-2"style="padding: 0 0 0 10px; white-space:pre; line-height: 30px;"><c:out value="${inquiryAllDetail.content}" /></td>
+					    	<td width="420" height="31" bgcolor="#FFFFFF" class="mt-2 mb-2"style="padding: 0 0 0 10px; white-space: break-spaces; line-height: 30px;"><c:out value="${inquiryAllDetail.content}" /></td>
 					    </tr>
 				    </c:if>
 				    </c:forEach>
@@ -85,73 +85,3 @@
 	</div>
 	
 </div>
-
-<script src="${contextPath}/resources/plugins/validation/jquery.validate.min.js"></script>
-<script src="${contextPath}/resources/plugins/validation/additional-methods.min.js"></script>
-<script src="${contextPath}/resources/plugins/validation/messages_ko.min.js"></script>
-
-<script>
-$(function($) {
-	$(".wrap-answerForm").hide();
-
-	 $("#answerForm").validate({
-	    	submitHandler: function() {
-	            var f = confirm("답변 등록을 하시겠습니까?");
-	            if(f){
-	            	$.ajax({
-	        			type: "post",
-	        			async: false,
-	        			url: "${contextPath}/manager/insertAnswerEnd.do",
-	        			data: {
-	        				inquiryNo: $("#inquiryNo").val(),
-		        			type: $("#type").val(),
-	            			userNo: ${member.userNo},
-	        				title: $("#title").val(),
-	        				content: $("#content").val(),
-	        				refNo: $("#refNo").val()
-	        			},
-	        			success: function(data){
-	        				if(data.trim() == "success") {
-	        					alert("답변 등록이 완료되었습니다.");
-	        					location.href="${contextPath}/manager/inquiryListView.do";
-	        				} else {
-	        					alert("답변 등록이 되지 않았습니다.");
-	        					window.location.reload();
-	        				}
-	        			},
-	        			error: function(jqxhr, textStatus, errorThrown){
-	                        console.log("답변 등록 처리 실패");
-	                        //에러 로그
-	                        console.log(jqxhr);
-	                        console.log(textStatus);
-	                        console.log(errorThrown);
-	                    }
-	        		});
-	            } else {
-	                return false;
-	            }
-	        },
-	      rules: {
-	          title: {
-	              required: true
-	            },
-	        content: {
-	          required: true
-	        }
-	      },
-	      messages: {
-	    	  title: {
-	              required: "필수 입력 사항입니다."
-	         },
-	    	  content: {
-	              required: "필수 입력 사항입니다."
-	         }
-	      }
-	    });
-});
-
-function displayForm() {
-	$(".wrap-answerForm").toggle();
-	
-}
-</script>

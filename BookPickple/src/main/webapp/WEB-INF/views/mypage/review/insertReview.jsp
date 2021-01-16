@@ -89,7 +89,7 @@
 <script src="${contextPath}/resources/plugins/validation/additional-methods.min.js"></script>
 <script src="${contextPath}/resources/plugins/validation/messages_ko.min.js"></script>
 <script>
-$(function($) {
+$(function() {
 	var currentRating = $('#rating').data('current-rating');
 
     $('#rating').barrating({
