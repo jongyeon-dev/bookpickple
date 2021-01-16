@@ -12,8 +12,8 @@
 <link href="${contextPath}/resources/plugins/barrating/fontawesome-stars.css" rel="stylesheet" type="text/css">
 <script src="${contextPath}/resources/plugins/barrating/jquery.barrating.min.js"></script>
 <style>
-.br-theme-fontawesome-stars .br-widget a {
-font-size: 16px !important;
+	.br-theme-fontawesome-stars .br-widget a {
+	font-size: 16px !important;
 }
 </style>
 
@@ -204,7 +204,7 @@ font-size: 16px !important;
 	var finalPubDate = splitDate[0] + "년 " +splitDate[1] + "월 " + splitDate[2] + "일"
 	$(".book-pub-date").text(finalPubDate);
 
-	$(function($){
+	$(function(){
 		$('.minus').click(function(e){
 			e.preventDefault();
 			var stat = $('#book-quantity').val();

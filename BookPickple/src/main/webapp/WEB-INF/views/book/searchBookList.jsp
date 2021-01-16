@@ -7,8 +7,8 @@
 <link href="${contextPath}/resources/plugins/barrating/fontawesome-stars.css" rel="stylesheet" type="text/css">
 <script src="${contextPath}/resources/plugins/barrating/jquery.barrating.min.js"></script>
 <style>
-.br-theme-fontawesome-stars .br-widget a {
-font-size: 16px !important;
+	.br-theme-fontawesome-stars .br-widget a {
+	font-size: 16px !important;
 }
 </style>
 
@@ -115,7 +115,7 @@ font-size: 16px !important;
 
 <script>
 
-	$(function($){
+	$(function(){
 		// 출판일 파싱
 		var splitDate = $("#dbPublishedDate").val().split(" ")[0].split("-");
 		var finalPubDate = splitDate[0] + "년 " +splitDate[1] + "월"

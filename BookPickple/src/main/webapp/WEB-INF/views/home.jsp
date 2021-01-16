@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"	isELIgnored="false"
-	%>
+%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+
+<link href="${contextPath}/resources/css/carousel/owl.carousel.min.css" rel="stylesheet" type="text/css">
+<link href="${contextPath}/resources/css/carousel/owl.theme.default.min.css" rel="stylesheet" type="text/css">
 
 <div class="container-fluid">
 
@@ -212,3 +215,28 @@
    </div>
        
 </div>
+
+
+<script src="${contextPath}/resources/js/carousel/owl.carousel.min.js"></script>
+	<script src="${contextPath}/resources/js/carousel/jquery.bxslider.min.js"></script>
+	<script src="${contextPath}/resources/js/carousel/script.slider.js"></script>
+   	<script>
+		$(function() {
+			$('.owl-carousel').owlCarousel({
+			    loop:true,
+			    margin:10,
+			    nav:true,
+			    responsive:{
+			        0:{
+			            items:1
+			        },
+			        600:{
+			            items:3
+			        },
+			        1000:{
+			            items:5
+			        }
+			    }
+			});
+		});
+   	</script>

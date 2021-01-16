@@ -6,8 +6,6 @@
 <c:set var="cartList"  value="${cartMap.cartList}"  />
 <c:set var="bookList"  value="${cartMap.bookList}"  />
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-
 <div class="container">
 
 	<div class="table-responsive custom-list">
