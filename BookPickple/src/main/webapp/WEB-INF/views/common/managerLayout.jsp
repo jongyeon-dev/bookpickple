@@ -10,7 +10,8 @@
 <link href="${contextPath}/resources/plugins/highlightjs/styles/darkula.css" rel="stylesheet" type="text/css">
 <link href="${contextPath}/resources/css/style.css" rel="stylesheet" type="text/css">
 <link href="${contextPath}/resources/css/common/custom.css" rel="stylesheet" type="text/css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script src="${contextPath}/resources/js/common/common.min.js"></script>
 
 	<title><tiles:insertAttribute name="title" ignore="true"/></title>
 	
@@ -31,15 +32,13 @@
 	      	</footer>
 	    </div>
     </div>
- 
-
-    
-  	<script src="${contextPath}/resources/js/common/common.min.js"></script>
-  	<script src="${contextPath}/resources/js/common/custom.min.js"></script>
-  	<script src="${contextPath}/resources/js/common/settings.js"></script>
-  	<script src="${contextPath}/resources/js/common/styleSwitcher.js"></script>
-  	<script src="${contextPath}/resources/js/common/gleek.js"></script>
-  	<script src="${contextPath}/resources/plugins/highlightjs/highlight.pack.min.js"></script>
+   
+    <script src="${contextPath}/resources/js/common/custom.min.js"></script>
+    <script src="${contextPath}/resources/js/common/settings.js"></script>
+ 	<script src="${contextPath}/resources/js/common/styleSwitcher.js"></script>
+	<script src="${contextPath}/resources/js/common/gleek.js"></script>
+    <script src="${contextPath}/resources/js/common/gleek.js"></script>
+	<script src="${contextPath}/resources/plugins/highlightjs/highlight.pack.min.js"></script>
   	<script>hljs.initHighlightingOnLoad();</script>
   	<script>
 		$(function() {
@@ -59,8 +58,6 @@
 	        });
 		});
    	</script>
-   	
-   	<!--  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> -->
    	
   
 </body>     

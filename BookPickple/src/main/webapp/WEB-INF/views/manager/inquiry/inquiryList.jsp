@@ -152,7 +152,7 @@
 <script src="${contextPath}/resources/plugins/tables/js/jquery.dataTables.min.js"></script>
 <script src="${contextPath}/resources/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
 <script>
-$(function($) {
+$(function() {
 	 $('#managerInquiryList').DataTable({
 		 lengthMenu: [ 20, 40, 60, 80 ],
 		 ordering: false,

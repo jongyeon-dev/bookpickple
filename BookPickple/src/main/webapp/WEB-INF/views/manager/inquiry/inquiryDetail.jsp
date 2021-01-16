@@ -56,7 +56,7 @@
 					    </tr>
 					    <tr>
 					    	<td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">문의 내용</th>
-					      	<td width="420" height="31" bgcolor="#FFFFFF" class="mt-2 mb-2"style="padding: 0 0 0 10px; white-space:pre; line-height: 30px;"><c:out value="${inquiryDetail.content}" /></td>
+					      	<td width="420" height="31" bgcolor="#FFFFFF" class="mt-2 mb-2"style="padding: 0 0 0 10px; white-space: break-spaces; line-height: 30px;"><c:out value="${inquiryDetail.content}" /></td>
 					    </tr>
 				    </c:if>
 				    <c:if test="${inquiryDetail.clevel == 2 }">
@@ -85,7 +85,7 @@
 					    </tr>
 					    <tr>
 					    	<td scope="row" width="150" height="31" bgcolor="#F5F5F5" align="center">답변 내용</th>
-					    	<td width="420" height="31" bgcolor="#FFFFFF" class="mt-2 mb-2"style="padding: 0 0 0 10px; white-space:pre; line-height: 30px;"><c:out value="${inquiryDetail.content}" /></td>
+					    	<td width="420" height="31" bgcolor="#FFFFFF" class="mt-2 mb-2"style="padding: 0 0 0 10px; white-space: break-spaces; line-height: 30px;"><c:out value="${inquiryDetail.content}" /></td>
 					    </tr>
 				    </c:if>
 				   </tbody>
@@ -128,7 +128,7 @@
 <script src="${contextPath}/resources/plugins/validation/messages_ko.min.js"></script>
 
 <script>
-$(function($) {
+$(function() {
 	$(".wrap-answerForm").hide();
 
 	 $("#answerForm").validate({

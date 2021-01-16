@@ -96,7 +96,7 @@
 <script src="${contextPath}/resources/plugins/tables/js/jquery.dataTables.min.js"></script>
 <script src="${contextPath}/resources/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
 <script>
-$(function($) {
+$(function() {
 	 $('#managerMemberList').DataTable({
 		 lengthMenu: [ 10, 20, 30, 40, 50 ],
 		 order: [

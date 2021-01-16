@@ -181,7 +181,7 @@
     </div>
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
 <script>
 	// 출판일 파싱
 	var splitDate = $("#dbPublishedDate").val().split(" ")[0].split("-");
