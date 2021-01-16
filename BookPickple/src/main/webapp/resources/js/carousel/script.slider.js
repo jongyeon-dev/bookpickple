@@ -1,4 +1,4 @@
-(function($){
+(function(){
 
         // Slidder home 4
         if($('#bxslider-home4').length >0){
