@@ -6,8 +6,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 
-<link href="${contextPath}/resources/plugins/summernote/summernote.min.css" rel="stylesheet" type="text/css">
-
+<link href="${contextPath}/resources/plugins/summernote/summernote-lite.min.css" rel="stylesheet" type="text/css">
+<script src="${contextPath}/resources/plugins/summernote/summernote-lite.js"></script>
+<script src="${contextPath}/resources/plugins/summernote/summernote-ko-KR.min.js"></script>
 
 <div class="container-fluid">
     <div class="row" style="padding: 0 30px;">
@@ -24,7 +25,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form id="mailForm">
+                	<form id="mailForm">
                     	<div class="form-group">
                              <input type="text" class="form-control bg-transparent" name="mailTitle" id="mailTitle" placeholder="제목을 입력하세요.">
                          </div>
@@ -33,21 +34,26 @@
 						  <div class="mt-5 text-center">
 						 	 <button type="button" class="btn mb-1 btn-flat btn-primary" onclick="mailFormSubmit()">메일 전송</button>
 					 	 </div>
-					</form>
+					 </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="${contextPath}/resources/plugins/summernote/summernote.min.js"></script>
+
 
 <script>
-$(function($) {
-	$('#summernote').summernote({
-		 height: ($(window).height() - 300)
-	});
+$(function() {
+
+	
+
+
+});
+
+$('#summernote').summernote({
+	 height: ($(window).height() - 500),
+	 lang: "ko-KR"
 });
 
 function mailFormSubmit() {

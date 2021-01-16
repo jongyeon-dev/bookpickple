@@ -377,9 +377,8 @@ a:hover { text-decoration: none; }
 ---------------------------*/
 
 .owl-item .item img {
-    width: 125px;
+    width: 150px !important;
     display: block;
-    width: 150px;
     height: 200px;
     margin: 0 20px;
 }
