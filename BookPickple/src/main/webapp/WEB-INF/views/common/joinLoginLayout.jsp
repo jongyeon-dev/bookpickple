@@ -11,18 +11,14 @@
 <link href="${contextPath}/resources/css/style.css" rel="stylesheet" type="text/css">
 <link href="${contextPath}/resources/css/common/custom.css" rel="stylesheet" type="text/css">
 
+<script src="${contextPath}/resources/js/common/common.min.js"></script>
+
 <title><tiles:insertAttribute name="title" ignore="true"/></title>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
 </head>
 <body class="h-100" style="background: #F3F3F9;">
 	<div class="login-form-bg h-100">
 		<tiles:insertAttribute name="body" ignore="true" />	 	
     </div>
-
-  	<script src="${contextPath}/resources/js/common/common.min.js"></script>
-  	<script src="${contextPath}/resources/js/common/custom.min.js"></script>
-  	<script src="${contextPath}/resources/js/common/settings.js"></script>
-  	<script src="${contextPath}/resources/js/common/styleSwitcher.js"></script>
-  	<script src="${contextPath}/resources/js/common/gleek.js"></script>
   	
 </body>      

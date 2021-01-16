@@ -2,13 +2,9 @@
     pageEncoding="UTF-8"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
+
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-</head>
-<body>
+
 	 <div class="container-fluid h-100">
 	     <div class="row justify-content-center h-100">
 	         <div class="col-xl-4">
@@ -535,6 +531,3 @@
 	    };
 	    
 	</script>
-	
-	</body>
-</html>
