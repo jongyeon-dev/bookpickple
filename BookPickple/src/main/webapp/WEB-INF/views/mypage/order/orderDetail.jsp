@@ -180,7 +180,6 @@ $(function() {
 
     // 배송정보와 배송추적 tracking-api
     $(".btn-delivery").click(function() {
-        // var t_code = $('#tekbeCompnayList option:selected').attr('value');
         var t_invoice = $('#invoiceNumberText').val();
         window.open("", "popup", "width=500, height=500, scrollbars=yes");
         $("#invoiceForm").attr("action", " http://info.sweettracker.co.kr/tracking/5?t_key="+myKey+'&t_code=04&t_invoice='+t_invoice);
