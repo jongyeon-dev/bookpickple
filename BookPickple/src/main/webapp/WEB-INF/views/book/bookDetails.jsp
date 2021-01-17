@@ -141,10 +141,10 @@
 			
 				<div id="bookInfo">
 					<h3 class="font-weight-bold">품목 정보</h3>
-					<table class="table header-border" style="padding: 30px;">
+					<table class="table header-border" style="padding: 30px; font-size: 12px;">
 						  <tbody>
 						  	<tr>
-						      <td scope="row" width="100" height="31" bgcolor="#F5F5F5" align="center">카테고리</th>
+						      <td scope="row" width="50" height="31" bgcolor="#F5F5F5" align="center">카테고리</th>
 						      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">
 						      	<c:if test="${book.type == 'IT'}">IT</c:if>
 						      	<c:if test="${book.type == 'NOVEL'}">소설</c:if>
@@ -154,11 +154,11 @@
 						      </td>
 						    </tr>
 						    <tr>
-						      <td scope="row" width="100" height="31" bgcolor="#F5F5F5" align="center">출간일</th>
+						      <td scope="row" width="50" height="31" bgcolor="#F5F5F5" align="center">출간일</th>
 						      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;"><span class="book-pub-date"></span></td>
 						    </tr>
 						    <tr>
-						      <td scope="row" width="100" height="31" bgcolor="#F5F5F5" align="center">ISBN 13</th>
+						      <td scope="row" width="50" height="31" bgcolor="#F5F5F5" align="center">ISBN 13</th>
 						      <td width="210" height="31" bgcolor="#FFFFFF" style="padding: 0 0 0 10px;">${book.isbn}</td>
 						    </tr>
 						</tbody>
