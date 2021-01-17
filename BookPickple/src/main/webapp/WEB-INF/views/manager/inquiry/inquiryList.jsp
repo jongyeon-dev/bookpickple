@@ -206,6 +206,25 @@ $(function() {
 	    })
 
 	    $("#periodTo").datepicker().data('datepicker').selectDate(new Date());
+
+	    // 검색 한 후 searchType selectbox 유지
+	    var url = location.href;
+
+	    if(url.indexOf("1w") > -1) {
+	    	$("#1w a").attr('class','btn mb-1 btn-primary btn-sm');
+		} else if (url.indexOf("1m") > -1) {
+			$("#1m a").attr('class','btn mb-1 btn-primary btn-sm');
+		} else if (url.indexOf("3m") > -1) {
+			$("#3m a").attr('class','btn mb-1 btn-primary btn-sm');
+		} else if (url.indexOf("6m") > -1) {
+			$("#6m a").attr('class','btn mb-1 btn-primary btn-sm');
+		} else if (url.indexOf("all") > -1) {
+		     $("#searchType").val("all").prop("selected", true);
+		} else if (url.indexOf("title") > -1) {
+		     $("#searchType").val("title").prop("selected", true);
+		} else if (url.indexOf("userName") > -1) {
+		     $("#searchType").val("userName").prop("selected", true);
+		}
 });
 
 function keywordSearch() {
