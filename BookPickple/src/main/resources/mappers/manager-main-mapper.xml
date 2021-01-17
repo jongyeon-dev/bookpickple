@@ -48,7 +48,7 @@
 		                    WHEN age >= 60              THEN '60대 이상'
 		                END BIRTH
 		          FROM (SELECT TRUNC(MONTHS_BETWEEN(SYSDATE, TO_DATE(BIRTH, 'YYYYMMDD'))/12) AGE
-		                  FROM MEMBER
+		                  FROM MEMBER WHERE STATUS = 'Y'
 		                )
 		        )
 		 GROUP BY BIRTH
