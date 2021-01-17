@@ -19,20 +19,19 @@
 			<form name="frm_sticky">	     
 		      <c:forEach var="book" items="${quickBooksList}" varStatus="bookNum">
 		         <c:choose>
-		           <c:when test="${bookNum.count==1 }">
-				      <a href="${contextPath}/book/detailBookView.do?bookNo=${book.bookNo}" id="bookLink">
-				  	         <img width="75" height="95" id="quickBookImage"  
-				                 src="${contextPath}/resources/bookFileRepo/${book.bookNo}/${book.changeFileName}">
-				      </a>
-				        <input type="hidden"  name="bookNo" id="bookNo" value="${book.bookNo}" />
-				        <input type="hidden" name="bookFileName" id="bookFileName" value="${book.changeFileName}" />
-				      <br>
-			      </c:when>
-			      <c:otherwise>
-			        <input type="hidden"  name="bookNo" value="${book.bookNo}" />
-			        <input type="hidden" name="bookFileName" value="${book.changeFileName}" />
-			        
-			      </c:otherwise>
+			           <c:when test="${bookNum.count==1 }">
+					      <a href="${contextPath}/book/detailBookView.do?bookNo=${book.bookNo}" id="bookLink">
+					  	         <img width="75" height="95" id="quickBookImage"  
+					                 src="${contextPath}/resources/bookFileRepo/${book.bookNo}/${book.changeFileName}">
+					      </a>
+					        <input type="hidden"  name="bookNo" id="bookNo" value="${book.bookNo}" />
+					        <input type="hidden" name="bookFileName" id="bookFileName" value="${book.changeFileName}" />
+					      <br>
+				      </c:when>
+				      <c:otherwise>
+				        <input type="hidden"  name="bookNo" value="${book.bookNo}" />
+				        <input type="hidden" name="bookFileName" value="${book.changeFileName}" />
+				      </c:otherwise>
 			      </c:choose>
 		     </c:forEach>
 		   </c:otherwise>
@@ -58,7 +57,8 @@
 		var currentBook = document.getElementById("currentBook");
 		var bookNo = document.frm_sticky.bookNo;
 		var bookFileName = document.frm_sticky.bookFileName;
-
+		
+		
 		if(index == bookNo.length -1) {
 			index = -1;
 		}
@@ -66,6 +66,8 @@
 		if(index < bookNo.length - 1) {
 			index++;
 		}	
+
+		
 
 		var nextBookNo = bookNo[index].value;
 		
@@ -76,6 +78,7 @@
 
 		currentBook.innerHTML = index+1;
 
+		
 	}
 
 

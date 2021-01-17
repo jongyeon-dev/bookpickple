@@ -1,7 +1,6 @@
 package com.kh.bookpickple.goods.controller;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -199,8 +198,8 @@ public class GoodsController {
 		boolean exist =false;
 		List<Book> quickBooksList=(ArrayList<Book>)session.getAttribute("quickBooksList");
 		
-		if(quickBooksList!=null){
-			if(quickBooksList.size() < 5){ 
+		if(quickBooksList != null){
+			if(quickBooksList.size() <= 5){ 
 				for(int i = 0; i < quickBooksList.size(); i++){
 					Book book= (Book) quickBooksList.get(i);
 					if(bookNo == book.getBookNo()){
@@ -209,11 +208,14 @@ public class GoodsController {
 					}
 				}
 				if(exist == false){
+					if(quickBooksList.size() == 5) {
+						quickBooksList.remove(0);
+					}
 					quickBooksList.add(quickBook);
 				}
 			}
-			
-		}else{
+
+		} else {
 			quickBooksList =new ArrayList<Book>();
 			quickBooksList.add(quickBook);
 			

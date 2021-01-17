@@ -143,7 +143,6 @@
 		SELECT B.*, BI.CHANGEFILENAME 
         FROM BOOK B, BOOKIMAGES BI
         WHERE B.BOOKNO = BI.BOOKNO AND BI.FILELEVEL= 0 AND B.BOOKNO = #{bookNo}
-        ORDER BY B.CREDATE DESC, B.BOOKNO DESC
 	</select>
 	
 	<select id="selectAjaxKeywordSeach" parameterType="string" resultType="Book">
