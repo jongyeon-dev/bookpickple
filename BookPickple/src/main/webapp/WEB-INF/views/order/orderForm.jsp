@@ -200,7 +200,6 @@
 		</div>
 	</div>
 
-
 <script>
 $(function() {
 	var dbAddr = $("#dbAddress").val();

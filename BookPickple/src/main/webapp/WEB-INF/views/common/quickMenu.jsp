@@ -16,7 +16,7 @@
 		     	<p>최근 본 도서가 없습니다.</p>
 			</c:when>
 			<c:otherwise>
-			<form name="frm_sticky">	     
+			<form name="quickMenuForm">	     
 		      <c:forEach var="book" items="${quickBooksList}" varStatus="bookNum">
 		         <c:choose>
 			           <c:when test="${bookNum.count==1 }">
@@ -55,9 +55,8 @@
 		var bookLink = document.getElementById("bookLink");
 		var bookImage = document.getElementById("quickBookImage");
 		var currentBook = document.getElementById("currentBook");
-		var bookNo = document.frm_sticky.bookNo;
-		var bookFileName = document.frm_sticky.bookFileName;
-		
+		var bookNo = document.quickMenuForm.bookNo;
+		var bookFileName = document.quickMenuForm.bookFileName;
 		
 		if(index == bookNo.length -1) {
 			index = -1;
@@ -67,18 +66,13 @@
 			index++;
 		}	
 
-		
-
 		var nextBookNo = bookNo[index].value;
-		
 		var nextFileName = bookFileName[index].value;
 
 		bookLink.setAttribute("href", "${contextPath}/book/detailBookView.do?bookNo=" + nextBookNo);
 		bookImage.src = "${contextPath}/resources/bookFileRepo/" + nextBookNo + "/" + nextFileName;
 
 		currentBook.innerHTML = index+1;
-
-		
 	}
 
 
@@ -86,8 +80,8 @@
 	 	var bookLink = document.getElementById("bookLink");
 	 	var bookImage = document.getElementById("quickBookImage");
 		var currentBook = document.getElementById("currentBook");
-		var bookNo = document.frm_sticky.bookNo;
-		var bookFileName = document.frm_sticky.bookFileName;
+		var bookNo = document.quickMenuForm.bookNo;
+		var bookFileName = document.quickMenuForm.bookFileName;
 
 		if(index == 0) {
 			index = bookNo.length;
@@ -98,7 +92,6 @@
 		}	
 
 		var preBookNo = bookNo[index].value;
-
 		var preFileName = bookFileName[index].value;
 		
 		bookLink.setAttribute("href", "${contextPath}/book/detailBookView.do?bookNo=" + preBookNo);

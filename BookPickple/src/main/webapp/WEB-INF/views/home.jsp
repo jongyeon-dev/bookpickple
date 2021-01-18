@@ -21,7 +21,6 @@
 							<span class="text-primary"> 모아볼 수 있는<em class="font-weight-bold"> 기회</em></span>
 						</h2>
 						<h4 class="caption subtitle">재린이 탈출 필독서</h4>
-						<a class="caption button-radius" href="${contextPath}/book/detailBookView.do?bookNo=43"><span class="icon"></span>보러가기</a>
 					</div>
 				</li>
 				<li>
@@ -32,7 +31,6 @@
 							<span class="text-warning"><em class="font-weight-bold"> 관종</em></span>이란?
 						</h2>
 						<h4 class="caption subtitle mb-1">새로운 화두를 던지는 작가, <span class="text-warning">임홍택</span></h4>
-						<a class="caption button-radius" href="${contextPath}/book/detailBookView.do?bookNo=41"><span class="icon">보러 가기</span></a>
 					</div>
 				</li>
 				<li>
@@ -42,7 +40,6 @@
 							The 친절한<span class="text-info"><em class="font-weight-bold"> 자바 입문</em></span>
 						</h2>
 						<h4 class="caption subtitle">앱 화면을 만들면서 재밌게 배우자!</h4>
-						<a class="caption button-radius" href="${contextPath}/book/detailBookView.do?bookNo=40"><span class="icon"></span>보러가기</a>
 					</div>
 				</li>
 			</ul>
