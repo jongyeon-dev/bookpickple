@@ -1,4 +1,4 @@
-# BookPickple
+# BookPickple - 김종연(JongYeon Kim)
 
 KH정보교육원 : [NCS]웹 기반 빅데이터 시각화 개발자 양성과정 (2020년 08월 13일 ~ 2021년 01월 18일)
 
