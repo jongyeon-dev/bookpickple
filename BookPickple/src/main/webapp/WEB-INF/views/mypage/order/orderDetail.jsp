@@ -176,7 +176,7 @@ $(function() {
 
 
 	// 스윗트래커
-	var myKey = "";
+	var myKey = ""; 
 
     // 배송정보와 배송추적 tracking-api
     $(".btn-delivery").click(function() {
